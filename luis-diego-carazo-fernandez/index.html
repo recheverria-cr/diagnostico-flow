@@ -37,7 +37,7 @@ nav{position:sticky;top:0;z-index:100;background:var(--navy);border-bottom:1px s
 .hero-grid{display:grid;grid-template-columns:auto 1fr;gap:48px;align-items:start}
 .score-block{text-align:center;min-width:200px}
 .score-label{color:var(--gray-2);font-size:12px;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px}
-.score-big{font-size:clamp(80px,11vw,104px);font-weight:800;line-height:1;color:var(--success)}
+.score-big{font-size:clamp(80px,11vw,104px);font-weight:800;line-height:1;color:var(--warning)}
 .score-big span{font-size:clamp(30px,4vw,44px);color:var(--gray-1);font-weight:400}
 .score-sub{color:var(--gray-2);font-size:12px;margin-top:8px;line-height:1.5}
 .hero-facts{display:flex;flex-direction:column;gap:12px}
@@ -158,12 +158,12 @@ footer{background:#060D17;padding:44px 24px;text-align:center}
     <div class="hero-meta">
       <span class="meta-chip">🏥 Ginecólogo / Obstetra</span>
       <span class="meta-chip">📍 Costa Rica</span>
-      <span class="meta-chip">🏨 </span>
+      <span class="meta-chip">🏨 su clínica</span>
     </div>
     <div class="hero-grid">
       <div class="score-block">
         <div class="score-label">Índice de Visibilidad Digital</div>
-        <div class="score-big">4.0<span> / 5.0</span></div>
+        <div class="score-big">3<span> / 5.0</span></div>
         <div class="score-sub">Base sólida, con brechas clave<br>detectadas en su práctica</div>
       </div>
       <div class="hero-facts">
@@ -171,8 +171,8 @@ footer{background:#060D17;padding:44px 24px;text-align:center}
         <div class="fact-row">
           <span class="fact-icon">⭐</span>
           <div class="fact-text">
-            <strong>Sin reseñas verificadas detectadas</strong>
-            Huli Health y Google Business Profile muestran 0 opiniones públicas — la primera prioridad a cambiar.
+            <strong>22 reseñas · 4.7 en Huli Health</strong>
+            Buena base de reputación verificada — hay que trasladarla a Google.
           </div>
         </div>
         <div class="fact-row">
@@ -192,8 +192,8 @@ footer{background:#060D17;padding:44px 24px;text-align:center}
     <div class="fact-row">
       <span class="fact-icon">📍</span>
       <div class="fact-text">
-        <strong>Google Business Profile: no reclamado</strong>
-        Los pacientes que buscan en Google Maps no encuentran su perfil verificado.
+        <strong>Google Business Profile: activo</strong>
+        Perfil activo pero con margen de mejora en reseñas y contenido.
       </div>
     </div>
       </div>
@@ -219,24 +219,8 @@ footer{background:#060D17;padding:44px 24px;text-align:center}
             <div class="gap-bar red"></div>
             <div class="gap-body">
               <div class="gap-label red">Brecha Crítica — Prioridad 1</div>
-              <div class="gap-title">Sin Google Business Profile verificado</div>
-              <div class="gap-desc">Los pacientes que buscan 'Ginecólogo / Obstetra' en Google Maps no encuentran su perfil individual. Los médicos sin GBP activo son prácticamente invisibles para el 40% de las búsquedas locales de salud.</div>
-            </div>
-          </div>
-          <div class="gap-card">
-            <div class="gap-bar amber"></div>
-            <div class="gap-body">
-              <div class="gap-label amber">Brecha Importante — Prioridad 2</div>
               <div class="gap-title">Sin presencia en redes sociales propia</div>
               <div class="gap-desc">Los pacientes modernos validan su confianza en un médico viendo su contenido en Instagram o Facebook antes de agendar. Sin presencia social, usted pierde esa validación — y la consulta.</div>
-            </div>
-          </div>
-          <div class="gap-card">
-            <div class="gap-bar amber"></div>
-            <div class="gap-body">
-              <div class="gap-label amber">Brecha Importante — Prioridad 3</div>
-              <div class="gap-title">Volumen de reseñas insuficiente</div>
-              <div class="gap-desc">Con 0 reseñas en Huli y 0 en Google, su reputación digital no refleja su nivel clínico. El 76% de los pacientes elige médico basándose en reseñas. Esto es la brecha más impactante que puede cerrar.</div>
             </div>
           </div>
         </div>
@@ -322,7 +306,7 @@ footer{background:#060D17;padding:44px 24px;text-align:center}
           <div class="road-title">Fundación Digital</div>
         </div>
         <div class="road-body">
-          <div class="road-item"><div class="road-bullet p1"></div><div class="road-item-text">Crear y verificar Google Business Profile individual con fotos profesionales y horarios</div></div>
+          <div class="road-item"><div class="road-bullet p1"></div><div class="road-item-text">Optimizar Google Business Profile: más fotos, descripción enriquecida, estrategia de respuesta a reseñas</div></div>
           <div class="road-item"><div class="road-bullet p1"></div><div class="road-item-text">Auditar y unificar información (NAP) en todos los directorios médicos activos en CR</div></div>
           <div class="road-item"><div class="road-bullet p1"></div><div class="road-item-text">Crear cuenta Instagram con bio profesional y primeros 3 posts educativos</div></div>
           <div class="road-item"><div class="road-bullet p1"></div><div class="road-item-text">Activar flujo automático de solicitud de reseñas vía WhatsApp post-consulta</div></div>
@@ -398,7 +382,7 @@ footer{background:#060D17;padding:44px 24px;text-align:center}
       datasets: [
         {
           label: 'Luis Fernandez',
-          data: [0.0, 2.5, 0.0, 2.5, 0.5, 1.2],
+          data: [2.5, 2.5, 0.0, 2.5, 2.0, 0.0],
           backgroundColor: 'rgba(94,235,194,0.15)',
           borderColor: '#5EEBC2',
           borderWidth: 2.5,
@@ -408,7 +392,7 @@ footer{background:#060D17;padding:44px 24px;text-align:center}
         },
         {
           label: 'Promedio mercado CR',
-          data: [1.2, 3.7, 1.2, 3.7, 1.7, 2.4],
+          data: [3.7, 3.7, 1.2, 3.7, 3.2, 1.2],
           backgroundColor: 'rgba(154,171,189,0.08)',
           borderColor: '#9AABBD',
           borderWidth: 2,
