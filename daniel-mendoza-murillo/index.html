@@ -434,7 +434,7 @@
           <div class="hero-fact"><strong>0</strong>Sitio web propio</div>
           <div class="hero-fact"><strong>0</strong>Perfil Huli independiente</div>
           <div class="hero-fact"><strong>91</strong>Procedimientos ofrecidos</div>
-          <div class="hero-fact"><strong>~219</strong>Reseñas del líder del mercado</div>
+          <div class="hero-fact"><strong>1,659</strong>Reseñas del líder del mercado</div>
         </div>
         <div class="hero-date" style="margin-top:20px">Reporte generado el 27 de mayo de 2026 · Datos de fuentes públicas: Huli Health, Hospital La Católica, Google Business Profile</div>
       </div>
@@ -525,7 +525,7 @@
     <h2 class="section-title">Benchmark: ginecólogos top en <span class="accent">San José, Costa Rica</span></h2>
     <p class="section-sub">Comparación de presencia en las dos plataformas clave para Costa Rica: Google Business Profile + Huli Health (el directorio médico dominante en CR).</p>
 
-    <div class="chart-frame bar" style="margin-bottom:32px;">
+    <div class="chart-frame bar" style="height:400px;margin-bottom:32px;">
       <canvas id="barChart"></canvas>
     </div>
 
@@ -536,11 +536,35 @@
           <th>Reseñas Huli</th>
           <th>Rating Huli</th>
           <th>Centros</th>
-          <th>Instagram</th>
+          <th>Redes sociales</th>
           <th>Sitio Web</th>
         </tr>
       </thead>
       <tbody>
+        <tr>
+          <td><a href="https://www.hulihealth.com/es/doctor/fabio-alfaro-albertazzi" target="_blank" style="color:var(--accent-dim);text-decoration:none;font-weight:600">Dr. Fabio Alfaro Albertazzi</a></td>
+          <td><strong>1,659</strong></td>
+          <td><span class="rating-star">★</span> 5.0</td>
+          <td>Hospital Metropolitano</td>
+          <td>✓ Activo</td>
+          <td>✓ Hospital dir.</td>
+        </tr>
+        <tr>
+          <td><a href="https://www.hulihealth.com/es/doctor/mauren-milgram-hochgelernter" target="_blank" style="color:var(--accent-dim);text-decoration:none;font-weight:600">Dra. Mauren Milgram Hochgelernter</a></td>
+          <td><strong>897</strong></td>
+          <td><span class="rating-star">★</span> 5.0</td>
+          <td>Metropolitano · La Católica</td>
+          <td>✓ Activo</td>
+          <td>✓ Múltiples dir.</td>
+        </tr>
+        <tr>
+          <td><a href="https://www.hulihealth.com/es/doctor/simon-solano-mendez" target="_blank" style="color:var(--accent-dim);text-decoration:none;font-weight:600">Dr. Simón Solano Méndez</a></td>
+          <td><strong>779</strong></td>
+          <td><span class="rating-star">★</span> 5.0</td>
+          <td>Metropolitano · La Católica</td>
+          <td>✓ Activo</td>
+          <td>✓ Hospital dir.</td>
+        </tr>
         <tr>
           <td><a href="https://www.hulihealth.com/es/doctor/mario-roberto-viquez-villalobos" target="_blank" style="color:var(--accent-dim);text-decoration:none;font-weight:600">Dr. Mario Víquez Villalobos</a></td>
           <td><strong>219</strong></td>
@@ -550,28 +574,12 @@
           <td>✓ Hospital CIMA dir.</td>
         </tr>
         <tr>
-          <td><a href="https://www.instagram.com/drjorgenaranjoblanco/" target="_blank" style="color:var(--accent-dim);text-decoration:none;font-weight:600">Dr. Jorge Naranjo Blanco</a></td>
-          <td>~80 est.</td>
-          <td><span class="rating-star">★</span> 5.0</td>
-          <td>Cartago</td>
-          <td>✓ Activo</td>
-          <td>—</td>
-        </tr>
-        <tr>
           <td><a href="https://www.hulihealth.com/es/doctor/john-jairo-dumett-ruiz" target="_blank" style="color:var(--accent-dim);text-decoration:none;font-weight:600">Dr. John Dumett Ruiz</a></td>
           <td><strong>49</strong></td>
           <td><span class="rating-star">★</span> 5.0</td>
           <td>Hospital Clínica Bíblica</td>
           <td>✓ Activo</td>
           <td>✓ Bíblica dir.</td>
-        </tr>
-        <tr>
-          <td><a href="https://directorio.salud360.cr/es/doctor/ricardo-camacho-lopez" target="_blank" style="color:var(--accent-dim);text-decoration:none;font-weight:600">Dr. Ricardo Camacho López</a></td>
-          <td>~30 est.</td>
-          <td><span class="rating-star">★</span> 4.8</td>
-          <td>San José</td>
-          <td>✓ Activo</td>
-          <td>—</td>
         </tr>
         <tr class="highlighted">
           <td><a href="https://directorio.hospitallacatolica.com/es/doctor/daniel-mendoza-murillo" target="_blank" style="text-decoration:none">Dr. Daniel Mendoza Murillo ← usted</a></td>
@@ -583,7 +591,7 @@
         </tr>
       </tbody>
     </table>
-    <p style="font-size:0.75rem;color:var(--text-muted);margin-top:12px;">Datos obtenidos de perfiles públicos en Huli Health, directorios hospitalarios e Instagram. Mayo 2026. "est." = estimado con base en posición en resultados de búsqueda.</p>
+    <p style="font-size:0.75rem;color:var(--text-muted);margin-top:12px;">Fuente: Huli Health Costa Rica (hulihealth.com), perfiles públicos verificados. Mayo 2026. Nota: La Dra. Milgram y el Dr. Solano operan también en Hospital La Católica — el mismo hospital del Dr. Mendoza — con 897 y 779 reseñas respectivamente.</p>
   </div>
 </section>
 
@@ -1207,12 +1215,12 @@
   new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: ['Dr. Víquez Villalobos', 'Dr. Naranjo Blanco*', 'Dr. Dumett Ruiz', 'Dr. Camacho López*', 'Dr. Mendoza Murillo'],
+      labels: ['Dr. Alfaro Albertazzi', 'Dra. Milgram Hochgelernter', 'Dr. Solano Méndez', 'Dr. Víquez Villalobos', 'Dr. Dumett Ruiz', 'Dr. Mendoza Murillo'],
       datasets: [
         {
           label: 'Reseñas Huli Health',
-          data: [219, 80, 49, 30, 0],
-          backgroundColor: ['#3A4D62','#3A4D62','#3A4D62','#3A4D62','#D9534F'],
+          data: [1659, 897, 779, 219, 49, 0],
+          backgroundColor: ['#3A4D62','#3A4D62','#3A4D62','#3A4D62','#3A4D62','#D9534F'],
           borderRadius: 4,
           barThickness: 22,
         }
@@ -1231,7 +1239,7 @@
               return v === 0 ? 'Sin reseñas públicas' : v + ' reseñas en Huli';
             },
             afterLabel: function(context) {
-              const labels = ['', '* estimado', '', '* estimado', '← Usted'];
+              const labels = ['', '', '', '', '', '← Usted'];
               return labels[context.dataIndex] || '';
             }
           }
@@ -1240,7 +1248,7 @@
       scales: {
         x: {
           beginAtZero: true,
-          max: 250,
+          max: 1800,
           grid: { color: 'rgba(0,0,0,0.06)' },
           ticks: { color: '#728698', font: { family: 'Outfit', size: 11 } }
         },
