@@ -1,0 +1,1734 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diagnóstico de Visibilidad Digital — Dra. Alexandra Ortega Knohr</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Newsreader:ital,wght@1,400;1,600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root {
+    --navy: #0B1929;
+    --navy-mid: #0F2236;
+    --navy-light: #14304D;
+    --navy-card: #162D4A;
+    --accent: #5EEBC2;
+    --accent-dim: #3CC49E;
+    --alert: #D9534F;
+    --warning: #E8A820;
+    --success: #3DAD6C;
+    --text-dark: #1C2D3F;
+    --gray-1: #728698;
+    --gray-2: #9AABBD;
+    --gray-3: #C4CFDD;
+    --gray-card: #3D5066;
+    --bg: #FFFFFF;
+    --bg-alt: #F6F8FB;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--bg);
+    color: var(--text-dark);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* NAV */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--navy);
+    border-bottom: 1px solid var(--navy-light);
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+  .nav-brand {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .nav-links {
+    display: flex;
+    gap: 24px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--gray-2);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-actions { display: flex; gap: 12px; align-items: center; }
+  .btn-print {
+    font-family: 'Outfit', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 7px 16px;
+    background: transparent;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-print:hover { background: var(--accent); color: var(--navy); }
+
+  /* HERO */
+  .hero {
+    background: var(--navy);
+    padding: 72px 40px 64px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 420px; height: 420px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(94,235,194,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: 20%;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(94,235,194,0.04) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 260px;
+    gap: 48px;
+    align-items: start;
+  }
+  .report-title {
+    font-size: clamp(36px, 5vw, 54px);
+    font-weight: 300;
+    color: #fff;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .report-title strong { font-weight: 800; color: #fff; }
+  .report-title em {
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+  }
+  .report-tagline {
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--gray-3);
+    margin-bottom: 32px;
+    max-width: 560px;
+    line-height: 1.7;
+  }
+  .hero-divider {
+    width: 40px;
+    height: 2px;
+    background: var(--accent);
+    margin-bottom: 24px;
+  }
+  .practice-name {
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+  .practice-insight {
+    font-size: 15px;
+    color: var(--gray-2);
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+  .practice-meta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+  }
+  .meta-badge {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--gray-2);
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 5px 12px;
+    border-radius: 20px;
+  }
+  .key-facts { display: flex; flex-direction: column; gap: 10px; }
+  .fact-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--gray-2);
+  }
+  .fact-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+  .hero-score-box {
+    background: rgba(94,235,194,0.06);
+    border: 1px solid rgba(94,235,194,0.2);
+    border-radius: 16px;
+    padding: 32px 24px;
+    text-align: center;
+  }
+  .score-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+  }
+  .score-number {
+    font-size: clamp(60px, 8vw, 88px);
+    font-weight: 800;
+    color: #fff;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .score-denom {
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--gray-1);
+  }
+  .score-tier {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 14px;
+    border-radius: 20px;
+    background: var(--warning);
+    color: #fff;
+    margin-top: 14px;
+  }
+  .hero-date {
+    margin-top: 12px;
+    font-size: 11px;
+    color: var(--gray-1);
+    text-align: center;
+  }
+
+  /* SECTIONS */
+  .section {
+    padding: 64px 40px;
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+  .section-alt { background: var(--bg-alt); }
+  .section-dark { background: var(--navy); }
+  .section-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 64px 40px;
+  }
+  .section-tag {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-size: clamp(22px, 3vw, 30px);
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+    line-height: 1.25;
+  }
+  .section-title-dark { color: #fff; }
+  .section-sub {
+    font-size: 15px;
+    color: var(--gray-1);
+    margin-bottom: 40px;
+    max-width: 640px;
+  }
+  .section-sub-dark { color: var(--gray-2); }
+
+  /* VERDICT */
+  .verdict-grid {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 40px;
+    align-items: start;
+  }
+  .chart-frame {
+    position: relative;
+    width: 100%;
+    height: 420px;
+  }
+  .chart-frame canvas {
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
+  }
+  .chart-frame.bar { height: 380px; }
+  .gap-cards { display: flex; flex-direction: column; gap: 16px; }
+  .gap-card {
+    background: var(--navy-card);
+    border-radius: 10px;
+    padding: 18px 20px;
+    border-left: 3px solid var(--alert);
+  }
+  .gap-card.amber { border-left-color: var(--warning); }
+  .gap-card.teal { border-left-color: var(--accent); }
+  .gap-card-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+  .gap-card-desc {
+    font-size: 12px;
+    color: var(--gray-2);
+    line-height: 1.5;
+  }
+  .opportunity-bar {
+    background: var(--bg-alt);
+    border-radius: 10px;
+    padding: 20px 24px;
+    border-left: 4px solid var(--accent);
+    margin-top: 24px;
+  }
+  .opportunity-bar p {
+    font-size: 14px;
+    color: var(--text-dark);
+    line-height: 1.6;
+  }
+  .opportunity-bar strong { color: var(--navy); }
+
+  /* BADGES */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    font-size: 15px;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+  .badge-red { background: rgba(217,83,79,0.15); color: var(--alert); }
+  .badge-amber { background: rgba(232,168,32,0.15); color: var(--warning); }
+  .badge-teal { background: rgba(94,235,194,0.15); color: var(--accent-dim); }
+  .badge-green { background: rgba(61,173,108,0.15); color: var(--success); }
+
+  /* AI SECTION */
+  .ai-hook {
+    font-size: clamp(20px, 3vw, 28px);
+    font-weight: 700;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 16px;
+    line-height: 1.3;
+  }
+  .ai-scenario {
+    font-size: 14px;
+    color: var(--gray-3);
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto 48px;
+    line-height: 1.7;
+  }
+  .ai-steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 48px;
+  }
+  .ai-step {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(94,235,194,0.12);
+    border-radius: 12px;
+    padding: 28px 20px;
+    text-align: center;
+  }
+  .ai-step-icon { font-size: 28px; margin-bottom: 12px; }
+  .ai-step-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+  }
+  .ai-step-desc {
+    font-size: 13px;
+    color: var(--gray-2);
+    line-height: 1.5;
+  }
+  .ai-pillars {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 48px;
+  }
+  .pillar-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 24px 18px;
+  }
+  .pillar-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 12px;
+  }
+  .pillar-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--gray-2);
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+  .pillar-item .chk { flex-shrink: 0; margin-top: 1px; }
+  .check-yes { color: var(--success); }
+  .check-no { color: var(--alert); }
+
+  /* PRICING */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 32px;
+  }
+  .pricing-card {
+    background: var(--navy-card);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 28px 24px;
+    position: relative;
+    transition: transform 0.2s;
+  }
+  .pricing-card:hover { transform: translateY(-4px); }
+  .pricing-card.featured {
+    border-color: var(--accent);
+    background: var(--navy-light);
+    transform: translateY(-8px);
+    box-shadow: 0 16px 48px rgba(94,235,194,0.12);
+  }
+  .pricing-badge {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent);
+    color: var(--navy);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 14px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+  .pricing-tier {
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+  .pricing-tagline {
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--gray-2);
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+  .pricing-price {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+  .pricing-period {
+    font-size: 12px;
+    color: var(--gray-1);
+    margin-bottom: 20px;
+  }
+  .pricing-guarantee {
+    background: rgba(94,235,194,0.08);
+    border: 1px solid rgba(94,235,194,0.2);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 11px;
+    color: var(--gray-3);
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+  .pricing-includes {
+    list-style: none;
+    margin-bottom: 24px;
+  }
+  .pricing-includes li {
+    font-size: 12px;
+    color: var(--gray-2);
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    line-height: 1.4;
+  }
+  .pricing-includes li::before {
+    content: '✓';
+    color: var(--accent);
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .pricing-anchor {
+    font-size: 11px;
+    color: var(--gray-1);
+    text-align: center;
+    margin-bottom: 16px;
+    text-decoration: line-through;
+  }
+  .pricing-cta {
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-family: 'Outfit', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 12px;
+    border-radius: 8px;
+    background: rgba(94,235,194,0.12);
+    color: var(--accent);
+    text-decoration: none;
+    border: 1px solid var(--accent);
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+  .pricing-card.featured .pricing-cta {
+    background: var(--accent);
+    color: var(--navy);
+  }
+  .pricing-cta:hover { opacity: 0.85; }
+  .guarantee-bar {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    padding: 18px 24px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--gray-2);
+  }
+  .guarantee-bar strong { color: var(--accent); }
+
+  /* MARKET STATS */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  .stat-card {
+    background: var(--bg-alt);
+    border-radius: 12px;
+    padding: 24px 20px;
+    border-top: 3px solid var(--accent);
+  }
+  .stat-number {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--navy);
+    margin-bottom: 8px;
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 13px;
+    color: var(--gray-1);
+    line-height: 1.5;
+  }
+  .stat-source {
+    font-size: 10px;
+    color: var(--gray-2);
+    margin-top: 8px;
+  }
+
+  /* BENCHMARK */
+  .benchmark-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .benchmark-table th {
+    background: var(--navy);
+    color: var(--gray-2);
+    font-weight: 600;
+    padding: 12px 16px;
+    text-align: left;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .benchmark-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--bg-alt);
+    color: var(--text-dark);
+  }
+  .benchmark-table tr.target td {
+    background: rgba(94,235,194,0.06);
+    font-weight: 600;
+    color: var(--navy);
+  }
+  .benchmark-table td a {
+    color: var(--navy);
+    text-decoration: none;
+  }
+  .benchmark-table td a:hover { text-decoration: underline; color: var(--accent-dim); }
+  .benchmark-table tr.target td a { color: var(--accent-dim); }
+
+  /* AUDIT */
+  .audit-section {
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 32px;
+    border: 1px solid rgba(0,0,0,0.07);
+  }
+  .audit-header {
+    background: var(--navy);
+    padding: 20px 28px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .audit-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    flex: 1;
+  }
+  .audit-body {
+    background: #fff;
+    padding: 28px;
+  }
+  .audit-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 24px;
+  }
+  .audit-col-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--gray-1);
+    margin-bottom: 10px;
+  }
+  .audit-finding {
+    font-size: 14px;
+    color: var(--text-dark);
+    line-height: 1.6;
+  }
+  .audit-finding strong { color: var(--navy); }
+  .recs-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .rec-card {
+    background: var(--navy-card);
+    border-radius: 10px;
+    padding: 16px 18px;
+    border-left: 3px solid var(--alert);
+  }
+  .rec-card.amber { border-left-color: var(--warning); }
+  .rec-card.green { border-left-color: var(--success); }
+  .rec-priority {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--alert);
+    margin-bottom: 6px;
+  }
+  .rec-card.amber .rec-priority { color: var(--warning); }
+  .rec-card.green .rec-priority { color: var(--success); }
+  .rec-text {
+    font-size: 13px;
+    color: #fff;
+    line-height: 1.5;
+  }
+  .quick-win {
+    background: rgba(94,235,194,0.07);
+    border: 1px solid rgba(94,235,194,0.2);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-top: 16px;
+    font-size: 13px;
+    color: var(--text-dark);
+    line-height: 1.6;
+  }
+  .quick-win strong { color: var(--accent-dim); font-weight: 700; }
+
+  /* ROADMAP */
+  .roadmap-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .roadmap-card {
+    background: var(--navy-card);
+    border-radius: 14px;
+    padding: 28px 24px;
+    border-top: 3px solid var(--alert);
+  }
+  .roadmap-card:nth-child(2) { border-top-color: var(--warning); }
+  .roadmap-card:nth-child(3) { border-top-color: var(--success); }
+  .roadmap-phase {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--alert);
+    margin-bottom: 8px;
+  }
+  .roadmap-card:nth-child(2) .roadmap-phase { color: var(--warning); }
+  .roadmap-card:nth-child(3) .roadmap-phase { color: var(--success); }
+  .roadmap-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 18px;
+  }
+  .roadmap-list { list-style: none; }
+  .roadmap-list li {
+    font-size: 13px;
+    color: var(--gray-2);
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    line-height: 1.6;
+  }
+  .roadmap-list li::before {
+    content: '→';
+    color: var(--accent);
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* KPIs */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+  }
+  .kpi-card {
+    background: var(--bg-alt);
+    border-radius: 12px;
+    padding: 20px 16px;
+    text-align: center;
+    border-bottom: 3px solid var(--accent);
+  }
+  .kpi-metric {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--navy);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 6px;
+    line-height: 1.4;
+  }
+  .kpi-tool {
+    font-size: 11px;
+    color: var(--gray-1);
+  }
+
+  /* FINAL CTA */
+  .final-cta {
+    background: var(--navy);
+    padding: 80px 40px;
+    text-align: center;
+  }
+  .final-cta-inner { max-width: 640px; margin: 0 auto; }
+  .final-cta-title {
+    font-size: clamp(24px, 3.5vw, 36px);
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.25;
+    margin-bottom: 16px;
+  }
+  .final-cta-sub {
+    font-size: 15px;
+    color: var(--gray-2);
+    margin-bottom: 40px;
+    line-height: 1.6;
+  }
+  .cta-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .btn-primary {
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 16px 32px;
+    background: var(--accent);
+    color: var(--navy);
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-primary:hover { opacity: 0.88; transform: translateY(-2px); }
+  .btn-secondary {
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 16px 32px;
+    background: transparent;
+    color: var(--accent);
+    border: 1.5px solid var(--accent);
+    border-radius: 8px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-secondary:hover { background: rgba(94,235,194,0.08); }
+
+  /* HIGHLIGHT PILL */
+  .highlight-pill {
+    display: inline-block;
+    background: rgba(94,235,194,0.12);
+    border: 1px solid rgba(94,235,194,0.3);
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+  }
+
+  /* PRINT */
+  @media print {
+    .nav, .btn-print, .cta-buttons { display: none !important; }
+    .hero { padding: 40px 20px; }
+    .section { padding: 32px 20px; }
+    .audit-section { page-break-inside: avoid; }
+    .pricing-card.featured { transform: none; }
+    .roadmap-card { page-break-inside: avoid; }
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hero-inner { grid-template-columns: 1fr; }
+    .verdict-grid { grid-template-columns: 1fr; }
+    .ai-steps { grid-template-columns: 1fr; }
+    .ai-pillars { grid-template-columns: repeat(2, 1fr); }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .pricing-card.featured { transform: none; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .audit-grid { grid-template-columns: 1fr; }
+    .recs-grid { grid-template-columns: 1fr; }
+    .roadmap-grid { grid-template-columns: 1fr; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .hero { padding: 40px 20px 48px; }
+    .section { padding: 40px 20px; }
+    .section-inner { padding: 40px 20px; }
+    .final-cta { padding: 48px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-brand">FLOW Results · DPI</div>
+  <ul class="nav-links">
+    <li><a href="#veredicto">Veredicto</a></li>
+    <li><a href="#ia">IA</a></li>
+    <li><a href="#benchmark">Benchmark</a></li>
+    <li><a href="#auditoria">Auditoría</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#planes">Planes</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="btn-print" onclick="window.print()">Imprimir reporte</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <h1 class="report-title">
+        <strong>Diagnóstico</strong> de<br>
+        <em>Visibilidad</em> Digital
+      </h1>
+      <p class="report-tagline">
+        Las mejores especialistas merecen ser encontradas en internet. Este reporte le revelará un diagnóstico completo de cómo ser la referente número 1 de su especialidad en Puntarenas y la Región Pacífico Central.
+      </p>
+      <div class="hero-divider"></div>
+      <div class="practice-name">Dra. Alexandra Ortega Knohr</div>
+      <p class="practice-insight">
+        La Dra. Ortega tiene credenciales sólidas, licencia activa y una posición única como una de las pocas cirujanas ortopedistas en Puntarenas. Ahora necesita visibilidad digital para que los pacientes de la región la encuentren antes que al sistema público.
+      </p>
+      <div class="practice-meta">
+        <span class="meta-badge">Ortopedia y Traumatología</span>
+        <span class="meta-badge">Medicina Física y Rehabilitación</span>
+        <span class="meta-badge">Puntarenas, Costa Rica</span>
+        <span class="meta-badge">Clínica Montespino</span>
+      </div>
+      <div class="key-facts">
+        <div class="fact-item"><div class="fact-dot"></div>Reseñas en Google: no encontradas públicamente</div>
+        <div class="fact-item"><div class="fact-dot"></div>Perfil Salud360: activo (MED8332 · Colegio Médicos CR)</div>
+        <div class="fact-item"><div class="fact-dot"></div>Perfil Huli Health: no encontrado bajo su nombre</div>
+        <div class="fact-item"><div class="fact-dot"></div>Sitio web propio: no encontrado</div>
+        <div class="fact-item"><div class="fact-dot"></div>Instagram / redes sociales: no encontradas como ortopedista</div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-score-box">
+        <div class="score-label">Visibilidad Global</div>
+        <div class="score-number">1.5<span class="score-denom"> /5</span></div>
+        <div class="score-tier">Brecha Crítica</div>
+      </div>
+      <div class="hero-date">Diagnóstico: Mayo 2026 · Fuente: FLOW Results Research</div>
+    </div>
+  </div>
+</section>
+
+<!-- VEREDICTO -->
+<section id="veredicto">
+  <div class="section">
+    <div class="section-tag">Veredicto Ejecutivo</div>
+    <h2 class="section-title">Una especialista excepcional<br>invisible para el 90% de sus pacientes potenciales</h2>
+    <p class="section-sub">La Dra. Ortega tiene las credenciales, la especialidad y la ubicación estratégica. El problema: nadie que busque "ortopedista Puntarenas" en Google la va a encontrar hoy.</p>
+
+    <div class="verdict-grid">
+      <div>
+        <div class="chart-frame">
+          <canvas id="radarChart"></canvas>
+        </div>
+        <div class="opportunity-bar">
+          <p>Cerrar las tres brechas principales podría representar entre <strong>15 y 30 consultas privadas adicionales por mes</strong>, basado en el volumen de búsquedas locales estimado para "ortopedista Puntarenas" y la conversión típica de consultas médicas en Costa Rica (estimado ilustrativo basado en benchmarks de mercado).</p>
+        </div>
+      </div>
+      <div class="gap-cards">
+        <div class="gap-card">
+          <div class="gap-card-title">Reseñas: cero presencia verificable</div>
+          <div class="gap-card-desc">Los líderes en Huli Health acumulan 100–746 reseñas. La Dra. Ortega no tiene reseñas públicas encontradas en ninguna plataforma. Esto la hace invisible para pacientes que comparan opciones.</div>
+        </div>
+        <div class="gap-card amber">
+          <div class="gap-card-title">Sin sitio web ni perfil Huli optimizado</div>
+          <div class="gap-card-desc">No existe un sitio web propio ni un perfil Huli Health activo con fotos, servicios y disponibilidad. El 100% de su tráfico potencial se pierde antes de llegar a ella.</div>
+        </div>
+        <div class="gap-card teal">
+          <div class="gap-card-title">Diferenciador sin explotar: cirujana ortopedista mujer</div>
+          <div class="gap-card-desc">De 63 ortopedistas en San José, solo 5 son mujeres. En Puntarenas, ser una cirujana ortopedista femenina es un diferenciador potente y auténtico que ninguna comunicación actual capitaliza.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AI SECTION -->
+<div id="ia" class="section-dark">
+  <div class="section-inner">
+    <p class="ai-hook">¿Le gustaría que ChatGPT y Google recomienden a la Dra. Ortega cuando alguien busque ortopedista en Puntarenas?</p>
+    <p class="ai-scenario">
+      Son las 10 de la noche. Una paciente de 45 años en Barranca tiene dolor crónico de rodilla. Abre ChatGPT y escribe: <em>"¿quién es el mejor ortopedista en Puntarenas?"</em><br><br>
+      La IA busca señales de autoridad. Si no encuentra reseñas, directorio activo ni contenido sobre la Dra. Ortega, recomienda a alguien en San José. Esa paciente viaja más lejos. La Dra. Ortega nunca supo que existía.
+    </p>
+
+    <div class="ai-steps">
+      <div class="ai-step">
+        <div class="ai-step-icon">🔍</div>
+        <div class="ai-step-title">Paso 1: Paciente pregunta</div>
+        <div class="ai-step-desc">El paciente abre ChatGPT, Google AI o Perplexity y describe su necesidad médica en lenguaje natural.</div>
+      </div>
+      <div class="ai-step">
+        <div class="ai-step-icon">🧠</div>
+        <div class="ai-step-title">Paso 2: IA busca señales</div>
+        <div class="ai-step-desc">El sistema analiza directorios, reseñas, contenido educativo, menciones en medios y schema markup para identificar autoridades locales.</div>
+      </div>
+      <div class="ai-step">
+        <div class="ai-step-icon">✅</div>
+        <div class="ai-step-title">Paso 3: Recomienda al mejor posicionado</div>
+        <div class="ai-step-desc">Gana quien tiene más señales de confianza y autoridad digital — no necesariamente el mejor médico, sino el más visible ante la IA.</div>
+      </div>
+    </div>
+
+    <div class="ai-pillars">
+      <div class="pillar-card">
+        <div class="pillar-title">Contenido educativo</div>
+        <div class="pillar-item"><span class="chk check-no">✗</span>Blog o artículos sobre ortopedia</div>
+        <div class="pillar-item"><span class="chk check-no">✗</span>FAQs sobre rodilla, columna, fracturas</div>
+        <div class="pillar-item"><span class="chk check-no">✗</span>Videos explicativos en YouTube/IG</div>
+        <div class="pillar-item"><span class="chk check-no">✗</span>Guías descargables para pacientes</div>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-title">Schema &amp; Datos estructurados</div>
+        <div class="pillar-item"><span class="chk check-no">✗</span>Marcado schema MedicalBusiness</div>
+        <div class="pillar-item"><span class="chk check-no">✗</span>Schema de especialidad y procedimientos</div>
+        <div class="pillar-item"><span class="chk check-yes">✓</span>Licencia verificada (MED8332 CMCR)</div>
+        <div class="pillar-item"><span class="chk check-no">✗</span>Perfil GBP con categorías correctas</div>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-title">Reseñas &amp; Autoridad social</div>
+        <div class="pillar-item"><span class="chk check-no">✗</span>Reseñas en Google Business Profile</div>
+        <div class="pillar-item"><span class="chk check-no">✗</span>Reseñas en Huli Health</div>
+        <div class="pillar-item"><span class="chk check-yes">✓</span>Listing activo en Salud360 y ASSA</div>
+        <div class="pillar-item"><span class="chk check-no">✗</span>Reseñas en Salud360 verificables</div>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-title">Citaciones &amp; Directorios</div>
+        <div class="pillar-item"><span class="chk check-yes">✓</span>Colegio de Médicos CR (hulilabs)</div>
+        <div class="pillar-item"><span class="chk check-yes">✓</span>Salud360 activo</div>
+        <div class="pillar-item"><span class="chk check-no">✗</span>Huli Health perfil optimizado</div>
+        <div class="pillar-item"><span class="chk check-no">✗</span>Google Business Profile reclamado</div>
+      </div>
+    </div>
+
+    <!-- DOCTOR RANK PRICING -->
+    <div style="text-align:center; margin-bottom: 32px;">
+      <div class="highlight-pill">Doctor Rank · Visibilidad ante IA</div>
+      <h3 class="ai-hook" style="font-size: clamp(18px,2.5vw,24px); margin-top: 8px;">Convierta la invisibilidad actual en autoridad digital</h3>
+      <p class="ai-scenario" style="margin-bottom: 32px;">Tres planes diseñados para que la Dra. Ortega sea la referente de ortopedia en Puntarenas — en Google, en Huli y ante las herramientas de inteligencia artificial.</p>
+    </div>
+
+    <div class="pricing-grid">
+      <!-- BÁSICO -->
+      <div class="pricing-card">
+        <div class="pricing-tier">Visibilidad IA</div>
+        <div class="pricing-tagline">"Aparecer cuando un paciente busque ortopedista en Puntarenas en ChatGPT o Google"</div>
+        <div class="pricing-price">$297</div>
+        <div class="pricing-period">USD / mes · ≈ ₡155,000</div>
+        <div class="pricing-guarantee">
+          Garantía: mencionada en respuestas de ChatGPT, Perplexity o Google AI Overview para "ortopedista Puntarenas" dentro de 90 días, o se reembolsa el último mes.
+        </div>
+        <ul class="pricing-includes">
+          <li>Reclamación y optimización de Google Business Profile</li>
+          <li>Perfil Huli Health completo con fotos y servicios</li>
+          <li>NAP unificado en 5 directorios CR (Salud360, ASSA, CMCR, Huli, EncuentraMédicos)</li>
+          <li>Schema markup MedicalBusiness en web</li>
+          <li>Reporte mensual de menciones IA</li>
+        </ul>
+        <div class="pricing-anchor">Valor real $580 · usted paga $297</div>
+        <a href="https://calendly.com/recheverria-flow/sesion-de-estrategia-con-flow-results-clone" target="_blank" class="pricing-cta">Comenzar con Visibilidad IA</a>
+      </div>
+
+      <!-- AVANZADO (FEATURED) -->
+      <div class="pricing-card featured">
+        <div class="pricing-badge">⭐ Recomendado para la Dra. Ortega</div>
+        <div class="pricing-tier">Autoridad Digital</div>
+        <div class="pricing-tagline">"Dominar las búsquedas de ortopedia en Puntarenas y ser la referente reconocida en la Región Pacífico Central"</div>
+        <div class="pricing-price">$697</div>
+        <div class="pricing-period">USD / mes · ≈ ₡363,000</div>
+        <div class="pricing-guarantee">
+          Garantía: Top 3 en Google para 3 búsquedas clave de ortopedia en Puntarenas + duplicar seguidores en redes sociales en 6 meses, o el segundo mes es gratuito.
+        </div>
+        <ul class="pricing-includes">
+          <li>Todo lo de Visibilidad IA, más:</li>
+          <li>Sitio web profesional con páginas por servicio (rodilla, columna, fracturas, rehabilitación)</li>
+          <li>Estrategia de contenido mensual (4 posts IG + 2 artículos SEO)</li>
+          <li>Gestión de reseñas y protocolo de velocidad de reseñas</li>
+          <li>Campañas Google Ads locales (Puntarenas, Barranca, Esparza, Jacó)</li>
+          <li>Posicionamiento como cirujana ortopedista femenina — diferenciador de marca</li>
+          <li>Reporte de ranking mensual + sesión estratégica trimestral</li>
+        </ul>
+        <div class="pricing-anchor">Valor real $1,400 · usted paga $697</div>
+        <a href="https://calendly.com/recheverria-flow/sesion-de-estrategia-con-flow-results-clone" target="_blank" class="pricing-cta">Agendar sesión estratégica</a>
+      </div>
+
+      <!-- PREMIUM -->
+      <div class="pricing-card">
+        <div class="pricing-tier">Referente Nacional</div>
+        <div class="pricing-tagline">"Ser la voz pública de ortopedia en la Región Pacífico de Costa Rica y caso de referencia nacional"</div>
+        <div class="pricing-price">$1,900</div>
+        <div class="pricing-period">USD / mes · ≈ ₡990,000</div>
+        <div class="pricing-guarantee">
+          Garantía: #1 en Google y ChatGPT para ortopedia en Puntarenas + 25,000+ seguidores combinados + 6+ apariciones en medios en 12 meses, o se continúa sin costo hasta cumplirlo.
+        </div>
+        <ul class="pricing-includes">
+          <li>Todo lo de Autoridad Digital, más:</li>
+          <li>Producción de video mensual (Reels, YouTube)</li>
+          <li>Relaciones públicas y prensa médica regional</li>
+          <li>Podcast o columna médica en medios de Puntarenas</li>
+          <li>Estrategia de marca personal como cirujana ortopedista de referencia</li>
+          <li>Gestión completa de redes sociales</li>
+          <li>Reporte ejecutivo quincenal</li>
+        </ul>
+        <div class="pricing-anchor">Valor real $3,500 · usted paga $1,900</div>
+        <a href="https://calendly.com/recheverria-flow/sesion-de-estrategia-con-flow-results-clone" target="_blank" class="pricing-cta">Hablar sobre Referente Nacional</a>
+      </div>
+    </div>
+
+    <div class="guarantee-bar">
+      <strong>Garantía FLOW Results</strong> — sobre visibilidad y autoridad, no sobre volumen de pacientes.<br>
+      Si no cumplimos las métricas acordadas, no cobramos. Sin contratos forzosos a 12 meses.
+    </div>
+  </div>
+</div>
+
+<!-- MARKET CONTEXT -->
+<div class="section-alt">
+  <div class="section">
+    <div class="section-tag">Contexto de Mercado</div>
+    <h2 class="section-title">Así elige un paciente a su ortopedista en Costa Rica hoy</h2>
+    <p class="section-sub">El comportamiento del paciente costarricense ha migrado al mundo digital. La decisión ya no pasa por la recomendación del médico general — pasa por Google, Huli y WhatsApp.</p>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-number">78%</div>
+        <div class="stat-label">de pacientes en LATAM busca a su especialista en línea antes de llamar al consultorio</div>
+        <div class="stat-source">Fuente: Doctoralia Patient Journey LATAM, 2024 · doctoralia.com.mx/blog</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">94%</div>
+        <div class="stat-label">de usuarios de Huli Health lee reseñas antes de agendar con un especialista nuevo</div>
+        <div class="stat-source">Fuente: HuliHealth Blog, "Ortopedia en Costa Rica", 2024 · blog.hulihealth.com</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">65%</div>
+        <div class="stat-label">de búsquedas médicas en móvil incluyen términos de localización como "cerca" o el nombre de la ciudad</div>
+        <div class="stat-source">Fuente: Google Health, "How Patients Search for Doctors", 2023 · think.withgoogle.com</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">3x</div>
+        <div class="stat-label">más probabilidad de que un paciente elija a un especialista con 50+ reseñas vs. uno sin reseñas, incluso si el sin reseñas está más cerca</div>
+        <div class="stat-source">Fuente: BrightLocal Local Consumer Review Survey, 2024 · brightlocal.com</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BENCHMARK -->
+<section id="benchmark">
+  <div class="section">
+    <div class="section-tag">Benchmark Competitivo</div>
+    <h2 class="section-title">Los líderes de ortopedia en Costa Rica acumulan cientos de reseñas. La brecha es real.</h2>
+    <p class="section-sub">Comparamos a la Dra. Ortega con los ortopedistas mejor posicionados en Huli Health a nivel nacional, y con los especialistas más cercanos en la región del Pacífico Central.</p>
+
+    <div style="margin-bottom: 40px;">
+      <div class="chart-frame bar">
+        <canvas id="barChart"></canvas>
+      </div>
+    </div>
+
+    <table class="benchmark-table">
+      <thead>
+        <tr>
+          <th>Especialista</th>
+          <th>Ciudad / Clínica</th>
+          <th>Reseñas Huli</th>
+          <th>Rating Huli</th>
+          <th>GBP / Google</th>
+          <th>Sitio Web</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><a href="https://www.hulihealth.com/es/doctor/rodolfo-ivancovich-cruz" target="_blank">Dr. Rodolfo Ivancovich-Cruz</a></td>
+          <td>San José · OrthopediK</td>
+          <td>746</td>
+          <td>⭐ 5.0</td>
+          <td>Sí</td>
+          <td>Sí</td>
+        </tr>
+        <tr>
+          <td><a href="https://www.hulihealth.com/es/doctor/cristhian-jose-castro-artavia" target="_blank">Dr. Cristhian Castro Artavia</a></td>
+          <td>San José · La Católica</td>
+          <td>536</td>
+          <td>⭐ 5.0</td>
+          <td>Sí</td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <td><a href="https://www.hulihealth.com/es/doctor/manuel-chavarria-alvarado" target="_blank">Dr. Manuel Chavarría Alvarado</a></td>
+          <td>San José · CIMA</td>
+          <td>596</td>
+          <td>⭐ 5.0</td>
+          <td>Sí</td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <td><a href="https://www.hulihealth.com/es/doctor/alexander-valverde-retana" target="_blank">Dr. Alexander Valverde Retana</a></td>
+          <td>San José · Clínica Bíblica</td>
+          <td>408</td>
+          <td>⭐ 5.0</td>
+          <td>Sí</td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <td><a href="https://www.hulihealth.com/es/doctor/lisandro-antonio-jimenez-quiros" target="_blank">Dr. Lisandro Jiménez Quirós</a></td>
+          <td>San Rafael · OrthopediK</td>
+          <td>335</td>
+          <td>⭐ 5.0</td>
+          <td>Sí</td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <td><a href="https://www.hulihealth.com/es/doctor/diana-alexandra-rojas-torres" target="_blank">Dra. Diana Rojas Torres</a></td>
+          <td>Heredia · La Católica</td>
+          <td>157</td>
+          <td>⭐ 5.0</td>
+          <td>Sí</td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <td><a href="https://www.hulihealth.com/es/doctor/andres-ugalde-cordero" target="_blank">Dr. Andrés Ugalde Cordero</a></td>
+          <td>Liberia · Orthocell</td>
+          <td>159</td>
+          <td>⭐ 5.0</td>
+          <td>Sí</td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <td><a href="https://www.drmartinezortopedia.com/dr-david-martinez-tello/" target="_blank">Dr. David Martínez Tello</a></td>
+          <td>Puntarenas · H. Monseñor Sanabria</td>
+          <td>~20</td>
+          <td>⭐ 4.8</td>
+          <td>Parcial</td>
+          <td>Sí</td>
+        </tr>
+        <tr class="target">
+          <td><a href="https://directorio.salud360.cr/es/doctor/alexandra-ortega-knohr" target="_blank">Dra. Alexandra Ortega Knohr ← Usted</a></td>
+          <td>Puntarenas · Clínica Montespino</td>
+          <td>0</td>
+          <td>N/D</td>
+          <td>No reclamado</td>
+          <td>No</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-size:11px; color: var(--gray-1); margin-top: 12px;">Fuentes: HuliHealth.com directorio nacional, Mayo 2026 · Salud360.cr · Google Search. Los datos de reseñas son de la plataforma Huli Health y pueden variar en otras plataformas.</p>
+  </div>
+</section>
+
+<!-- AUDITORÍA 6D -->
+<section id="auditoria">
+  <div class="section">
+    <div class="section-tag">Auditoría de 6 Dimensiones</div>
+    <h2 class="section-title">Dónde está la brecha — y cómo cerrarla</h2>
+    <p class="section-sub">Cada dimensión analizada con datos reales y recomendaciones concretas con nivel de prioridad.</p>
+
+    <!-- 1. RESEÑAS -->
+    <div class="audit-section">
+      <div class="audit-header">
+        <div class="badge badge-red">1.0</div>
+        <div class="audit-title">Reseñas y Reputación — Sin presencia verificable en ninguna plataforma</div>
+      </div>
+      <div class="audit-body">
+        <div class="audit-grid">
+          <div>
+            <div class="audit-col-title">Estado Actual</div>
+            <div class="audit-finding">
+              No se encontraron reseñas públicas asociadas a la Dra. Alexandra Ortega Knohr en <strong>Google Business Profile, Huli Health, Salud360 ni Facebook</strong>. Su perfil en Salud360 está activo con información básica (licencia MED8332) pero sin calificaciones de pacientes.<br><br>
+              Su único competidor directo en Puntarenas identificado (Dr. David Martínez Tello, Hospital Monseñor Sanabria) tiene presencia débil pero existente. Los líderes nacionales acumulan entre <strong>157 y 746 reseñas</strong> en Huli Health, todas con rating 5.0.
+            </div>
+          </div>
+          <div>
+            <div class="audit-col-title">Lo que hacen los líderes</div>
+            <div class="audit-finding">
+              El Dr. Rodolfo Ivancovich-Cruz lidera con <strong>746 reseñas en Huli</strong> (¢70,000/consulta, San José). Dra. Diana Rojas Torres — una de las pocas mujeres ortopedistas en CR — tiene <strong>157 reseñas con 5.0</strong> en Huli Health. Los líderes implementan protocolos sistemáticos de solicitud de reseñas post-consulta vía WhatsApp. La diferencia no es calidad médica: es proceso.
+            </div>
+          </div>
+        </div>
+        <div class="recs-grid">
+          <div class="rec-card">
+            <div class="rec-priority">Prioridad Crítica</div>
+            <div class="rec-text">Reclamar y optimizar el Google Business Profile con fotos, horarios, servicios y respuestas a reseñas. Meta: 30 reseñas en los primeros 90 días via protocolo WhatsApp post-consulta.</div>
+          </div>
+          <div class="rec-card">
+            <div class="rec-priority">Prioridad Crítica</div>
+            <div class="rec-text">Crear y completar perfil en Huli Health con foto profesional, lista de condiciones tratadas (rodilla, columna, fracturas, scoliosis), horarios y precio de consulta (¢65,000–70,000).</div>
+          </div>
+          <div class="rec-card amber">
+            <div class="rec-priority">Prioridad Alta</div>
+            <div class="rec-text">Implementar flujo de solicitud de reseña automático: mensaje WhatsApp 24h post-consulta con link directo a Google y Huli. Objetivo: 5 reseñas nuevas por mes sostenido.</div>
+          </div>
+          <div class="rec-card amber">
+            <div class="rec-priority">Prioridad Alta</div>
+            <div class="rec-text">Configurar alertas de reputación y responder a todas las reseñas en menos de 48 horas — tanto positivas como negativas — con tono profesional y cálido.</div>
+          </div>
+        </div>
+        <div class="quick-win"><strong>Victoria rápida (30 días):</strong> Enviar mensaje personalizado a los últimos 20 pacientes solicitando reseña en Google. Si solo el 30% responde, ya tiene 6 reseñas y una presencia verificable.</div>
+      </div>
+    </div>
+
+    <!-- 2. SITIO WEB -->
+    <div class="audit-section">
+      <div class="audit-header">
+        <div class="badge badge-red">1.0</div>
+        <div class="audit-title">Sitio Web y Conversión — Sin presencia digital propia</div>
+      </div>
+      <div class="audit-body">
+        <div class="audit-grid">
+          <div>
+            <div class="audit-col-title">Estado Actual</div>
+            <div class="audit-finding">
+              <strong>No existe sitio web propio</strong> de la Dra. Alexandra Ortega Knohr. Los pacientes que llegan a Salud360 o al buscador encuentran solo información básica sin posibilidad de agendar cita en línea, ver servicios detallados ni conocer la historia y credenciales de la Dra.<br><br>
+              La Clínica Montespino tiene un sitio de Google Sites básico, pero la Dra. Ortega no aparece listada entre sus especialistas ortopédicos (aparece el Dr. Castillo Malespin como ortopedista de la clínica).
+            </div>
+          </div>
+          <div>
+            <div class="audit-col-title">Lo que hacen los líderes</div>
+            <div class="audit-finding">
+              El Dr. Francisco Soto (Grecia) tiene sitio web completo con páginas por especialidad, galería, formulario de contacto y chat de WhatsApp. <strong>Dr. David Martínez Tello</strong> (Puntarenas) también tiene sitio propio. Un sitio web convierte entre 3–8% de visitantes en consultas agendadas cuando tiene CTAs claros, según benchmarks de salud en LATAM.
+            </div>
+          </div>
+        </div>
+        <div class="recs-grid">
+          <div class="rec-card">
+            <div class="rec-priority">Prioridad Crítica</div>
+            <div class="rec-text">Crear sitio web propio con dominio personalizado (ej. dra-ortega-puntarenas.cr) con páginas: Inicio, Sobre la Dra., Servicios (rodilla, columna, fracturas, rehabilitación), Citas, Contacto.</div>
+          </div>
+          <div class="rec-card">
+            <div class="rec-priority">Prioridad Crítica</div>
+            <div class="rec-text">Incluir botón de WhatsApp flotante con número +506 2664 1919 visible en todas las páginas. El 70%+ de pacientes en CR prefiere agendar por WhatsApp — este botón es el CTA más importante.</div>
+          </div>
+          <div class="rec-card amber">
+            <div class="rec-priority">Prioridad Alta</div>
+            <div class="rec-text">Agregar bio completa con foto profesional, credenciales UCR, código de licencia MED8332, años de experiencia e idiomas (español e inglés). La transparencia genera confianza.</div>
+          </div>
+          <div class="rec-card green">
+            <div class="rec-priority">Mejora Secundaria</div>
+            <div class="rec-text">Integrar sistema de agenda en línea (Huli o Calendly) para que pacientes puedan ver disponibilidad y confirmar sin llamar. Reduce fricción y capta pacientes fuera de horario.</div>
+          </div>
+        </div>
+        <div class="quick-win"><strong>Victoria rápida (30 días):</strong> Crear una página de HuliHealth completa funciona como "mini sitio web" gratuito mientras se desarrolla el sitio propio. Con foto, servicios, precio y horario, ya tiene conversión real.</div>
+      </div>
+    </div>
+
+    <!-- 3. SEO -->
+    <div class="audit-section">
+      <div class="audit-header">
+        <div class="badge badge-red">1.5</div>
+        <div class="audit-title">SEO y Contenido — Invisible para búsquedas locales de ortopedia en Puntarenas</div>
+      </div>
+      <div class="audit-body">
+        <div class="audit-grid">
+          <div>
+            <div class="audit-col-title">Estado Actual</div>
+            <div class="audit-finding">
+              Al buscar "ortopedista Puntarenas" o "ortopedia Puntarenas" en Google, <strong>la Dra. Ortega no aparece en los primeros 5 resultados</strong> orgánicos ni en el local pack. No hay blog, artículos educativos, FAQs ni contenido de valor asociado a su nombre.<br><br>
+              La única presencia indexable es su perfil en Salud360 y la mención en el directorio del Colegio de Médicos. Esto es insuficiente para competir en búsquedas locales con intención de consulta.
+            </div>
+          </div>
+          <div>
+            <div class="audit-col-title">Lo que hacen los líderes</div>
+            <div class="audit-finding">
+              El Dr. Francisco Soto tiene un sitio web con páginas individuales para cada procedimiento (cirugía de rodilla, reemplazo de cadera, fracturas). OrthopediK tiene blog activo con artículos que ranquean para búsquedas de condiciones. <strong>El contenido educativo es el activo SEO más valioso</strong> en medicina privada — cada artículo es una "consulta gratuita" que atrae pacientes calificados.
+            </div>
+          </div>
+        </div>
+        <div class="recs-grid">
+          <div class="rec-card">
+            <div class="rec-priority">Prioridad Crítica</div>
+            <div class="rec-text">Optimizar Google Business Profile con categorías correctas, descripción con palabras clave ("ortopedista Puntarenas", "traumatología Barranca"), fotos y posts mensuales.</div>
+          </div>
+          <div class="rec-card">
+            <div class="rec-priority">Prioridad Crítica</div>
+            <div class="rec-text">Crear páginas de servicio individuales en el sitio web: "Cirugía de Rodilla Puntarenas", "Dolor de Columna Puntarenas", "Tratamiento de Fracturas", "Ortopedia Pediátrica Puntarenas".</div>
+          </div>
+          <div class="rec-card amber">
+            <div class="rec-priority">Prioridad Alta</div>
+            <div class="rec-text">Publicar 2 artículos mensuales con preguntas frecuentes reales de pacientes: "¿Cuándo se opera una hernia de disco?", "¿Cómo saber si necesito ortopedista o fisiatra?"</div>
+          </div>
+          <div class="rec-card amber">
+            <div class="rec-priority">Prioridad Alta</div>
+            <div class="rec-text">Implementar schema markup de tipo MedicalBusiness, Person y MedicalSpecialty en el sitio — las herramientas de IA y Google dependen de estos metadatos para recomendaciones locales.</div>
+          </div>
+        </div>
+        <div class="quick-win"><strong>Victoria rápida (30 días):</strong> Completar el perfil de Google Business Profile con categoría "Ortopedista", 10+ fotos de la clínica/consultorio, horarios actualizados y primer post de contenido. Esto solo ya mejora visibilidad en local pack.</div>
+      </div>
+    </div>
+
+    <!-- 4. DIRECTORIOS -->
+    <div class="audit-section">
+      <div class="audit-header">
+        <div class="badge badge-amber">2.0</div>
+        <div class="audit-title">Directorios y Citaciones — Base existe, pero incompleta y sin optimizar</div>
+      </div>
+      <div class="audit-body">
+        <div class="audit-grid">
+          <div>
+            <div class="audit-col-title">Estado Actual</div>
+            <div class="audit-finding">
+              La Dra. Ortega tiene presencia verificada en <strong>Salud360.cr</strong> (perfil activo con información de contacto) y en el <strong>directorio del Colegio de Médicos y Cirujanos de CR</strong> (hulilabs, código MED8332). También aparece en el directorio de ASSA (seguro).<br><br>
+              No se encontró perfil en <strong>Huli Health</strong> (el directorio más usado en CR para agendar citas), ni en EncuentraMédicos.com, ni en el directorio de la Cámara Costarricense de la Salud bajo su nombre propio.
+            </div>
+          </div>
+          <div>
+            <div class="audit-col-title">Lo que hacen los líderes</div>
+            <div class="audit-finding">
+              Los ortopedistas con mayor posicionamiento en CR (Ivancovich, Jiménez Quirós, Castro Artavia) tienen perfiles <strong>completos y verificados en Huli Health</strong> con foto, bio, servicios, precio, horarios, y sistema de citas. Huli es la plataforma #1 de agendamiento médico privado en Costa Rica — no tener presencia aquí equivale a no existir para un segmento clave de pacientes digitales.
+            </div>
+          </div>
+        </div>
+        <div class="recs-grid">
+          <div class="rec-card">
+            <div class="rec-priority">Prioridad Crítica</div>
+            <div class="rec-text">Crear perfil completo y verificado en Huli Health con foto profesional, descripción, lista de servicios, precio de consulta, horarios y enlace a agenda. Es gratuito y el retorno es inmediato.</div>
+          </div>
+          <div class="rec-card amber">
+            <div class="rec-priority">Prioridad Alta</div>
+            <div class="rec-text">Completar perfil en EncuentraMédicos.com y directorio de la Cámara Costarricense de la Salud. Verificar que el NAP (nombre, dirección, teléfono) sea idéntico en todas las plataformas.</div>
+          </div>
+          <div class="rec-card amber">
+            <div class="rec-priority">Prioridad Alta</div>
+            <div class="rec-text">Solicitar listing o validación en directorio de Hospital Monseñor Sanabria (Puntarenas) y Clínica Montespino, ya que pacientes buscan especialistas por clínica antes que por nombre.</div>
+          </div>
+          <div class="rec-card green">
+            <div class="rec-priority">Mejora Secundaria</div>
+            <div class="rec-text">Actualizar perfil de Salud360 con foto de perfil profesional, listado completo de condiciones tratadas y enlace al sitio web propio cuando esté disponible.</div>
+          </div>
+        </div>
+        <div class="quick-win"><strong>Victoria rápida (30 días):</strong> Crear el perfil en Huli Health (hulihealth.com) — es el directorio con más tráfico de pacientes privados en CR y permite agendamiento directo. Tiempo estimado: 45 minutos para configuración inicial.</div>
+      </div>
+    </div>
+
+    <!-- 5. REDES SOCIALES -->
+    <div class="audit-section">
+      <div class="audit-header">
+        <div class="badge badge-red">1.0</div>
+        <div class="audit-title">Redes Sociales — Sin presencia profesional identificable</div>
+      </div>
+      <div class="audit-body">
+        <div class="audit-grid">
+          <div>
+            <div class="audit-col-title">Estado Actual</div>
+            <div class="audit-finding">
+              No se encontró <strong>perfil profesional de Instagram, Facebook ni LinkedIn</strong> asociado específicamente a la Dra. Alexandra Ortega Knohr como ortopedista. Existe un perfil de Instagram @dr.alexandra_ortega pero el contenido disponible no corresponde a ortopedia y traumatología.<br><br>
+              La Clínica Montespino tiene presencia en Facebook (@medicomontespino) pero no menciona específicamente a la Dra. Ortega como especialista de ortopedia en sus publicaciones recientes.
+            </div>
+          </div>
+          <div>
+            <div class="audit-col-title">Lo que hacen los líderes</div>
+            <div class="audit-finding">
+              La <strong>Dra. Diana Rojas Torres</strong> (ortopedista en La Católica) tiene presencia activa en Instagram con contenido educativo sobre articulaciones y recuperación. El ángulo de <strong>cirujana ortopedista mujer</strong> resuena especialmente en redes — pacientes mujeres y padres de familia con niños buscan activamente especialistas femeninas en Costa Rica.
+            </div>
+          </div>
+        </div>
+        <div class="recs-grid">
+          <div class="rec-card">
+            <div class="rec-priority">Prioridad Crítica</div>
+            <div class="rec-text">Crear perfil profesional de Instagram bajo nombre @dra.alexandraortega o similar. Publicar bio clara: "Ortopedista y Traumatóloga | Clínica Montespino, Puntarenas | Inglés/Español | Citas: [WhatsApp]".</div>
+          </div>
+          <div class="rec-card amber">
+            <div class="rec-priority">Prioridad Alta</div>
+            <div class="rec-text">Publicar 2 Reels por semana con contenido educativo: "¿Cuándo ir al ortopedista?", "Mitos sobre el dolor de rodilla", "Recuperación post-fractura". El formato video genera 3x más alcance que imágenes estáticas.</div>
+          </div>
+          <div class="rec-card amber">
+            <div class="rec-priority">Prioridad Alta</div>
+            <div class="rec-text">Capitalizar el diferenciador: posicionarse como cirujana ortopedista mujer en Puntarenas — única o casi única en la región. Esto atrae pacientes mujeres y genera PR orgánico.</div>
+          </div>
+          <div class="rec-card green">
+            <div class="rec-priority">Mejora Secundaria</div>
+            <div class="rec-text">Crear página de Facebook y conectarla con Google Business Profile. El pixel de Facebook permite retargeting de pacientes que visitaron el sitio web pero no agendaron cita.</div>
+          </div>
+        </div>
+        <div class="quick-win"><strong>Victoria rápida (30 días):</strong> Un solo Reel contando la historia de "por qué ser ortopedista siendo mujer" puede llegar a 5,000–20,000 vistas orgánicas si se publica con los hashtags correctos (#ortopediaCR #puntarenas #ortopedistaCR).</div>
+      </div>
+    </div>
+
+    <!-- 6. AI READINESS -->
+    <div class="audit-section">
+      <div class="audit-header">
+        <div class="badge badge-red">1.5</div>
+        <div class="audit-title">Preparación para IA — Ausente de las respuestas de ChatGPT, Perplexity y Google AI</div>
+      </div>
+      <div class="audit-body">
+        <div class="audit-grid">
+          <div>
+            <div class="audit-col-title">Estado Actual</div>
+            <div class="audit-finding">
+              Ante una consulta de IA como <strong>"mejor ortopedista en Puntarenas"</strong>, las herramientas de IA no encontrarían señales suficientes para recomendar a la Dra. Ortega. Las razones: sin sitio web, sin contenido indexable, sin reseñas verificables, sin schema markup, sin menciones en medios de comunicación.<br><br>
+              La única señal positiva es su licencia en el registro del CMCR — pero eso sola es insuficiente para generar recomendaciones de IA.
+            </div>
+          </div>
+          <div>
+            <div class="audit-col-title">Lo que hacen los líderes</div>
+            <div class="audit-finding">
+              Al preguntar a ChatGPT o Perplexity por ortopedistas en Costa Rica, aparecen nombres como <strong>Dr. Rodolfo Ivancovich-Cruz</strong> (OrthopediK) y el equipo de <strong>OrthoSurgeons.cr</strong> — porque tienen sitios web con contenido detallado, presencia en múltiples directorios y 100+ reseñas. La IA premia la consistencia y autoridad multi-plataforma.
+            </div>
+          </div>
+        </div>
+        <div class="recs-grid">
+          <div class="rec-card">
+            <div class="rec-priority">Prioridad Crítica</div>
+            <div class="rec-text">Construir la base de señales de IA: sitio web con schema markup + perfil Huli completo + GBP optimizado + 30+ reseñas. Sin estos tres elementos, ninguna herramienta de IA la mencionará.</div>
+          </div>
+          <div class="rec-card amber">
+            <div class="rec-priority">Prioridad Alta</div>
+            <div class="rec-text">Publicar FAQ en el sitio web respondiendo preguntas reales de pacientes: "¿Cuánto cuesta la consulta ortopédica en Puntarenas?", "¿Qué hace un ortopedista vs. un fisiatra?" Las FAQs son el tipo de contenido que más cita la IA.</div>
+          </div>
+          <div class="rec-card amber">
+            <div class="rec-priority">Prioridad Alta</div>
+            <div class="rec-text">Obtener menciones en medios regionales (Puntarenas al Día, La Nación sección salud) como ortopedista experta en Puntarenas. Las menciones en prensa son señales de autoridad de alto peso para modelos de IA.</div>
+          </div>
+          <div class="rec-card green">
+            <div class="rec-priority">Mejora Secundaria</div>
+            <div class="rec-text">Crear perfil en Wikipedia o Wikidata sobre su especialidad en Puntarenas, o colaborar con artículos médicos en medios digitales. El contenido en sitios de alta autoridad es referenciado por IA generativa.</div>
+          </div>
+        </div>
+        <div class="quick-win"><strong>Victoria rápida (30 días):</strong> Publicar una página "Sobre la Dra. Alexandra Ortega Knohr" en el sitio web con bio completa, credenciales, especialidades y fotos — en formato que las IAs puedan parsear fácilmente como fuente de referencia.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<div id="roadmap" class="section-dark">
+  <div class="section-inner">
+    <div class="section-tag">Hoja de Ruta 12 Meses</div>
+    <h2 class="section-title section-title-dark">De invisible a referente de ortopedia en el Pacífico Central</h2>
+    <p class="section-sub section-sub-dark">Un plan por fases — primero los cimientos, luego la construcción, finalmente la consolidación del liderazgo.</p>
+
+    <div class="roadmap-grid">
+      <div class="roadmap-card">
+        <div class="roadmap-phase">Fase 1 · Días 1–30</div>
+        <div class="roadmap-title">Fundación Digital</div>
+        <ul class="roadmap-list">
+          <li>Reclamar y verificar Google Business Profile como "Ortopedista" en Puntarenas</li>
+          <li>Crear perfil completo en Huli Health con foto, servicios, precio y agenda</li>
+          <li>Unificar NAP en Salud360, ASSA, EncuentraMédicos y CMCR</li>
+          <li>Instalar Google Analytics + Google Search Console</li>
+          <li>Enviar solicitud de reseña a los últimos 20 pacientes por WhatsApp</li>
+          <li>Crear cuenta de Instagram profesional con bio optimizada</li>
+          <li>Definir dominio y estructura del sitio web</li>
+        </ul>
+      </div>
+      <div class="roadmap-card">
+        <div class="roadmap-phase">Fase 2 · Días 31–90</div>
+        <div class="roadmap-title">Construcción de Autoridad</div>
+        <ul class="roadmap-list">
+          <li>Lanzar sitio web propio con páginas por especialidad (rodilla, columna, fracturas)</li>
+          <li>Implementar schema markup y SEO técnico</li>
+          <li>Publicar 2 Reels educativos por semana en Instagram</li>
+          <li>Lanzar campaña Google Ads local (Puntarenas, Barranca, Esparza, Jacó)</li>
+          <li>Protocolo de reseñas: 5+ nuevas reseñas mensuales en Google y Huli</li>
+          <li>Primera aparición en medios locales como experta ortopedista</li>
+          <li>Crear página de Facebook y conectar con GBP</li>
+        </ul>
+      </div>
+      <div class="roadmap-card">
+        <div class="roadmap-phase">Fase 3 · Meses 4–12</div>
+        <div class="roadmap-title">Escala y Liderazgo</div>
+        <ul class="roadmap-list">
+          <li>Consolidar posición Top 3 en Google para búsquedas locales de ortopedia</li>
+          <li>Publicar blog mensual con artículos SEO de alto valor</li>
+          <li>Producir video mensual en YouTube sobre condiciones comunes</li>
+          <li>Desarrollar ángulo de marca: "cirujana ortopedista mujer en el Pacífico"</li>
+          <li>Alcanzar 100+ reseñas combinadas Google + Huli</li>
+          <li>Aparecer en respuestas de ChatGPT y Google AI Overview</li>
+          <li>Evaluar expansión a segunda sede o telemedicina regional</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- KPIs -->
+<div class="section-alt">
+  <div class="section">
+    <div class="section-tag">Indicadores Clave</div>
+    <h2 class="section-title">Las métricas que importan — y cómo medirlas</h2>
+    <p class="section-sub">Cinco KPIs que convierten la visibilidad digital en resultados concretos y medibles.</p>
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-metric">Nuevas consultas por canal digital</div>
+        <div class="kpi-tool">Google Analytics + UTM tags en WhatsApp</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-metric">Velocidad de reseñas (reseñas / mes)</div>
+        <div class="kpi-tool">Google Business Profile Insights + Huli Dashboard</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-metric">Posición en local pack ("ortopedista Puntarenas")</div>
+        <div class="kpi-tool">Google Search Console + BrightLocal</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-metric">Conversión sitio web → cita agendada</div>
+        <div class="kpi-tool">Google Analytics Goals + Huli Health bookings</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-metric">Menciones en respuestas de IA (ChatGPT / Perplexity)</div>
+        <div class="kpi-tool">Pruebas manuales mensuales + Doctor Rank AI Monitor</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <div class="final-cta-inner">
+    <div class="highlight-pill">Sesión estratégica sin costo</div>
+    <h2 class="final-cta-title">La Dra. Ortega ya tiene las credenciales. Ahora toca que Puntarenas entero lo sepa.</h2>
+    <p class="final-cta-sub">En 30 minutos revisamos juntos su situación actual, validamos las oportunidades de este diagnóstico y definimos si FLOW Results es el aliado correcto para este camino. Sin compromiso, sin presión.</p>
+    <div class="cta-buttons">
+      <a href="https://calendly.com/recheverria-flow/sesion-de-estrategia-con-flow-results-clone" target="_blank" class="btn-primary">Agendar sesión de 30 minutos</a>
+      <button class="btn-secondary" onclick="window.print()">Imprimir reporte</button>
+    </div>
+    <p style="margin-top: 24px; font-size: 12px; color: var(--gray-1);">
+      FLOW Results · flowresults.com · recheverria@flowresults.com<br>
+      Diagnóstico preparado exclusivamente para Dra. Alexandra Ortega Knohr · Mayo 2026
+    </p>
+  </div>
+</section>
+
+<script>
+// RADAR CHART
+(function() {
+  const ctx = document.getElementById('radarChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'radar',
+    data: {
+      labels: ['Reseñas', 'Sitio Web', 'SEO', 'Directorios', 'Redes Sociales', 'IA Readiness'],
+      datasets: [
+        {
+          label: 'Dra. Ortega Knohr',
+          data: [1.0, 1.0, 1.5, 2.0, 1.0, 1.5],
+          borderColor: '#5EEBC2',
+          backgroundColor: 'rgba(94,235,194,0.18)',
+          borderWidth: 2.5,
+          pointRadius: 5,
+          pointBackgroundColor: '#5EEBC2',
+          pointBorderColor: '#0B1929',
+          pointBorderWidth: 2,
+        },
+        {
+          label: 'Promedio líderes CR',
+          data: [4.2, 3.5, 3.8, 4.0, 3.2, 3.0],
+          borderColor: '#728698',
+          backgroundColor: 'rgba(114,134,152,0.08)',
+          borderWidth: 1.5,
+          borderDash: [6, 4],
+          pointRadius: 3,
+          pointBackgroundColor: '#728698',
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        r: {
+          min: 0,
+          max: 5,
+          ticks: { display: false, stepSize: 1 },
+          grid: { color: 'rgba(114,134,152,0.25)' },
+          angleLines: { color: 'rgba(114,134,152,0.2)' },
+          pointLabels: {
+            font: { size: 12, weight: '600', family: 'Outfit' },
+            color: '#1C2D3F',
+          }
+        }
+      },
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: {
+            usePointStyle: true,
+            pointStyle: 'circle',
+            font: { size: 12, family: 'Outfit' },
+            color: '#1C2D3F',
+            padding: 20,
+          }
+        },
+        tooltip: {
+          callbacks: {
+            label: ctx => ` ${ctx.dataset.label}: ${ctx.raw}/5`
+          }
+        }
+      }
+    }
+  });
+})();
+
+// BAR CHART
+(function() {
+  const ctx = document.getElementById('barChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: [
+        'Dr. Ivancovich-Cruz',
+        'Dr. Chavarría Alvarado',
+        'Dr. Castro Artavia',
+        'Dr. Valverde Retana',
+        'Dr. Jiménez Quirós',
+        'Dra. Rojas Torres',
+        'Dr. Ugalde Cordero',
+        'Dr. Martínez Tello (Puntarenas)',
+        'Dra. Ortega Knohr ← Usted',
+      ],
+      datasets: [{
+        label: 'Reseñas en Huli Health',
+        data: [746, 596, 536, 408, 335, 157, 159, 20, 0],
+        backgroundColor: [
+          '#3A4D62','#3A4D62','#3A4D62','#3A4D62',
+          '#3A4D62','#3A4D62','#3A4D62','#3A4D62',
+          '#5EEBC2'
+        ],
+        borderRadius: 4,
+        barThickness: 22,
+      }]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        x: {
+          beginAtZero: true,
+          grid: { color: 'rgba(0,0,0,0.05)' },
+          ticks: { font: { size: 11, family: 'Outfit' }, color: '#728698' }
+        },
+        y: {
+          grid: { display: false },
+          ticks: { font: { size: 12, family: 'Outfit' }, color: '#1C2D3F' }
+        }
+      },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: ctx => ` ${ctx.raw} reseñas en Huli Health`
+          }
+        }
+      }
+    }
+  });
+})();
+</script>
+</body>
+</html>
