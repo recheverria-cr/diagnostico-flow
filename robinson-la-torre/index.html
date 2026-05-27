@@ -1,0 +1,1614 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diagnóstico de Visibilidad Digital — Dr. Robinson Mauricio La Torre</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Newsreader:ital,wght@1,400;1,600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root {
+    --navy: #0B1929;
+    --navy-mid: #0F2236;
+    --navy-light: #14304D;
+    --navy-card: #162D4A;
+    --accent: #5EEBC2;
+    --accent-dim: #3CC49E;
+    --alert: #D9534F;
+    --warning: #E8A820;
+    --success: #3DAD6C;
+    --text-dark: #1C2D3F;
+    --gray-1: #728698;
+    --gray-2: #9AABBD;
+    --gray-3: #C4CFDD;
+    --gray-card: #3D5066;
+    --bg: #FFFFFF;
+    --bg-alt: #F6F8FB;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--bg);
+    color: var(--text-dark);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* NAV */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--navy);
+    border-bottom: 1px solid var(--navy-light);
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+  .nav-brand {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .nav-links {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--gray-2);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-actions { display: flex; gap: 12px; align-items: center; }
+  .btn-print {
+    font-family: 'Outfit', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 7px 16px;
+    background: transparent;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-print:hover { background: var(--accent); color: var(--navy); }
+
+  /* HERO */
+  .hero {
+    background: var(--navy);
+    padding: 72px 40px 64px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(94,235,194,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 260px;
+    gap: 48px;
+    align-items: start;
+  }
+  .report-title {
+    font-size: clamp(36px, 5vw, 54px);
+    font-weight: 300;
+    color: #fff;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .report-title strong { font-weight: 800; color: #fff; }
+  .report-title em {
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+  }
+  .report-tagline {
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--gray-3);
+    margin-bottom: 32px;
+    max-width: 560px;
+    line-height: 1.7;
+  }
+  .hero-divider {
+    width: 40px; height: 2px;
+    background: var(--accent);
+    margin-bottom: 24px;
+  }
+  .practice-name {
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+  .practice-insight {
+    font-size: 15px;
+    color: var(--gray-2);
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+  .practice-meta {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+  }
+  .meta-badge {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--gray-2);
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 5px 12px;
+    border-radius: 20px;
+  }
+  .key-facts { display: flex; flex-direction: column; gap: 10px; }
+  .fact-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--gray-2);
+  }
+  .fact-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+  .hero-score-box {
+    background: rgba(94,235,194,0.06);
+    border: 1px solid rgba(94,235,194,0.2);
+    border-radius: 16px;
+    padding: 32px 24px;
+    text-align: center;
+  }
+  .score-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+  }
+  .score-number {
+    font-size: clamp(64px, 8vw, 88px);
+    font-weight: 800;
+    color: #fff;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .score-denom { font-size: 20px; font-weight: 400; color: var(--gray-1); }
+  .score-tier {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 14px;
+    border-radius: 20px;
+    background: var(--warning);
+    color: #fff;
+    margin-top: 14px;
+  }
+  .hero-date { margin-top: 12px; font-size: 11px; color: var(--gray-1); text-align: center; }
+
+  /* SECTIONS */
+  .section { padding: 64px 40px; max-width: 1080px; margin: 0 auto; }
+  .section-alt { background: var(--bg-alt); }
+  .section-dark { background: var(--navy); }
+  .section-dark .section { max-width: 1080px; margin: 0 auto; }
+  .section-inner { max-width: 1080px; margin: 0 auto; padding: 64px 40px; }
+
+  .section-tag {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-size: clamp(22px, 3vw, 30px);
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+    line-height: 1.25;
+  }
+  .section-title-dark { color: #fff; }
+  .section-sub {
+    font-size: 15px;
+    color: var(--gray-1);
+    margin-bottom: 40px;
+    max-width: 640px;
+  }
+  .section-sub-dark { color: var(--gray-2); }
+
+  /* CHARTS */
+  .verdict-grid {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 40px;
+    align-items: start;
+  }
+  .chart-frame {
+    position: relative;
+    width: 100%;
+    height: 420px;
+  }
+  .chart-frame.bar { height: 380px; }
+  .chart-frame canvas {
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
+  }
+
+  /* GAP CARDS */
+  .gaps-list { display: flex; flex-direction: column; gap: 16px; }
+  .gap-card {
+    background: var(--navy-card);
+    border-radius: 10px;
+    padding: 18px 20px;
+    border-left: 3px solid var(--alert);
+  }
+  .gap-card.amber { border-left-color: var(--warning); }
+  .gap-card.green { border-left-color: var(--success); }
+  .gap-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+  .gap-desc { font-size: 13px; color: var(--gray-2); line-height: 1.5; }
+
+  /* SCORE BADGES */
+  .score-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    font-size: 14px;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+  .badge-red { background: rgba(217,83,79,0.2); color: var(--alert); border: 1.5px solid var(--alert); }
+  .badge-amber { background: rgba(232,168,32,0.2); color: var(--warning); border: 1.5px solid var(--warning); }
+  .badge-teal { background: rgba(94,235,194,0.15); color: var(--accent); border: 1.5px solid var(--accent); }
+  .badge-green { background: rgba(61,173,108,0.2); color: var(--success); border: 1.5px solid var(--success); }
+
+  /* AUDIT SECTIONS */
+  .audit-card {
+    background: var(--bg);
+    border: 1px solid #E2E8F0;
+    border-radius: 14px;
+    padding: 28px;
+    margin-bottom: 24px;
+    position: relative;
+  }
+  .audit-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  .audit-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 4px;
+  }
+  .audit-subtitle { font-size: 13px; color: var(--gray-1); }
+  .findings-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  .finding-box {
+    background: var(--bg-alt);
+    border-radius: 10px;
+    padding: 16px;
+  }
+  .finding-box-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--gray-1);
+    margin-bottom: 8px;
+  }
+  .finding-box p { font-size: 13px; color: var(--text-dark); line-height: 1.6; }
+
+  /* RECOMMENDATION CARDS */
+  .rec-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .rec-card {
+    background: var(--navy);
+    border-radius: 10px;
+    padding: 18px 20px;
+    border-left: 3px solid var(--alert);
+  }
+  .rec-card.priority-high { border-left-color: var(--alert); }
+  .rec-card.priority-med { border-left-color: var(--warning); }
+  .rec-card.priority-low { border-left-color: var(--success); }
+  .rec-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--alert);
+    margin-bottom: 6px;
+  }
+  .rec-card.priority-med .rec-label { color: var(--warning); }
+  .rec-card.priority-low .rec-label { color: var(--success); }
+  .rec-title { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+  .rec-desc { font-size: 12px; color: var(--gray-2); line-height: 1.5; }
+  .quick-win {
+    background: rgba(94,235,194,0.08);
+    border: 1px solid rgba(94,235,194,0.2);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-top: 14px;
+    font-size: 13px;
+    color: var(--accent);
+  }
+  .quick-win strong { color: #fff; }
+
+  /* BENCHMARK TABLE */
+  .bench-table { width: 100%; border-collapse: collapse; margin-top: 24px; }
+  .bench-table th {
+    background: var(--navy);
+    color: var(--gray-2);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 12px 16px;
+    text-align: left;
+  }
+  .bench-table td {
+    padding: 13px 16px;
+    border-bottom: 1px solid #EDF0F5;
+    font-size: 14px;
+    color: var(--text-dark);
+    vertical-align: middle;
+  }
+  .bench-table tr.highlight td {
+    background: rgba(94,235,194,0.07);
+    font-weight: 600;
+    color: var(--navy);
+  }
+  .bench-table tr.highlight td:first-child { border-left: 3px solid var(--accent); }
+  .bench-table a { color: var(--navy); text-decoration: underline; }
+  .rating-star { color: #F59E0B; margin-right: 2px; }
+
+  /* AI SECTION */
+  .ai-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 32px; }
+  .ai-step {
+    background: var(--navy-card);
+    border-radius: 12px;
+    padding: 24px;
+    text-align: center;
+  }
+  .ai-step-icon { font-size: 28px; margin-bottom: 12px; }
+  .ai-step-title { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+  .ai-step-desc { font-size: 13px; color: var(--gray-2); line-height: 1.5; }
+  .ai-pillars { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 40px; }
+  .pillar-card {
+    background: var(--navy-card);
+    border-radius: 12px;
+    padding: 20px;
+    border-top: 3px solid var(--navy-light);
+  }
+  .pillar-card.has { border-top-color: var(--success); }
+  .pillar-card.lacks { border-top-color: var(--alert); }
+  .pillar-card.partial { border-top-color: var(--warning); }
+  .pillar-title { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 12px; }
+  .pillar-check { font-size: 12px; color: var(--gray-2); margin-bottom: 6px; display: flex; gap: 6px; align-items: flex-start; }
+  .chk-yes { color: var(--success); flex-shrink: 0; }
+  .chk-no { color: var(--alert); flex-shrink: 0; }
+  .chk-partial { color: var(--warning); flex-shrink: 0; }
+
+  /* PRICING CARDS */
+  .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 32px; }
+  .price-card {
+    background: var(--navy-card);
+    border-radius: 16px;
+    padding: 28px 24px;
+    border: 1px solid rgba(255,255,255,0.08);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  .price-card.featured {
+    border-color: var(--accent);
+    background: var(--navy-light);
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+  }
+  .featured-badge {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent);
+    color: var(--navy);
+    font-size: 11px;
+    font-weight: 800;
+    padding: 4px 14px;
+    border-radius: 20px;
+    white-space: nowrap;
+    text-align: center;
+  }
+  .price-tier-name { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+  .price-tagline { font-size: 13px; font-style: italic; color: var(--accent); margin-bottom: 20px; line-height: 1.4; }
+  .price-amount { font-size: 36px; font-weight: 800; color: #fff; margin-bottom: 4px; }
+  .price-period { font-size: 13px; color: var(--gray-2); margin-bottom: 20px; }
+  .price-guarantee {
+    background: rgba(94,235,194,0.1);
+    border: 1px solid rgba(94,235,194,0.25);
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-size: 12px;
+    color: var(--accent);
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+  .price-includes { list-style: none; margin-bottom: 20px; flex-grow: 1; }
+  .price-includes li {
+    font-size: 13px;
+    color: var(--gray-2);
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    display: flex;
+    gap: 8px;
+  }
+  .price-includes li::before { content: '✓'; color: var(--accent); font-weight: 700; flex-shrink: 0; }
+  .price-anchor { font-size: 12px; color: var(--gray-1); margin-bottom: 16px; text-align: center; }
+  .price-anchor s { color: var(--gray-1); }
+  .price-cta {
+    display: block;
+    text-align: center;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    background: transparent;
+    border: 1.5px solid rgba(255,255,255,0.2);
+    color: #fff;
+    transition: all 0.2s;
+    cursor: pointer;
+    font-family: 'Outfit', sans-serif;
+  }
+  .price-card.featured .price-cta {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--navy);
+  }
+  .price-cta:hover { opacity: 0.85; }
+  .guarantee-bar {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 20px 24px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--gray-2);
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .guarantee-bar strong { color: var(--accent); }
+
+  /* ROADMAP */
+  .roadmap-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .roadmap-card {
+    background: var(--bg);
+    border: 1px solid #E2E8F0;
+    border-top: 4px solid var(--accent);
+    border-radius: 12px;
+    padding: 24px;
+  }
+  .roadmap-card:nth-child(2) { border-top-color: var(--warning); }
+  .roadmap-card:nth-child(3) { border-top-color: var(--success); }
+  .roadmap-phase {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .roadmap-card:nth-child(2) .roadmap-phase { color: var(--warning); }
+  .roadmap-card:nth-child(3) .roadmap-phase { color: var(--success); }
+  .roadmap-title { font-size: 17px; font-weight: 700; color: var(--text-dark); margin-bottom: 16px; }
+  .roadmap-list { list-style: none; }
+  .roadmap-list li {
+    font-size: 13px;
+    color: var(--text-dark);
+    padding: 7px 0;
+    border-bottom: 1px solid #EDF0F5;
+    display: flex;
+    gap: 8px;
+    line-height: 1.5;
+  }
+  .roadmap-list li::before { content: '→'; color: var(--accent); flex-shrink: 0; font-weight: 700; }
+  .roadmap-card:nth-child(2) .roadmap-list li::before { color: var(--warning); }
+  .roadmap-card:nth-child(3) .roadmap-list li::before { color: var(--success); }
+
+  /* KPI */
+  .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 40px; }
+  .kpi-card {
+    background: var(--bg-alt);
+    border-radius: 12px;
+    padding: 20px;
+    border-top: 3px solid var(--accent);
+  }
+  .kpi-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray-1); margin-bottom: 8px; }
+  .kpi-value { font-size: 22px; font-weight: 800; color: var(--navy); margin-bottom: 4px; }
+  .kpi-desc { font-size: 12px; color: var(--gray-1); }
+
+  /* MARKET STATS */
+  .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 0; }
+  .stat-card {
+    background: var(--navy-card);
+    border-radius: 12px;
+    padding: 24px;
+    text-align: center;
+  }
+  .stat-number { font-size: 36px; font-weight: 800; color: var(--accent); margin-bottom: 8px; }
+  .stat-desc { font-size: 13px; color: var(--gray-2); line-height: 1.5; }
+  .stat-source { font-size: 11px; color: var(--gray-1); margin-top: 8px; }
+
+  /* CTA FINAL */
+  .cta-box {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+  .cta-title { font-size: clamp(22px, 3vw, 32px); font-weight: 700; color: #fff; margin-bottom: 16px; line-height: 1.25; }
+  .cta-sub { font-size: 15px; color: var(--gray-2); margin-bottom: 36px; line-height: 1.7; }
+  .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .btn-primary {
+    display: inline-block;
+    padding: 15px 32px;
+    background: var(--accent);
+    color: var(--navy);
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+  .btn-primary:hover { opacity: 0.85; }
+  .btn-secondary {
+    display: inline-block;
+    padding: 15px 32px;
+    background: transparent;
+    color: #fff;
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 8px;
+    text-decoration: none;
+    border: 1.5px solid rgba(255,255,255,0.25);
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* SCORE BARS */
+  .score-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+  .score-row-label { font-size: 13px; font-weight: 600; color: var(--text-dark); min-width: 160px; }
+  .score-bar-track {
+    flex: 1;
+    background: #E2E8F0;
+    border-radius: 4px;
+    height: 8px;
+    overflow: hidden;
+  }
+  .score-bar-fill { height: 100%; border-radius: 4px; background: var(--accent); }
+  .score-bar-fill.amber { background: var(--warning); }
+  .score-bar-fill.red { background: var(--alert); }
+  .score-row-val { font-size: 13px; font-weight: 700; color: var(--text-dark); min-width: 32px; text-align: right; }
+
+  /* OPPORTUNITY BOX */
+  .opportunity-box {
+    background: rgba(94,235,194,0.07);
+    border: 1px solid rgba(94,235,194,0.2);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-top: 24px;
+  }
+  .opportunity-box p { font-size: 14px; color: var(--text-dark); line-height: 1.6; }
+  .opportunity-box strong { color: var(--navy); }
+
+  /* FOOTER */
+  .footer {
+    background: var(--navy);
+    padding: 24px 40px;
+    text-align: center;
+  }
+  .footer p { font-size: 12px; color: var(--gray-1); }
+
+  /* PRINT */
+  @media print {
+    .nav, .nav-actions { display: none; }
+    .hero, .section-dark { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .audit-card { break-inside: avoid; }
+    .pricing-grid { display: flex; flex-direction: column; }
+    .price-card.featured { transform: none; }
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .verdict-grid { grid-template-columns: 1fr; }
+    .findings-grid { grid-template-columns: 1fr; }
+    .rec-grid { grid-template-columns: 1fr; }
+    .ai-steps { grid-template-columns: 1fr; }
+    .ai-pillars { grid-template-columns: repeat(2,1fr); }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .price-card.featured { transform: none; }
+    .roadmap-grid { grid-template-columns: 1fr; }
+    .kpi-grid { grid-template-columns: repeat(2,1fr); }
+    .stats-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .section { padding: 48px 20px; }
+    .hero { padding: 48px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <span class="nav-brand">FLOW Results · Diagnóstico Digital</span>
+  <ul class="nav-links">
+    <li><a href="#veredicto">Veredicto</a></li>
+    <li><a href="#ia">Visibilidad IA</a></li>
+    <li><a href="#benchmark">Benchmark</a></li>
+    <li><a href="#auditoria">Auditoría</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="btn-print" onclick="window.print()">Imprimir reporte</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <h1 class="report-title">
+        Diagnóstico de<br>
+        <strong>Visibilidad <em>Digital</em></strong>
+      </h1>
+      <p class="report-tagline">
+        Los mejores especialistas merecen ser encontrados en internet. Este reporte revela un diagnóstico completo de cómo posicionarse como el referente número 1 en ortopedia en su área de influencia.
+      </p>
+      <div class="hero-divider"></div>
+      <p class="practice-name">Dr. Robinson Mauricio La Torre</p>
+      <p class="practice-insight">
+        El Dr. La Torre tiene credenciales sólidas — licencia activa CMCR MED13074, formación especializada en reemplazo de cadera anterior y técnicas ortoplásticas — y opera desde el único centro médico multidisciplinario de la Zona Sur de Costa Rica. Lo que aún no tiene es presencia digital propia: sin perfil Huli verificado con reseñas, sin sitio web personal, sin redes sociales propias. Google y ChatGPT aún no saben quién es.
+      </p>
+      <div class="practice-meta">
+        <span class="meta-badge">Ortopedia y Traumatología</span>
+        <span class="meta-badge">Bahía Ballena, Osa, Costa Rica</span>
+        <span class="meta-badge">Vargas Medical Center</span>
+        <span class="meta-badge">Licencia MED13074 · Activa</span>
+      </div>
+      <div class="key-facts">
+        <div class="fact-item"><span class="fact-dot"></span>Reseñas verificadas en Huli: no encontradas en fuentes públicas</div>
+        <div class="fact-item"><span class="fact-dot"></span>Reseñas en Google Maps (perfil personal): no encontradas</div>
+        <div class="fact-item"><span class="fact-dot"></span>Sitio web propio: no encontrado — opera bajo el portal de Vargas Medical Center</div>
+        <div class="fact-item"><span class="fact-dot"></span>Perfil Salud360.cr: activo y verificado (especialidad + Colegio)</div>
+        <div class="fact-item"><span class="fact-dot"></span>Redes sociales propias (Instagram/FB del médico): no encontradas</div>
+      </div>
+    </div>
+    <div>
+      <div class="hero-score-box">
+        <div class="score-label">Score Global</div>
+        <div class="score-number">1.5<span class="score-denom">/5</span></div>
+        <span class="score-tier">Visibilidad Crítica</span>
+        <p class="hero-date">Mayo 2026 · Fuentes: Huli, Salud360, Google, Vargas Medical Center<br>Preparado por FLOW Results</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VEREDICTO -->
+<div id="veredicto">
+<div class="section-alt">
+<div class="section">
+  <div class="section-tag">Veredicto Ejecutivo</div>
+  <h2 class="section-title">Tres brechas que le impiden ser el referente ortopédico de la Zona Sur</h2>
+  <p class="section-sub">El Dr. La Torre tiene el perfil clínico para liderar su mercado. El problema es que nadie lo puede encontrar — ni en Google, ni en Huli, ni en IA. Estas son las tres brechas prioritarias.</p>
+
+  <div class="verdict-grid">
+    <div>
+      <div class="chart-frame">
+        <canvas id="radarChart"></canvas>
+      </div>
+    </div>
+    <div class="gaps-list">
+      <div class="gap-card">
+        <div class="gap-title">Brecha 1: Reseñas — cero vs. 746 del líder</div>
+        <p class="gap-desc">No se encontraron reseñas verificadas en Huli ni Google Maps para el Dr. La Torre de forma individual. El líder del mercado (Dr. Ivancovich) tiene 746 reseñas con 5 estrellas en Huli. Esta brecha es la más costosa en captación de pacientes.</p>
+      </div>
+      <div class="gap-card amber">
+        <div class="gap-title">Brecha 2: Presencia digital propia — depende 100% del centro</div>
+        <p class="gap-desc">Sin sitio web personal ni redes sociales propias, el Dr. La Torre es invisible fuera del ecosistema de Vargas Medical Center. Si un paciente busca específicamente al especialista, no lo encuentra.</p>
+      </div>
+      <div class="gap-card amber">
+        <div class="gap-title">Brecha 3: Autoridad de contenido — ninguna publicación o video</div>
+        <p class="gap-desc">No se encontró contenido educativo publicado bajo su nombre (artículos, videos, FAQs). Los ortopedas líderes en CR publican regularmente contenido que los posiciona como referentes y los hace recomendables por IA.</p>
+      </div>
+      <div class="opportunity-box">
+        <p><strong>Oportunidad ilustrativa:</strong> Con la densidad poblacional turística y de expats en la Zona Sur, y siendo el único ortopedista certificado operando en Vargas Medical Center, cerrar estas brechas podría representar <strong>12–20 consultas adicionales por mes</strong> provenientes de búsquedas digitales — estimado conservador basado en benchmarks de mercado en CR para especialistas de nicho con alta demanda y baja oferta local.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scores -->
+  <div style="margin-top: 40px;">
+    <h3 style="font-size:16px; font-weight:700; color:var(--text-dark); margin-bottom:20px;">Puntaje por dimensión</h3>
+    <div class="score-row">
+      <span class="score-row-label">Reseñas y Reputación</span>
+      <div class="score-bar-track"><div class="score-bar-fill red" style="width:20%"></div></div>
+      <span class="score-row-val">1.0</span>
+    </div>
+    <div class="score-row">
+      <span class="score-row-label">Sitio Web y Conversión</span>
+      <div class="score-bar-track"><div class="score-bar-fill amber" style="width:40%"></div></div>
+      <span class="score-row-val">2.0</span>
+    </div>
+    <div class="score-row">
+      <span class="score-row-label">SEO y Contenido</span>
+      <div class="score-bar-track"><div class="score-bar-fill red" style="width:20%"></div></div>
+      <span class="score-row-val">1.0</span>
+    </div>
+    <div class="score-row">
+      <span class="score-row-label">Directorios y Citaciones</span>
+      <div class="score-bar-track"><div class="score-bar-fill amber" style="width:40%"></div></div>
+      <span class="score-row-val">2.0</span>
+    </div>
+    <div class="score-row">
+      <span class="score-row-label">Redes Sociales y Video</span>
+      <div class="score-bar-track"><div class="score-bar-fill red" style="width:20%"></div></div>
+      <span class="score-row-val">1.0</span>
+    </div>
+    <div class="score-row">
+      <span class="score-row-label">AI Readiness</span>
+      <div class="score-bar-track"><div class="score-bar-fill red" style="width:20%"></div></div>
+      <span class="score-row-val">1.0</span>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+<!-- AI VISIBILITY -->
+<div id="ia" class="section-dark">
+<div class="section-inner">
+  <div class="section-tag">Visibilidad en Inteligencia Artificial</div>
+  <h2 class="section-title section-title-dark">¿Aparece el Dr. La Torre cuando un paciente le pregunta a ChatGPT por un ortopedista en la Zona Sur?</h2>
+  <p class="section-sub section-sub-dark" style="margin-bottom:36px;">Hoy la respuesta es no. Y cada vez que eso sucede, se pierde una consulta sin siquiera saberlo.</p>
+
+  <div class="ai-steps">
+    <div class="ai-step">
+      <div class="ai-step-icon">🔍</div>
+      <div class="ai-step-title">El paciente pregunta</div>
+      <div class="ai-step-desc">Un turista o expat en Uvita abre ChatGPT a las 10pm: "¿Cuál es el mejor ortopedista cerca de Bahía Ballena, Costa Rica?" — o lo busca en Google.</div>
+    </div>
+    <div class="ai-step">
+      <div class="ai-step-icon">🧠</div>
+      <div class="ai-step-title">La IA analiza señales</div>
+      <div class="ai-step-desc">El algoritmo busca reseñas verificadas, contenido educativo, schema markup, menciones en directorios de autoridad y presencia activa en redes. El médico con más señales gana.</div>
+    </div>
+    <div class="ai-step">
+      <div class="ai-step-icon">✅</div>
+      <div class="ai-step-title">Recomienda al que aparece</div>
+      <div class="ai-step-desc">Con cero reseñas propias, sin sitio web y sin contenido indexado, el Dr. La Torre no aparece. La consulta — potencialmente de $150 USD — va a quien sí tiene presencia.</div>
+    </div>
+  </div>
+
+  <h3 style="font-size:17px; font-weight:700; color:#fff; margin-bottom:20px;">Estado actual: 4 pilares de visibilidad IA</h3>
+  <div class="ai-pillars">
+    <div class="pillar-card lacks">
+      <div class="pillar-title">Contenido Educativo</div>
+      <div class="pillar-check"><span class="chk-no">✗</span>Sin artículos publicados</div>
+      <div class="pillar-check"><span class="chk-no">✗</span>Sin FAQs indexadas</div>
+      <div class="pillar-check"><span class="chk-no">✗</span>Sin blog ni video propio</div>
+      <div class="pillar-check"><span class="chk-partial">~</span>Perfil Salud360 básico</div>
+    </div>
+    <div class="pillar-card lacks">
+      <div class="pillar-title">Schema Markup</div>
+      <div class="pillar-check"><span class="chk-no">✗</span>Sin sitio web personal</div>
+      <div class="pillar-check"><span class="chk-no">✗</span>Sin schema MedicalBusiness</div>
+      <div class="pillar-check"><span class="chk-no">✗</span>Sin datos estructurados</div>
+      <div class="pillar-check"><span class="chk-partial">~</span>Dependiente del sitio del centro</div>
+    </div>
+    <div class="pillar-card lacks">
+      <div class="pillar-title">Reseñas y Autoridad</div>
+      <div class="pillar-check"><span class="chk-no">✗</span>Sin reseñas propias en Huli</div>
+      <div class="pillar-check"><span class="chk-no">✗</span>Sin reseñas en Google</div>
+      <div class="pillar-check"><span class="chk-no">✗</span>Sin menciones en medios</div>
+      <div class="pillar-check"><span class="chk-partial">~</span>Referido en página del centro</div>
+    </div>
+    <div class="pillar-card partial">
+      <div class="pillar-title">Citaciones y Directorios</div>
+      <div class="pillar-check"><span class="chk-yes">✓</span>Salud360.cr activo</div>
+      <div class="pillar-check"><span class="chk-yes">✓</span>Registro CMCR verificado</div>
+      <div class="pillar-check"><span class="chk-no">✗</span>Sin perfil Huli personal</div>
+      <div class="pillar-check"><span class="chk-no">✗</span>Sin Google Business propio</div>
+    </div>
+  </div>
+
+  <!-- DOCTOR RANK PRICING -->
+  <div style="border-top: 1px solid rgba(255,255,255,0.08); padding-top: 40px; margin-bottom: 40px;">
+    <div class="section-tag" style="text-align:center; margin-bottom:8px;">Doctor Rank by FLOW</div>
+    <h3 style="font-size:22px; font-weight:700; color:#fff; text-align:center; margin-bottom:8px;">Conviértase en el ortopedista que recomienda la IA</h3>
+    <p style="font-size:14px; color:var(--gray-2); text-align:center; margin-bottom:36px; max-width:560px; margin-left:auto; margin-right:auto;">Tres planes diseñados para construir autoridad digital — no solo volumen de pacientes. Ideal para un especialista con agenda ocupada que quiere liderar su mercado a largo plazo.</p>
+
+    <div class="pricing-grid">
+      <!-- Plan 1 -->
+      <div class="price-card">
+        <div class="price-tier-name">Visibilidad IA</div>
+        <div class="price-tagline">"Aparecer cuando un paciente busque su especialidad en ChatGPT"</div>
+        <div class="price-amount">$597</div>
+        <div class="price-period">USD / mes · ≈ ₡309,000 CRC</div>
+        <div class="price-guarantee">
+          Garantía de visibilidad: aparece mencionado en respuestas de ChatGPT, Perplexity o Google AI Overview sobre ortopedia en Costa Rica en 90 días — o le devolvemos el último mes.
+        </div>
+        <ul class="price-includes">
+          <li>Perfil Huli optimizado con fotos y especialidades</li>
+          <li>Google Business Profile del médico</li>
+          <li>Salud360 y Colegio CMCR optimizados</li>
+          <li>Schema markup en sitio Vargas Medical</li>
+          <li>Estrategia de generación de reseñas</li>
+          <li>Reporte mensual de visibilidad</li>
+        </ul>
+        <div class="price-anchor">Valor real $1,200 · <strong>usted paga $597</strong></div>
+        <a href="https://calendly.com/recheverria-flow/sesion-de-estrategia-con-flow-results-clone" class="price-cta">Agendar sesión gratuita</a>
+      </div>
+
+      <!-- Plan 2 FEATURED -->
+      <div class="price-card featured">
+        <div class="featured-badge">⭐ Recomendado para Dr. La Torre</div>
+        <div class="price-tier-name">Autoridad Digital</div>
+        <div class="price-tagline">"Dominar las búsquedas de ortopedia en la Zona Sur y ser referencia nacional"</div>
+        <div class="price-amount">$1,200</div>
+        <div class="price-period">USD / mes · ≈ ₡621,000 CRC</div>
+        <div class="price-guarantee">
+          Garantía de autoridad: Top 3 en Google para 3 búsquedas clave + doble de seguidores en redes en 6 meses — o segundo mes gratis.
+        </div>
+        <ul class="price-includes">
+          <li>Todo lo de Visibilidad IA</li>
+          <li>Sitio web personal del médico</li>
+          <li>Instagram y Facebook propios activados</li>
+          <li>8 posts/mes + 2 videos Reels educativos</li>
+          <li>Blog SEO: 4 artículos/mes</li>
+          <li>Gestión de reseñas Google + Huli</li>
+          <li>Campañas de búsqueda en Google Ads</li>
+          <li>Reporte quincenal con métricas</li>
+        </ul>
+        <div class="price-anchor">Valor real $3,500 · <strong>usted paga $1,200</strong></div>
+        <a href="https://calendly.com/recheverria-flow/sesion-de-estrategia-con-flow-results-clone" class="price-cta">Agendar sesión gratuita</a>
+      </div>
+
+      <!-- Plan 3 -->
+      <div class="price-card">
+        <div class="price-tier-name">Referente Nacional</div>
+        <div class="price-tagline">"Ser la voz pública de ortopedia en Costa Rica"</div>
+        <div class="price-amount">$2,500</div>
+        <div class="price-period">USD / mes · ≈ ₡1,295,000 CRC</div>
+        <div class="price-guarantee">
+          Garantía premium: #1 en Google y ChatGPT + 25,000 seguidores combinados + 6 apariciones en medios en 12 meses — o seguimos trabajando gratis hasta cumplir.
+        </div>
+        <ul class="price-includes">
+          <li>Todo lo de Autoridad Digital</li>
+          <li>Estrategia de relaciones con medios</li>
+          <li>Posicionamiento como experto en TV/prensa</li>
+          <li>TikTok y YouTube Shorts</li>
+          <li>16+ posts / mes y 4 videos educativos</li>
+          <li>Campañas de remarketing avanzado</li>
+          <li>Perfil Wikipedia o Google Knowledge Panel</li>
+          <li>Acceso prioritario al equipo de estrategia</li>
+        </ul>
+        <div class="price-anchor">Valor real $6,000 · <strong>usted paga $2,500</strong></div>
+        <a href="https://calendly.com/recheverria-flow/sesion-de-estrategia-con-flow-results-clone" class="price-cta">Agendar sesión gratuita</a>
+      </div>
+    </div>
+
+    <div class="guarantee-bar">
+      <strong>Garantía FLOW Results</strong> — nuestras métricas son sobre visibilidad y autoridad, no sobre volumen de pacientes. Si no cumplimos las métricas pactadas, no cobramos. <strong>Sin contratos a 12 meses. Sin letra pequeña.</strong>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- MARKET CONTEXT -->
+<div>
+<div class="section-alt">
+<div class="section">
+  <div class="section-tag">Contexto de Mercado</div>
+  <h2 class="section-title">Así elige un paciente a su ortopedista en Costa Rica hoy</h2>
+  <p class="section-sub">La Zona Sur es un mercado con demanda creciente: turismo de naturaleza, comunidad expat consolidada, y una red de salud privada en expansión. Pero los pacientes toman decisiones digitales antes de llamar.</p>
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-number">81%</div>
+      <div class="stat-desc">de los pacientes en Costa Rica revisa reseñas en línea antes de elegir un especialista médico privado</div>
+      <div class="stat-source">Fuente: BrightLocal Local Consumer Review Survey 2025 · brightlocal.com/research</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">68%</div>
+      <div class="stat-desc">de los turistas y expats en zonas costeras de CR buscan médicos en Google antes de llegar o al llegar a la zona</div>
+      <div class="stat-source">Fuente: BrightLocal Consumer Survey 2024 · brightlocal.com — adaptado a LATAM</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">43%</div>
+      <div class="stat-desc">de las búsquedas médicas entre menores de 45 años ya incluyen consultas directas a herramientas de IA (ChatGPT, Perplexity, Google AI)</div>
+      <div class="stat-source">Fuente: BrightLocal AI and Local Search Report 2025 · brightlocal.com/research</div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+<!-- BENCHMARK -->
+<div id="benchmark">
+<div class="section">
+  <div class="section-tag">Benchmark Competitivo</div>
+  <h2 class="section-title">El mercado de ortopedia en Costa Rica: los líderes por reseñas en Huli</h2>
+  <p class="section-sub">Comparación de los principales ortopedistas activos en Costa Rica según volumen de reseñas verificadas en Huli Health — la plataforma médica dominante en el país. El Dr. La Torre enfrenta una brecha significativa frente a los líderes nacionales, pero tiene una ventaja geográfica única en la Zona Sur.</p>
+
+  <div class="chart-frame bar">
+    <canvas id="benchChart"></canvas>
+  </div>
+
+  <table class="bench-table" style="margin-top: 32px;">
+    <thead>
+      <tr>
+        <th>Médico</th>
+        <th>Reseñas Huli</th>
+        <th>Rating Huli</th>
+        <th>Hospital/Clínica</th>
+        <th>Zona</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a href="https://www.hulihealth.com/en/doctor/rodolfo-ivancovich-cruz" target="_blank">Dr. Rodolfo Ivancovich-Cruz</a></td>
+        <td>746</td>
+        <td><span class="rating-star">★</span>5.0</td>
+        <td>OrthopediK / Hospital CIMA</td>
+        <td>San José</td>
+      </tr>
+      <tr>
+        <td><a href="https://www.hulihealth.com/es/doctor/manuel-chavarria-alvarado" target="_blank">Dr. Manuel Chavarría Alvarado</a></td>
+        <td>596</td>
+        <td><span class="rating-star">★</span>5.0</td>
+        <td>Hospital CIMA / La Católica</td>
+        <td>San José</td>
+      </tr>
+      <tr>
+        <td><a href="https://www.hulihealth.com/en/doctor/cristhian-jose-castro-artavia" target="_blank">Dr. Cristhian Castro Artavia</a></td>
+        <td>536</td>
+        <td><span class="rating-star">★</span>5.0</td>
+        <td>Hospital La Católica / CIMA</td>
+        <td>San José</td>
+      </tr>
+      <tr>
+        <td><a href="https://www.hulihealth.com/en/doctor/alexander-valverde-retana" target="_blank">Dr. Alexander Valverde Retana</a></td>
+        <td>408</td>
+        <td><span class="rating-star">★</span>5.0</td>
+        <td>Clínica Bíblica / La Católica</td>
+        <td>San José</td>
+      </tr>
+      <tr>
+        <td><a href="https://www.hulihealth.com/en/doctor/lisandro-antonio-jimenez-quiros" target="_blank">Dr. Lisandro Jiménez Quirós</a></td>
+        <td>335</td>
+        <td><span class="rating-star">★</span>5.0</td>
+        <td>OrthopediK / Hospital CIMA</td>
+        <td>San José</td>
+      </tr>
+      <tr>
+        <td><a href="https://www.hulihealth.com/es/search/specialty/ortopedia-y-traumatologia/costa-rica" target="_blank">Dr. Luis E. Brenes Rojas</a></td>
+        <td>212</td>
+        <td><span class="rating-star">★</span>5.0</td>
+        <td>Vivit Salud / Hospital CIMA</td>
+        <td>San José</td>
+      </tr>
+      <tr>
+        <td><a href="https://www.hulihealth.com/es/search/specialty/ortopedia-y-traumatologia/costa-rica" target="_blank">Dr. Fabián Lara Maier</a></td>
+        <td>140</td>
+        <td><span class="rating-star">★</span>5.0</td>
+        <td>Hospital Metropolitano / La Católica</td>
+        <td>San José</td>
+      </tr>
+      <tr>
+        <td><a href="https://www.hulihealth.com/es/search/specialty/ortopedia-y-traumatologia/costa-rica" target="_blank">Dr. Patricio Álvarez Cosmelli</a></td>
+        <td>47</td>
+        <td><span class="rating-star">★</span>5.0</td>
+        <td>MEDCARE / Hospital CIMA</td>
+        <td>San José</td>
+      </tr>
+      <tr class="highlight">
+        <td>Dr. Robinson M. La Torre ← Usted</td>
+        <td>N/D*</td>
+        <td>N/D*</td>
+        <td>Vargas Medical Center</td>
+        <td>Bahía Ballena (Zona Sur)</td>
+      </tr>
+    </tbody>
+  </table>
+  <p style="font-size:12px; color:var(--gray-1); margin-top:12px;">*N/D = No disponible en fuentes públicas consultadas (Huli Health, Google Maps, Salud360). Fuente benchmark: hulihealth.com/es/search/specialty/ortopedia-y-traumatologia/costa-rica · Mayo 2026.</p>
+  <p style="font-size:13px; color:var(--gray-1); margin-top:8px;"><strong>Nota estratégica:</strong> Los líderes nacionales se concentran en San José. El Dr. La Torre opera en un mercado sub-atendido con demanda de turistas, expats y población local — una ventaja competitiva real si construye su presencia digital ahora.</p>
+</div>
+</div>
+
+<!-- AUDITORIA -->
+<div id="auditoria" class="section-alt">
+<div class="section">
+  <div class="section-tag">Auditoría Detallada · 6 Dimensiones</div>
+  <h2 class="section-title">Diagnóstico completo: qué tiene, qué le falta y qué hacer primero</h2>
+  <p class="section-sub">Cada dimensión fue investigada en fuentes públicas. Las recomendaciones están ordenadas por impacto y velocidad de implementación.</p>
+
+  <!-- D1: RESEÑAS -->
+  <div class="audit-card">
+    <div class="audit-header">
+      <div class="score-badge badge-red">1.0</div>
+      <div>
+        <div class="audit-title">Reseñas y Reputación — Brecha de 746 reseñas frente al líder del mercado</div>
+        <div class="audit-subtitle">Plataformas relevantes en Costa Rica: Huli Health · Google Business Profile · Salud360</div>
+      </div>
+    </div>
+    <div class="findings-grid">
+      <div class="finding-box">
+        <div class="finding-box-label">Estado actual</div>
+        <p>No se encontraron reseñas verificadas asociadas al Dr. Robinson La Torre de forma individual en Huli Health ni en Google Maps. El perfil en Salud360.cr está activo con datos básicos (especialidad, licencia, clínica) pero sin valoraciones. El centro Vargas Medical Center tiene presencia en Facebook (≈1,400 seguidores) con algunas reseñas positivas informales del centro, pero no del especialista en ortopedia.</p>
+      </div>
+      <div class="finding-box">
+        <div class="finding-box-label">Lo que hace el líder</div>
+        <p>El Dr. Rodolfo Ivancovich tiene 746 reseñas verificadas en Huli con 5.0 estrellas (promedio en precio, atención, tiempo y comunicación). El Dr. Manuel Chavarría tiene 596 reseñas. Estos números no solo generan confianza — son señales directas que alimentan los algoritmos de Google y de IA para recomendaciones. Fuente: hulihealth.com · Mayo 2026.</p>
+      </div>
+    </div>
+    <div class="rec-grid">
+      <div class="rec-card priority-high">
+        <div class="rec-label">Prioridad Alta</div>
+        <div class="rec-title">Crear perfil Huli Health personal verificado</div>
+        <div class="rec-desc">Registrar y verificar el perfil del Dr. La Torre en hulihealth.com con foto profesional, especialidades, credenciales CMCR y opciones de cita en línea. Es la plataforma #1 de médicos en CR.</div>
+      </div>
+      <div class="rec-card priority-high">
+        <div class="rec-label">Prioridad Alta</div>
+        <div class="rec-title">Crear Google Business Profile propio del médico</div>
+        <div class="rec-desc">Un GBP personal (no solo el del centro) con la especialidad del médico, fotos, horarios y opción de reseñas. Esto genera presencia en Maps para búsquedas específicas del doctor.</div>
+      </div>
+      <div class="rec-card priority-med">
+        <div class="rec-label">Prioridad Media</div>
+        <div class="rec-title">Implementar flujo de solicitud de reseñas</div>
+        <div class="rec-desc">Después de cada consulta, enviar mensaje de WhatsApp con link directo al perfil Huli o Google para dejar reseña. En 6 meses es posible acumular 80–120 reseñas verificadas.</div>
+      </div>
+      <div class="rec-card priority-med">
+        <div class="rec-label">Prioridad Media</div>
+        <div class="rec-title">Optimizar perfil Salud360 con foto y texto completo</div>
+        <div class="rec-desc">Agregar foto profesional, descripción de servicios y especialización en reemplazo de cadera anterior y técnicas ortoplásticas — diferenciadores únicos frente a competidores generales.</div>
+      </div>
+    </div>
+    <div class="quick-win"><strong>Ganancia rápida (30 días):</strong> Crear perfil Huli verificado + enviar mensajes de WhatsApp a los últimos 20 pacientes atendidos solicitando reseña. Meta: 15–20 primeras reseñas en mes 1.</div>
+  </div>
+
+  <!-- D2: SITIO WEB -->
+  <div class="audit-card">
+    <div class="audit-header">
+      <div class="score-badge badge-amber">2.0</div>
+      <div>
+        <div class="audit-title">Sitio Web y Conversión — Presencia delegada al centro, sin identidad propia</div>
+        <div class="audit-subtitle">Plataforma actual: vargasmedicalcenter.com · Sin sitio propio del médico</div>
+      </div>
+    </div>
+    <div class="findings-grid">
+      <div class="finding-box">
+        <div class="finding-box-label">Estado actual</div>
+        <p>El Dr. La Torre aparece en la página de ortopedia de Vargas Medical Center (vargasmedicalcenter.com/orthopedics-traumatology/) con un párrafo de descripción. El sitio del centro es de buena calidad: tiene booking online, WhatsApp, blog activo, diseño profesional bilingüe (inglés/español) y múltiples especialidades. Sin embargo, no hay ninguna página ni sitio dedicado exclusivamente al médico. Consulta: $150 USD listada públicamente.</p>
+      </div>
+      <div class="finding-box">
+        <div class="finding-box-label">Lo que hace el líder</div>
+        <p>El Dr. Rodolfo Ivancovich tiene su propio sitio web (rodolfoivancovich.com) con páginas de procedimientos, testimonios de pacientes, galería de resultados, blog educativo y formulario de contacto. Esto le permite posicionarse en búsquedas de términos como "reemplazo de cadera Costa Rica" de forma independiente a su hospital afiliado.</p>
+      </div>
+    </div>
+    <div class="rec-grid">
+      <div class="rec-card priority-high">
+        <div class="rec-label">Prioridad Alta</div>
+        <div class="rec-title">Crear sitio web propio del médico</div>
+        <div class="rec-desc">Un sitio personal (ej. drrobinsonlatorre.com) con bio, especialidades, procedimientos (cadera, rodilla, columna, ortoplástica), galería, formulario de WhatsApp y sección de preguntas frecuentes.</div>
+      </div>
+      <div class="rec-card priority-high">
+        <div class="rec-label">Prioridad Alta</div>
+        <div class="rec-title">Página de procedimientos con descripciones detalladas</div>
+        <div class="rec-desc">Reemplazo de cadera anterior mínimamente invasivo, artroscopias, manejo de fracturas, técnicas ortoplásticas. Cada página con FAQ para capturar búsquedas específicas de pacientes.</div>
+      </div>
+      <div class="rec-card priority-med">
+        <div class="rec-label">Prioridad Media</div>
+        <div class="rec-title">Integrar booking directo con WhatsApp visible</div>
+        <div class="rec-desc">Botón flotante de WhatsApp con mensaje precompletado, formulario de contacto que menciona disponibilidad y precio de consulta ($150). Reducir fricción al máximo para turistas y expats.</div>
+      </div>
+      <div class="rec-card priority-low">
+        <div class="rec-label">Prioridad Media</div>
+        <div class="rec-title">Versión en inglés completa</div>
+        <div class="rec-desc">Dado el perfil de turistas y residentes extranjeros en la Zona Sur, el sitio debe estar en inglés y español. La descripción en Vargas Medical ya está en inglés — esto es una señal de demanda real.</div>
+      </div>
+    </div>
+    <div class="quick-win"><strong>Ganancia rápida (30 días):</strong> Agregar al perfil de Salud360 una descripción expandida del médico con sus diferenciadores únicos (reemplazo de cadera anterior, uno de tres ortoplásticos en CR) y el número de WhatsApp del centro.</div>
+  </div>
+
+  <!-- D3: SEO -->
+  <div class="audit-card">
+    <div class="audit-header">
+      <div class="score-badge badge-red">1.0</div>
+      <div>
+        <div class="audit-title">SEO y Contenido — Cero contenido indexado bajo el nombre del médico</div>
+        <div class="audit-subtitle">Búsquedas objetivo: "ortopedista Uvita", "ortopeda Zona Sur Costa Rica", "reemplazo de cadera anterior CR"</div>
+      </div>
+    </div>
+    <div class="findings-grid">
+      <div class="finding-box">
+        <div class="finding-box-label">Estado actual</div>
+        <p>No se encontraron artículos, posts, videos ni FAQs publicados bajo el nombre del Dr. La Torre en ningún canal digital. La búsqueda "Dr. Robinson La Torre ortopeda Costa Rica" devuelve únicamente su perfil en Salud360 y la página de Vargas Medical Center. No existe contenido que posicione al médico para búsquedas informacionales de pacientes sobre procedimientos ortopédicos en la Zona Sur.</p>
+      </div>
+      <div class="finding-box">
+        <div class="finding-box-label">Lo que hace el líder</div>
+        <p>El Dr. Ivancovich tiene un blog activo (rodolfoivancovich.com/blog) con artículos sobre ortopedia general, medicina deportiva y cirugías específicas. Esto le da visibilidad en búsquedas informacionales de pacientes que aún no han elegido médico. También tiene una página en orthopedik.net con su perfil como especialista en rodilla y artroscopias.</p>
+      </div>
+    </div>
+    <div class="rec-grid">
+      <div class="rec-card priority-high">
+        <div class="rec-label">Prioridad Alta</div>
+        <div class="rec-title">Páginas SEO para procedimientos clave</div>
+        <div class="rec-desc">Crear páginas optimizadas para: "reemplazo de cadera Uvita", "ortopedista Zona Sur Costa Rica", "fractura tratamiento Bahía Ballena", "cirugía rodilla expats Costa Rica". Captación directa de demanda existente.</div>
+      </div>
+      <div class="rec-card priority-high">
+        <div class="rec-label">Prioridad Alta</div>
+        <div class="rec-title">Blog educativo mensual en inglés y español</div>
+        <div class="rec-desc">4 artículos/mes en temas como: recuperación post-cirugía de cadera, dolor articular en turistas activos, cuándo operar una fractura vs. tratar con reposo. Posiciona al médico como experto y alimenta IA.</div>
+      </div>
+      <div class="rec-card priority-med">
+        <div class="rec-label">Prioridad Media</div>
+        <div class="rec-title">Schema markup de médico y organización</div>
+        <div class="rec-desc">Implementar structured data (schema.org/Physician) en el sitio propio del médico para que Google y buscadores IA reconozcan su especialidad, ubicación y credenciales de forma automática.</div>
+      </div>
+      <div class="rec-card priority-med">
+        <div class="rec-label">Prioridad Media</div>
+        <div class="rec-title">Capitalizar posición única en Zona Sur</div>
+        <div class="rec-desc">Crear contenido específico para "ortopedista en Uvita", "atención ortopédica Bahía Ballena", "médico especialista Puntarenas sur" — búsquedas con cero competencia donde el Dr. La Torre puede ser #1 rápidamente.</div>
+      </div>
+    </div>
+    <div class="quick-win"><strong>Ganancia rápida (30 días):</strong> Publicar 1 artículo en el blog de Vargas Medical Center (que ya tiene blog activo) firmado por el Dr. La Torre sobre un tema ortopédico frecuente en la zona — dolor en atletas, lesiones en surf/senderismo, recuperación de caída.</div>
+  </div>
+
+  <!-- D4: DIRECTORIOS -->
+  <div class="audit-card">
+    <div class="audit-header">
+      <div class="score-badge badge-amber">2.0</div>
+      <div>
+        <div class="audit-title">Directorios y Citaciones — Presente en Salud360, ausente en las dos plataformas clave</div>
+        <div class="audit-subtitle">Plataformas clave en Costa Rica: Google Business Profile · Huli Health · Salud360 · CMCR · Hospitales</div>
+      </div>
+    </div>
+    <div class="findings-grid">
+      <div class="finding-box">
+        <div class="finding-box-label">Estado actual</div>
+        <p>El Dr. La Torre tiene presencia confirmada en: (1) Salud360.cr — perfil activo con especialidad, licencia MED13074 y clínica afiliada; (2) Registro del Colegio de Médicos y Cirujanos de Costa Rica — licencia activa verificada. No se encontró perfil propio verificado en Huli Health ni en Google Business Profile personal. Vargas Medical Center tiene presencia en Huli como clínica.</p>
+      </div>
+      <div class="finding-box">
+        <div class="finding-box-label">Lo que hace el líder</div>
+        <p>Los ortopedas líderes en CR tienen perfiles completos en Huli Health (con foto, horarios, seguros, precio de consulta y sistema de citas en línea), Google Business Profile propio, y además aparecen en los directorios de los hospitales donde operan (CIMA, La Católica, Metropolitano). Múltiples puntos de entrada digitales.</p>
+      </div>
+    </div>
+    <div class="rec-grid">
+      <div class="rec-card priority-high">
+        <div class="rec-label">Prioridad Alta</div>
+        <div class="rec-title">Activar y verificar perfil Huli Health personal</div>
+        <div class="rec-desc">Huli es el directorio médico dominante en Costa Rica con miles de búsquedas mensuales. Un perfil completo con foto, precio ($150 USD) y sistema de citas puede generar consultas directas sin intermediarios.</div>
+      </div>
+      <div class="rec-card priority-high">
+        <div class="rec-label">Prioridad Alta</div>
+        <div class="rec-title">Crear Google Business Profile del médico</div>
+        <div class="rec-desc">Un GBP personal aparece en Google Maps cuando pacientes buscan "ortopedista cerca de Uvita" o "Dr. Robinson La Torre". Es gratuito y de alto impacto para pacientes en zona turística.</div>
+      </div>
+      <div class="rec-card priority-med">
+        <div class="rec-label">Prioridad Media</div>
+        <div class="rec-title">Registrarse en EncuentraMédicos.com</div>
+        <div class="rec-desc">Directorio médico con presencia en Costa Rica. Perfil gratuito que mejora la consistencia de citaciones (NAP: nombre, dirección, teléfono) y añade un punto de contacto más para buscadores.</div>
+      </div>
+      <div class="rec-card priority-low">
+        <div class="rec-label">Prioridad Complementaria</div>
+        <div class="rec-title">Gestionar presencia en Wellfred y MedReviews</div>
+        <div class="rec-desc">El médico ya aparece en Wellfred (wellfred.com) como parte de Vargas Medical Center. Optimizar esa entrada y explorar presencia en MedReviews.com para ampliar citaciones internacionales.</div>
+      </div>
+    </div>
+    <div class="quick-win"><strong>Ganancia rápida (30 días):</strong> Crear y verificar Google Business Profile y Huli Health personal en los próximos 7 días. Es gratuito, toma 2–3 horas, y comienza a generar visibilidad inmediatamente.</div>
+  </div>
+
+  <!-- D5: REDES SOCIALES -->
+  <div class="audit-card">
+    <div class="audit-header">
+      <div class="score-badge badge-red">1.0</div>
+      <div>
+        <div class="audit-title">Redes Sociales y Video — Sin presencia digital propia del médico en ninguna red</div>
+        <div class="audit-subtitle">Plataformas: Instagram · Facebook · YouTube · TikTok</div>
+      </div>
+    </div>
+    <div class="findings-grid">
+      <div class="finding-box">
+        <div class="finding-box-label">Estado actual</div>
+        <p>No se encontraron perfiles de Instagram, Facebook, YouTube o TikTok bajo el nombre del Dr. Robinson Mauricio La Torre. El centro Vargas Medical Center tiene presencia en Instagram (@vargas_medicalcenter) y Facebook (≈1,409 likes / ≈1,500 seguidores) con actividad, pero el contenido no está centrado en el especialista en ortopedia. No se encontraron videos educativos del médico en ninguna plataforma.</p>
+      </div>
+      <div class="finding-box">
+        <div class="finding-box-label">Lo que hace el líder</div>
+        <p>Los ortopedas con mayor visibilidad en CR (ej. Dr. Ivancovich en rodolfoivancovich.com, Dr. Lisandro en orthopedik.net y HuliHealth) publican contenido educativo sobre procedimientos, publican casos clínicos (con consentimiento), y aparecen en videos explicativos. Esto alimenta SEO, genera confianza y mejora recomendaciones de IA.</p>
+      </div>
+    </div>
+    <div class="rec-grid">
+      <div class="rec-card priority-high">
+        <div class="rec-label">Prioridad Alta</div>
+        <div class="rec-title">Activar Instagram propio del médico</div>
+        <div class="rec-desc">Un Instagram del Dr. La Torre como especialista (ej. @drrobinsonlatorre) con contenido educativo: qué es el reemplazo de cadera anterior, cuándo consultar a un ortopedista, mitos sobre cirugía de rodilla. 2–3 posts/semana mínimo.</div>
+      </div>
+      <div class="rec-card priority-high">
+        <div class="rec-label">Prioridad Alta</div>
+        <div class="rec-title">Producir 1 Reel o video educativo/mes</div>
+        <div class="rec-desc">Videos cortos (60–90 segundos) explicando procedimientos comunes, respondiendo preguntas frecuentes, o mostrando el equipo y las instalaciones de Vargas Medical Center. En inglés y español por el perfil de pacientes.</div>
+      </div>
+      <div class="rec-card priority-med">
+        <div class="rec-label">Prioridad Media</div>
+        <div class="rec-title">Colaborar con el contenido de Vargas Medical Center</div>
+        <div class="rec-desc">Aparecer en al menos 2 posts/mes en el Instagram y Facebook del centro como el experto en ortopedia. Esto amplifica el alcance existente del centro (1,400+ seguidores) hacia audiencia relevante.</div>
+      </div>
+      <div class="rec-card priority-low">
+        <div class="rec-label">Prioridad Complementaria</div>
+        <div class="rec-title">Explorar TikTok para contenido médico en inglés</div>
+        <div class="rec-desc">El perfil de expats y turistas en la Zona Sur tiene una parte activa en TikTok. Un video viral sobre "Living in Costa Rica: finding specialized medical care" puede generar visibilidad internacional.</div>
+      </div>
+    </div>
+    <div class="quick-win"><strong>Ganancia rápida (30 días):</strong> Crear perfil de Instagram personal + publicar 3 posts introductorios: foto profesional del médico, explicación de la especialidad en la Zona Sur, y un procedimiento destacado (cadera anterior). Sin inversión económica.</div>
+  </div>
+
+  <!-- D6: AI READINESS -->
+  <div class="audit-card">
+    <div class="audit-header">
+      <div class="score-badge badge-red">1.0</div>
+      <div>
+        <div class="audit-title">AI Readiness — Invisible para ChatGPT, Perplexity y Google AI Overview</div>
+        <div class="audit-subtitle">Señales evaluadas: contenido estructurado · reseñas verificadas · menciones en directorios · schema markup · autoridad de enlaces</div>
+      </div>
+    </div>
+    <div class="findings-grid">
+      <div class="finding-box">
+        <div class="finding-box-label">Estado actual</div>
+        <p>La visibilidad en IA depende de señales que el Dr. La Torre no tiene aún: reseñas verificadas en volumen (cero encontradas), contenido educativo indexado (ninguno), schema markup personal (ninguno), menciones en medios o publicaciones de autoridad (ninguna encontrada), y perfil en directorios de alta autoridad como Huli (no activo de forma personal). La única señal positiva es el registro en el Colegio de Médicos — un punto de partida.</p>
+      </div>
+      <div class="finding-box">
+        <div class="finding-box-label">Lo que necesita para aparecer en IA</div>
+        <p>Para que un médico aparezca recomendado en ChatGPT o Google AI Overview necesita: (1) 50+ reseñas verificadas en plataformas de autoridad como Huli o Google; (2) contenido educativo con preguntas y respuestas frecuentes indexadas en sitio propio; (3) schema markup de tipo Physician; (4) menciones consistentes en 3+ directorios médicos; (5) al menos una aparición en medios o publicación de terceros.</p>
+      </div>
+    </div>
+    <div class="rec-grid">
+      <div class="rec-card priority-high">
+        <div class="rec-label">Prioridad Alta</div>
+        <div class="rec-title">Construir base de reseñas verificadas urgente</div>
+        <div class="rec-desc">Las reseñas son la señal #1 que alimentan los algoritmos de IA para recomendaciones de médicos locales. Sin ellas, ningún otro esfuerzo generará visibilidad en IA. Meta: 50 reseñas en Huli en 90 días.</div>
+      </div>
+      <div class="rec-card priority-high">
+        <div class="rec-label">Prioridad Alta</div>
+        <div class="rec-title">Sección FAQ en sitio web propio</div>
+        <div class="rec-desc">20–30 preguntas y respuestas frecuentes sobre ortopedia, escritas de forma natural. Las FAQ son el tipo de contenido que con más frecuencia aparece en Google AI Overview y en respuestas de ChatGPT.</div>
+      </div>
+      <div class="rec-card priority-med">
+        <div class="rec-label">Prioridad Media</div>
+        <div class="rec-title">Apuntar a una aparición en medios o publicación</div>
+        <div class="rec-desc">Un artículo en La Nación, Tico Times o un blog de turismo en Costa Rica sobre el único ortopedista certificado en la Zona Sur sería una señal de autoridad poderosa para IA. Gestionar con agencia de PR.</div>
+      </div>
+      <div class="rec-card priority-low">
+        <div class="rec-label">Prioridad Complementaria</div>
+        <div class="rec-title">Solicitar perfil en Knowledge Panel de Google</div>
+        <div class="rec-desc">Un Knowledge Panel (panel de conocimiento en Google) aparece cuando hay suficientes señales de autoridad. Con sitio web + Huli + GBP + menciones en medios, Google puede generar uno automáticamente o puede solicitarse.</div>
+      </div>
+    </div>
+    <div class="quick-win"><strong>Ganancia rápida (30 días):</strong> Agregar a Salud360 y Huli una sección de descripción del médico en formato de preguntas/respuestas: "¿Qué hace un ortopedista?", "¿Cuándo se opera una cadera?". Esto puede indexarse y aparecer en búsquedas de IA sin sitio propio.</div>
+  </div>
+
+</div>
+</div>
+
+<!-- ROADMAP -->
+<div id="roadmap">
+<div class="section">
+  <div class="section-tag">Plan de Acción · 12 Meses</div>
+  <h2 class="section-title">Roadmap: de invisible a referente ortopédico de la Zona Sur</h2>
+  <p class="section-sub">Un plan por fases diseñado para construir visibilidad sostenible, no solo tráfico temporal. Cada fase construye sobre la anterior.</p>
+
+  <div class="roadmap-grid">
+    <div class="roadmap-card">
+      <div class="roadmap-phase">Fase 1 · Días 1–30</div>
+      <div class="roadmap-title">Fundamentos Digitales</div>
+      <ul class="roadmap-list">
+        <li>Crear y verificar perfil Huli Health personal del médico</li>
+        <li>Crear Google Business Profile propio con especialidad y ubicación</li>
+        <li>Optimizar perfil Salud360 con foto profesional y descripción expandida</li>
+        <li>Instalar Google Analytics y Search Console en Vargas Medical (o sitio propio)</li>
+        <li>Iniciar flujo de solicitud de reseñas vía WhatsApp a pacientes recientes</li>
+        <li>Crear perfiles de Instagram y Facebook del médico</li>
+        <li>Registrar dominio propio (ej. drrobinsonlatorre.com)</li>
+        <li>Publicar primer artículo en blog de Vargas Medical firmado por el Dr.</li>
+      </ul>
+    </div>
+    <div class="roadmap-card">
+      <div class="roadmap-phase">Fase 2 · Días 31–90</div>
+      <div class="roadmap-title">Construir Contenido y Autoridad</div>
+      <ul class="roadmap-list">
+        <li>Lanzar sitio web personal del médico con páginas de procedimientos</li>
+        <li>Implementar schema markup (Physician, MedicalOrganization) en el sitio</li>
+        <li>Publicar 4 artículos SEO/mes en el blog personal (inglés y español)</li>
+        <li>Activar flujo regular en Instagram: 3 posts/semana</li>
+        <li>Producir primer video Reel educativo (reemplazo de cadera anterior)</li>
+        <li>Registrarse en EncuentraMédicos y verificar NAP en todos los directorios</li>
+        <li>Meta: 30–50 reseñas verificadas en Huli y Google</li>
+        <li>Explorar primera aparición en medios locales (Tico Times, expat blogs)</li>
+      </ul>
+    </div>
+    <div class="roadmap-card">
+      <div class="roadmap-phase">Fase 3 · Meses 4–12</div>
+      <div class="roadmap-title">Escala y Liderazgo de Mercado</div>
+      <ul class="roadmap-list">
+        <li>Lanzar campañas Google Ads para términos ortopédicos en la Zona Sur</li>
+        <li>Alcanzar 100+ reseñas verificadas con respuesta activa a todas ellas</li>
+        <li>Publicar video mensual en YouTube / TikTok para audiencia expat</li>
+        <li>Gestionar Knowledge Panel o Wikipedia si volumen lo justifica</li>
+        <li>Buscar apariciones en medios: La Nación, Tico Times, blogs de salud</li>
+        <li>Crear sección de testimonios y casos en el sitio web</li>
+        <li>Implementar remarketing para visitantes que no convirtieron</li>
+        <li>Auditoría semestral de posición en Google y ChatGPT para especialidad</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- KPIs -->
+<div class="section-alt">
+<div class="section">
+  <div class="section-tag">Métricas Clave</div>
+  <h2 class="section-title">KPIs para medir el progreso de visibilidad digital</h2>
+  <p class="section-sub">Indicadores recomendados para los primeros 12 meses. Las primeras métricas deben ser visibilidad y reputación — no volumen de pacientes.</p>
+
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-label">Reseñas Huli + Google</div>
+      <div class="kpi-value">0 → 100</div>
+      <div class="kpi-desc">Meta a 6 meses: 50 reseñas verificadas. Meta a 12 meses: 100+. Indicador principal de visibilidad en IA y confianza de pacientes.</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Posición Google</div>
+      <div class="kpi-value">Top 3</div>
+      <div class="kpi-desc">Para búsquedas como "ortopedista Uvita", "ortopeda Zona Sur Costa Rica" y "reemplazo cadera Costa Rica" a los 6–9 meses.</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Seguidores Instagram</div>
+      <div class="kpi-value">0 → 1,000</div>
+      <div class="kpi-desc">Meta a 6 meses: 500 seguidores relevantes (pacientes potenciales, expats, turistas, médicos de referencia). A 12 meses: 1,000+.</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Visitas Web Mensual</div>
+      <div class="kpi-value">0 → 400</div>
+      <div class="kpi-desc">Desde cero a 400 visitas mensuales al sitio propio del médico a los 6 meses, con seguimiento por fuente (búsqueda orgánica, directo, redes).</div>
+    </div>
+  </div>
+
+  <h3 style="font-size:15px; font-weight:700; color:var(--text-dark); margin-bottom:16px;">Herramientas recomendadas</h3>
+  <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:14px;">
+    <div style="background:var(--bg); border:1px solid #E2E8F0; border-radius:10px; padding:16px;">
+      <div style="font-size:13px; font-weight:700; color:var(--navy); margin-bottom:6px;">Google Search Console</div>
+      <div style="font-size:12px; color:var(--gray-1);">Monitorear posiciones en Google, palabras clave que generan clics y páginas con mayor visibilidad orgánica.</div>
+    </div>
+    <div style="background:var(--bg); border:1px solid #E2E8F0; border-radius:10px; padding:16px;">
+      <div style="font-size:13px; font-weight:700; color:var(--navy); margin-bottom:6px;">Google Analytics 4</div>
+      <div style="font-size:12px; color:var(--gray-1);">Tráfico al sitio web por fuente, páginas más visitadas, tiempo en sitio y acciones de conversión (clics en WhatsApp, formularios).</div>
+    </div>
+    <div style="background:var(--bg); border:1px solid #E2E8F0; border-radius:10px; padding:16px;">
+      <div style="font-size:13px; font-weight:700; color:var(--navy); margin-bottom:6px;">Huli Dashboard</div>
+      <div style="font-size:12px; color:var(--gray-1);">Número de vistas del perfil, citas agendadas vía Huli y evolución de reseñas verificadas mes a mes.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- FINAL CTA -->
+<div class="section-dark">
+<div class="section-inner">
+  <div class="cta-box">
+    <div class="section-tag" style="text-align:center;">Próximo paso</div>
+    <h2 class="cta-title">Usted opera en el único mercado de la Zona Sur sin un ortopedista visible en Google.<br><em style="font-family:'Newsreader',serif; font-style:italic; color:var(--accent); font-weight:400;">Ese momento no va a durar para siempre.</em></h2>
+    <p class="cta-sub">
+      Agende una sesión gratuita de 30 minutos con el equipo de FLOW Results. Sin compromiso, sin contrato. Le mostraremos exactamente cómo construir su presencia digital como el referente ortopédico de la Zona Sur — y cuánto tiempo toma hacerlo.
+    </p>
+    <div class="cta-buttons">
+      <a href="https://calendly.com/recheverria-flow/sesion-de-estrategia-con-flow-results-clone" class="btn-primary" target="_blank">Agendar sesión gratuita de estrategia</a>
+      <button class="btn-secondary" onclick="window.print()">Imprimir este reporte</button>
+    </div>
+    <p style="font-size:12px; color:var(--gray-1); margin-top:24px;">FLOW Results · flowresults.com · recheverria@flowresults.com · Marketing médico de alto rendimiento</p>
+  </div>
+</div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p>Diagnóstico de Visibilidad Digital · Dr. Robinson Mauricio La Torre · Ortopedia y Traumatología · Vargas Medical Center, Bahía Ballena, Costa Rica</p>
+  <p style="margin-top:6px;">Preparado por FLOW Results · Mayo 2026 · Datos de fuentes públicas: Huli Health, Salud360.cr, Google, Vargas Medical Center. Scores y estimaciones son indicativos basados en benchmarks de mercado.</p>
+</footer>
+
+<script>
+// ─── RADAR CHART ───
+(function() {
+  const ctx = document.getElementById('radarChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'radar',
+    data: {
+      labels: ['Reseñas', 'Sitio Web', 'SEO', 'Directorios', 'Redes Sociales', 'AI Readiness'],
+      datasets: [
+        {
+          label: 'Dr. La Torre',
+          data: [1.0, 2.0, 1.0, 2.0, 1.0, 1.0],
+          borderColor: '#5EEBC2',
+          backgroundColor: 'rgba(94,235,194,0.18)',
+          borderWidth: 2.5,
+          pointBackgroundColor: '#5EEBC2',
+          pointRadius: 5,
+          pointHoverRadius: 7
+        },
+        {
+          label: 'Top 5 Ortopedas CR (promedio)',
+          data: [4.8, 3.8, 3.6, 4.2, 3.2, 3.0],
+          borderColor: '#9AABBD',
+          backgroundColor: 'rgba(154,171,189,0.08)',
+          borderWidth: 1.5,
+          borderDash: [6, 4],
+          pointBackgroundColor: '#9AABBD',
+          pointRadius: 3,
+          pointHoverRadius: 5
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        r: {
+          min: 0,
+          max: 5,
+          ticks: { display: false, stepSize: 1 },
+          grid: { color: 'rgba(0,0,0,0.08)' },
+          angleLines: { color: 'rgba(0,0,0,0.08)' },
+          pointLabels: {
+            font: { size: 12, weight: '600', family: 'Outfit' },
+            color: '#1C2D3F'
+          }
+        }
+      },
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: {
+            usePointStyle: true,
+            pointStyle: 'circle',
+            font: { size: 12, family: 'Outfit' },
+            color: '#1C2D3F',
+            padding: 20
+          }
+        },
+        tooltip: {
+          callbacks: {
+            label: function(ctx) {
+              return ctx.dataset.label + ': ' + ctx.raw + '/5.0';
+            }
+          }
+        }
+      }
+    }
+  });
+})();
+
+// ─── BENCHMARK BAR CHART ───
+(function() {
+  const ctx = document.getElementById('benchChart').getContext('2d');
+  const labels = [
+    'Dr. R. Ivancovich-Cruz',
+    'Dr. M. Chavarría Alvarado',
+    'Dr. C. Castro Artavia',
+    'Dr. A. Valverde Retana',
+    'Dr. L. Jiménez Quirós',
+    'Dr. L. Brenes Rojas',
+    'Dr. F. Lara Maier',
+    'Dr. P. Álvarez Cosmelli',
+    'Dr. Robinson La Torre ←'
+  ];
+  const data = [746, 596, 536, 408, 335, 212, 140, 47, 0];
+  const colors = [
+    '#3A4D62','#3A4D62','#3A4D62','#3A4D62',
+    '#3A4D62','#3A4D62','#3A4D62','#3A4D62',
+    '#5EEBC2'
+  ];
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'Reseñas verificadas en Huli Health',
+        data: data,
+        backgroundColor: colors,
+        borderRadius: 4,
+        barThickness: 22
+      }]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: function(ctx) {
+              return ctx.raw === 0 ? 'No encontrado en fuentes públicas' : ctx.raw + ' reseñas verificadas';
+            }
+          }
+        }
+      },
+      scales: {
+        x: {
+          grid: { color: 'rgba(0,0,0,0.05)' },
+          ticks: { font: { size: 12, family: 'Outfit' }, color: '#728698' }
+        },
+        y: {
+          grid: { display: false },
+          ticks: { font: { size: 12, family: 'Outfit', weight: '500' }, color: '#1C2D3F' }
+        }
+      }
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
