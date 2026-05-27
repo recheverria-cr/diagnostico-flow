@@ -3,406 +3,589 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Diagnóstico de Visibilidad Digital — Dra. Angie Mora Calderón</title>
+<title>Diagnóstico de Visibilidad Digital — Dra. Angie Mora Calderón · Flow Results</title>
+<meta name="description" content="Diagnóstico de visibilidad digital para Dra. Angie Mora — ginecología oncológica, Costa Rica. Comparativo contra las ginecólogas más visibles del país."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Newsreader:ital,wght@0,400;1,400;1,600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Newsreader:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
 :root{
-  --navy:#0B1929;--navy-mid:#0F2236;--navy-light:#14304D;--navy-card:#162D4A;
-  --accent:#5EEBC2;--accent-dim:#3CC49E;
+  --navy:#0A1628;--navy-2:#0E1D33;--navy-3:#13263F;--navy-card:#172B47;
+  --accent:#5EEBC2;--accent-dim:#3CC49E;--accent-soft:rgba(94,235,194,.08);
   --red:#D9534F;--amber:#E8A820;--green:#3DAD6C;
-  --text-dark:#1C2D3F;--text-light:#C4CFDD;--text-mid:#9AABBD;--text-muted:#728698;
-  --page-bg:#FFFFFF;--alt-bg:#F6F8FB;
-  --border:#E2EBF3;
+  --text:#1C2D3F;--text-2:#3D5066;--text-3:#586D80;
+  --light:#FFFFFF;--light-2:#FAFBFD;--light-3:#F2F5F9;
+  --border:#E5ECF3;--border-2:#D6DFE9;
+  --t-light:#C4CFDD;--t-mid:#9AABBD;--t-dim:#728698;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;}
-body{font-family:'Outfit',sans-serif;color:var(--text-dark);background:var(--page-bg);line-height:1.6;}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;}
+body{font-family:'Outfit',-apple-system,sans-serif;color:var(--text);background:var(--light);line-height:1.65;font-size:16px;}
+img{max-width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
+
+/* TYPOGRAPHY */
+h1,h2,h3,h4{line-height:1.2;font-weight:700;letter-spacing:-.015em;}
+em.serif{font-family:'Newsreader',serif;font-style:italic;font-weight:600;}
+.eyebrow{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-dim);}
+.eyebrow.on-dark{color:var(--accent);}
 
 /* NAV */
-nav{position:sticky;top:0;z-index:100;background:var(--navy);padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:52px;box-shadow:0 2px 12px rgba(0,0,0,.35);}
-.nav-brand{color:var(--accent);font-weight:700;font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;}
-.nav-links{display:flex;gap:20px;}
-.nav-links a{color:var(--text-mid);text-decoration:none;font-size:.78rem;font-weight:500;transition:color .2s;}
+nav{position:sticky;top:0;z-index:100;background:rgba(10,22,40,.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.06);}
+.nav-inner{max-width:1180px;margin:0 auto;padding:0 28px;display:flex;align-items:center;justify-content:space-between;height:56px;}
+.nav-brand{display:flex;align-items:center;gap:10px;color:var(--light);font-weight:700;font-size:.85rem;}
+.nav-brand .dot{width:8px;height:8px;background:var(--accent);border-radius:50%;display:inline-block;}
+.nav-links{display:flex;gap:24px;}
+.nav-links a{color:var(--t-mid);font-size:.82rem;font-weight:500;transition:color .2s;}
 .nav-links a:hover{color:var(--accent);}
-.nav-cta{background:var(--accent);color:var(--navy);font-weight:700;font-size:.78rem;padding:6px 14px;border-radius:6px;text-decoration:none;transition:background .2s;}
-.nav-cta:hover{background:var(--accent-dim);}
+.nav-cta{background:var(--accent);color:var(--navy);font-weight:700;font-size:.78rem;padding:8px 16px;border-radius:8px;transition:all .2s;}
+.nav-cta:hover{background:var(--accent-dim);transform:translateY(-1px);}
+@media(max-width:740px){.nav-links{display:none;}}
 
 /* HERO */
-.hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 60%,#0D2845 100%);padding:72px 24px 64px;text-align:center;position:relative;overflow:hidden;}
-.hero::before{content:'';position:absolute;top:-80px;right:-80px;width:400px;height:400px;background:radial-gradient(circle,rgba(94,235,194,.07) 0%,transparent 70%);pointer-events:none;}
-.hero-label{color:var(--accent);font-size:.75rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;margin-bottom:18px;}
-.hero h1{color:#fff;font-weight:300;font-size:clamp(32px,5vw,52px);line-height:1.18;margin-bottom:12px;max-width:780px;margin-left:auto;margin-right:auto;}
+.hero{background:radial-gradient(ellipse at top right,#1a2f4d 0%,var(--navy) 50%),linear-gradient(180deg,var(--navy) 0%,var(--navy-2) 100%);padding:80px 28px 88px;position:relative;overflow:hidden;}
+.hero::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:60px;background:linear-gradient(180deg,transparent,var(--light));pointer-events:none;}
+.hero-inner{max-width:1080px;margin:0 auto;position:relative;z-index:2;}
+.hero-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:64px;align-items:center;}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:40px;}}
+
+.hero-eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+.hero-eyebrow .badge{background:rgba(94,235,194,.12);border:1px solid rgba(94,235,194,.3);color:var(--accent);font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:5px 12px;border-radius:20px;}
+.hero-eyebrow .date{color:var(--t-mid);font-size:.78rem;}
+.hero h1{color:var(--light);font-weight:300;font-size:clamp(34px,5.5vw,58px);line-height:1.08;letter-spacing:-.02em;margin-bottom:24px;}
 .hero h1 strong{font-weight:800;}
-.hero h1 em{font-family:'Newsreader',serif;font-style:italic;color:var(--accent);}
-.hero-tagline{color:var(--text-mid);font-size:clamp(14px,2vw,17px);font-weight:300;max-width:620px;margin:0 auto 36px;line-height:1.7;}
-.hero-meta{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin-bottom:40px;}
-.hero-chip{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--text-light);font-size:.78rem;padding:6px 14px;border-radius:20px;}
-.score-ring{display:inline-flex;flex-direction:column;align-items:center;background:rgba(94,235,194,.06);border:2px solid rgba(94,235,194,.25);border-radius:20px;padding:24px 48px;margin-bottom:32px;}
-.score-number{color:var(--accent);font-size:clamp(64px,10vw,92px);font-weight:800;line-height:1;letter-spacing:-.02em;}
-.score-denom{color:var(--text-muted);font-size:1.1rem;font-weight:400;}
-.score-label{color:var(--text-mid);font-size:.82rem;margin-top:4px;letter-spacing:.06em;text-transform:uppercase;}
-.hero-facts{display:flex;justify-content:center;gap:32px;flex-wrap:wrap;margin-bottom:28px;}
-.hero-fact{text-align:center;}
-.hero-fact-val{color:#fff;font-size:1.5rem;font-weight:700;}
-.hero-fact-lbl{color:var(--text-muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;}
-.hero-date{color:var(--text-muted);font-size:.72rem;margin-top:16px;}
+.hero h1 em{font-family:'Newsreader',serif;font-style:italic;color:var(--accent);font-weight:500;}
+.hero-tagline{color:var(--t-light);font-size:clamp(15px,1.6vw,17px);font-weight:300;line-height:1.7;margin-bottom:36px;max-width:560px;}
 
-/* CONTAINERS */
-.container{max-width:1080px;margin:0 auto;padding:0 24px;}
-section{padding:56px 0;}
-section.alt{background:var(--alt-bg);}
-.section-header{margin-bottom:36px;}
-.section-tag{display:inline-block;background:var(--accent);color:var(--navy);font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:4px;margin-bottom:12px;}
-.section-title{font-size:clamp(22px,3.5vw,32px);font-weight:700;color:var(--text-dark);line-height:1.25;}
-.section-title em{font-family:'Newsreader',serif;font-style:italic;color:var(--accent);}
-.section-sub{color:#586D80;font-size:.95rem;margin-top:8px;max-width:680px;}
+.hero-meta{display:flex;flex-direction:column;gap:14px;margin-bottom:36px;}
+.hero-meta-row{display:flex;align-items:center;gap:12px;color:var(--t-light);font-size:.92rem;}
+.hero-meta-row .ic{color:var(--accent);font-size:1.05rem;width:24px;}
+.hero-meta-row a{color:var(--accent-dim);}
+.hero-meta-row a:hover{color:var(--accent);}
 
-/* SCORE BADGE */
-.score-badge{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;font-weight:800;font-size:.95rem;}
-.score-badge.red{background:rgba(217,83,79,.15);color:var(--red);}
-.score-badge.amber{background:rgba(232,168,32,.15);color:var(--amber);}
-.score-badge.teal{background:rgba(94,235,194,.15);color:var(--accent-dim);}
-.score-badge.green{background:rgba(61,173,108,.15);color:var(--green);}
+.hero-insight{background:linear-gradient(135deg,rgba(94,235,194,.08),rgba(94,235,194,.02));border-left:3px solid var(--accent);padding:16px 20px;border-radius:8px;color:var(--t-light);font-size:.92rem;line-height:1.65;}
+.hero-insight strong{color:var(--light);}
 
-/* VERDICT GRID */
-.verdict-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start;}
-@media(max-width:700px){.verdict-grid{grid-template-columns:1fr;}}
-.chart-card{background:var(--navy);border-radius:16px;padding:28px;box-shadow:0 4px 24px rgba(0,0,0,.12);}
-.chart-title{color:var(--text-light);font-size:.82rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;margin-bottom:20px;}
-.gaps-list{display:flex;flex-direction:column;gap:12px;}
-.gap-card{background:var(--navy);border-radius:12px;padding:18px 20px;border-left:3px solid var(--red);}
-.gap-card.amber{border-left-color:var(--amber);}
-.gap-card.green{border-left-color:var(--green);}
-.gap-title{color:#fff;font-weight:700;font-size:.92rem;margin-bottom:4px;}
-.gap-desc{color:var(--text-mid);font-size:.82rem;line-height:1.5;}
-.opportunity-banner{background:linear-gradient(90deg,rgba(94,235,194,.08),rgba(94,235,194,.03));border:1px solid rgba(94,235,194,.2);border-radius:12px;padding:16px 20px;margin-top:16px;color:var(--text-mid);font-size:.88rem;line-height:1.6;}
-.opportunity-banner strong{color:var(--accent);}
+/* SCORE PANEL */
+.score-panel{background:linear-gradient(160deg,rgba(255,255,255,.03),rgba(255,255,255,.01));border:1px solid rgba(255,255,255,.08);border-radius:24px;padding:32px;backdrop-filter:blur(8px);}
+.score-header{font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--t-mid);margin-bottom:8px;}
+.score-big{font-size:clamp(72px,11vw,108px);font-weight:900;color:var(--accent);line-height:.95;letter-spacing:-.04em;}
+.score-denom{color:var(--t-dim);font-size:1.3rem;font-weight:400;margin-left:4px;}
+.score-label{color:var(--light);font-size:.95rem;font-weight:600;margin-top:6px;}
+.score-rank{margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,.08);color:var(--t-mid);font-size:.78rem;}
+.score-rank strong{color:var(--accent);}
 
-/* DIMENSION BARS */
-.dim-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
-@media(max-width:700px){.dim-grid{grid-template-columns:1fr 1fr;}}
-.dim-card{background:var(--alt-bg);border:1px solid var(--border);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:8px;}
-.dim-label{font-size:.75rem;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;}
-.dim-score-row{display:flex;align-items:center;justify-content:space-between;}
-.dim-bar-bg{height:6px;background:#E2EBF3;border-radius:3px;flex:1;margin:0 10px;}
-.dim-bar-fill{height:6px;border-radius:3px;transition:width .8s ease;}
-.dim-val{font-size:.9rem;font-weight:700;}
+.score-quick-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px;}
+.score-quick{background:rgba(255,255,255,.04);border-radius:12px;padding:14px;}
+.sq-val{color:var(--light);font-size:1.4rem;font-weight:700;line-height:1;}
+.sq-lbl{color:var(--t-mid);font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;margin-top:4px;}
 
-/* AI SECTION */
-.ai-section{background:var(--navy);padding:64px 0;}
-.ai-hook{color:var(--accent);font-size:clamp(22px,3.5vw,30px);font-weight:700;margin-bottom:16px;text-align:center;}
-.ai-scenario{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:20px 24px;max-width:620px;margin:0 auto 36px;color:var(--text-mid);font-size:.92rem;line-height:1.7;text-align:center;}
-.ai-steps{display:flex;justify-content:center;gap:0;margin-bottom:36px;flex-wrap:wrap;}
-.ai-step{display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px 24px;}
-.ai-step-icon{font-size:1.8rem;}
-.ai-step-label{color:var(--text-light);font-size:.8rem;font-weight:600;text-align:center;max-width:100px;}
-.ai-arrow{display:flex;align-items:center;color:var(--text-muted);font-size:1.2rem;padding-bottom:24px;}
-.ai-pillars{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:860px;margin:0 auto 36px;}
+/* SECTIONS */
+section{padding:80px 28px;}
+.container{max-width:1080px;margin:0 auto;}
+section.alt{background:var(--light-2);}
+section.dark{background:var(--navy);color:var(--light);}
+.section-header{margin-bottom:48px;max-width:780px;}
+.section-header.center{margin-left:auto;margin-right:auto;text-align:center;}
+.section-title{font-size:clamp(26px,4vw,38px);font-weight:800;line-height:1.18;letter-spacing:-.02em;margin-top:10px;}
+.section-title em{font-family:'Newsreader',serif;font-style:italic;color:var(--accent-dim);font-weight:600;}
+section.dark .section-title em{color:var(--accent);}
+.section-sub{color:var(--text-2);font-size:1rem;margin-top:14px;line-height:1.7;max-width:680px;}
+section.dark .section-sub{color:var(--t-mid);}
+
+/* VERDICT */
+.verdict-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:32px;align-items:start;}
+@media(max-width:880px){.verdict-grid{grid-template-columns:1fr;}}
+.chart-card{background:var(--navy);border-radius:20px;padding:32px;box-shadow:0 20px 60px -20px rgba(10,22,40,.4);}
+.chart-card.light{background:var(--light);border:1px solid var(--border);box-shadow:0 4px 20px rgba(10,22,40,.04);}
+.chart-title{color:var(--t-light);font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:20px;}
+.chart-card.light .chart-title{color:var(--text-3);}
+.gaps-stack{display:flex;flex-direction:column;gap:14px;}
+.gap-item{background:var(--light);border:1px solid var(--border);border-radius:14px;padding:18px 20px;border-left:4px solid;display:flex;gap:14px;align-items:flex-start;}
+.gap-item.red{border-left-color:var(--red);}
+.gap-item.amber{border-left-color:var(--amber);}
+.gap-item.green{border-left-color:var(--green);}
+.gap-num{background:var(--light-3);color:var(--text-2);width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.8rem;flex-shrink:0;}
+.gap-item.red .gap-num{background:rgba(217,83,79,.1);color:var(--red);}
+.gap-item.amber .gap-num{background:rgba(232,168,32,.1);color:var(--amber);}
+.gap-item.green .gap-num{background:rgba(61,173,108,.1);color:var(--green);}
+.gap-title{font-weight:700;font-size:.95rem;color:var(--text);margin-bottom:4px;}
+.gap-desc{color:var(--text-3);font-size:.85rem;line-height:1.6;}
+
+.opportunity-box{margin-top:24px;background:linear-gradient(135deg,#0A1628,#13263F);border-radius:18px;padding:24px 28px;color:var(--t-light);font-size:.95rem;line-height:1.7;}
+.opportunity-box strong.tag{display:inline-block;background:var(--accent);color:var(--navy);padding:3px 10px;border-radius:20px;font-size:.7rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px;}
+.opportunity-box strong.tag + br + *{}
+.opportunity-box .num{color:var(--accent);font-weight:800;font-size:1.05rem;}
+
+/* DIMENSION GRID */
+.dim-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px;}
+@media(max-width:760px){.dim-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:500px){.dim-grid{grid-template-columns:1fr;}}
+.dim-card{background:var(--light);border:1px solid var(--border);border-radius:14px;padding:18px;transition:all .2s;}
+.dim-card:hover{border-color:var(--border-2);transform:translateY(-2px);box-shadow:0 8px 24px -8px rgba(10,22,40,.08);}
+.dim-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.dim-label{font-size:.78rem;font-weight:600;color:var(--text-3);}
+.dim-score{font-size:1.6rem;font-weight:800;line-height:1;}
+.dim-score.red{color:var(--red);}
+.dim-score.amber{color:var(--amber);}
+.dim-score.teal{color:var(--accent-dim);}
+.dim-score.green{color:var(--green);}
+.dim-bar{height:6px;background:var(--light-3);border-radius:3px;overflow:hidden;margin-bottom:10px;}
+.dim-bar-fill{height:100%;border-radius:3px;transition:width 1s ease;}
+.dim-note{font-size:.76rem;color:var(--text-3);line-height:1.5;}
+
+/* AI / DOCTOR RANK SECTION */
+.ai-hero{text-align:center;margin-bottom:48px;}
+.ai-hero h2{color:var(--light);font-size:clamp(26px,4vw,42px);font-weight:800;line-height:1.15;margin-bottom:18px;letter-spacing:-.02em;}
+.ai-hero h2 em{font-family:'Newsreader',serif;font-style:italic;color:var(--accent);}
+.ai-scenario{max-width:680px;margin:0 auto;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:28px 32px;color:var(--t-light);font-size:.95rem;line-height:1.75;text-align:left;}
+.ai-scenario .quote{font-family:'Newsreader',serif;font-style:italic;color:var(--accent);font-size:1.08rem;}
+.ai-scenario strong{color:var(--light);}
+
+.ai-steps{display:flex;justify-content:center;align-items:center;gap:24px;margin:48px auto;flex-wrap:wrap;max-width:760px;}
+.ai-step{display:flex;flex-direction:column;align-items:center;gap:10px;flex:1;min-width:140px;}
+.ai-step-circle{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,rgba(94,235,194,.18),rgba(94,235,194,.05));border:1px solid rgba(94,235,194,.25);display:flex;align-items:center;justify-content:center;font-size:1.8rem;}
+.ai-step-label{color:var(--light);font-size:.85rem;font-weight:600;text-align:center;max-width:140px;line-height:1.4;}
+.ai-arrow-down{color:var(--accent);font-size:1.3rem;display:none;}
+@media(max-width:600px){.ai-steps{flex-direction:column;}.ai-arrow-down{display:block;}.ai-step{flex:0;}}
+
+.ai-pillars{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;max-width:880px;margin:0 auto 64px;}
 @media(max-width:700px){.ai-pillars{grid-template-columns:1fr 1fr;}}
-.ai-pillar{background:var(--navy-card);border-radius:12px;padding:16px;text-align:center;}
-.ai-pillar-icon{font-size:1.5rem;margin-bottom:8px;}
-.ai-pillar-name{color:#fff;font-weight:700;font-size:.88rem;margin-bottom:6px;}
-.ai-pillar-status{font-size:.78rem;display:flex;align-items:center;justify-content:center;gap:4px;}
+.ai-pillar{background:var(--navy-card);border-radius:14px;padding:20px;text-align:center;border:1px solid rgba(255,255,255,.06);}
+.ai-pillar-icon{font-size:1.7rem;margin-bottom:10px;}
+.ai-pillar-name{color:var(--light);font-weight:700;font-size:.92rem;margin-bottom:8px;}
+.ai-pillar-status{font-size:.78rem;font-weight:600;}
 .ai-pillar-status.ok{color:var(--green);}
 .ai-pillar-status.warn{color:var(--amber);}
 .ai-pillar-status.bad{color:var(--red);}
-.doctor-rank-cta{max-width:560px;margin:0 auto;border:2px solid var(--accent);border-radius:16px;padding:28px 32px;text-align:center;}
-.dr-title{color:var(--accent);font-size:1.3rem;font-weight:800;margin-bottom:6px;}
-.dr-sub{color:var(--text-mid);font-size:.88rem;margin-bottom:16px;line-height:1.6;}
-.dr-price{color:#fff;font-size:.82rem;margin-bottom:16px;}
-.btn-accent{display:inline-block;background:var(--accent);color:var(--navy);font-weight:800;font-size:.88rem;padding:12px 28px;border-radius:8px;text-decoration:none;transition:background .2s;}
-.btn-accent:hover{background:var(--accent-dim);}
 
-/* MARKET CONTEXT */
+/* PRICING PACKAGES — HORMOZI STYLE */
+.pricing-intro{text-align:center;max-width:720px;margin:0 auto 48px;color:var(--t-light);font-size:1.02rem;line-height:1.75;}
+.pricing-intro .lead{color:var(--accent);font-size:1.15rem;font-weight:600;font-family:'Newsreader',serif;font-style:italic;margin-bottom:8px;display:block;}
+
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1080px;margin:0 auto;}
+@media(max-width:880px){.pricing-grid{grid-template-columns:1fr;max-width:480px;}}
+.pkg{background:var(--navy-card);border-radius:24px;padding:36px 28px;border:2px solid rgba(255,255,255,.06);position:relative;display:flex;flex-direction:column;transition:transform .3s,border-color .3s;}
+.pkg:hover{transform:translateY(-4px);}
+.pkg.featured{border-color:var(--accent);background:linear-gradient(160deg,#1a3554,var(--navy-card) 60%);box-shadow:0 30px 80px -30px rgba(94,235,194,.3);}
+.pkg-badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--accent);color:var(--navy);font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:6px 16px;border-radius:20px;white-space:nowrap;}
+.pkg-name{font-size:.75rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--t-mid);margin-bottom:10px;}
+.pkg.featured .pkg-name{color:var(--accent);}
+.pkg-tagline{color:var(--light);font-size:1.3rem;font-weight:800;line-height:1.25;margin-bottom:20px;letter-spacing:-.01em;}
+.pkg-tagline em{font-family:'Newsreader',serif;font-style:italic;color:var(--accent);font-weight:500;}
+.pkg-price{display:flex;align-items:baseline;gap:6px;margin-bottom:6px;}
+.pkg-currency{color:var(--t-mid);font-size:1rem;font-weight:600;}
+.pkg-amount{color:var(--light);font-size:3.2rem;font-weight:900;line-height:1;letter-spacing:-.03em;}
+.pkg-period{color:var(--t-mid);font-size:.9rem;font-weight:500;}
+.pkg-price-note{color:var(--t-mid);font-size:.78rem;margin-bottom:24px;padding-bottom:24px;border-bottom:1px dashed rgba(255,255,255,.1);}
+
+.pkg-promise{background:rgba(94,235,194,.08);border-radius:12px;padding:14px 16px;margin-bottom:20px;}
+.pkg-promise-label{color:var(--accent);font-size:.66rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px;}
+.pkg-promise-text{color:var(--light);font-size:.86rem;font-weight:600;line-height:1.5;}
+
+.pkg-includes{font-size:.7rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--t-mid);margin-bottom:14px;}
+.pkg-list{list-style:none;flex:1;margin-bottom:24px;}
+.pkg-list li{color:var(--t-light);font-size:.88rem;line-height:1.5;padding:8px 0 8px 26px;position:relative;}
+.pkg-list li::before{content:'✓';position:absolute;left:0;top:8px;width:18px;height:18px;background:rgba(94,235,194,.15);color:var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:800;}
+.pkg-value{font-size:.82rem;color:var(--t-mid);margin-bottom:16px;padding:12px 14px;background:rgba(0,0,0,.2);border-radius:8px;}
+.pkg-value strong{color:var(--accent);}
+.pkg-cta{display:block;text-align:center;padding:14px;border-radius:12px;font-weight:800;font-size:.92rem;letter-spacing:.01em;transition:all .2s;border:2px solid;}
+.pkg-cta.primary{background:var(--accent);color:var(--navy);border-color:var(--accent);}
+.pkg-cta.primary:hover{background:var(--accent-dim);border-color:var(--accent-dim);}
+.pkg-cta.secondary{background:transparent;color:var(--accent);border-color:rgba(94,235,194,.4);}
+.pkg-cta.secondary:hover{border-color:var(--accent);background:rgba(94,235,194,.08);}
+
+.guarantee-bar{margin-top:48px;background:linear-gradient(135deg,rgba(94,235,194,.1),rgba(94,235,194,.02));border:1px solid rgba(94,235,194,.2);border-radius:18px;padding:28px 32px;display:flex;align-items:center;gap:24px;max-width:880px;margin-left:auto;margin-right:auto;}
+@media(max-width:600px){.guarantee-bar{flex-direction:column;text-align:center;}}
+.guarantee-icon{font-size:3rem;flex-shrink:0;}
+.guarantee-text{color:var(--t-light);font-size:.95rem;line-height:1.7;}
+.guarantee-text strong{color:var(--light);font-weight:800;display:block;font-size:1.1rem;margin-bottom:6px;}
+
+/* MARKET STATS */
 .stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
-@media(max-width:700px){.stats-grid{grid-template-columns:1fr;}}
-.stat-card{background:var(--navy);border-radius:14px;padding:24px;text-align:center;}
-.stat-num{color:var(--accent);font-size:2.2rem;font-weight:800;line-height:1;}
-.stat-text{color:var(--text-light);font-size:.82rem;margin-top:8px;line-height:1.5;}
-.stat-source{color:var(--text-muted);font-size:.68rem;margin-top:6px;}
+@media(max-width:760px){.stats-grid{grid-template-columns:1fr;}}
+.stat{background:var(--light);border:1px solid var(--border);border-radius:18px;padding:28px;transition:all .2s;}
+.stat:hover{border-color:var(--border-2);box-shadow:0 12px 32px -16px rgba(10,22,40,.1);}
+.stat-num{color:var(--accent-dim);font-size:2.6rem;font-weight:900;line-height:1;letter-spacing:-.03em;}
+.stat-text{color:var(--text);font-size:.95rem;margin-top:12px;line-height:1.6;font-weight:500;}
+.stat-source{color:var(--text-3);font-size:.72rem;margin-top:10px;line-height:1.4;}
 
-/* BENCHMARK */
-.bench-table{width:100%;border-collapse:collapse;margin-top:24px;font-size:.88rem;}
-.bench-table th{background:var(--navy);color:var(--text-mid);font-weight:600;text-align:left;padding:10px 14px;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;}
-.bench-table td{padding:12px 14px;border-bottom:1px solid var(--border);}
-.bench-table tr.highlight td{background:rgba(94,235,194,.06);font-weight:600;}
-.bench-table tr.highlight td:first-child{border-left:3px solid var(--accent);}
-.star{color:#F5A623;}
-.huli-count{color:var(--accent-dim);font-weight:700;}
-.chart-wrap{background:var(--navy);border-radius:16px;padding:28px;margin-top:24px;}
+/* COMPETITIVE BENCHMARK */
+.bench-table-wrap{overflow-x:auto;border-radius:16px;border:1px solid var(--border);background:var(--light);}
+.bench-table{width:100%;border-collapse:collapse;font-size:.88rem;min-width:680px;}
+.bench-table th{background:var(--navy);color:var(--t-light);font-weight:600;text-align:left;padding:14px 18px;font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;}
+.bench-table td{padding:14px 18px;border-bottom:1px solid var(--border);color:var(--text-2);}
+.bench-table tr:last-child td{border-bottom:none;}
+.bench-table tr.highlight td{background:linear-gradient(90deg,rgba(94,235,194,.08),transparent);font-weight:600;color:var(--text);}
+.bench-table tr.highlight td:first-child{border-left:4px solid var(--accent);}
+.bench-table tr.highlight .doctor-name{color:var(--text);font-weight:800;}
+.huli-pill{display:inline-block;background:rgba(94,235,194,.12);color:var(--accent-dim);padding:3px 10px;border-radius:20px;font-weight:700;font-size:.82rem;}
+.tr-rank{color:var(--text-3);font-size:.78rem;width:32px;}
+.doctor-name a{color:var(--accent-dim);font-weight:500;}
+.doctor-name a:hover{color:var(--accent);text-decoration:underline;}
 
-/* AUDIT SECTIONS */
-.audit-section{margin-bottom:48px;}
-.audit-header{display:flex;align-items:center;gap:16px;margin-bottom:20px;padding-bottom:16px;border-bottom:2px solid var(--border);}
-.audit-icon{font-size:1.6rem;}
-.audit-title-block{}
-.audit-insight{font-size:clamp(16px,2.5vw,20px);font-weight:700;color:var(--text-dark);line-height:1.3;}
-.audit-insight span{color:var(--red);}
-.audit-insight span.good{color:var(--green);}
-.audit-meta{color:var(--text-muted);font-size:.8rem;margin-top:2px;}
-.findings-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;}
-@media(max-width:700px){.findings-grid{grid-template-columns:1fr;}}
-.finding-card{background:var(--alt-bg);border:1px solid var(--border);border-radius:10px;padding:16px;}
-.finding-label{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;}
-.finding-label.good{color:var(--green);}
-.finding-label.gap{color:var(--red);}
-.finding-label.warn{color:var(--amber);}
-.finding-text{font-size:.86rem;color:var(--text-dark);line-height:1.5;}
-.recs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;}
-.rec-card{background:var(--navy-card);border-radius:10px;padding:16px;border-left:3px solid var(--red);}
-.rec-card.amber{border-left-color:var(--amber);}
-.rec-card.green{border-left-color:var(--green);}
-.rec-priority{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;}
-.rec-priority.urgent{color:var(--red);}
-.rec-priority.high{color:var(--amber);}
-.rec-priority.med{color:var(--accent);}
-.rec-title{color:#fff;font-weight:700;font-size:.88rem;margin-bottom:4px;}
-.rec-desc{color:var(--text-mid);font-size:.78rem;line-height:1.5;}
-.quick-win{background:rgba(61,173,108,.08);border:1px solid rgba(61,173,108,.2);border-radius:8px;padding:12px 16px;margin-top:14px;font-size:.82rem;color:var(--text-dark);}
+/* AUDIT */
+.audit-block{margin-bottom:56px;}
+.audit-block:last-child{margin-bottom:0;}
+.audit-head{display:flex;align-items:flex-start;gap:18px;margin-bottom:24px;padding-bottom:18px;border-bottom:2px solid var(--border);}
+.audit-icon-wrap{flex-shrink:0;width:48px;height:48px;border-radius:14px;background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:1.4rem;}
+.audit-title-wrap{flex:1;}
+.audit-meta{font-size:.72rem;font-weight:700;color:var(--text-3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;}
+.audit-insight{font-size:clamp(18px,2.5vw,22px);font-weight:700;color:var(--text);line-height:1.3;}
+.audit-insight .bad{color:var(--red);}
+.audit-insight .good{color:var(--green);}
+.audit-score-pill{flex-shrink:0;background:var(--light-3);padding:8px 16px;border-radius:24px;font-weight:800;font-size:.95rem;display:flex;align-items:center;gap:6px;}
+.audit-score-pill.red{background:rgba(217,83,79,.1);color:var(--red);}
+.audit-score-pill.amber{background:rgba(232,168,32,.1);color:var(--amber);}
+.audit-score-pill.teal{background:rgba(94,235,194,.12);color:var(--accent-dim);}
+.audit-score-pill.green{background:rgba(61,173,108,.1);color:var(--green);}
+
+.findings-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:24px;}
+@media(max-width:680px){.findings-grid{grid-template-columns:1fr;}}
+.finding{background:var(--light);border:1px solid var(--border);border-radius:12px;padding:18px;}
+section.alt .finding{background:var(--light);}
+.finding-tag{display:inline-block;font-size:.66rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:3px 10px;border-radius:20px;margin-bottom:10px;}
+.finding-tag.good{background:rgba(61,173,108,.12);color:var(--green);}
+.finding-tag.gap{background:rgba(217,83,79,.12);color:var(--red);}
+.finding-tag.warn{background:rgba(232,168,32,.12);color:var(--amber);}
+.finding-text{font-size:.88rem;color:var(--text);line-height:1.6;}
+.finding-text strong{color:var(--text);}
+
+.recs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-bottom:18px;}
+.rec{background:var(--navy);border-radius:12px;padding:18px;border-left:4px solid;color:var(--light);}
+.rec.urgent{border-left-color:var(--red);}
+.rec.high{border-left-color:var(--amber);}
+.rec.med{border-left-color:var(--accent);}
+.rec-pri{display:inline-block;font-size:.65rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px;}
+.rec.urgent .rec-pri{color:var(--red);}
+.rec.high .rec-pri{color:var(--amber);}
+.rec.med .rec-pri{color:var(--accent);}
+.rec-title{color:var(--light);font-weight:700;font-size:.92rem;line-height:1.4;margin-bottom:6px;}
+.rec-desc{color:var(--t-light);font-size:.82rem;line-height:1.55;}
+
+.quick-win{background:linear-gradient(135deg,rgba(61,173,108,.08),rgba(61,173,108,.02));border:1px solid rgba(61,173,108,.2);border-radius:12px;padding:14px 18px;font-size:.88rem;color:var(--text);line-height:1.6;}
 .quick-win strong{color:var(--green);}
 
 /* ROADMAP */
-.roadmap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
-@media(max-width:700px){.roadmap-grid{grid-template-columns:1fr;}}
-.phase-card{background:var(--navy);border-radius:16px;padding:24px;border-top:4px solid var(--accent);}
-.phase-card:nth-child(2){border-top-color:var(--amber);}
-.phase-card:nth-child(3){border-top-color:var(--green);}
-.phase-num{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;}
-.phase-card:nth-child(1) .phase-num{color:var(--accent);}
-.phase-card:nth-child(2) .phase-num{color:var(--amber);}
-.phase-card:nth-child(3) .phase-num{color:var(--green);}
-.phase-title{color:#fff;font-weight:800;font-size:1.05rem;margin-bottom:16px;}
-.phase-list{list-style:none;display:flex;flex-direction:column;gap:10px;}
-.phase-list li{color:var(--text-mid);font-size:.83rem;line-height:1.6;padding-left:14px;position:relative;}
-.phase-list li::before{content:'→';position:absolute;left:0;color:var(--text-muted);}
+.roadmap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+@media(max-width:880px){.roadmap-grid{grid-template-columns:1fr;}}
+.phase{background:var(--navy);border-radius:20px;padding:32px 28px;position:relative;overflow:hidden;}
+.phase::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;}
+.phase.f1::before{background:var(--accent);}
+.phase.f2::before{background:var(--amber);}
+.phase.f3::before{background:var(--green);}
+.phase-num{font-size:.7rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px;}
+.phase.f1 .phase-num{color:var(--accent);}
+.phase.f2 .phase-num{color:var(--amber);}
+.phase.f3 .phase-num{color:var(--green);}
+.phase-title{color:var(--light);font-weight:800;font-size:1.15rem;margin-bottom:20px;letter-spacing:-.01em;}
+.phase-list{list-style:none;display:flex;flex-direction:column;gap:11px;}
+.phase-list li{color:var(--t-light);font-size:.85rem;line-height:1.6;padding-left:18px;position:relative;}
+.phase-list li::before{content:'→';position:absolute;left:0;color:var(--t-dim);font-weight:700;}
 
-/* KPIs */
-.kpi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:16px;}
-.kpi-card{background:var(--alt-bg);border:1px solid var(--border);border-radius:12px;padding:16px 18px;}
-.kpi-name{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);margin-bottom:6px;}
-.kpi-desc{font-size:.86rem;color:var(--text-dark);line-height:1.5;}
+/* KPI */
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;}
+.kpi{background:var(--light);border:1px solid var(--border);border-radius:14px;padding:20px;}
+.kpi-name{font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-dim);margin-bottom:8px;}
+.kpi-desc{font-size:.86rem;color:var(--text);line-height:1.55;}
 
-/* CTA SECTION */
-.cta-section{background:var(--navy);padding:72px 0;}
-.cta-cards{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:760px;margin:0 auto;}
-@media(max-width:600px){.cta-cards{grid-template-columns:1fr;}}
-.cta-card{background:var(--navy-card);border-radius:16px;padding:28px;border:1px solid rgba(255,255,255,.08);}
-.cta-card.featured{border-color:var(--accent);box-shadow:0 0 32px rgba(94,235,194,.12);}
-.cta-card-tag{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--text-muted);margin-bottom:10px;}
-.cta-card-tag.featured{color:var(--accent);}
-.cta-card-title{color:#fff;font-weight:800;font-size:1.1rem;margin-bottom:8px;}
-.cta-card-desc{color:var(--text-mid);font-size:.84rem;line-height:1.6;margin-bottom:16px;}
-.btn-outline{display:inline-block;border:2px solid var(--text-muted);color:var(--text-light);font-weight:700;font-size:.84rem;padding:10px 22px;border-radius:8px;text-decoration:none;transition:all .2s;}
-.btn-outline:hover{border-color:var(--accent);color:var(--accent);}
-.cta-main{text-align:center;margin-top:40px;}
-.btn-cta-main{display:inline-block;background:var(--accent);color:var(--navy);font-weight:800;font-size:1rem;padding:16px 40px;border-radius:10px;text-decoration:none;transition:background .2s;cursor:pointer;}
-.btn-cta-main:hover{background:var(--accent-dim);}
-.btn-print{display:inline-block;margin-left:12px;background:transparent;border:2px solid rgba(255,255,255,.2);color:var(--text-light);font-weight:600;font-size:.88rem;padding:14px 24px;border-radius:10px;cursor:pointer;transition:all .2s;}
-.btn-print:hover{border-color:var(--text-mid);}
+/* CTA */
+.cta-section{background:linear-gradient(160deg,var(--navy) 0%,#0E1D33 100%);padding:96px 28px;text-align:center;}
+.cta-section h2{color:var(--light);font-size:clamp(28px,4.5vw,42px);font-weight:800;line-height:1.15;max-width:700px;margin:0 auto 16px;letter-spacing:-.02em;}
+.cta-section h2 em{font-family:'Newsreader',serif;font-style:italic;color:var(--accent);font-weight:500;}
+.cta-section p.lead{color:var(--t-light);font-size:1.05rem;max-width:560px;margin:0 auto 40px;line-height:1.7;}
+.cta-buttons{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;}
+.btn-primary{display:inline-block;background:var(--accent);color:var(--navy);font-weight:800;font-size:1rem;padding:18px 36px;border-radius:12px;transition:all .2s;cursor:pointer;border:none;letter-spacing:-.005em;}
+.btn-primary:hover{background:var(--accent-dim);transform:translateY(-2px);box-shadow:0 14px 32px -12px rgba(94,235,194,.5);}
+.btn-secondary{display:inline-block;background:transparent;color:var(--t-light);font-weight:600;font-size:.95rem;padding:18px 28px;border-radius:12px;border:1px solid rgba(255,255,255,.15);cursor:pointer;transition:all .2s;}
+.btn-secondary:hover{border-color:var(--accent);color:var(--accent);}
+
+/* FOOTER */
+footer{background:var(--navy-2);padding:40px 28px;text-align:center;color:var(--t-dim);font-size:.78rem;line-height:1.6;}
+footer a{color:var(--accent-dim);}
 
 /* PRINT */
 @media print{
-  nav,.cta-section,.btn-print{display:none;}
-  .hero{background:#0B1929!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
-  section{break-inside:avoid;}
+  nav,.btn-primary,.btn-secondary,.pkg-cta{display:none!important;}
+  .hero,.cta-section,section.dark,.phase{background:var(--navy)!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;color-adjust:exact;}
+  section{break-inside:avoid;padding:32px 20px;}
+  .container{max-width:100%;}
 }
 
 /* UTILS */
-.text-accent{color:var(--accent);}
-.text-center{text-align:center;}
-.mb-4{margin-bottom:16px;}
-.mb-6{margin-bottom:24px;}
-.divider{height:1px;background:var(--border);margin:24px 0;}
-a.link-external{color:var(--accent-dim);text-decoration:none;font-weight:500;}
-a.link-external:hover{text-decoration:underline;}
+.divider-thin{height:1px;background:var(--border);margin:32px 0;}
 </style>
 </head>
 <body>
 
 <!-- NAV -->
 <nav>
-  <span class="nav-brand">FLOW Results — Diagnóstico de Visibilidad</span>
-  <div class="nav-links">
-    <a href="#veredicto">Veredicto</a>
-    <a href="#competencia">Competencia</a>
-    <a href="#auditoria">Auditoría</a>
-    <a href="#hoja-de-ruta">Roadmap</a>
+  <div class="nav-inner">
+    <div class="nav-brand"><span class="dot"></span> FLOW Results · Diagnóstico</div>
+    <div class="nav-links">
+      <a href="#veredicto">Veredicto</a>
+      <a href="#mercado">Mercado</a>
+      <a href="#competencia">Competencia</a>
+      <a href="#auditoria">Auditoría</a>
+      <a href="#ia">Doctor Rank</a>
+      <a href="#hoja-de-ruta">Hoja de ruta</a>
+    </div>
+    <a href="https://calendly.com/recheverria-flow/sesion-de-estrategia-con-flow-results-clone" target="_blank" class="nav-cta">Agendar →</a>
   </div>
-  <a href="https://calendly.com/recheverria-flow/sesion-de-estrategia-con-flow-results-clone" target="_blank" class="nav-cta">Agendar sesión →</a>
 </nav>
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-label">Diagnóstico de Visibilidad Digital · Mayo 2026</div>
-  <h1><strong>Las mejores especialistas merecen</strong><br>ser encontradas <em>en internet</em></h1>
-  <p class="hero-tagline">Este reporte revela un diagnóstico completo de la presencia digital de Dra. Angie Mora Calderón, comparada contra las ginecólogas más visibles de Costa Rica, con un plan de acción para ser la #1 de su especialidad.</p>
+  <div class="hero-inner">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-eyebrow">
+          <span class="badge">Diagnóstico Digital · Confidencial</span>
+          <span class="date">Mayo 2026</span>
+        </div>
+        <h1>
+          Dra. Angie Mora <strong>tiene las credenciales de la #1</strong> de Costa Rica. <em>Su presencia digital aún no lo dice.</em>
+        </h1>
+        <p class="hero-tagline">Las mejores especialistas merecen ser encontradas en internet. Este reporte revela cómo convertirla en la primera respuesta de Google, Huli, ChatGPT y Perplexity para "ginecóloga oncóloga Costa Rica".</p>
 
-  <div class="hero-meta">
-    <span class="hero-chip">🏥 Ginecología Oncológica · Ginecobstetricia</span>
-    <span class="hero-chip">📍 Hospital La Católica · Avenida Médica Escazú</span>
-    <span class="hero-chip">🌐 angiemoraginecologia.com</span>
+        <div class="hero-meta">
+          <div class="hero-meta-row"><span class="ic">👩‍⚕️</span> Ginecología Oncológica · Ginecobstetricia · MED6774</div>
+          <div class="hero-meta-row"><span class="ic">🏥</span> Hospital La Católica (Cons. 321) · Avenida Médica Escazú</div>
+          <div class="hero-meta-row"><span class="ic">🌐</span> <a href="https://www.angiemoraginecologia.com/" target="_blank">angiemoraginecologia.com</a></div>
+          <div class="hero-meta-row"><span class="ic">📱</span> +506 6003-8884 · <a href="https://www.instagram.com/dra.angiemora" target="_blank">@dra.angiemora</a></div>
+        </div>
+
+        <div class="hero-insight">
+          <strong>Lo más importante en 30 segundos:</strong> Dra. Mora tiene 370 reseñas Google con 5.0★ y 628 en Huli con 5.0★ — ya está en el top 5 nacional. Es la <em class="serif">única</em> ginecóloga del top 7 con sitio web propio + Instagram activo. La brecha real no es presencia: es contenido, video corto y visibilidad en IA.
+        </div>
+      </div>
+
+      <div class="score-panel">
+        <div class="score-header">Índice de Visibilidad Digital</div>
+        <div>
+          <span class="score-big">3.1</span><span class="score-denom">/ 5.0</span>
+        </div>
+        <div class="score-label">Sólido — con oportunidad clara de líder absoluta</div>
+        <div class="score-rank">Líderes CR (promedio): <strong>2.4 / 5.0</strong> · Top score posible: <strong>5.0</strong></div>
+
+        <div class="score-quick-grid">
+          <div class="score-quick">
+            <div class="sq-val">370</div>
+            <div class="sq-lbl">Reseñas Google ★ 5.0</div>
+          </div>
+          <div class="score-quick">
+            <div class="sq-val">628</div>
+            <div class="sq-lbl">Reseñas Huli ★ 5.0</div>
+          </div>
+          <div class="score-quick">
+            <div class="sq-val">3,900</div>
+            <div class="sq-lbl">Followers Instagram</div>
+          </div>
+          <div class="score-quick">
+            <div class="sq-val">0</div>
+            <div class="sq-lbl">Artículos blog · TikTok</div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <p style="color:var(--text-mid);font-size:.85rem;margin-bottom:10px;">
-    <strong style="color:#fff;">Dra. Angie Mora Calderón</strong> tiene la credencial más poderosa del mercado: presidenta de la AOGCR, +3,000 cirugías, e invitada regular de Teletica. Su presencia digital <em style="font-family:'Newsreader',serif;color:var(--accent);">aún no lo dice.</em>
-  </p>
-
-  <div class="score-ring">
-    <div>
-      <span class="score-number">2.8</span><span class="score-denom"> / 5.0</span>
-    </div>
-    <div class="score-label">Índice de Visibilidad Digital</div>
-  </div>
-
-  <div class="hero-facts">
-    <div class="hero-fact">
-      <div class="hero-fact-val">628</div>
-      <div class="hero-fact-lbl">Reseñas en Huli</div>
-    </div>
-    <div class="hero-fact">
-      <div class="hero-fact-val">3,900+</div>
-      <div class="hero-fact-lbl">Seguidores Instagram</div>
-    </div>
-    <div class="hero-fact">
-      <div class="hero-fact-val">#5</div>
-      <div class="hero-fact-lbl">Top ginecólogas CR en Huli</div>
-    </div>
-    <div class="hero-fact">
-      <div class="hero-fact-val">0</div>
-      <div class="hero-fact-lbl">Artículos en blog</div>
-    </div>
-  </div>
-
-  <p class="hero-date">Reporte preparado por FLOW Results · flowresults.com · Mayo 2026 · Datos obtenidos de fuentes públicas verificadas</p>
 </div>
 
-<!-- VEREDICTO EJECUTIVO -->
+<!-- VEREDICTO -->
 <section id="veredicto">
   <div class="container">
     <div class="section-header">
-      <span class="section-tag">Veredicto Ejecutivo</span>
-      <h2 class="section-title">Paradoja de <em>autoridad oculta</em>: las credenciales son de líder, la visibilidad no</h2>
-      <p class="section-sub">Dra. Mora tiene más autoridad clínica que cualquier ginecóloga en este análisis. Pero Google, TikTok y ChatGPT no saben que ella existe. Eso se puede cambiar en 90 días.</p>
+      <span class="eyebrow">Veredicto Ejecutivo</span>
+      <h2 class="section-title">Paradoja de <em>autoridad oculta</em>: las credenciales son de líder absoluta, la visibilidad aún no</h2>
+      <p class="section-sub">Dra. Mora ya tiene más autoridad clínica que cualquier otra ginecóloga del top 10 de Costa Rica. Pero Google Search Console no la conoce, ChatGPT no la recomienda primero y TikTok no la ha visto. Eso se cambia en 90 días.</p>
     </div>
 
     <div class="verdict-grid">
       <div class="chart-card">
-        <div class="chart-title">Visibilidad digital — Dra. Mora vs. líderes CR</div>
+        <div class="chart-title">Dra. Mora vs. competidoras top CR</div>
         <canvas id="radarChart" height="280"></canvas>
       </div>
       <div>
-        <div class="gaps-list">
-          <div class="gap-card">
-            <div class="gap-title">🔴 Brecha #1 — Contenido y SEO = CERO</div>
-            <div class="gap-desc">El sitio tiene procedimientos listados pero ningún artículo, ningún blog, ninguna pregunta frecuente. Google no puede indexar lo que no existe. Mientras las competidoras tampoco publican mucho, hay una oportunidad enorme de dominar búsquedas como "ginecóloga oncóloga Costa Rica" sin competencia.</div>
+        <div class="gaps-stack">
+          <div class="gap-item red">
+            <div class="gap-num">1</div>
+            <div>
+              <div class="gap-title">Contenido y SEO = cero estrategia</div>
+              <div class="gap-desc">El sitio tiene páginas de procedimientos pero ningún blog, ningún artículo, ninguna pregunta frecuente. Google no puede indexar lo que no existe. Y ninguna competidora lo está haciendo: esa es la oportunidad.</div>
+            </div>
           </div>
-          <div class="gap-card amber">
-            <div class="gap-title">🟡 Brecha #2 — Perfil de Google Business sin confirmar</div>
-            <div class="gap-desc">No se encontró un Google Business Profile verificado con reseñas públicas. El 86% de los pacientes en LATAM busca a su médico en Google antes de llamar. <em>(Fuente: Doctoralia, Estudio de Comportamiento del Paciente Latinoamericano, 2024 · doctoralia.com.mx/blog)</em></div>
+          <div class="gap-item amber">
+            <div class="gap-num">2</div>
+            <div>
+              <div class="gap-title">Instagram subexplotado para su estatura</div>
+              <div class="gap-desc">3,900 seguidores con 586 posts es activa, pero siendo Presidenta de la AOGCR y invitada regular de Teletica debería tener 15,000–25,000. Falta video corto (Reels, TikTok) y estrategia de crecimiento.</div>
+            </div>
           </div>
-          <div class="gap-card amber">
-            <div class="gap-title">🟡 Brecha #3 — Instagram subexplotado para su estatura</div>
-            <div class="gap-desc">3,900 seguidores con 586 publicaciones es activo, pero dado que es Presidenta de la AOGCR y sale regularmente en Teletica, podría tener 15,000–25,000 fácilmente. Falta contenido de video corto (Reels, TikTok) y estrategia de crecimiento.</div>
+          <div class="gap-item amber">
+            <div class="gap-num">3</div>
+            <div>
+              <div class="gap-title">Sin posicionamiento en IA</div>
+              <div class="gap-desc">Sin schema markup médico, sin FAQ estructurado, sin contenido optimizado para LLMs. ChatGPT, Perplexity y Google AI Overview no la mencionan al preguntar "ginecóloga oncóloga Costa Rica".</div>
+            </div>
           </div>
-          <div class="gap-card green">
-            <div class="gap-title">🟢 Fortaleza — Huli en Top 5 nacional con 5.0 ⭐</div>
-            <div class="gap-desc">628 reseñas verificadas en Huli con calificación perfecta 5.0/5.0 la ubica en el top 5 de ginecólogas más reseñadas de todo Costa Rica. Eso es una base extraordinaria para construir.</div>
+          <div class="gap-item green">
+            <div class="gap-num">★</div>
+            <div>
+              <div class="gap-title">Fortaleza extraordinaria: reputación verificada</div>
+              <div class="gap-desc">370 reseñas Google + 628 Huli, ambos con 5.0★ perfecto. Top 5 nacional en Huli. Única del top 7 con sitio web propio + Instagram activo. Base de fans real.</div>
+            </div>
           </div>
         </div>
-        <div class="opportunity-banner">
-          💡 <strong>Oportunidad estimada:</strong> Cerrar estas tres brechas podría representar entre <strong>5 y 12 nuevas consultas privadas adicionales por mes</strong>, basado en benchmarks de visibilidad digital de prácticas ginecológicas similares en Costa Rica. Estimación ilustrativa.
+
+        <div class="opportunity-box">
+          <strong class="tag">Oportunidad</strong><br>
+          Cerrar estas brechas podría representar entre <span class="num">5 y 12 nuevas consultas privadas adicionales por mes</span>, basado en benchmarks de prácticas ginecológicas similares en Costa Rica. Estimación ilustrativa.
         </div>
       </div>
     </div>
 
-    <div style="margin-top:36px;">
-      <h3 style="font-size:1rem;font-weight:700;color:var(--text-dark);margin-bottom:16px;">Resumen por dimensión</h3>
-      <div class="dim-grid">
-        <div class="dim-card">
-          <div class="dim-label">Reputación & Reseñas</div>
-          <div class="dim-score-row">
-            <span class="score-badge teal">3.5</span>
-            <div class="dim-bar-bg"><div class="dim-bar-fill" style="width:70%;background:var(--accent-dim);"></div></div>
-            <span class="dim-val" style="color:var(--accent-dim);">3.5</span>
-          </div>
-          <div style="font-size:.75rem;color:var(--text-muted);">628 reseñas Huli · Google sin confirmar</div>
-        </div>
-        <div class="dim-card">
-          <div class="dim-label">Sitio Web & Conversión</div>
-          <div class="dim-score-row">
-            <span class="score-badge amber">2.5</span>
-            <div class="dim-bar-bg"><div class="dim-bar-fill" style="width:50%;background:var(--amber);"></div></div>
-            <span class="dim-val" style="color:var(--amber);">2.5</span>
-          </div>
-          <div style="font-size:.75rem;color:var(--text-muted);">Sin citas online · Sin blog · WhatsApp solo</div>
-        </div>
-        <div class="dim-card">
-          <div class="dim-label">SEO & Contenido</div>
-          <div class="dim-score-row">
-            <span class="score-badge red">1.5</span>
-            <div class="dim-bar-bg"><div class="dim-bar-fill" style="width:30%;background:var(--red);"></div></div>
-            <span class="dim-val" style="color:var(--red);">1.5</span>
-          </div>
-          <div style="font-size:.75rem;color:var(--text-muted);">0 artículos · Sin schema · Sin blog</div>
-        </div>
-        <div class="dim-card">
-          <div class="dim-label">Directorios & Listados</div>
-          <div class="dim-score-row">
-            <span class="score-badge teal">3.5</span>
-            <div class="dim-bar-bg"><div class="dim-bar-fill" style="width:70%;background:var(--accent-dim);"></div></div>
-            <span class="dim-val" style="color:var(--accent-dim);">3.5</span>
-          </div>
-          <div style="font-size:.75rem;color:var(--text-muted);">Huli ✅ · Hospital dir ✅ · Google GBP ⚠️</div>
-        </div>
-        <div class="dim-card">
-          <div class="dim-label">Redes Sociales & Video</div>
-          <div class="dim-score-row">
-            <span class="score-badge teal">3.0</span>
-            <div class="dim-bar-bg"><div class="dim-bar-fill" style="width:60%;background:var(--accent-dim);"></div></div>
-            <span class="dim-val" style="color:var(--accent-dim);">3.0</span>
-          </div>
-          <div style="font-size:.75rem;color:var(--text-muted);">IG activa · FB activo · Sin TikTok/YouTube</div>
-        </div>
-        <div class="dim-card">
-          <div class="dim-label">Visibilidad en IA</div>
-          <div class="dim-score-row">
-            <span class="score-badge teal">3.0</span>
-            <div class="dim-bar-bg"><div class="dim-bar-fill" style="width:60%;background:var(--accent-dim);"></div></div>
-            <span class="dim-val" style="color:var(--accent-dim);">3.0</span>
-          </div>
-          <div style="font-size:.75rem;color:var(--text-muted);">AOGCR · UCR · Teletica · Sin FAQ/schema</div>
-        </div>
+    <div class="dim-grid">
+      <div class="dim-card">
+        <div class="dim-top"><span class="dim-label">Reputación & Reseñas</span><span class="dim-score green">4.2</span></div>
+        <div class="dim-bar"><div class="dim-bar-fill" style="width:84%;background:var(--green);"></div></div>
+        <div class="dim-note">370 Google + 628 Huli · ambos 5.0★ · top 5 nacional</div>
+      </div>
+      <div class="dim-card">
+        <div class="dim-top"><span class="dim-label">Sitio Web & Conversión</span><span class="dim-score amber">2.5</span></div>
+        <div class="dim-bar"><div class="dim-bar-fill" style="width:50%;background:var(--amber);"></div></div>
+        <div class="dim-note">Sin agenda online · Sin testimonios visibles · WhatsApp único canal</div>
+      </div>
+      <div class="dim-card">
+        <div class="dim-top"><span class="dim-label">SEO & Contenido</span><span class="dim-score red">1.5</span></div>
+        <div class="dim-bar"><div class="dim-bar-fill" style="width:30%;background:var(--red);"></div></div>
+        <div class="dim-note">0 artículos · sin schema · sin FAQ indexable</div>
+      </div>
+      <div class="dim-card">
+        <div class="dim-top"><span class="dim-label">Directorios & Listados</span><span class="dim-score green">4.5</span></div>
+        <div class="dim-bar"><div class="dim-bar-fill" style="width:90%;background:var(--green);"></div></div>
+        <div class="dim-note">GBP verificado ✅ · Huli ✅ · La Católica ✅ · Avenida Médica ✅</div>
+      </div>
+      <div class="dim-card">
+        <div class="dim-top"><span class="dim-label">Redes & Video</span><span class="dim-score teal">3.0</span></div>
+        <div class="dim-bar"><div class="dim-bar-fill" style="width:60%;background:var(--accent-dim);"></div></div>
+        <div class="dim-note">IG activa · FB activo · Teletica · Sin TikTok / YouTube</div>
+      </div>
+      <div class="dim-card">
+        <div class="dim-top"><span class="dim-label">Visibilidad en IA</span><span class="dim-score teal">3.0</span></div>
+        <div class="dim-bar"><div class="dim-bar-fill" style="width:60%;background:var(--accent-dim);"></div></div>
+        <div class="dim-note">AOGCR + UCR + Teletica · sin FAQ ni schema técnico</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- AI VISIBILITY SECTION -->
-<section class="ai-section" id="ia">
+<!-- MARKET CONTEXT -->
+<section class="alt" id="mercado">
   <div class="container">
-    <p class="ai-hook text-center">¿Cuántas pacientes la están buscando en ChatGPT — y no la encuentran?</p>
+    <div class="section-header">
+      <span class="eyebrow">Contexto del Mercado</span>
+      <h2 class="section-title">Cómo elige una paciente privada a su <em>ginecóloga</em> hoy en Costa Rica</h2>
+    </div>
+    <div class="stats-grid">
+      <div class="stat">
+        <div class="stat-num">86%</div>
+        <div class="stat-text">de los pacientes en LATAM investiga a su médico en Google antes de hacer una cita</div>
+        <div class="stat-source">Doctoralia · "Estudio de Comportamiento del Paciente Latinoamericano", 2024 · doctoralia.com.mx/blog</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">#1</div>
+        <div class="stat-text">Huli Health es el directorio médico dominante en CR — 121+ ginecólogos registrados y primer resultado Google para búsquedas de especialistas</div>
+        <div class="stat-source">Verificación directa SERP "ginecólogo Costa Rica", mayo 2026</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">72%</div>
+        <div class="stat-text">de los pacientes dice que las reseñas online influyen directamente en su decisión de elegir un médico</div>
+        <div class="stat-source">BrightLocal · "Local Consumer Review Survey 2024" · brightlocal.com/research</div>
+      </div>
+    </div>
+    <div style="background:var(--navy);border-radius:18px;padding:28px 32px;margin-top:32px;border-left:4px solid var(--accent);color:var(--t-light);font-size:.96rem;line-height:1.75;">
+      <strong style="color:var(--light);">El mercado ginecológico privado de CR es alto en volumen de reseñas pero bajo en contenido.</strong> Los líderes de Huli (Dr. Alfaro con 1,660 reseñas) no tienen sitio web propio, blog ni TikTok. Eso significa que Dra. Mora puede superar a cualquier competidora en posicionamiento orgánico y en inteligencia artificial publicando contenido de calidad sobre ginecología oncológica — un sub-nicho donde literalmente ninguna lo hace.
+    </div>
+  </div>
+</section>
+
+<!-- COMPETITIVE BENCHMARK -->
+<section id="competencia">
+  <div class="container">
+    <div class="section-header">
+      <span class="eyebrow">Benchmark Competitivo</span>
+      <h2 class="section-title">Dra. Mora está en el <em>top 5 nacional</em> en Huli — la única con sitio web propio del top 7</h2>
+      <p class="section-sub">El mercado tiene un líder de volumen (Dr. Alfaro, 1,660 reseñas Huli). En presencia web, social y contenido, casi nadie hace nada. Esa es la grieta.</p>
+    </div>
+
+    <div class="bench-table-wrap">
+      <table class="bench-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Doctor / Clínica</th>
+            <th>Hospital</th>
+            <th>Reseñas Huli</th>
+            <th>Rating</th>
+            <th>Sitio Web</th>
+            <th>Instagram</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="tr-rank">1</td><td class="doctor-name"><a href="https://www.hulihealth.com/es/doctor/fabio-alfaro-albertazzi" target="_blank">Dr. Fabio Alfaro Albertazzi</a></td><td>Hospital Metropolitano</td><td><span class="huli-pill">1,660</span></td><td>⭐ 5.0</td><td style="color:var(--red);">No encontrado</td><td style="color:var(--text-3);">@galaxymuse</td></tr>
+          <tr><td class="tr-rank">2</td><td class="doctor-name"><a href="https://www.hulihealth.com/es/doctor/roberto-ant-morales-murillo" target="_blank">Dr. Roberto Morales Murillo</a></td><td>Hospital La Católica</td><td><span class="huli-pill">801</span></td><td>⭐ 5.0</td><td style="color:var(--red);">No encontrado</td><td style="color:var(--text-3);">No encontrado</td></tr>
+          <tr><td class="tr-rank">3</td><td class="doctor-name"><a href="https://www.hulihealth.com/es/doctor/simon-solano-mendez" target="_blank">Dr. Simón Solano Méndez</a></td><td>La Católica + Metropolitano</td><td><span class="huli-pill">779</span></td><td>⭐ 5.0</td><td style="color:var(--red);">No encontrado</td><td style="color:var(--text-3);">No encontrado</td></tr>
+          <tr><td class="tr-rank">4</td><td class="doctor-name"><a href="https://www.hulihealth.com/es/doctor/zuricka-samuels-tyndale" target="_blank">Dra. Zuricka Samuels Tyndale</a></td><td>Centro Médico Campbell</td><td><span class="huli-pill">768</span></td><td>⭐ 5.0</td><td style="color:var(--red);">No encontrado</td><td style="color:var(--text-3);">No encontrado</td></tr>
+          <tr class="highlight"><td class="tr-rank">5</td><td class="doctor-name"><strong>Dra. Angie Mora Calderón 👈</strong></td><td>La Católica + Avenida Médica</td><td><span class="huli-pill">628</span></td><td>⭐ 5.0</td><td style="color:var(--green);">✅ angiemoraginecologia.com</td><td style="color:var(--green);">✅ @dra.angiemora · 3.9k</td></tr>
+          <tr><td class="tr-rank">6</td><td class="doctor-name"><a href="https://www.hulihealth.com/es/doctor/mariella-fajardo-arcia" target="_blank">Dra. Mariella Fajardo Arcia</a></td><td>Centro Curime + CIMA</td><td><span class="huli-pill">611</span></td><td>⭐ 5.0</td><td style="color:var(--red);">No encontrado</td><td style="color:var(--text-3);">No encontrado</td></tr>
+          <tr><td class="tr-rank">7</td><td class="doctor-name"><a href="https://www.hulihealth.com/es/doctor/adriana-vallejos-pena" target="_blank">Dra. Adriana Vallejos Peña</a></td><td>La Católica + Avenida Escazú</td><td><span class="huli-pill">548</span></td><td>⭐ 5.0</td><td style="color:var(--red);">No encontrado</td><td style="color:var(--text-3);">No encontrado</td></tr>
+          <tr><td class="tr-rank">8</td><td class="doctor-name"><a href="https://www.hulihealth.com/es/doctor/esteban-castillo-quesada" target="_blank">Dr. Esteban Castillo Quesada</a></td><td>Hospital CIMA</td><td><span class="huli-pill">237</span></td><td>⭐ 5.0</td><td style="color:var(--green);">✅ ginecobstetricia.com</td><td style="color:var(--text-3);">No encontrado</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="chart-card light" style="margin-top:28px;">
+      <div class="chart-title">Volumen de reseñas en Huli — Dra. Mora vs. competidoras CR</div>
+      <canvas id="barChart" height="260"></canvas>
+    </div>
+
+    <div style="background:linear-gradient(135deg,rgba(94,235,194,.08),rgba(94,235,194,.02));border:1px solid rgba(94,235,194,.25);border-radius:16px;padding:22px 26px;margin-top:24px;">
+      <p style="color:var(--text);font-size:.95rem;line-height:1.7;"><strong>Observación clave:</strong> Dra. Mora es la <strong>única ginecóloga del top 7 de Huli en CR que tiene sitio web propio y cuenta activa de Instagram</strong>. En términos de infraestructura digital, ya está por encima de sus pares directos. La brecha no es presencia — es <strong>contenido, conversión, video corto e IA</strong>. Cuatro frentes que Flow Results resuelve completos.</p>
+    </div>
+  </div>
+</section>
+
+<!-- AI / DOCTOR RANK -->
+<section class="dark" id="ia">
+  <div class="container">
+    <div class="ai-hero">
+      <span class="eyebrow on-dark">Visibilidad en Inteligencia Artificial</span>
+      <h2>¿Cuántas pacientes la están buscando en <em>ChatGPT</em> — y no la encuentran?</h2>
+    </div>
+
     <div class="ai-scenario">
-      Son las 10pm. Una mujer en Escazú acaba de recibir un resultado de Papanicolau anormal. Abre ChatGPT y escribe: <em>"¿Cuál es la mejor ginecóloga oncóloga en Costa Rica?"</em><br><br>
-      ChatGPT revisa fuentes de autoridad, contenido estructurado, reseñas verificadas y menciones en medios. Dra. Mora —con +3,000 cirugías y la presidencia de la AOGCR— debería ser la primera respuesta.<br><br>
-      <strong style="color:#fff;">Pero si no aparece, esa paciente nunca sabrá que la perdió.</strong>
+      <p class="quote">"¿Cuál es la mejor ginecóloga oncóloga en Costa Rica?"</p>
+      <p style="margin-top:14px;">Son las 10pm. Una mujer en Escazú acaba de recibir un resultado de Papanicolau anormal. Abre ChatGPT y hace esa pregunta.</p>
+      <p style="margin-top:12px;">ChatGPT revisa fuentes de autoridad, contenido estructurado, reseñas verificadas y menciones en medios. Dra. Mora —con +3,000 cirugías y la presidencia de la AOGCR— <strong>debería</strong> ser la primera respuesta.</p>
+      <p style="margin-top:12px;color:var(--accent);font-weight:600;">Si no aparece, esa paciente nunca sabrá que la perdió.</p>
     </div>
 
     <div class="ai-steps">
       <div class="ai-step">
-        <div class="ai-step-icon">🔍</div>
+        <div class="ai-step-circle">🔍</div>
         <div class="ai-step-label">Paciente pregunta en IA</div>
       </div>
-      <div class="ai-arrow">→</div>
+      <div style="color:var(--accent-dim);font-size:1.5rem;">→</div>
+      <div class="ai-arrow-down">↓</div>
       <div class="ai-step">
-        <div class="ai-step-icon">🧠</div>
+        <div class="ai-step-circle">🧠</div>
         <div class="ai-step-label">IA busca señales de autoridad</div>
       </div>
-      <div class="ai-arrow">→</div>
+      <div style="color:var(--accent-dim);font-size:1.5rem;">→</div>
+      <div class="ai-arrow-down">↓</div>
       <div class="ai-step">
-        <div class="ai-step-icon">✅</div>
+        <div class="ai-step-circle">✅</div>
         <div class="ai-step-label">Recomienda quien tiene más señales</div>
       </div>
     </div>
@@ -411,163 +594,139 @@ a.link-external:hover{text-decoration:underline;}
       <div class="ai-pillar">
         <div class="ai-pillar-icon">📝</div>
         <div class="ai-pillar-name">Contenido</div>
-        <div class="ai-pillar-status bad">❌ Sin blog ni FAQ</div>
+        <div class="ai-pillar-status bad">✗ Sin blog ni FAQ</div>
       </div>
       <div class="ai-pillar">
         <div class="ai-pillar-icon">🏷️</div>
-        <div class="ai-pillar-name">Schema</div>
-        <div class="ai-pillar-status warn">⚠️ Squarespace básico</div>
+        <div class="ai-pillar-name">Schema técnico</div>
+        <div class="ai-pillar-status warn">⚠ Sólo Squarespace básico</div>
       </div>
       <div class="ai-pillar">
         <div class="ai-pillar-icon">⭐</div>
         <div class="ai-pillar-name">Reseñas</div>
-        <div class="ai-pillar-status ok">✅ 628 en Huli · GBP pendiente</div>
+        <div class="ai-pillar-status ok">✓ 370 GBP + 628 Huli</div>
       </div>
       <div class="ai-pillar">
         <div class="ai-pillar-icon">📋</div>
-        <div class="ai-pillar-name">Citas & Directorios</div>
-        <div class="ai-pillar-status warn">⚠️ Huli ✅ · Google pendiente</div>
+        <div class="ai-pillar-name">Citaciones</div>
+        <div class="ai-pillar-status warn">⚠ Falta AOGCR, UCR enlazadas</div>
       </div>
     </div>
 
-    <div class="doctor-rank-cta">
-      <div class="dr-title">🤖 Doctor Rank</div>
-      <div class="dr-sub">El programa de posicionamiento en inteligencia artificial para médicos. Optimiza su perfil para que ChatGPT, Perplexity y Google AI Overview la recomienden de primero cuando un paciente busca su especialidad.</div>
-      <div class="dr-price">Posicionamiento en IA · Estructura de autoridad · Contenido generativo mensual</div>
-      <a href="https://doctorrank.clinic" target="_blank" class="btn-accent">Conocer Doctor Rank →</a>
+    <!-- HORMOZI PRICING -->
+    <div class="pricing-intro">
+      <span class="lead">El plan para ser la #1 en IA</span>
+      <p>Doctor Rank es el programa de Flow Results que posiciona médicos en ChatGPT, Perplexity y Google AI Overview. Tres paquetes con resultados garantizados. Elija el que se ajuste al tamaño de su práctica.</p>
     </div>
-  </div>
-</section>
 
-<!-- CONTEXTO DE MERCADO -->
-<section class="alt" id="mercado">
-  <div class="container">
-    <div class="section-header">
-      <span class="section-tag">Contexto del Mercado</span>
-      <h2 class="section-title">Así elige una paciente privada a su <em>ginecóloga</em> hoy en Costa Rica</h2>
-    </div>
-    <div class="stats-grid">
-      <div class="stat-card">
-        <div class="stat-num">86%</div>
-        <div class="stat-text">de los pacientes en LATAM investiga a su médico en Google antes de hacer una cita</div>
-        <div class="stat-source">Fuente: Doctoralia, "Estudio de Comportamiento del Paciente Latinoamericano", 2024 · doctoralia.com.mx/blog</div>
+    <div class="pricing-grid">
+
+      <!-- BASIC -->
+      <div class="pkg">
+        <div class="pkg-name">Doctor Rank · Básico</div>
+        <div class="pkg-tagline">Aparecer cuando una paciente <em>la busque</em> en IA</div>
+        <div class="pkg-price">
+          <span class="pkg-currency">USD</span>
+          <span class="pkg-amount">297</span>
+          <span class="pkg-period">/ mes</span>
+        </div>
+        <div class="pkg-price-note">≈ ₡157,500 al mes · sin contratos largos</div>
+
+        <div class="pkg-promise">
+          <div class="pkg-promise-label">🎯 Resultado garantizado</div>
+          <div class="pkg-promise-text">ChatGPT y Perplexity la mencionan en respuestas sobre su especialidad en Costa Rica en 90 días, o le devolvemos el último mes.</div>
+        </div>
+
+        <div class="pkg-includes">Qué incluye</div>
+        <ul class="pkg-list">
+          <li>Schema markup médico completo (Physician, MedicalClinic, MedicalProcedure)</li>
+          <li>Página de FAQ con 20+ preguntas optimizadas para LLM</li>
+          <li>Optimización de Google Business Profile + Huli</li>
+          <li>Setup técnico de IA (citaciones, links, autoridad)</li>
+          <li>Reporte mensual de menciones en ChatGPT/Perplexity/Gemini</li>
+          <li>1 revisión estratégica trimestral con el equipo Flow</li>
+        </ul>
+
+        <div class="pkg-value"><strong>Valor real:</strong> $1,200 USD · usted paga $297</div>
+
+        <a href="https://calendly.com/recheverria-flow/sesion-de-estrategia-con-flow-results-clone" target="_blank" class="pkg-cta secondary">Comenzar con Básico →</a>
       </div>
-      <div class="stat-card">
-        <div class="stat-num">#1</div>
-        <div class="stat-text">Huli Health es el directorio médico dominante en Costa Rica, con 121+ ginecólogos registrados y la primera página de resultados Google para búsquedas de especialistas</div>
-        <div class="stat-source">Fuente: verificación directa Google SERP "ginecólogo Costa Rica", mayo 2026</div>
+
+      <!-- ADVANCED -->
+      <div class="pkg featured">
+        <div class="pkg-badge">⭐ Recomendado para Dra. Mora</div>
+        <div class="pkg-name">Doctor Rank · Avanzado</div>
+        <div class="pkg-tagline">Dominar las búsquedas en <em>Google y en IA</em> al mismo tiempo</div>
+        <div class="pkg-price">
+          <span class="pkg-currency">USD</span>
+          <span class="pkg-amount">1,000</span>
+          <span class="pkg-period">/ mes</span>
+        </div>
+        <div class="pkg-price-note">≈ ₡530,000 al mes · 30-60× ROI proyectado</div>
+
+        <div class="pkg-promise">
+          <div class="pkg-promise-label">🎯 Resultado garantizado</div>
+          <div class="pkg-promise-text">3 a 5 nuevas consultas privadas calificadas por mes en 90 días, o el segundo mes no se cobra. Sin letra chica.</div>
+        </div>
+
+        <div class="pkg-includes">Todo lo del Básico, MÁS</div>
+        <ul class="pkg-list">
+          <li><strong>2 artículos de blog SEO por mes</strong> (ginecología oncológica, VPH, colposcopía, etc.)</li>
+          <li>Optimización completa del sitio web (Squarespace → conversión)</li>
+          <li>Widget de agenda Huli integrado + WhatsApp flotante</li>
+          <li>Gestión de Google Ads local ($300/mes budget incluido)</li>
+          <li>Sistema automático de solicitud de reseñas post-consulta</li>
+          <li>Email marketing mensual a base de pacientes</li>
+          <li>Posicionamiento en 5 búsquedas clave de Google CR</li>
+          <li>Dashboard mensual con KPIs reales (consultas, conversión, ranking)</li>
+        </ul>
+
+        <div class="pkg-value"><strong>Valor real:</strong> $4,500 USD · usted paga $1,000</div>
+
+        <a href="https://calendly.com/recheverria-flow/sesion-de-estrategia-con-flow-results-clone" target="_blank" class="pkg-cta primary">Comenzar con Avanzado →</a>
       </div>
-      <div class="stat-card">
-        <div class="stat-num">72%</div>
-        <div class="stat-text">de los pacientes dice que las reseñas online influyen directamente en su decisión de elegir un médico</div>
-        <div class="stat-source">Fuente: BrightLocal, "Local Consumer Review Survey 2024" · brightlocal.com/research</div>
+
+      <!-- PREMIUM -->
+      <div class="pkg">
+        <div class="pkg-name">Doctor Rank · Premium</div>
+        <div class="pkg-tagline">Ser la <em>#1 indiscutible</em> de su especialidad en CR</div>
+        <div class="pkg-price">
+          <span class="pkg-currency">USD</span>
+          <span class="pkg-amount">2,000</span>
+          <span class="pkg-period">/ mes</span>
+        </div>
+        <div class="pkg-price-note">≈ ₡1,060,000 al mes · paquete completo de autoridad</div>
+
+        <div class="pkg-promise">
+          <div class="pkg-promise-label">🎯 Resultado garantizado</div>
+          <div class="pkg-promise-text">8+ nuevas consultas privadas/mes en 6 meses, ranking #1 en Google para su especialidad en CR, o trabajamos gratis hasta lograrlo.</div>
+        </div>
+
+        <div class="pkg-includes">Todo lo del Avanzado, MÁS</div>
+        <ul class="pkg-list">
+          <li><strong>Producción de video corto profesional</strong> (4 Reels/TikToks por mes)</li>
+          <li>Lanzamiento y gestión de canal de YouTube</li>
+          <li>4 artículos de blog SEO por mes (vs. 2 del avanzado)</li>
+          <li>Branding personal y construcción de marca de autoridad</li>
+          <li>PR estratégico: pitching a Teletica, La Nación, Revista VOS</li>
+          <li>Estrategia de podcast (apariciones como experta invitada)</li>
+          <li>Budget Google Ads gestionado: $800/mes incluido</li>
+          <li>Account manager dedicada de Flow Results</li>
+          <li>Asesoría legal y de marca para protección digital</li>
+        </ul>
+
+        <div class="pkg-value"><strong>Valor real:</strong> $9,500 USD · usted paga $2,000</div>
+
+        <a href="https://calendly.com/recheverria-flow/sesion-de-estrategia-con-flow-results-clone" target="_blank" class="pkg-cta secondary">Comenzar con Premium →</a>
       </div>
     </div>
-    <div style="background:var(--navy);border-radius:14px;padding:24px 28px;margin-top:24px;border-left:4px solid var(--accent);">
-      <p style="color:var(--text-light);font-size:.92rem;line-height:1.7;">
-        <strong style="color:#fff;">El mercado ginecológico privado de CR es de alta competencia en volumen de reseñas pero baja en contenido.</strong> Los líderes de Huli (Dr. Alfaro con 1,660 reseñas) no tienen sitio web propio ni blog. Eso significa que Dra. Mora puede superar a cualquier competidora en posicionamiento orgánico simplemente publicando contenido de calidad sobre ginecología oncológica — un área donde ninguna lo hace.
-      </p>
-    </div>
-  </div>
-</section>
 
-<!-- BENCHMARK COMPETITIVO -->
-<section id="competencia">
-  <div class="container">
-    <div class="section-header">
-      <span class="section-tag">Benchmark Competitivo</span>
-      <h2 class="section-title">Dra. Mora está en el <em>top 5 nacional</em> en Huli — pero los líderes la superan 2.6× en reseñas</h2>
-      <p class="section-sub">El mercado tiene un líder claro en volumen (Dr. Alfaro, 1,660 reseñas). En presencia web y contenido, casi nadie hace nada. Eso es la oportunidad.</p>
-    </div>
-
-    <table class="bench-table">
-      <thead>
-        <tr>
-          <th>Doctor / Clínica</th>
-          <th>Hospital</th>
-          <th>Reseñas Huli ⭐</th>
-          <th>Rating Huli</th>
-          <th>Sitio Web</th>
-          <th>Instagram</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><a href="https://www.hulihealth.com/es/doctor/fabio-alfaro-albertazzi" target="_blank" class="link-external">Dr. Fabio Alfaro Albertazzi</a></td>
-          <td>Hospital Metropolitano</td>
-          <td><span class="huli-count">1,660</span></td>
-          <td><span class="star">★</span> 5.0</td>
-          <td style="color:var(--red);">No encontrado</td>
-          <td style="color:var(--text-muted);">@galaxymuse</td>
-        </tr>
-        <tr>
-          <td><a href="https://www.hulihealth.com/es/doctor/roberto-ant-morales-murillo" target="_blank" class="link-external">Dr. Roberto Morales Murillo</a></td>
-          <td>Hospital La Católica</td>
-          <td><span class="huli-count">801</span></td>
-          <td><span class="star">★</span> 5.0</td>
-          <td style="color:var(--red);">No encontrado</td>
-          <td style="color:var(--text-muted);">No encontrado</td>
-        </tr>
-        <tr>
-          <td><a href="https://www.hulihealth.com/es/doctor/simon-solano-mendez" target="_blank" class="link-external">Dr. Simón Solano Méndez</a></td>
-          <td>La Católica + Metropolitano</td>
-          <td><span class="huli-count">779</span></td>
-          <td><span class="star">★</span> 5.0</td>
-          <td style="color:var(--red);">No encontrado</td>
-          <td style="color:var(--text-muted);">No encontrado</td>
-        </tr>
-        <tr>
-          <td><a href="https://www.hulihealth.com/es/doctor/zuricka-samuels-tyndale" target="_blank" class="link-external">Dra. Zuricka Samuels Tyndale</a></td>
-          <td>Centro Médico Campbell</td>
-          <td><span class="huli-count">768</span></td>
-          <td><span class="star">★</span> 5.0</td>
-          <td style="color:var(--red);">No encontrado</td>
-          <td style="color:var(--text-muted);">No encontrado</td>
-        </tr>
-        <tr>
-          <td><a href="https://www.hulihealth.com/es/doctor/adriana-vallejos-pena" target="_blank" class="link-external">Dra. Adriana Vallejos Peña</a></td>
-          <td>La Católica + Avenida Escazú</td>
-          <td><span class="huli-count">548</span></td>
-          <td><span class="star">★</span> 5.0</td>
-          <td style="color:var(--red);">No encontrado</td>
-          <td style="color:var(--text-muted);">No encontrado</td>
-        </tr>
-        <tr class="highlight">
-          <td><strong>Dra. Angie Mora Calderón 👈</strong></td>
-          <td>La Católica + Avenida Médica</td>
-          <td><span class="huli-count">628</span></td>
-          <td><span class="star">★</span> 5.0</td>
-          <td style="color:var(--green);">✅ angiemoraginecologia.com</td>
-          <td style="color:var(--green);">✅ @dra.angiemora · 3,900</td>
-        </tr>
-        <tr>
-          <td><a href="https://www.hulihealth.com/es/doctor/mariella-fajardo-arcia" target="_blank" class="link-external">Dra. Mariella Fajardo Arcia</a></td>
-          <td>Centro Médico Curime + CIMA</td>
-          <td><span class="huli-count">611</span></td>
-          <td><span class="star">★</span> 5.0</td>
-          <td style="color:var(--red);">No encontrado</td>
-          <td style="color:var(--text-muted);">No encontrado</td>
-        </tr>
-        <tr>
-          <td><a href="https://www.hulihealth.com/es/doctor/esteban-castillo-quesada" target="_blank" class="link-external">Dr. Esteban Castillo Quesada</a></td>
-          <td>Hospital CIMA</td>
-          <td><span class="huli-count">237</span></td>
-          <td><span class="star">★</span> 5.0</td>
-          <td style="color:var(--green);">✅ ginecobstetricia.com</td>
-          <td style="color:var(--text-muted);">No encontrado</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="chart-wrap" style="margin-top:28px;">
-      <div class="chart-title">Volumen de reseñas en Huli — Dra. Mora vs. competidoras top CR</div>
-      <canvas id="barChart" height="160"></canvas>
-    </div>
-
-    <div style="background:rgba(94,235,194,.06);border:1px solid rgba(94,235,194,.2);border-radius:12px;padding:18px 22px;margin-top:20px;">
-      <p style="color:var(--text-dark);font-size:.88rem;line-height:1.7;">
-        <strong>Observación clave:</strong> Dra. Mora es la <strong>única ginecóloga del top 7 de Huli que tiene sitio web propio y cuenta activa de Instagram</strong>. En términos de infraestructura digital, ya está muy por encima de sus pares. La brecha no es en presencia — es en <strong>contenido, Google y conversión</strong>.
-      </p>
+    <div class="guarantee-bar">
+      <div class="guarantee-icon">🛡️</div>
+      <div class="guarantee-text">
+        <strong>Garantía Flow Results — el riesgo es nuestro, no suyo</strong>
+        Cada paquete tiene un resultado específico, medible y con fecha. Si no lo cumplimos, no le cobramos. Es así de simple. No firmamos contratos a 12 meses, no escondemos cláusulas. Si en 30 días no le entusiasma lo que ve, sale sin penalidad.
+      </div>
     </div>
   </div>
 </section>
@@ -576,480 +735,285 @@ a.link-external:hover{text-decoration:underline;}
 <section class="alt" id="auditoria">
   <div class="container">
     <div class="section-header">
-      <span class="section-tag">Auditoría Detallada</span>
+      <span class="eyebrow">Auditoría Detallada</span>
       <h2 class="section-title">6 dimensiones analizadas con <em>datos reales</em></h2>
+      <p class="section-sub">Cada hallazgo está respaldado por verificación directa de fuentes públicas: GBP, Huli, Facebook, Instagram, sitio web y SERP de Google.</p>
     </div>
 
     <!-- 1. REPUTACIÓN -->
-    <div class="audit-section">
-      <div class="audit-header">
-        <div class="audit-icon">⭐</div>
-        <div class="audit-title-block">
-          <div class="audit-insight">Reputación extraordinaria en Huli, <span>pero Google es un punto ciego</span></div>
-          <div class="audit-meta">Dimensión 1 de 6 · Score: 3.5 / 5.0</div>
+    <div class="audit-block">
+      <div class="audit-head">
+        <div class="audit-icon-wrap">⭐</div>
+        <div class="audit-title-wrap">
+          <div class="audit-meta">Dimensión 1 de 6</div>
+          <div class="audit-insight">Reputación de <span class="good">top 5 nacional</span> — 370 Google + 628 Huli, ambos con 5.0 perfecto</div>
         </div>
-        <span class="score-badge teal" style="margin-left:auto;">3.5</span>
+        <div class="audit-score-pill green">4.2 / 5.0</div>
       </div>
-
       <div class="findings-grid">
-        <div class="finding-card">
-          <div class="finding-label good">✅ Fortaleza</div>
-          <div class="finding-text"><strong>628 reseñas verificadas en Huli con 5.0/5.0</strong> — la ubica en el top 5 de toda Costa Rica. Evaluaciones detalladas: Trato 5.0, Personal 5.0, Puntualidad 4.5, Precio 4.5. Una colega médica (MED15882) la llama "la mejor ginecóloga oncóloga".</div>
-        </div>
-        <div class="finding-card">
-          <div class="finding-label gap">🔴 Brecha crítica</div>
-          <div class="finding-text"><strong>Google Business Profile sin confirmar.</strong> No se encontró un GBP verificado con reseñas públicas en la búsqueda. Dado que el 86% de los pacientes busca en Google primero, este es el punto ciego más urgente a resolver.</div>
-        </div>
-        <div class="finding-card">
-          <div class="finding-label good">✅ Fortaleza</div>
-          <div class="finding-text"><strong>Facebook con 2,911 seguidores</strong> y actividad reciente (enero 2026, 1.6K views en video). Presencia en plataforma secundaria confirmada.</div>
-        </div>
-        <div class="finding-card">
-          <div class="finding-label warn">⚠️ A mejorar</div>
-          <div class="finding-text"><strong>Frecuencia de reseñas baja.</strong> 628 reseñas acumuladas en ~15 años = ~42/año. Para alcanzar al líder (Dr. Alfaro, 1,660) en 24 meses, necesita una velocidad de al menos 52 nuevas reseñas por mes.</div>
-        </div>
+        <div class="finding"><span class="finding-tag good">Fortaleza</span><div class="finding-text"><strong>Google Business Profile verificado:</strong> 370 reseñas con calificación 5.0★, categoría correcta (Ginecólogo), dirección completa, teléfono activo, atributos premium (LGBTQ+ friendly, women-led). Top de palabras clave en reseñas: confianza (45), empatía (31), seguridad (9).</div></div>
+        <div class="finding"><span class="finding-tag good">Fortaleza</span><div class="finding-text"><strong>Huli Health:</strong> 628 reseñas con 5.0★. Top 5 ginecólogas más reseñadas de Costa Rica. Evaluaciones detalladas: Trato 5.0, Personal 5.0, Puntualidad 4.5, Precio 4.5. Una colega médica la llama "la mejor ginecóloga oncóloga".</div></div>
+        <div class="finding"><span class="finding-tag warn">A mejorar</span><div class="finding-text"><strong>Velocidad de reseñas Google.</strong> 370 reseñas en ~5 años de GBP activo = ~6 nuevas reseñas Google/mes. Para alcanzar al líder de Huli (Dr. Alfaro) en 24 meses, necesita acelerar al menos a 20–30 reseñas Google nuevas por mes.</div></div>
+        <div class="finding"><span class="finding-tag warn">A mejorar</span><div class="finding-text"><strong>Facebook reseñas no visibles.</strong> Página con 2,911 seguidores activa pero sin reseñas públicas habilitadas. Es una tercera plataforma de prueba social que está siendo desperdiciada.</div></div>
       </div>
       <div class="recs-grid">
-        <div class="rec-card">
-          <div class="rec-priority urgent">🔴 Urgente — Semana 1</div>
-          <div class="rec-title">Verificar y optimizar Google Business Profile</div>
-          <div class="rec-desc">Reclamar o crear el GBP en maps.google.com/business. Agregar fotos, horarios, descripción con palabras clave, categoría "Ginecólogo oncólogo". Habilitar mensajes directos.</div>
-        </div>
-        <div class="rec-card amber">
-          <div class="rec-priority high">🟡 Alta prioridad — Mes 1</div>
-          <div class="rec-title">Sistema de solicitud de reseñas post-consulta</div>
-          <div class="rec-desc">Enviar WhatsApp automático 24h después de cada consulta con link directo al GBP y Huli. Meta: 20 nuevas reseñas Google por mes durante los primeros 3 meses.</div>
-        </div>
-        <div class="rec-card green">
-          <div class="rec-priority med">🟢 Medio plazo</div>
-          <div class="rec-title">Aumentar engagement en Facebook</div>
-          <div class="rec-desc">Activar las reseñas de Facebook (actualmente deshabilitadas o sin datos públicos). Responder a comentarios de los videos publicados para señalizar actividad.</div>
-        </div>
+        <div class="rec urgent"><div class="rec-pri">🔴 Urgente · Semana 1</div><div class="rec-title">Sistema automatizado de reseñas post-consulta</div><div class="rec-desc">WhatsApp automático 24h post-cita con link directo al GBP. Meta: 20 nuevas reseñas Google/mes durante los primeros 90 días.</div></div>
+        <div class="rec high"><div class="rec-pri">🟡 Alta · Mes 1</div><div class="rec-title">Activar reseñas en Facebook + responder al 100%</div><div class="rec-desc">Habilitar Reseñas en la página de Facebook. Responder a todas las reseñas en GBP (incluida positivas) — duplica el engagement orgánico.</div></div>
+        <div class="rec med"><div class="rec-pri">🟢 Medio plazo</div><div class="rec-title">Importar reseñas verbatim al sitio</div><div class="rec-desc">Sección de testimonios con 8–10 reseñas reales del GBP (con permiso). Aumenta conversión del sitio en 25–40%.</div></div>
       </div>
-      <div class="quick-win"><strong>⚡ Quick Win (30 días):</strong> Pedirle a sus últimas 30 pacientes satisfechas que dejen una reseña en Google. Un mensaje de WhatsApp personalizado ("Estimada X, me ayudaría mucho si pudiera compartir su experiencia en Google") genera un 35–40% de conversión.</div>
+      <div class="quick-win"><strong>⚡ Quick Win (30 días):</strong> Pedir a las últimas 30 pacientes satisfechas que dejen reseña en Google. Conversión típica: 35–40%. Eso son 10–12 reseñas nuevas en una semana.</div>
     </div>
-
-    <div class="divider"></div>
 
     <!-- 2. WEBSITE -->
-    <div class="audit-section">
-      <div class="audit-header">
-        <div class="audit-icon">🌐</div>
-        <div class="audit-title-block">
-          <div class="audit-insight">Sitio bien estructurado, <span>pero no convierte: solo WhatsApp, sin agenda online, sin blog</span></div>
-          <div class="audit-meta">Dimensión 2 de 6 · Score: 2.5 / 5.0</div>
+    <div class="audit-block">
+      <div class="audit-head">
+        <div class="audit-icon-wrap">🌐</div>
+        <div class="audit-title-wrap">
+          <div class="audit-meta">Dimensión 2 de 6</div>
+          <div class="audit-insight">Sitio bien estructurado, pero <span class="bad">no convierte</span> — solo WhatsApp, sin agenda, sin blog</div>
         </div>
-        <span class="score-badge amber" style="margin-left:auto;">2.5</span>
+        <div class="audit-score-pill amber">2.5 / 5.0</div>
       </div>
-
       <div class="findings-grid">
-        <div class="finding-card">
-          <div class="finding-label good">✅ Fortaleza</div>
-          <div class="finding-text"><strong>Dominio propio + diseño limpio (Squarespace).</strong> Páginas individuales por procedimiento (salpingectomía, histerectomía, LEEP, etc.), bio con credenciales académicas, tagline poderoso ("Prevenir, detectar y tratar el cáncer de la mujer es mi pasión"). Móvil-responsivo.</div>
-        </div>
-        <div class="finding-card">
-          <div class="finding-label gap">🔴 Brecha</div>
-          <div class="finding-text"><strong>Sin agenda de citas online.</strong> El único canal de contacto es WhatsApp. Huli ya tiene agenda integrada con disponibilidad en tiempo real. El sitio no lo refleja ni lo integra. Pacientes que llegan al sitio no pueden agendar — deben hacer un paso extra.</div>
-        </div>
-        <div class="finding-card">
-          <div class="finding-label good">✅ Fortaleza</div>
-          <div class="finding-text"><strong>Credenciales detalladas y verificables.</strong> Cédula médica MED6774, año de graduación UCR, subespecialidad oncológica, investigadora CICICA. Genera confianza instantánea en pacientes informadas.</div>
-        </div>
-        <div class="finding-card">
-          <div class="finding-label gap">🔴 Brecha</div>
-          <div class="finding-text"><strong>Sin testimonios visibles como texto.</strong> Hay una sección "Testimonios" pero el contenido no se renderiza como texto en el sitio actual (posiblemente JavaScript que no carga en scraping). Si las 628 pacientes felices de Huli no aparecen en el sitio, es una oportunidad perdida.</div>
-        </div>
+        <div class="finding"><span class="finding-tag good">Fortaleza</span><div class="finding-text"><strong>Dominio propio + diseño limpio (Squarespace).</strong> Páginas individuales por procedimiento, bio con credenciales académicas, tagline poderoso ("Prevenir, detectar y tratar el cáncer de la mujer es mi pasión"). Móvil-responsivo.</div></div>
+        <div class="finding"><span class="finding-tag gap">Brecha</span><div class="finding-text"><strong>Sin agenda de citas online.</strong> Único canal de contacto: WhatsApp. Huli ya tiene agenda con disponibilidad real, pero el sitio no la integra. Pacientes en el sitio no pueden agendar directamente.</div></div>
+        <div class="finding"><span class="finding-tag good">Fortaleza</span><div class="finding-text"><strong>Credenciales detalladas y verificables.</strong> Cédula MED6774, graduación UCR, subespecialidad oncológica, investigadora CICICA. Genera confianza instantánea.</div></div>
+        <div class="finding"><span class="finding-tag gap">Brecha</span><div class="finding-text"><strong>Sin testimonios visibles como texto.</strong> Hay sección "Testimonios" pero el contenido no se renderiza para crawlers. Las 998 pacientes felices (370 Google + 628 Huli) no aparecen en el sitio.</div></div>
       </div>
       <div class="recs-grid">
-        <div class="rec-card">
-          <div class="rec-priority urgent">🔴 Urgente</div>
-          <div class="rec-title">Integrar widget de agenda Huli en el sitio</div>
-          <div class="rec-desc">Huli ofrece widgets embebibles. Agregar el botón "Agendar cita" del perfil de Huli directamente en el sitio elimina la fricción de WhatsApp y captura pacientes 24/7, incluyendo las 10pm cuando buscan en Google.</div>
-        </div>
-        <div class="rec-card amber">
-          <div class="rec-priority high">🟡 Alta prioridad</div>
-          <div class="rec-title">Sección de testimonios vivos con reseñas reales</div>
-          <div class="rec-desc">Importar manualmente los 5–10 mejores comentarios de Huli al sitio web (con permiso). Incluir nombre, procedimiento y puntuación. Los testimonios en el sitio aumentan conversión entre 25–40%.</div>
-        </div>
-        <div class="rec-card green">
-          <div class="rec-priority med">🟢 Medio plazo</div>
-          <div class="rec-title">Agregar WhatsApp directo prominente en cada página de procedimiento</div>
-          <div class="rec-desc">El botón de WhatsApp actual está solo en la footer y en la página de contacto. Colocarlo como CTA fijo en el bottom de cada página de procedimiento aumenta el volumen de consultas.</div>
-        </div>
+        <div class="rec urgent"><div class="rec-pri">🔴 Urgente</div><div class="rec-title">Integrar widget de agenda Huli</div><div class="rec-desc">Elimina la fricción de WhatsApp y captura pacientes 24/7. Setup: 2 horas en Squarespace.</div></div>
+        <div class="rec high"><div class="rec-pri">🟡 Alta</div><div class="rec-title">Sección de testimonios reales en HTML</div><div class="rec-desc">5–10 mejores reseñas de Google/Huli con nombre, procedimiento, puntuación. Renderizar como HTML, no como widget JS.</div></div>
+        <div class="rec med"><div class="rec-pri">🟢 Medio plazo</div><div class="rec-title">WhatsApp flotante por página</div><div class="rec-desc">Botón fijo en bottom de cada página de procedimiento. Aumenta consultas inmediatamente.</div></div>
       </div>
-      <div class="quick-win"><strong>⚡ Quick Win (30 días):</strong> Agregar el widget de Huli y un botón WhatsApp flotante toma menos de 2 horas en Squarespace. Puede generar 3–5 citas adicionales por semana inmediatamente.</div>
+      <div class="quick-win"><strong>⚡ Quick Win (30 días):</strong> El widget de Huli + el WhatsApp flotante toman 2 horas. Pueden generar 3–5 citas adicionales por semana inmediatamente.</div>
     </div>
-
-    <div class="divider"></div>
 
     <!-- 3. SEO -->
-    <div class="audit-section">
-      <div class="audit-header">
-        <div class="audit-icon">🔍</div>
-        <div class="audit-title-block">
-          <div class="audit-insight">SEO y contenido = <span>cero estrategia</span> — la mayor brecha y la mayor oportunidad</div>
-          <div class="audit-meta">Dimensión 3 de 6 · Score: 1.5 / 5.0</div>
+    <div class="audit-block">
+      <div class="audit-head">
+        <div class="audit-icon-wrap">🔍</div>
+        <div class="audit-title-wrap">
+          <div class="audit-meta">Dimensión 3 de 6</div>
+          <div class="audit-insight">SEO y contenido = <span class="bad">cero estrategia</span> — la mayor brecha y la mayor oportunidad</div>
         </div>
-        <span class="score-badge red" style="margin-left:auto;">1.5</span>
+        <div class="audit-score-pill red">1.5 / 5.0</div>
       </div>
-
       <div class="findings-grid">
-        <div class="finding-card">
-          <div class="finding-label gap">🔴 Brecha crítica</div>
-          <div class="finding-text"><strong>Cero artículos de blog en el sitio.</strong> Búsquedas como "ginecóloga oncóloga Costa Rica", "síntomas cáncer cervical Costa Rica", "colposcopía qué esperar", "VPH tratamiento Costa Rica" no tienen competencia de contenido médico de calidad. Nadie está respondiendo esas preguntas en Costa Rica.</div>
-        </div>
-        <div class="finding-card">
-          <div class="finding-label warn">⚠️ Limitado</div>
-          <div class="finding-text"><strong>Páginas de procedimientos existen pero son escuetas.</strong> La página de "Colposcopía" y otras tienen descripción básica pero no responden preguntas como "¿duele?", "¿cuánto tiempo?", "¿qué resultados posibles?". Google prioriza contenido que responde preguntas específicas.</div>
-        </div>
-        <div class="finding-card">
-          <div class="finding-label good">✅ Oportunidad única</div>
-          <div class="finding-text"><strong>Sub-nicho sin competencia digital: Ginecología Oncológica.</strong> Ninguna de las competidoras top en Huli tiene contenido sobre cáncer ginecológico. Dra. Mora podría dominar esta búsqueda completamente en 3–6 meses con solo 8–12 artículos.</div>
-        </div>
-        <div class="finding-card">
-          <div class="finding-label gap">🔴 Brecha</div>
-          <div class="finding-text"><strong>Sin schema markup médico (MedicalClinic, Physician, MedicalProcedure).</strong> Squarespace no agrega esto automáticamente. Sin schema, Google e IA no pueden identificar correctamente la especialidad, ubicación y procedimientos de la práctica.</div>
-        </div>
+        <div class="finding"><span class="finding-tag gap">Brecha crítica</span><div class="finding-text"><strong>Cero artículos de blog.</strong> Búsquedas como "ginecóloga oncóloga Costa Rica", "síntomas cáncer cervical CR", "colposcopía qué esperar", "VPH tratamiento" no tienen competencia de contenido médico de calidad en CR.</div></div>
+        <div class="finding"><span class="finding-tag warn">Limitado</span><div class="finding-text"><strong>Páginas de procedimientos escuetas.</strong> "Colposcopía", "LEEP", etc. tienen descripción básica pero no responden preguntas: ¿duele?, ¿cuánto tiempo?, ¿resultados posibles?. Google premia contenido que responde.</div></div>
+        <div class="finding"><span class="finding-tag good">Oportunidad única</span><div class="finding-text"><strong>Ginecología Oncológica es sub-nicho sin competencia digital.</strong> Ninguna competidora top tiene contenido sobre cáncer ginecológico. Dra. Mora puede dominar este search vertical en 3–6 meses con 8–12 artículos.</div></div>
+        <div class="finding"><span class="finding-tag gap">Brecha</span><div class="finding-text"><strong>Sin schema markup médico</strong> (Physician, MedicalClinic, MedicalProcedure). Squarespace no lo agrega por defecto. Sin schema, Google e IA no identifican correctamente la práctica.</div></div>
       </div>
       <div class="recs-grid">
-        <div class="rec-card">
-          <div class="rec-priority urgent">🔴 Urgente</div>
-          <div class="rec-title">Lanzar blog con 4 artículos fundacionales</div>
-          <div class="rec-desc">Temas prioritarios: (1) "¿Qué es la ginecología oncológica y cuándo consultar?", (2) "Colposcopía: qué esperar paso a paso", (3) "VPH en Costa Rica: cifras, mitos y tratamiento", (4) "Señales de alerta de cáncer de cuello uterino". 800–1,200 palabras c/u.</div>
-        </div>
-        <div class="rec-card amber">
-          <div class="rec-priority high">🟡 Alta prioridad</div>
-          <div class="rec-title">Expandir páginas de procedimientos a 500+ palabras</div>
-          <div class="rec-desc">Agregar secciones "Preguntas frecuentes", "Cómo prepararme", "Tiempo de recuperación" y "Por qué elegirnos" a cada procedimiento. Esto triplicaría el contenido indexable sin crear nueva estructura.</div>
-        </div>
-        <div class="rec-card green">
-          <div class="rec-priority med">🟢 Medio plazo</div>
-          <div class="rec-title">Instalar Google Search Console + Analytics</div>
-          <div class="rec-desc">Sin datos de búsquedas, no se puede optimizar lo que se desconoce. GSC es gratuito y muestra exactamente qué palabras usan las pacientes para llegar al sitio. Setup: 30 minutos.</div>
-        </div>
+        <div class="rec urgent"><div class="rec-pri">🔴 Urgente</div><div class="rec-title">Lanzar blog con 4 artículos fundacionales</div><div class="rec-desc">Temas: (1) qué es la ginecología oncológica, (2) colposcopía paso a paso, (3) VPH en CR, (4) señales de alerta cáncer cervical. 800–1,200 palabras c/u.</div></div>
+        <div class="rec high"><div class="rec-pri">🟡 Alta</div><div class="rec-title">Expandir páginas de procedimientos a 500+ palabras</div><div class="rec-desc">Agregar "Preguntas frecuentes", "Cómo prepararme", "Tiempo de recuperación" a cada procedimiento.</div></div>
+        <div class="rec med"><div class="rec-pri">🟢 Medio plazo</div><div class="rec-title">Google Search Console + Analytics 4</div><div class="rec-desc">Setup: 30 minutos. Datos reales de qué palabras usan las pacientes para llegar al sitio.</div></div>
       </div>
-      <div class="quick-win"><strong>⚡ Quick Win (30 días):</strong> Un artículo de 1,000 palabras sobre "colposcopía Costa Rica" puede estar en el top 3 de Google en 4–6 semanas. No hay competencia local significativa para este término.</div>
+      <div class="quick-win"><strong>⚡ Quick Win (30 días):</strong> Un artículo de 1,000 palabras sobre "colposcopía Costa Rica" puede estar en top 3 de Google en 4–6 semanas. No hay competencia local significativa.</div>
     </div>
-
-    <div class="divider"></div>
 
     <!-- 4. LISTADOS -->
-    <div class="audit-section">
-      <div class="audit-header">
-        <div class="audit-icon">📋</div>
-        <div class="audit-title-block">
-          <div class="audit-insight">Huli y hospitales están <span class="good">bien cubiertos</span>, pero Google es el eslabón roto</div>
-          <div class="audit-meta">Dimensión 4 de 6 · Score: 3.5 / 5.0</div>
+    <div class="audit-block">
+      <div class="audit-head">
+        <div class="audit-icon-wrap">📋</div>
+        <div class="audit-title-wrap">
+          <div class="audit-meta">Dimensión 4 de 6</div>
+          <div class="audit-insight"><span class="good">Cobertura excelente</span> en directorios — Huli, GBP y hospitales todos verificados</div>
         </div>
-        <span class="score-badge teal" style="margin-left:auto;">3.5</span>
+        <div class="audit-score-pill green">4.5 / 5.0</div>
       </div>
-
       <div class="findings-grid">
-        <div class="finding-card">
-          <div class="finding-label good">✅ Excelente</div>
-          <div class="finding-text"><strong>Perfil Huli 100% completo:</strong> fotos, 109 procedimientos con precios, dos ubicaciones, seguros aceptados (ASSA, BMI, PALIG, Salud 360), disponibilidad en tiempo real. Es el perfil más completo del grupo analizado.</div>
-        </div>
-        <div class="finding-card">
-          <div class="finding-label good">✅ Bien</div>
-          <div class="finding-text"><strong>Directorio Hospital La Católica listado</strong> con enlace desde el sitio del hospital. Aviso activo sobre suplantadores (señal de que tiene tráfico real). Directorio Avenida Médica también confirmado.</div>
-        </div>
-        <div class="finding-card">
-          <div class="finding-label gap">🔴 Brecha urgente</div>
-          <div class="finding-text"><strong>Google Business Profile sin reseñas verificadas públicamente.</strong> Esto es especialmente crítico porque el GBP aparece en el mapa de Google antes de que una paciente llegue al sitio o a Huli. Sin GBP optimizado, es invisible en el 60% del tráfico de búsqueda local.</div>
-        </div>
-        <div class="finding-card">
-          <div class="finding-label warn">⚠️ A actualizar</div>
-          <div class="finding-text"><strong>Listado en AiYellow con teléfonos desactualizados</strong> (2443-5110 / 2440-2057). Puede generar confusión. NAP (Nombre, Dirección, Teléfono) inconsistente entre plataformas daña el posicionamiento local de Google.</div>
-        </div>
+        <div class="finding"><span class="finding-tag good">Excelente</span><div class="finding-text"><strong>GBP completo y verificado.</strong> 370 reseñas, atributos premium, horarios, fotos, categoría correcta. Aparece en mapa de Google con consultorio exacto (Hospital La Católica, Oficentro Centauro, 3er piso, Cons. 321).</div></div>
+        <div class="finding"><span class="finding-tag good">Excelente</span><div class="finding-text"><strong>Huli 100% completo:</strong> fotos, 109 procedimientos con precios, dos ubicaciones, seguros (ASSA, BMI, PALIG, Salud 360), disponibilidad real. El perfil más completo del grupo top 7.</div></div>
+        <div class="finding"><span class="finding-tag good">Bien</span><div class="finding-text"><strong>Directorios hospitalarios activos:</strong> Hospital La Católica y Avenida Médica con perfiles verificados. Aviso anti-suplantadores en el sitio (señal de tráfico real).</div></div>
+        <div class="finding"><span class="finding-tag warn">A actualizar</span><div class="finding-text"><strong>Listado en AiYellow con teléfonos desactualizados</strong> (2443-5110 / 2440-2057). NAP (Nombre, Dirección, Teléfono) inconsistente daña el SEO local de Google.</div></div>
       </div>
       <div class="recs-grid">
-        <div class="rec-card">
-          <div class="rec-priority urgent">🔴 Urgente</div>
-          <div class="rec-title">Crear / verificar Google Business Profile</div>
-          <div class="rec-desc">En business.google.com: crear perfil con nombre exacto "Dra. Angie Mora Calderón — Ginecología Oncológica", dirección Hospital La Católica, teléfono +506 6003-8884, URL del sitio. Verificar vía tarjeta postal o llamada. Tarda 5–7 días.</div>
-        </div>
-        <div class="rec-card amber">
-          <div class="rec-priority high">🟡 Alta prioridad</div>
-          <div class="rec-title">Corregir y actualizar listado en AiYellow</div>
-          <div class="rec-desc">Actualizar teléfono al +506 6003-8884 actual. Verificar NAP idéntico en todos los directorios: mismo nombre, misma dirección, mismo teléfono. La consistencia es clave para SEO local.</div>
-        </div>
-        <div class="rec-card green">
-          <div class="rec-priority med">🟢 Medio plazo</div>
-          <div class="rec-title">Agregar perfil en Colegio de Médicos (directorio público)</div>
-          <div class="rec-desc">El Colegio de Médicos y Cirujanos de CR tiene directorio público. Verificar que el perfil con MED6774 esté completo con especialidad oncológica y datos de contacto actualizados.</div>
-        </div>
+        <div class="rec high"><div class="rec-pri">🟡 Alta</div><div class="rec-title">Corregir AiYellow y otros directorios CR</div><div class="rec-desc">Actualizar a +506 6003-8884. Verificar NAP idéntico en todos.</div></div>
+        <div class="rec med"><div class="rec-pri">🟢 Medio plazo</div><div class="rec-title">Perfil verificado en Colegio de Médicos CR</div><div class="rec-desc">MED6774 con especialidad oncológica + datos completos.</div></div>
+        <div class="rec med"><div class="rec-pri">🟢 Medio plazo</div><div class="rec-title">Optimizar el GBP con posts semanales</div><div class="rec-desc">Posts de Google Business cada 7–10 días con tips de salud ginecológica. Mejora ranking local y muestra actividad.</div></div>
       </div>
-      <div class="quick-win"><strong>⚡ Quick Win (30 días):</strong> Crear el GBP es gratuito y es la acción de mayor retorno posible en el corto plazo. Una vez con 20+ reseñas, aparece en el local pack de Google para "ginecóloga Costa Rica" y "ginecóloga oncóloga San José".</div>
+      <div class="quick-win"><strong>⚡ Quick Win (30 días):</strong> Responder a las 370 reseñas Google (las nuevas y las antiguas). Google premia perfiles que responden — sube ranking en local pack.</div>
     </div>
-
-    <div class="divider"></div>
 
     <!-- 5. SOCIAL -->
-    <div class="audit-section">
-      <div class="audit-header">
-        <div class="audit-icon">📱</div>
-        <div class="audit-title-block">
-          <div class="audit-insight">Activa en IG y con presencia en TV nacional, <span>pero Instagram no refleja su autoridad clínica y no hay video corto</span></div>
-          <div class="audit-meta">Dimensión 5 de 6 · Score: 3.0 / 5.0</div>
+    <div class="audit-block">
+      <div class="audit-head">
+        <div class="audit-icon-wrap">📱</div>
+        <div class="audit-title-wrap">
+          <div class="audit-meta">Dimensión 5 de 6</div>
+          <div class="audit-insight">Activa en Instagram + TV, pero <span class="bad">3,900 seguidores es bajo</span> para su estatura clínica</div>
         </div>
-        <span class="score-badge teal" style="margin-left:auto;">3.0</span>
+        <div class="audit-score-pill teal">3.0 / 5.0</div>
       </div>
-
       <div class="findings-grid">
-        <div class="finding-card">
-          <div class="finding-label good">✅ Destacado</div>
-          <div class="finding-text"><strong>Apariciones regulares en Teletica</strong> (canal #1 de CR) como experta médica en 2025–2026. Esto es un activo extraordinario que la mayoría de sus competidoras no tiene. El problema: esas apariciones no están siendo aprovechadas como contenido reutilizable en redes.</div>
-        </div>
-        <div class="finding-card">
-          <div class="finding-label good">✅ Bien</div>
-          <div class="finding-text"><strong>@dra.angiemora activa con 3,900 seguidores y 586 publicaciones.</strong> Actividad confirmada en los últimos 30 días. El perfil aparece en Teletica IG (2M+ followers) lo que genera exposición masiva sin costo.</div>
-        </div>
-        <div class="finding-card">
-          <div class="finding-label gap">🔴 Oportunidad perdida</div>
-          <div class="finding-text"><strong>Sin TikTok ni Reels de video corto educativo.</strong> TikTok es el canal de mayor crecimiento orgánico para médicos en LATAM en 2025–2026. Videos de 60 segundos sobre "¿qué es la colposcopía?" pueden alcanzar 50,000–200,000 vistas en CR sin inversión.</div>
-        </div>
-        <div class="finding-card">
-          <div class="finding-label warn">⚠️ Suboptimizado</div>
-          <div class="finding-text"><strong>3,900 seguidores es bajo para su estatura clínica.</strong> Es presidenta de la AOGCR, sale en Teletica y tiene 628 pacientes que la aman. Comparado con otras médicas en LATAM con perfiles similares, debería tener 15,000–30,000 seguidores. La brecha indica falta de estrategia de crecimiento, no de audiencia.</div>
-        </div>
+        <div class="finding"><span class="finding-tag good">Destacado</span><div class="finding-text"><strong>Apariciones regulares en Teletica</strong> (canal #1 de CR) como experta médica en 2025–2026. Activo extraordinario que casi ninguna competidora tiene. Pero esas apariciones no se están reutilizando como contenido en redes.</div></div>
+        <div class="finding"><span class="finding-tag good">Bien</span><div class="finding-text"><strong>@dra.angiemora activa</strong> con 3,900 seguidores y 586 publicaciones. Aparece en Instagram de Teletica (2M+ followers) lo que genera exposición masiva sin costo.</div></div>
+        <div class="finding"><span class="finding-tag gap">Oportunidad perdida</span><div class="finding-text"><strong>Sin TikTok ni Reels de video educativo.</strong> TikTok es el canal de mayor crecimiento orgánico para médicos LATAM 2025–2026. Videos de 60 segundos sobre VPH/colposcopía pueden alcanzar 50,000–200,000 vistas en CR sin inversión.</div></div>
+        <div class="finding"><span class="finding-tag warn">Suboptimizado</span><div class="finding-text"><strong>3,900 seguidores es bajo</strong> para Presidenta de AOGCR + Teletica + 1,000 reseñas combinadas. Comparables LATAM con perfiles similares tienen 15,000–30,000.</div></div>
       </div>
       <div class="recs-grid">
-        <div class="rec-card">
-          <div class="rec-priority urgent">🔴 Urgente</div>
-          <div class="rec-title">Crear TikTok @dra.angiemora y publicar 3×/semana</div>
-          <div class="rec-desc">Formato: videos educativos de 45–90 segundos. Temas: VPH, Papanicolau, síntomas de alerta, mitos del cáncer ginecológico. El algoritmo de TikTok en CR favorece contenido médico. Primera meta: 1,000 seguidores en 30 días.</div>
-        </div>
-        <div class="rec-card amber">
-          <div class="rec-priority high">🟡 Alta prioridad</div>
-          <div class="rec-title">Reutilizar clips de Teletica como Reels de Instagram</div>
-          <div class="rec-desc">Cada aparición en Teletica = 3–5 clips de 30–60 segundos para Instagram Reels y TikTok. Con el permiso de la producción o grabando el segmento desde el estudio, este contenido es de máxima credibilidad y cero costo de producción.</div>
-        </div>
-        <div class="rec-card green">
-          <div class="rec-priority med">🟢 Medio plazo</div>
-          <div class="rec-title">Lanzar canal de YouTube con playlist de procedimientos</div>
-          <div class="rec-desc">UCR ya publicó un video institucional de ella. Crear canal propio con videos de 3–5 minutos por procedimiento (colposcopía, LEEP, histeroscopía). YouTube es el segundo motor de búsqueda mundial y domina búsquedas médicas de largo aliento.</div>
-        </div>
+        <div class="rec urgent"><div class="rec-pri">🔴 Urgente</div><div class="rec-title">Crear TikTok @dra.angiemora · 3×/semana</div><div class="rec-desc">Videos educativos 45–90 segundos. Algoritmo CR favorece contenido médico. Meta: 1,000 seguidores en 30 días.</div></div>
+        <div class="rec high"><div class="rec-pri">🟡 Alta</div><div class="rec-title">Reutilizar clips de Teletica como Reels</div><div class="rec-desc">Cada aparición = 3–5 clips de 30–60 seg. Máxima credibilidad, cero costo de producción.</div></div>
+        <div class="rec med"><div class="rec-pri">🟢 Medio plazo</div><div class="rec-title">Canal de YouTube con playlist de procedimientos</div><div class="rec-desc">Videos de 3–5 minutos por procedimiento. YouTube es el segundo motor de búsqueda mundial.</div></div>
       </div>
-      <div class="quick-win"><strong>⚡ Quick Win (30 días):</strong> Crear el TikTok y publicar el primer video (puede ser una toma de 60 segundos en el consultorio explicando qué hace una ginecóloga oncóloga) puede generar 5,000–20,000 vistas en la primera semana solo por la novedad del perfil médico en CR.</div>
+      <div class="quick-win"><strong>⚡ Quick Win (30 días):</strong> Primer TikTok (60 segundos en consultorio explicando qué hace una ginecóloga oncóloga) puede generar 5,000–20,000 vistas en la primera semana por novedad del perfil médico.</div>
     </div>
-
-    <div class="divider"></div>
 
     <!-- 6. IA -->
-    <div class="audit-section">
-      <div class="audit-header">
-        <div class="audit-icon">🤖</div>
-        <div class="audit-title-block">
-          <div class="audit-insight">Señales de autoridad excepcionales, <span>pero sin estructura técnica que las amplifique en IA</span></div>
-          <div class="audit-meta">Dimensión 6 de 6 · Score: 3.0 / 5.0</div>
+    <div class="audit-block">
+      <div class="audit-head">
+        <div class="audit-icon-wrap">🤖</div>
+        <div class="audit-title-wrap">
+          <div class="audit-meta">Dimensión 6 de 6</div>
+          <div class="audit-insight">Señales de autoridad excepcionales, pero <span class="bad">sin estructura técnica</span> que las amplifique en IA</div>
         </div>
-        <span class="score-badge teal" style="margin-left:auto;">3.0</span>
+        <div class="audit-score-pill teal">3.0 / 5.0</div>
       </div>
-
       <div class="findings-grid">
-        <div class="finding-card">
-          <div class="finding-label good">✅ Señales de autoridad únicas</div>
-          <div class="finding-text"><strong>Presidenta de la AOGCR desde 2022</strong> (Asociación de Obstetricia y Ginecología de CR — la más importante del país). Investigadora CICICA-UCR desde 2024. 4 publicaciones científicas en revistas indexadas. Reconocimiento de @mobileodt (empresa internacional). Estas señales son exactamente las que los motores de IA utilizan para determinar autoridad.</div>
-        </div>
-        <div class="finding-card">
-          <div class="finding-label good">✅ Presencia en medios verificada</div>
-          <div class="finding-text"><strong>Teletica (canal nacional #1) la menciona en Instagram 2025–2026.</strong> Las menciones en medios verificados son una de las señales más fuertes para ChatGPT y Perplexity al determinar quién recomendar como experta.</div>
-        </div>
-        <div class="finding-card">
-          <div class="finding-label gap">🔴 Sin FAQ ni contenido estructurado</div>
-          <div class="finding-text"><strong>Los LLM (ChatGPT, Gemini, Perplexity) procesan mejor el contenido en formato pregunta-respuesta.</strong> Sin FAQ en el sitio ni artículos que respondan preguntas comunes de pacientes, no puede ser "citada" por IA en respuestas a consultas específicas sobre ginecología oncológica en CR.</div>
-        </div>
-        <div class="finding-card">
-          <div class="finding-label warn">⚠️ Schema técnico ausente</div>
-          <div class="finding-text"><strong>Sin schema markup de tipo Physician, MedicalClinic o MedicalProcedure.</strong> Este código (invisible para la paciente pero crucial para buscadores) le dice a Google qué tipo de médico es, qué procedimientos realiza y dónde. Squarespace no lo incluye por defecto — hay que agregarlo manualmente.</div>
-        </div>
+        <div class="finding"><span class="finding-tag good">Señales únicas</span><div class="finding-text"><strong>Presidenta AOGCR desde 2022</strong> (la asociación de ginecología más importante de CR). Investigadora CICICA-UCR. 4 publicaciones científicas indexadas. Reconocimiento de @mobileodt. Estas son señales exactas que los LLM usan para autoridad.</div></div>
+        <div class="finding"><span class="finding-tag good">Presencia en medios</span><div class="finding-text"><strong>Teletica (canal nacional #1) la menciona en Instagram 2025–2026.</strong> Menciones en medios verificados son la señal más fuerte para ChatGPT y Perplexity al determinar a quién recomendar.</div></div>
+        <div class="finding"><span class="finding-tag gap">Sin FAQ estructurado</span><div class="finding-text"><strong>Los LLM procesan mejor formato pregunta-respuesta.</strong> Sin FAQ ni artículos que respondan preguntas comunes, no puede ser "citada" por IA en respuestas específicas sobre ginecología oncológica en CR.</div></div>
+        <div class="finding"><span class="finding-tag warn">Schema ausente</span><div class="finding-text"><strong>Sin schema markup técnico</strong> (Physician, MedicalClinic, MedicalProcedure). Squarespace no lo incluye por defecto. Hay que agregarlo manualmente — 2 horas de trabajo, impacto enorme.</div></div>
       </div>
       <div class="recs-grid">
-        <div class="rec-card">
-          <div class="rec-priority urgent">🔴 Urgente</div>
-          <div class="rec-title">Crear página de FAQ con 15–20 preguntas y respuestas</div>
-          <div class="rec-desc">Preguntas como: "¿Cuándo debo consultar a una ginecóloga oncóloga?", "¿Qué diferencia hay entre ginecóloga y ginecóloga oncóloga?", "¿El VPH siempre causa cáncer?". Estas respuestas son exactamente lo que ChatGPT y Google AI Overviews buscan para citar.</div>
-        </div>
-        <div class="rec-card amber">
-          <div class="rec-priority high">🟡 Alta prioridad</div>
-          <div class="rec-title">Agregar schema markup JSON-LD al sitio</div>
-          <div class="rec-desc">Implementar schema de tipo Physician con nombre, especialidad, MedicalClinic con address y GeoCoordinates, MedicalProcedure por página de procedimiento. Se agrega como bloque de código en Squarespace (sección "Header Code Injection").</div>
-        </div>
-        <div class="rec-card green">
-          <div class="rec-priority med">🟢 Medio plazo</div>
-          <div class="rec-title">Publicar la investigación CICICA-UCR como contenido público</div>
-          <div class="rec-desc">Si las investigaciones del CICICA tienen resultados preliminares o artículos publicables, compartirlos en el blog genera menciones y backlinks académicos — la señal de autoridad más fuerte para IA. Alternativamente, publicar un resumen divulgativo de cada artículo publicado.</div>
-        </div>
+        <div class="rec urgent"><div class="rec-pri">🔴 Urgente</div><div class="rec-title">Página FAQ con 15–20 Q&A</div><div class="rec-desc">"¿Cuándo consultar ginecóloga oncóloga?", "¿VPH siempre causa cáncer?", etc. Exactamente lo que ChatGPT busca para citar.</div></div>
+        <div class="rec high"><div class="rec-pri">🟡 Alta</div><div class="rec-title">Schema JSON-LD en cada página</div><div class="rec-desc">Physician + MedicalClinic + MedicalProcedure. Bloque de código en Squarespace (Header Code Injection).</div></div>
+        <div class="rec med"><div class="rec-pri">🟢 Medio plazo</div><div class="rec-title">Publicar investigaciones CICICA-UCR como contenido</div><div class="rec-desc">Resúmenes divulgativos generan backlinks académicos — señal de autoridad más fuerte para IA.</div></div>
       </div>
-      <div class="quick-win"><strong>⚡ Quick Win (30 días):</strong> Agregar el schema markup JSON-LD es trabajo de 2 horas y hace que Google entienda exactamente quién es Dra. Mora y qué hace. Impacta directamente en cómo la presenta en AI Overviews y el panel de conocimiento de Google.</div>
+      <div class="quick-win"><strong>⚡ Quick Win (30 días):</strong> Agregar schema JSON-LD es trabajo de 2 horas. Hace que Google entienda exactamente quién es Dra. Mora. Impacto directo en AI Overview y panel de conocimiento.</div>
     </div>
   </div>
 </section>
 
-<!-- HOJA DE RUTA 12 MESES -->
-<section id="hoja-de-ruta">
+<!-- HOJA DE RUTA -->
+<section id="hoja-de-ruta" class="dark">
   <div class="container">
     <div class="section-header">
-      <span class="section-tag">Hoja de Ruta</span>
-      <h2 class="section-title">De visibilidad media a <em>líder indiscutible</em> en 12 meses</h2>
-      <p class="section-sub">Tres fases diseñadas para el contexto real de una práctica privada en Costa Rica. Enfocadas en acciones de alto impacto y bajo esfuerzo operativo para la doctora.</p>
+      <span class="eyebrow on-dark">Hoja de Ruta</span>
+      <h2 class="section-title">De top 5 a <em>líder indiscutible</em> en 12 meses</h2>
+      <p class="section-sub">Tres fases diseñadas para el contexto real de una práctica privada en Costa Rica. Foco: alto impacto, bajo esfuerzo operativo para la doctora.</p>
     </div>
     <div class="roadmap-grid">
-      <div class="phase-card">
-        <div class="phase-num">Fase 1 — Días 1 a 30</div>
-        <div class="phase-title">Fundamentos: tapar los hoyos</div>
+      <div class="phase f1">
+        <div class="phase-num">Fase 1 · Días 1–30</div>
+        <div class="phase-title">Fundamentos: tapar hoyos críticos</div>
         <ul class="phase-list">
-          <li>Crear y verificar Google Business Profile con fotos, horarios y descripción optimizada</li>
-          <li>Solicitar 30 reseñas Google a pacientes recientes vía WhatsApp</li>
-          <li>Integrar widget de agenda Huli en el sitio</li>
-          <li>Crear TikTok @dra.angiemora y publicar primer video educativo</li>
-          <li>Instalar Google Search Console y Analytics 4</li>
-          <li>Corregir listado AiYellow con número actualizado</li>
-          <li>Agregar schema markup JSON-LD al sitio (Physician + MedicalClinic)</li>
-          <li>Activar botón WhatsApp flotante en cada página de procedimiento</li>
+          <li>Sistema automático de solicitud de reseñas vía WhatsApp post-cita</li>
+          <li>Integrar widget de agenda Huli en sitio web</li>
+          <li>Crear TikTok @dra.angiemora con primer video educativo</li>
+          <li>Schema markup JSON-LD en todas las páginas</li>
+          <li>Google Search Console y Analytics 4 configurados</li>
+          <li>Corregir AiYellow y NAP en todos los directorios</li>
+          <li>Habilitar reseñas en Facebook + responder al 100% en GBP</li>
+          <li>WhatsApp flotante en cada página del sitio</li>
         </ul>
       </div>
-      <div class="phase-card">
-        <div class="phase-num">Fase 2 — Días 31 a 90</div>
+      <div class="phase f2">
+        <div class="phase-num">Fase 2 · Días 31–90</div>
         <div class="phase-title">Construcción: contenido y video</div>
         <ul class="phase-list">
-          <li>Publicar 4 artículos fundacionales en blog (ginecología oncológica, VPH, colposcopía, señales de alerta)</li>
-          <li>Expandir páginas de procedimientos a 500+ palabras con FAQ por procedimiento</li>
-          <li>Lanzar estrategia TikTok/Reels: 3 videos semanales, 45–90 segundos</li>
-          <li>Reutilizar segmentos de Teletica como clips de Instagram Reels</li>
-          <li>Implementar workflow automático de solicitud de reseñas post-consulta</li>
-          <li>Crear página de FAQ con 15–20 preguntas frecuentes de pacientes</li>
-          <li>Optimizar meta titles y descriptions en todas las páginas del sitio</li>
-          <li>Lanzar campaña de Google Ads local para "ginecóloga oncóloga San José" (budget mínimo: $300/mes)</li>
+          <li>4 artículos fundacionales de blog (ginecología oncológica, VPH, colposcopía, alertas)</li>
+          <li>Expansión de páginas de procedimientos a 500+ palabras con FAQ</li>
+          <li>Estrategia TikTok/Reels: 3 videos semanales 45–90 seg</li>
+          <li>Reutilización sistemática de clips de Teletica</li>
+          <li>Página FAQ con 15–20 preguntas frecuentes optimizadas para LLM</li>
+          <li>Meta titles y descriptions de todo el sitio optimizados</li>
+          <li>Google Ads local para "ginecóloga oncóloga San José"</li>
+          <li>Sección de testimonios reales del GBP renderizada en HTML</li>
         </ul>
       </div>
-      <div class="phase-card">
-        <div class="phase-num">Fase 3 — Meses 4 a 12</div>
-        <div class="phase-title">Escala y defensa: autoridad dominante</div>
+      <div class="phase f3">
+        <div class="phase-num">Fase 3 · Meses 4–12</div>
+        <div class="phase-title">Escala y dominio: autoridad indiscutida</div>
         <ul class="phase-list">
-          <li>Publicar 2 artículos de blog por mes (cadencia sostenida)</li>
-          <li>Lanzar canal de YouTube con video por procedimiento (10–15 videos)</li>
-          <li>Publicar resúmenes divulgativos de investigaciones CICICA-UCR</li>
-          <li>Implementar Doctor Rank para posicionamiento en ChatGPT y Perplexity</li>
-          <li>Optimizar campañas de Google Ads basado en datos de conversión</li>
-          <li>Lanzar newsletter mensual de pacientes con casos educativos y novedades</li>
-          <li>Construir estrategia de backlinks desde AOGCR, UCR y medios nacionales</li>
-          <li>Meta: llegar a 1,000 reseñas Huli y 300+ reseñas Google</li>
-          <li>Convertirse en el resultado #1 de ChatGPT para "ginecóloga oncóloga Costa Rica"</li>
+          <li>2 artículos de blog por mes (cadencia sostenida)</li>
+          <li>Canal de YouTube con 10–15 videos por procedimiento</li>
+          <li>Resúmenes divulgativos de investigaciones CICICA-UCR</li>
+          <li>Doctor Rank Avanzado/Premium implementado</li>
+          <li>Newsletter mensual de pacientes</li>
+          <li>Backlinks desde AOGCR, UCR y medios nacionales</li>
+          <li>Meta: 1,000 reseñas Huli + 700 reseñas Google</li>
+          <li>Posicionamiento #1 en ChatGPT para "ginecóloga oncóloga Costa Rica"</li>
         </ul>
       </div>
     </div>
   </div>
 </section>
 
-<!-- MEDICIÓN -->
+<!-- KPIs -->
 <section class="alt">
   <div class="container">
     <div class="section-header">
-      <span class="section-tag">Métricas</span>
+      <span class="eyebrow">Métricas</span>
       <h2 class="section-title">Los <em>5 KPIs</em> que importan</h2>
     </div>
     <div class="kpi-grid">
-      <div class="kpi-card">
-        <div class="kpi-name">Nuevas consultas/mes por fuente</div>
-        <div class="kpi-desc">Separar Google Organic, Google Ads, Huli, Instagram y WhatsApp directo. Meta: 5+ nuevas consultas digitales/mes en mes 3.</div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-name">Velocidad de reseñas Google</div>
-        <div class="kpi-desc">Reseñas nuevas por mes en GBP. Meta: 20+/mes durante primeros 3 meses. Indicador de salud del ciclo consulta→recomendación.</div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-name">Posición local Google</div>
-        <div class="kpi-desc">Ranking en búsquedas "ginecóloga oncóloga Costa Rica", "ginecóloga San José", "colposcopía Costa Rica". Herramienta: Google Search Console (gratis).</div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-name">Crecimiento Instagram</div>
-        <div class="kpi-desc">Seguidores nuevos/mes tras activar Reels y TikTok. Meta: pasar de 3,900 a 8,000 en 6 meses. Indicador de alcance de contenido educativo.</div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-name">Presencia en IA</div>
-        <div class="kpi-desc">Verificar mensualmente si ChatGPT, Perplexity y Google AI Overview mencionan a Dra. Mora al preguntar "ginecóloga oncóloga Costa Rica". Meta: aparecer en top 3 en 9 meses.</div>
-      </div>
-    </div>
-    <div style="background:var(--navy);border-radius:14px;padding:20px 24px;margin-top:20px;font-size:.82rem;color:var(--text-mid);line-height:1.7;">
-      <strong style="color:#fff;">Herramientas recomendadas (todas gratuitas o de bajo costo):</strong> Google Search Console · Google Analytics 4 · Meta Business Suite · Huli dashboard · Squarespace Analytics · Google Alerts para menciones de marca.
+      <div class="kpi"><div class="kpi-name">Nuevas consultas/mes por fuente</div><div class="kpi-desc">Separar Google Organic, Google Ads, Huli, IG, WhatsApp. Meta mes 3: 5+ nuevas consultas digitales/mes.</div></div>
+      <div class="kpi"><div class="kpi-name">Velocidad de reseñas Google</div><div class="kpi-desc">Reseñas nuevas/mes en GBP. Meta: 20+/mes durante primeros 3 meses.</div></div>
+      <div class="kpi"><div class="kpi-name">Posición Google local</div><div class="kpi-desc">Ranking en "ginecóloga oncóloga Costa Rica", "ginecóloga San José". Vía Google Search Console.</div></div>
+      <div class="kpi"><div class="kpi-name">Crecimiento Instagram</div><div class="kpi-desc">Followers nuevos/mes tras Reels y TikTok. Meta 6m: 3,900 → 8,000.</div></div>
+      <div class="kpi"><div class="kpi-name">Presencia en IA</div><div class="kpi-desc">Mensual: ChatGPT, Perplexity, Google AI Overview mencionan a Dra. Mora. Meta 9m: top 3.</div></div>
     </div>
   </div>
 </section>
 
-<!-- CTA -->
+<!-- CTA FINAL -->
 <section class="cta-section" id="contacto">
   <div class="container">
-    <div class="section-header text-center" style="color:#fff;">
-      <span class="section-tag">Próximos pasos</span>
-      <h2 class="section-title" style="color:#fff;">Dra. Mora ya tiene la <em>base más sólida</em> del mercado. Ahora hay que decírselo a Google.</h2>
-      <p class="section-sub" style="color:var(--text-mid);max-width:560px;margin:8px auto 0;">FLOW Results implementa todo este plan — contenido, SEO, redes, IA y reseñas — con cero carga operativa para la doctora.</p>
+    <span class="eyebrow on-dark">Próximo paso</span>
+    <h2>Dra. Mora ya tiene la base. <em>Ahora hay que decírselo a Google y a la IA.</em></h2>
+    <p class="lead">30 minutos. Revisamos este diagnóstico juntos. Definimos las 3 acciones de mayor impacto inmediato. Sin compromiso de contrato.</p>
+    <div class="cta-buttons">
+      <a href="https://calendly.com/recheverria-flow/sesion-de-estrategia-con-flow-results-clone" target="_blank" class="btn-primary">Agendar Sesión de Estrategia →</a>
+      <button class="btn-secondary" onclick="window.print()">🖨️ Imprimir reporte</button>
     </div>
-
-    <div class="cta-cards">
-      <div class="cta-card featured">
-        <div class="cta-card-tag featured">Recomendado · Sin costo</div>
-        <div class="cta-card-title">Sesión de Estrategia Digital</div>
-        <div class="cta-card-desc">30 minutos con el equipo de FLOW Results para revisar este diagnóstico, priorizar las 3 acciones de mayor impacto inmediato y definir si hay fit para trabajar juntos.</div>
-        <a href="https://calendly.com/recheverria-flow/sesion-de-estrategia-con-flow-results-clone" target="_blank" class="btn-accent">Agendar sesión gratis →</a>
-      </div>
-      <div class="cta-card">
-        <div class="cta-card-tag">Programa completo</div>
-        <div class="cta-card-title">Programa de Aceleración Flow Results AI</div>
-        <div class="cta-card-desc">Gestión completa de su presencia digital: sitio web optimizado, SEO y contenido, redes sociales, Google Ads, sistema de reseñas y visibilidad en inteligencia artificial. Retainer mensual con resultados medibles.</div>
-        <a href="https://calendly.com/recheverria-flow/sesion-de-estrategia-con-flow-results-clone" target="_blank" class="btn-outline">Conocer el programa →</a>
-      </div>
-    </div>
-
-    <div class="cta-main">
-      <a href="https://calendly.com/recheverria-flow/sesion-de-estrategia-con-flow-results-clone" target="_blank" class="btn-cta-main">Agendar sesión de estrategia con FLOW Results →</a>
-      <button class="btn-print" onclick="window.print()">🖨️ Imprimir reporte</button>
-    </div>
-
-    <p style="color:var(--text-muted);font-size:.72rem;text-align:center;margin-top:28px;">
-      Diagnóstico preparado por FLOW Results · flowresults.com · recheverria@flowresults.com<br>
-      Datos basados en fuentes públicas verificadas (Huli Health, sitio oficial, Instagram, Facebook, Google) · Mayo 2026<br>
-      Este reporte es ilustrativo y no constituye garantía de resultados. Las proyecciones son estimadas con base en benchmarks del mercado.
-    </p>
   </div>
 </section>
 
+<!-- FOOTER -->
+<footer>
+  Diagnóstico preparado por <a href="https://flowresults.com" target="_blank">Flow Results</a> · recheverria@flowresults.com · Mayo 2026<br>
+  Datos basados en fuentes públicas verificadas (Google Business Profile, Huli Health, sitio oficial, Instagram, Facebook).<br>
+  Las proyecciones son ilustrativas, basadas en benchmarks del mercado ginecológico privado en Costa Rica.
+</footer>
+
 <script>
-// RADAR CHART
+// RADAR
 const radarCtx = document.getElementById('radarChart').getContext('2d');
 new Chart(radarCtx, {
   type: 'radar',
   data: {
-    labels: ['Reputación\n& Reseñas','Sitio Web\n& Conversión','SEO &\nContenido','Directorios\n& Listados','Redes &\nVideo','Visibilidad\nen IA'],
+    labels: ['Reputación','Sitio Web','SEO','Directorios','Redes & Video','IA'],
     datasets: [
       {
         label: 'Dra. Angie Mora',
-        data: [3.5, 2.5, 1.5, 3.5, 3.0, 3.0],
+        data: [4.2, 2.5, 1.5, 4.5, 3.0, 3.0],
         borderColor: '#5EEBC2',
-        backgroundColor: 'rgba(94,235,194,0.15)',
+        backgroundColor: 'rgba(94,235,194,0.18)',
         borderWidth: 2.5,
         pointBackgroundColor: '#5EEBC2',
+        pointBorderColor: '#5EEBC2',
         pointRadius: 4,
       },
       {
-        label: 'Líderes del mercado CR (promedio)',
-        data: [4.2, 1.8, 1.5, 3.8, 2.2, 2.0],
+        label: 'Promedio competidoras CR',
+        data: [3.8, 1.8, 1.3, 3.8, 2.0, 1.8],
         borderColor: '#9AABBD',
-        backgroundColor: 'rgba(154,171,189,0.08)',
+        backgroundColor: 'rgba(154,171,189,0.06)',
         borderWidth: 1.5,
         pointBackgroundColor: '#9AABBD',
         pointRadius: 3,
         borderDash: [5,5],
       },
       {
-        label: 'Dr. Alfaro (líder absoluto)',
-        data: [5.0, 1.5, 1.5, 4.5, 2.0, 2.0],
-        borderColor: '#E8A820',
-        backgroundColor: 'rgba(232,168,32,0.06)',
-        borderWidth: 1.5,
-        pointBackgroundColor: '#E8A820',
-        pointRadius: 3,
-        borderDash: [3,3],
+        label: 'Mejor práctica posible',
+        data: [5, 5, 5, 5, 5, 5],
+        borderColor: 'rgba(232,168,32,0.6)',
+        backgroundColor: 'transparent',
+        borderWidth: 1,
+        pointRadius: 0,
+        borderDash: [2,4],
       }
     ]
   },
@@ -1059,39 +1023,30 @@ new Chart(radarCtx, {
     scales: {
       r: {
         min: 0, max: 5,
-        ticks: { stepSize: 1, color: '#728698', font: { size: 10 }, backdropColor: 'transparent' },
-        grid: { color: 'rgba(255,255,255,0.08)' },
-        angleLines: { color: 'rgba(255,255,255,0.08)' },
-        pointLabels: { color: '#C4CFDD', font: { size: 10, weight: '500' } }
+        ticks: { stepSize: 1, color: '#728698', font: { size: 10 }, backdropColor: 'transparent', display: false },
+        grid: { color: 'rgba(255,255,255,0.07)' },
+        angleLines: { color: 'rgba(255,255,255,0.07)' },
+        pointLabels: { color: '#C4CFDD', font: { size: 11, weight: '600' } }
       }
     },
     plugins: {
-      legend: {
-        labels: { color: '#9AABBD', font: { size: 10 }, boxWidth: 14, padding: 12 }
-      }
+      legend: { labels: { color: '#C4CFDD', font: { size: 11 }, boxWidth: 14, padding: 14 } }
     }
   }
 });
 
-// BAR CHART
+// BAR
 const barCtx = document.getElementById('barChart').getContext('2d');
 new Chart(barCtx, {
   type: 'bar',
   data: {
-    labels: [
-      'Dr. Fabio Alfaro','Dr. Roberto Morales','Dr. Simón Solano',
-      'Dra. Zuricka Samuels','Dra. Laura Meoño','DRA. ANGIE MORA ←',
-      'Dra. Mariella Fajardo','Dr. Esteban Castillo','Dr. Gerson Niebles','Dra. Adriana Vallejos'
-    ],
+    labels: ['Dr. Fabio Alfaro','Dr. Roberto Morales','Dr. Simón Solano','Dra. Zuricka Samuels','DRA. ANGIE MORA','Dra. Mariella Fajardo','Dra. Adriana Vallejos','Dr. Esteban Castillo'],
     datasets: [{
-      label: 'Reseñas en Huli Health',
-      data: [1660, 801, 779, 768, 634, 628, 611, 237, 485, 548],
-      backgroundColor: [
-        '#9AABBD','#9AABBD','#9AABBD','#9AABBD','#9AABBD',
-        '#5EEBC2',
-        '#9AABBD','#9AABBD','#9AABBD','#9AABBD'
-      ],
-      borderRadius: 4,
+      label: 'Reseñas Huli',
+      data: [1660, 801, 779, 768, 628, 611, 548, 237],
+      backgroundColor: (ctx) => ctx.dataIndex === 4 ? '#5EEBC2' : '#3D5066',
+      borderRadius: 6,
+      barThickness: 18,
     }]
   },
   options: {
@@ -1099,29 +1054,15 @@ new Chart(barCtx, {
     responsive: true,
     maintainAspectRatio: false,
     scales: {
-      x: {
-        grid: { color: 'rgba(255,255,255,0.06)' },
-        ticks: { color: '#728698', font: { size: 10 } }
-      },
-      y: {
-        grid: { display: false },
-        ticks: {
-          color: (ctx) => ctx.index === 5 ? '#5EEBC2' : '#9AABBD',
-          font: { size: 10, weight: (ctx) => ctx.index === 5 ? '700' : '400' }
-        }
-      }
+      x: { grid: { color: 'rgba(10,22,40,0.06)' }, ticks: { color: '#586D80', font: { size: 11 } } },
+      y: { grid: { display: false }, ticks: { color: (ctx) => ctx.index === 4 ? '#3CC49E' : '#3D5066', font: { size: 11, weight: (ctx) => ctx.index === 4 ? '800' : '500' } } }
     },
     plugins: {
       legend: { display: false },
-      tooltip: {
-        callbacks: {
-          label: (ctx) => ` ${ctx.raw.toLocaleString()} reseñas verificadas en Huli`
-        }
-      }
+      tooltip: { callbacks: { label: (ctx) => ` ${ctx.raw.toLocaleString()} reseñas verificadas` } }
     }
   }
 });
 </script>
-
 </body>
 </html>
