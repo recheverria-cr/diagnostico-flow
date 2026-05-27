@@ -1,0 +1,1987 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Diagnóstico de Visibilidad Digital — Dra. Natalia Linares Cruz</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Newsreader:ital,wght@1,400;1,600&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <style>
+    /* ============================
+       DESIGN SYSTEM
+    ============================ */
+    :root {
+      --navy:      #0B1929;
+      --navy-mid:  #0F2236;
+      --navy-lt:   #14304D;
+      --navy-card: #162D4A;
+      --accent:    #5EEBC2;
+      --accent-dim:#3CC49E;
+      --alert:     #D9534F;
+      --warning:   #E8A820;
+      --success:   #3DAD6C;
+      --text-dark: #1C2D3F;
+      --gray-1:    #728698;
+      --gray-2:    #9AABBD;
+      --gray-3:    #C4CFDD;
+      --gray-4:    #586D80;
+      --gray-5:    #3D5066;
+      --bg-page:   #FFFFFF;
+      --bg-alt:    #F6F8FB;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--bg-page);
+      color: var(--text-dark);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    /* ============================
+       NAV
+    ============================ */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--navy);
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.4);
+    }
+    .nav-brand {
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--gray-3);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-btn {
+      background: var(--accent);
+      color: var(--navy);
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: 'Outfit', sans-serif;
+    }
+    .nav-btn:hover { background: var(--accent-dim); }
+
+    /* ============================
+       HERO / COVER
+    ============================ */
+    .hero {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 60%, #0D2845 100%);
+      padding: 72px 32px 64px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(94,235,194,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+    .hero-report-label {
+      color: var(--gray-1);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .hero-title {
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: 800;
+      color: #FFFFFF;
+      letter-spacing: -0.01em;
+      line-height: 1.1;
+      margin-bottom: 14px;
+    }
+    .hero-tagline {
+      font-size: 16px;
+      font-weight: 300;
+      color: var(--gray-3);
+      max-width: 640px;
+      margin-bottom: 40px;
+      line-height: 1.7;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 48px;
+      align-items: start;
+    }
+    .hero-left h2 {
+      font-size: 24px;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin-bottom: 4px;
+    }
+    .hero-left .hero-insight {
+      font-size: 17px;
+      color: var(--gray-3);
+      font-weight: 400;
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+    .hero-left .hero-insight em {
+      font-family: 'Newsreader', serif;
+      font-style: italic;
+      color: var(--accent);
+    }
+    .hero-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 32px;
+    }
+    .hero-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--gray-2);
+      font-size: 14px;
+    }
+    .hero-meta-item .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+    .hero-facts {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .hero-fact {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
+      padding: 14px 16px;
+    }
+    .hero-fact-val {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--accent);
+    }
+    .hero-fact-label {
+      font-size: 12px;
+      color: var(--gray-2);
+      margin-top: 2px;
+    }
+    /* Score block */
+    .score-block {
+      text-align: center;
+      background: rgba(94,235,194,0.06);
+      border: 2px solid rgba(94,235,194,0.2);
+      border-radius: 20px;
+      padding: 32px 40px;
+      min-width: 200px;
+    }
+    .score-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gray-2);
+      margin-bottom: 8px;
+    }
+    .score-value {
+      font-size: clamp(60px, 8vw, 88px);
+      font-weight: 800;
+      color: var(--warning);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .score-denom {
+      font-size: 20px;
+      color: var(--gray-1);
+      font-weight: 400;
+    }
+    .score-tier {
+      margin-top: 12px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--warning);
+      background: rgba(232,168,32,0.12);
+      padding: 4px 12px;
+      border-radius: 20px;
+      display: inline-block;
+    }
+    .hero-date {
+      margin-top: 40px;
+      font-size: 11px;
+      color: var(--gray-1);
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    /* ============================
+       SECTION WRAPPER
+    ============================ */
+    .section {
+      padding: 64px 32px;
+    }
+    .section.alt { background: var(--bg-alt); }
+    .section.dark {
+      background: var(--navy);
+      color: white;
+    }
+    .section-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(24px, 3.5vw, 36px);
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 8px;
+      line-height: 1.25;
+    }
+    .section.dark .section-title { color: white; }
+    .section-title em {
+      font-family: 'Newsreader', serif;
+      font-style: italic;
+      color: var(--accent);
+    }
+    .section-sub {
+      font-size: 16px;
+      color: var(--gray-4);
+      max-width: 680px;
+      margin-bottom: 40px;
+      line-height: 1.7;
+    }
+    .section.dark .section-sub { color: var(--gray-3); }
+
+    /* ============================
+       CHART FRAMES
+    ============================ */
+    .chart-frame {
+      position: relative;
+      width: 100%;
+      height: 420px;
+    }
+    .chart-frame.bar {
+      height: 380px;
+    }
+    .chart-frame canvas {
+      width: 100% !important;
+      height: 100% !important;
+      display: block;
+    }
+
+    /* ============================
+       VERDICT / GAPS
+    ============================ */
+    .verdict-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+    .gap-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .gap-card {
+      background: var(--navy-card);
+      border-left: 4px solid var(--alert);
+      border-radius: 12px;
+      padding: 20px 24px;
+    }
+    .gap-card.amber { border-left-color: var(--warning); }
+    .gap-card.green { border-left-color: var(--success); }
+    .gap-card-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 6px;
+    }
+    .gap-card-desc {
+      font-size: 13px;
+      color: var(--gray-3);
+      line-height: 1.6;
+    }
+    .gap-badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-bottom: 8px;
+    }
+    .gap-badge.red { background: rgba(217,83,79,0.18); color: var(--alert); }
+    .gap-badge.amber { background: rgba(232,168,32,0.18); color: var(--warning); }
+    .gap-badge.green { background: rgba(61,173,108,0.18); color: var(--success); }
+
+    .opportunity-box {
+      margin-top: 24px;
+      background: rgba(94,235,194,0.08);
+      border: 1px solid rgba(94,235,194,0.2);
+      border-radius: 12px;
+      padding: 20px 24px;
+    }
+    .opportunity-box p {
+      font-size: 14px;
+      color: var(--gray-3);
+      line-height: 1.7;
+    }
+    .opportunity-box strong { color: var(--accent); }
+
+    /* ============================
+       AI SECTION
+    ============================ */
+    .ai-hook {
+      font-size: clamp(22px, 3vw, 32px);
+      font-weight: 700;
+      color: white;
+      margin-bottom: 24px;
+      line-height: 1.3;
+    }
+    .ai-hook em {
+      font-family: 'Newsreader', serif;
+      font-style: italic;
+      color: var(--accent);
+    }
+    .ai-scenario {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 40px;
+      font-size: 15px;
+      color: var(--gray-3);
+      line-height: 1.75;
+      font-style: italic;
+    }
+    .ai-steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+    .ai-step {
+      text-align: center;
+      padding: 28px 20px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.07);
+    }
+    .ai-step-icon { font-size: 28px; margin-bottom: 12px; }
+    .ai-step-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 6px;
+    }
+    .ai-step-desc {
+      font-size: 13px;
+      color: var(--gray-2);
+      line-height: 1.6;
+    }
+    .ai-pillars {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+    .ai-pillar {
+      background: var(--navy-card);
+      border-radius: 12px;
+      padding: 20px;
+    }
+    .ai-pillar-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 12px;
+    }
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--gray-3);
+      margin-bottom: 6px;
+      line-height: 1.5;
+    }
+    .check-item .icon { flex-shrink: 0; margin-top: 1px; }
+
+    /* Pricing Cards */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+    .pricing-card {
+      background: var(--navy-card);
+      border-radius: 16px;
+      padding: 28px 24px;
+      border: 1px solid rgba(255,255,255,0.07);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: relative;
+    }
+    .pricing-card.featured {
+      border-color: var(--accent);
+      transform: translateY(-8px);
+      box-shadow: 0 8px 40px rgba(94,235,194,0.15);
+    }
+    .pricing-badge {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent);
+      color: var(--navy);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 14px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+    .pricing-tier {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--gray-2);
+    }
+    .pricing-tagline {
+      font-family: 'Newsreader', serif;
+      font-style: italic;
+      font-size: 15px;
+      color: var(--gray-3);
+    }
+    .pricing-price {
+      font-size: 36px;
+      font-weight: 800;
+      color: white;
+    }
+    .pricing-price span {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--gray-2);
+    }
+    .pricing-local {
+      font-size: 12px;
+      color: var(--gray-1);
+      margin-top: -8px;
+    }
+    .pricing-guarantee {
+      background: rgba(94,235,194,0.08);
+      border-left: 3px solid var(--accent);
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-size: 12px;
+      color: var(--gray-3);
+      line-height: 1.6;
+    }
+    .pricing-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+    }
+    .pricing-features li {
+      font-size: 13px;
+      color: var(--gray-3);
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      line-height: 1.5;
+    }
+    .pricing-features li::before {
+      content: '✓';
+      color: var(--accent);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .pricing-anchor {
+      font-size: 11px;
+      color: var(--gray-1);
+      text-align: center;
+    }
+    .pricing-cta {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      font-family: 'Outfit', sans-serif;
+      cursor: pointer;
+      text-decoration: none;
+      text-align: center;
+      display: block;
+      border: 2px solid var(--accent);
+      color: var(--accent);
+      background: transparent;
+      transition: all 0.2s;
+    }
+    .pricing-cta:hover, .pricing-card.featured .pricing-cta {
+      background: var(--accent);
+      color: var(--navy);
+    }
+    .guarantee-bar {
+      background: rgba(94,235,194,0.05);
+      border: 1px solid rgba(94,235,194,0.15);
+      border-radius: 12px;
+      padding: 20px 28px;
+      text-align: center;
+      font-size: 14px;
+      color: var(--gray-3);
+      line-height: 1.7;
+    }
+    .guarantee-bar strong { color: var(--accent); }
+
+    /* ============================
+       MARKET STATS
+    ============================ */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .stat-card {
+      background: var(--bg-page);
+      border-radius: 14px;
+      padding: 28px 24px;
+      border: 1px solid #E8EEF4;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    }
+    .stat-value {
+      font-size: 40px;
+      font-weight: 800;
+      color: var(--navy);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .stat-desc {
+      font-size: 14px;
+      color: var(--gray-4);
+      line-height: 1.6;
+    }
+    .stat-source {
+      font-size: 11px;
+      color: var(--gray-2);
+      margin-top: 10px;
+    }
+    .stat-source a { color: var(--accent-dim); text-decoration: none; }
+
+    /* ============================
+       BENCHMARK TABLE
+    ============================ */
+    .benchmark-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    .benchmark-table th {
+      background: var(--navy);
+      color: var(--gray-3);
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 12px 16px;
+      text-align: left;
+    }
+    .benchmark-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid #E8EEF4;
+      color: var(--text-dark);
+    }
+    .benchmark-table tr:last-child td { border-bottom: none; }
+    .benchmark-table tr.target-row td {
+      background: rgba(94,235,194,0.06);
+      font-weight: 600;
+    }
+    .benchmark-table tr.target-row td:first-child {
+      border-left: 4px solid var(--accent);
+    }
+    .benchmark-table a {
+      color: var(--navy-mid);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .benchmark-table a:hover { color: var(--accent-dim); text-decoration: underline; }
+    .rating-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .rating-star { color: #F5A623; }
+
+    /* ============================
+       AUDIT SECTIONS
+    ============================ */
+    .audit-section {
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid #E8EEF4;
+      margin-bottom: 32px;
+    }
+    .audit-header {
+      background: var(--navy);
+      padding: 20px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+    }
+    .audit-header-left h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 4px;
+    }
+    .audit-header-left .audit-insight {
+      font-size: 13px;
+      color: var(--gray-3);
+    }
+    .score-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .score-pill.red { background: rgba(217,83,79,0.2); color: #F07C79; }
+    .score-pill.amber { background: rgba(232,168,32,0.2); color: #F0C040; }
+    .score-pill.teal { background: rgba(94,235,194,0.2); color: var(--accent); }
+    .score-pill.green { background: rgba(61,173,108,0.2); color: #52C885; }
+    .audit-body {
+      padding: 28px;
+      background: var(--bg-page);
+    }
+    .audit-body[hidden] { display: none; }
+    .audit-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+    .audit-col h4 {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--gray-1);
+      margin-bottom: 12px;
+    }
+    .finding-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--text-dark);
+      margin-bottom: 8px;
+      line-height: 1.6;
+    }
+    .finding-item .fi-icon { flex-shrink: 0; }
+    .reco-card {
+      background: var(--navy);
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .reco-card.red { border-left: 4px solid var(--alert); }
+    .reco-card.amber { border-left: 4px solid var(--warning); }
+    .reco-card.green { border-left: 4px solid var(--success); }
+    .reco-priority {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 20px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .reco-priority.red { background: rgba(217,83,79,0.2); color: #F07C79; }
+    .reco-priority.amber { background: rgba(232,168,32,0.2); color: #F0C040; }
+    .reco-priority.green { background: rgba(61,173,108,0.2); color: #52C885; }
+    .reco-content { flex: 1; }
+    .reco-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 4px;
+    }
+    .reco-desc {
+      font-size: 13px;
+      color: var(--gray-3);
+      line-height: 1.6;
+    }
+    .quickwins-box {
+      background: rgba(94,235,194,0.05);
+      border: 1px solid rgba(94,235,194,0.15);
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin-top: 20px;
+    }
+    .quickwins-box h4 {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    .quickwins-box ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .quickwins-box li {
+      font-size: 13px;
+      color: var(--text-dark);
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      line-height: 1.5;
+    }
+    .quickwins-box li::before {
+      content: '→';
+      color: var(--accent);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    /* ============================
+       ROADMAP
+    ============================ */
+    .roadmap-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .roadmap-card {
+      background: var(--bg-page);
+      border-radius: 14px;
+      border: 1px solid #E8EEF4;
+      padding: 28px 24px;
+    }
+    .roadmap-card.phase-1 { border-top: 4px solid var(--alert); }
+    .roadmap-card.phase-2 { border-top: 4px solid var(--warning); }
+    .roadmap-card.phase-3 { border-top: 4px solid var(--success); }
+    .roadmap-phase {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .phase-1 .roadmap-phase { color: var(--alert); }
+    .phase-2 .roadmap-phase { color: var(--warning); }
+    .phase-3 .roadmap-phase { color: var(--success); }
+    .roadmap-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 16px;
+    }
+    .roadmap-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .roadmap-list li {
+      font-size: 14px;
+      color: var(--gray-4);
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      line-height: 1.6;
+    }
+    .roadmap-list li::before {
+      content: '•';
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .phase-1 .roadmap-list li::before { color: var(--alert); }
+    .phase-2 .roadmap-list li::before { color: var(--warning); }
+    .phase-3 .roadmap-list li::before { color: var(--success); }
+
+    /* ============================
+       KPIs
+    ============================ */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+    .kpi-card {
+      background: var(--bg-page);
+      border-radius: 12px;
+      border: 1px solid #E8EEF4;
+      padding: 20px;
+      text-align: center;
+    }
+    .kpi-icon { font-size: 24px; margin-bottom: 8px; }
+    .kpi-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 6px;
+    }
+    .kpi-desc {
+      font-size: 12px;
+      color: var(--gray-4);
+      line-height: 1.5;
+    }
+
+    /* ============================
+       FINAL CTA
+    ============================ */
+    .final-cta {
+      background: var(--navy);
+      padding: 80px 32px;
+      text-align: center;
+    }
+    .final-cta-inner {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .final-cta h2 {
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 700;
+      color: white;
+      margin-bottom: 16px;
+      line-height: 1.3;
+    }
+    .final-cta h2 em {
+      font-family: 'Newsreader', serif;
+      font-style: italic;
+      color: var(--accent);
+    }
+    .final-cta p {
+      font-size: 16px;
+      color: var(--gray-3);
+      margin-bottom: 36px;
+      line-height: 1.7;
+    }
+    .cta-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: var(--navy);
+      padding: 16px 32px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+      font-family: 'Outfit', sans-serif;
+      transition: background 0.2s;
+    }
+    .btn-primary:hover { background: var(--accent-dim); }
+    .btn-secondary {
+      background: transparent;
+      color: white;
+      padding: 16px 32px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      border: 2px solid rgba(255,255,255,0.2);
+      font-family: 'Outfit', sans-serif;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ============================
+       PRINT
+    ============================ */
+    @media print {
+      .nav { display: none; }
+      .hero { padding: 40px 24px; }
+      .section { padding: 40px 24px; }
+      .audit-body { display: block !important; }
+    }
+
+    /* ============================
+       RESPONSIVE
+    ============================ */
+    @media (max-width: 768px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .score-block { min-width: auto; }
+      .verdict-grid { grid-template-columns: 1fr; }
+      .ai-steps { grid-template-columns: 1fr; }
+      .ai-pillars { grid-template-columns: 1fr 1fr; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .pricing-card.featured { transform: none; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .roadmap-grid { grid-template-columns: 1fr; }
+      .kpi-grid { grid-template-columns: 1fr 1fr; }
+      .audit-row { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-brand">Flow Results — DPI</div>
+  <ul class="nav-links">
+    <li><a href="#veredicto">Veredicto</a></li>
+    <li><a href="#ia">Visibilidad IA</a></li>
+    <li><a href="#benchmark">Benchmark</a></li>
+    <li><a href="#auditoria">Auditoría</a></li>
+    <li><a href="#roadmap">Hoja de Ruta</a></li>
+  </ul>
+  <button class="nav-btn" onclick="window.print()">Imprimir Reporte</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-report-label">Diagnóstico de Visibilidad Digital · Confidencial</div>
+    <h1 class="hero-title">Diagnóstico de<br>Visibilidad Digital</h1>
+    <p class="hero-tagline">Las mejores cirujanas merecen ser encontradas en internet. Este reporte revela un diagnóstico completo de cómo convertirse en la referente número 1 de cirugía plástica en Bogotá.</p>
+
+    <div class="hero-grid">
+      <div class="hero-left">
+        <h2>Dra. Natalia Linares Cruz</h2>
+        <p class="hero-insight">Su reputación clínica es <em>impecable</em>. Ahora necesita una infraestructura <em>digital</em> que esté a la altura de su formación para ser la primera opción que encuentren sus pacientes ideales.</p>
+
+        <div class="hero-meta">
+          <div class="hero-meta-item">
+            <span class="dot"></span>
+            <span>Cirugía Plástica, Estética y Reconstructiva</span>
+          </div>
+          <div class="hero-meta-item">
+            <span class="dot"></span>
+            <span>Bogotá, Colombia · Calle 127 #20-78, Edificio Horizonte</span>
+          </div>
+          <div class="hero-meta-item">
+            <span class="dot"></span>
+            <span>natalialinarescplastica.com</span>
+          </div>
+        </div>
+
+        <div class="hero-facts">
+          <div class="hero-fact">
+            <div class="hero-fact-val">166</div>
+            <div class="hero-fact-label">Opiniones en Doctoralia</div>
+          </div>
+          <div class="hero-fact">
+            <div class="hero-fact-val">5.0★</div>
+            <div class="hero-fact-label">Calificación promedio</div>
+          </div>
+          <div class="hero-fact">
+            <div class="hero-fact-val">2×</div>
+            <div class="hero-fact-label">Certificado de Excelencia</div>
+          </div>
+          <div class="hero-fact">
+            <div class="hero-fact-val">+490K</div>
+            <div class="hero-fact-label">Procedimientos en CO 2024</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="score-block">
+        <div class="score-label">Score Global</div>
+        <div class="score-value">2.2<span class="score-denom"> / 5</span></div>
+        <div class="score-tier">En Desarrollo</div>
+      </div>
+    </div>
+
+    <div class="hero-date">
+      Preparado por <strong style="color:var(--accent)">FLOW Results</strong> · Mayo 2026 ·
+      Fuentes: Doctoralia Colombia, Google Search, Instagram, YouTube, SCCP, cirugiaplastica.org.co
+    </div>
+  </div>
+</section>
+
+<!-- VEREDICTO EJECUTIVO -->
+<section class="section dark" id="veredicto">
+  <div class="section-inner">
+    <div class="section-label">Veredicto Ejecutivo</div>
+    <h2 class="section-title">Su reputación es su <em>mayor activo</em>.<br>Su visibilidad digital, su mayor brecha.</h2>
+    <p class="section-sub">Comparado con los líderes del mercado en Bogotá, la Dra. Linares destaca en reputación clínica pero aún tiene recorrido significativo en contenido, redes y posicionamiento en IA.</p>
+
+    <div class="verdict-grid">
+      <div>
+        <div class="chart-frame">
+          <canvas id="radarChart"></canvas>
+        </div>
+        <div class="opportunity-box" style="margin-top:24px;">
+          <p><strong>Estimación indicativa:</strong> Cerrar las brechas de contenido SEO, redes sociales y presencia en IA podría representar entre <strong>12 y 25 consultas adicionales por mes</strong>, basado en benchmarks de mercado de cirugía plástica en LATAM. Esta estimación es ilustrativa.</p>
+        </div>
+      </div>
+
+      <div class="gap-cards">
+        <div style="font-size:13px;font-weight:700;color:var(--gray-2);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">Las 3 Brechas Principales</div>
+
+        <div class="gap-card">
+          <span class="gap-badge red">Brecha Crítica</span>
+          <div class="gap-card-title">Sin estrategia de contenido SEO</div>
+          <div class="gap-card-desc">No existe blog, ni páginas de preguntas frecuentes, ni artículos educativos. Los líderes del mercado publican contenido regularmente y ranquean para términos como "rinoplastia Bogotá precio" o "cirugía de senos Bogotá recuperación". Usted no aparece.</div>
+        </div>
+
+        <div class="gap-card amber">
+          <span class="gap-badge amber">Brecha Alta</span>
+          <div class="gap-card-title">Redes sociales sub-explotadas y YouTube inactivo</div>
+          <div class="gap-card-desc">El último video en YouTube es de 2017. Su competencia directa publica en Instagram y TikTok 4–6 veces por semana con contenido educativo y casos de éxito. Esa audiencia busca exactamente lo que usted ofrece, pero no la encuentra.</div>
+        </div>
+
+        <div class="gap-card amber">
+          <span class="gap-badge amber">Brecha Alta</span>
+          <div class="gap-card-title">Ausencia total en herramientas de IA</div>
+          <div class="gap-card-desc">Sin schema markup, sin FAQs estructuradas, sin menciones en medios. Cuando una paciente le pregunta a ChatGPT "¿cuál es la mejor cirujana plástica en Bogotá?", la Dra. Linares no aparece — aunque tenga la mejor reputación clínica del mercado.</div>
+        </div>
+
+        <div style="background: var(--navy-card); border-radius:12px; padding:16px 20px; border:1px solid rgba(94,235,194,0.15);">
+          <div style="font-size:12px;font-weight:700;color:var(--accent);margin-bottom:6px;">FORTALEZA</div>
+          <div style="font-size:14px;color:white;font-weight:600;margin-bottom:4px;">Reputación clínica: 5.0★ en Doctoralia con 166 opiniones verificadas</div>
+          <div style="font-size:13px;color:var(--gray-3);">Certificado de Excelencia 2020 y 2023. SCCP + FILACP. Motiva® Certified. Esta base de confianza es difícil de construir — lo que falta es visibilidad.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AI SECTION -->
+<section class="section dark" id="ia" style="background: var(--navy-mid); border-top: 1px solid rgba(255,255,255,0.05);">
+  <div class="section-inner">
+    <div class="section-label">Visibilidad en Inteligencia Artificial</div>
+    <div class="ai-hook">¿Le gustaría que ChatGPT, Google y Perplexity<br>la <em>recomienden de primero</em>?</div>
+
+    <div class="ai-scenario">
+      "Son las 10 pm. Una paciente en Bogotá abre ChatGPT y escribe: '¿Cuál es la mejor cirujana plástica de Bogotá para una rinoplastia?' La IA responde con tres nombres. El suyo no está. Esa paciente tiene un presupuesto de $15 millones de pesos. La consulta hubiera sido suya."
+    </div>
+
+    <div class="ai-steps">
+      <div class="ai-step">
+        <div class="ai-step-icon">🔍</div>
+        <div class="ai-step-title">La paciente pregunta a la IA</div>
+        <div class="ai-step-desc">ChatGPT, Perplexity y Google AI Overview responden preguntas médicas las 24 horas del día, los 7 días de la semana.</div>
+      </div>
+      <div class="ai-step">
+        <div class="ai-step-icon">🧠</div>
+        <div class="ai-step-title">La IA busca señales de autoridad</div>
+        <div class="ai-step-desc">Analiza contenido, schema markup, volumen de reseñas, menciones en medios y presencia en directorios.</div>
+      </div>
+      <div class="ai-step">
+        <div class="ai-step-icon">✅</div>
+        <div class="ai-step-title">Recomienda al que tiene más señales</div>
+        <div class="ai-step-desc">No al mejor cirujano — al que tiene mejor infraestructura digital de autoridad. Eso es lo que construimos.</div>
+      </div>
+    </div>
+
+    <div class="ai-pillars">
+      <div class="ai-pillar">
+        <div class="ai-pillar-title">📝 Contenido</div>
+        <div class="check-item"><span class="icon">❌</span><span>Sin blog ni artículos educativos</span></div>
+        <div class="check-item"><span class="icon">❌</span><span>Sin FAQs estructuradas por procedimiento</span></div>
+        <div class="check-item"><span class="icon">✅</span><span>Páginas de servicios con descripciones básicas</span></div>
+        <div class="check-item"><span class="icon">❌</span><span>Sin contenido optimizado para preguntas de IA</span></div>
+      </div>
+      <div class="ai-pillar">
+        <div class="ai-pillar-title">🏗️ Schema Markup</div>
+        <div class="check-item"><span class="icon">❌</span><span>Sin schema de médico/physician</span></div>
+        <div class="check-item"><span class="icon">❌</span><span>Sin schema de servicios médicos</span></div>
+        <div class="check-item"><span class="icon">❌</span><span>Sin schema de organización o localización</span></div>
+        <div class="check-item"><span class="icon">❌</span><span>Sin datos estructurados para IA</span></div>
+      </div>
+      <div class="ai-pillar">
+        <div class="ai-pillar-title">⭐ Reseñas</div>
+        <div class="check-item"><span class="icon">✅</span><span>166 opiniones en Doctoralia (5.0★)</span></div>
+        <div class="check-item"><span class="icon">⚠️</span><span>Google Business Profile: datos incompletos</span></div>
+        <div class="check-item"><span class="icon">❌</span><span>Sin respuestas sistemáticas a reseñas</span></div>
+        <div class="check-item"><span class="icon">❌</span><span>Sin veloci​dad de nuevas reseñas visible</span></div>
+      </div>
+      <div class="ai-pillar">
+        <div class="ai-pillar-title">🔗 Citas y Directorios</div>
+        <div class="check-item"><span class="icon">✅</span><span>Doctoralia Colombia (activo)</span></div>
+        <div class="check-item"><span class="icon">✅</span><span>SCCP (directorio oficial)</span></div>
+        <div class="check-item"><span class="icon">✅</span><span>Motiva® Health (certificada)</span></div>
+        <div class="check-item"><span class="icon">❌</span><span>TopDoctors Colombia: no encontrado</span></div>
+      </div>
+    </div>
+
+    <!-- PRICING CARDS -->
+    <div style="margin-bottom:24px;">
+      <div style="text-align:center;margin-bottom:32px;">
+        <div style="font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray-2);margin-bottom:8px;">Solución</div>
+        <h3 style="font-size:28px;font-weight:700;color:white;">Doctor Rank — Programa de Autoridad Digital</h3>
+        <p style="color:var(--gray-3);max-width:560px;margin:8px auto 0;font-size:15px;">Construimos la infraestructura digital que hace que Google, ChatGPT y sus pacientes ideales la encuentren primero.</p>
+      </div>
+
+      <div class="pricing-grid">
+        <!-- Tier 1 -->
+        <div class="pricing-card">
+          <div class="pricing-tier">Visibilidad IA</div>
+          <div class="pricing-tagline">"Aparecer cuando una paciente busque su especialidad en ChatGPT"</div>
+          <div class="pricing-price">$1,500 <span>USD / mes</span></div>
+          <div class="pricing-local">≈ $6.2M COP / mes</div>
+          <div class="pricing-guarantee">
+            <strong style="color:var(--accent)">Garantía de visibilidad:</strong> Su nombre mencionado en respuestas de ChatGPT, Perplexity o Google AI Overview sobre cirugía plástica en Bogotá dentro de 90 días — o le devolvemos el último mes.
+          </div>
+          <ul class="pricing-features">
+            <li>Schema markup completo (Physician + MedicalService)</li>
+            <li>Optimización Google Business Profile</li>
+            <li>Ficha en TopDoctors Colombia</li>
+            <li>Estrategia de reseñas sistemática</li>
+            <li>Reporte mensual de posicionamiento IA</li>
+          </ul>
+          <div class="pricing-anchor">Valor real $2,800 · usted paga $1,500</div>
+          <a href="https://calendly.com/recheverria-flow/sesion-de-estrategia-con-flow-results-clone" class="pricing-cta" target="_blank">Agendar Llamada</a>
+        </div>
+
+        <!-- Tier 2 FEATURED -->
+        <div class="pricing-card featured">
+          <div class="pricing-badge">⭐ Recomendado para Dra. Linares</div>
+          <div class="pricing-tier">Autoridad Digital</div>
+          <div class="pricing-tagline">"Dominar las búsquedas de su especialidad en Google y redes"</div>
+          <div class="pricing-price">$3,000 <span>USD / mes</span></div>
+          <div class="pricing-local">≈ $12.4M COP / mes</div>
+          <div class="pricing-guarantee">
+            <strong style="color:var(--accent)">Garantía de autoridad:</strong> Top 3 en Google para 3 búsquedas clave de cirugía plástica en Bogotá + duplicar su audiencia en Instagram en 6 meses — o el segundo mes es sin costo.
+          </div>
+          <ul class="pricing-features">
+            <li>Todo lo del plan Visibilidad IA</li>
+            <li>Blog SEO: 4 artículos/mes optimizados</li>
+            <li>FAQs estructuradas por procedimiento</li>
+            <li>Gestión de Instagram + contenido educativo (3×/sem)</li>
+            <li>Reactivación del canal de YouTube</li>
+            <li>Estrategia TikTok para cirugía plástica</li>
+            <li>Dashboard de analytics mensual</li>
+          </ul>
+          <div class="pricing-anchor">Valor real $5,500 · usted paga $3,000</div>
+          <a href="https://calendly.com/recheverria-flow/sesion-de-estrategia-con-flow-results-clone" class="pricing-cta" target="_blank">Agendar Llamada</a>
+        </div>
+
+        <!-- Tier 3 -->
+        <div class="pricing-card">
+          <div class="pricing-tier">Referente Nacional</div>
+          <div class="pricing-tagline">"Ser la voz pública de cirugía plástica en Colombia"</div>
+          <div class="pricing-price">$5,500 <span>USD / mes</span></div>
+          <div class="pricing-local">≈ $22.8M COP / mes</div>
+          <div class="pricing-guarantee">
+            <strong style="color:var(--accent)">Garantía de referencia:</strong> #1 en Google y mencionada en ChatGPT + 25,000+ seguidores combinados + 6 apariciones en medios en 12 meses — o continuamos trabajando sin cargo hasta lograrlo.
+          </div>
+          <ul class="pricing-features">
+            <li>Todo lo del plan Autoridad Digital</li>
+            <li>Relaciones con medios colombianos (El Tiempo, Semana Health)</li>
+            <li>Producción de video profesional mensual</li>
+            <li>Podcast o columna de opinión especializada</li>
+            <li>Presencia en congresos y eventos SCCP</li>
+            <li>PR digital internacional (turismo médico)</li>
+          </ul>
+          <div class="pricing-anchor">Valor real $9,000 · usted paga $5,500</div>
+          <a href="https://calendly.com/recheverria-flow/sesion-de-estrategia-con-flow-results-clone" class="pricing-cta" target="_blank">Agendar Llamada</a>
+        </div>
+      </div>
+
+      <div class="guarantee-bar">
+        <strong>Garantía Flow Results — sobre visibilidad y autoridad, no sobre volumen de pacientes.</strong><br>
+        Si no cumplimos las métricas acordadas de ranking, menciones en IA o crecimiento de audiencia, no cobramos. Sin contratos forzosos a 12 meses.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARKET CONTEXT -->
+<section class="section alt" id="mercado">
+  <div class="section-inner">
+    <div class="section-label">Contexto del Mercado</div>
+    <h2 class="section-title">Así elige una paciente a su <em>cirujana plástica</em> hoy en Bogotá</h2>
+    <p class="section-sub">El mercado colombiano de cirugía estética creció un 10% en 2024 y Bogotá se consolida como epicentro. La competencia digital es tan importante como la clínica.</p>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-value">490K</div>
+        <div class="stat-desc">Procedimientos estéticos realizados en Colombia en 2024 — un incremento del 10% frente a 2023. Bogotá concentra la mayor parte.</div>
+        <div class="stat-source">Fuente: <a href="https://cirugiaplastica.org.co/en-2024-aumentaron-10-los-procedimientos-esteticos-quirurgicos-y-no-quirurgicos-en-colombia/" target="_blank">Sociedad Colombiana de Cirugía Plástica (SCCP), Enero 2025</a></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">30%</div>
+        <div class="stat-desc">De las cirugías plásticas en Colombia son realizadas a pacientes extranjeros. El turismo médico estético posiciona a Bogotá como destino #1 en LATAM.</div>
+        <div class="stat-source">Fuente: <a href="https://www.lafm.co/colombia/en-colombia-30-de-las-cirugias-plasticas-son-realizadas-a-pacientes-extranjeros-segun" target="_blank">La FM / ISAPS, 2024</a></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">77%</div>
+        <div class="stat-desc">De los pacientes utilizan al menos 2 plataformas de reseñas al evaluar un especialista. El que no está en múltiples canales, simplemente no existe.</div>
+        <div class="stat-source">Fuente: <a href="https://www.brightlocal.com/research/local-consumer-review-survey-2024/" target="_blank">BrightLocal Local Consumer Review Survey, 2024</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENCHMARK -->
+<section class="section" id="benchmark">
+  <div class="section-inner">
+    <div class="section-label">Benchmark Competitivo</div>
+    <h2 class="section-title">Posición en el mercado de <em>cirugía plástica</em> en Bogotá</h2>
+    <p class="section-sub">Comparación directa de volumen de opiniones en Doctoralia — la principal plataforma de referencia médica en Colombia — frente a los principales competidores.</p>
+
+    <div class="chart-frame bar" style="margin-bottom:40px;">
+      <canvas id="barChart"></canvas>
+    </div>
+
+    <table class="benchmark-table">
+      <thead>
+        <tr>
+          <th>Cirujano/a</th>
+          <th>Rating</th>
+          <th>Opiniones Doctoralia</th>
+          <th>Certificaciones</th>
+          <th>Fuente</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><a href="https://www.doctoralia.co/jorge-luis-azocar-perozo/cirujano-plastico-medico-estetico/bogota" target="_blank">Dr. Jorge Azocar</a></td>
+          <td><span class="rating-badge"><span class="rating-star">★</span> 5.0</span></td>
+          <td>374</td>
+          <td>Cert. Excelencia 2020/2023</td>
+          <td><a href="https://www.doctoralia.co/jorge-luis-azocar-perozo/cirujano-plastico-medico-estetico/bogota" target="_blank">Doctoralia</a></td>
+        </tr>
+        <tr>
+          <td><a href="https://www.doctoralia.co/jose-suarez/cirujano-plastico/bogota" target="_blank">Dr. José Suárez</a></td>
+          <td><span class="rating-badge"><span class="rating-star">★</span> 5.0</span></td>
+          <td>299</td>
+          <td>Winner Doctoralia Awards 2021/2022</td>
+          <td><a href="https://www.doctoralia.co/jose-suarez/cirujano-plastico/bogota" target="_blank">Doctoralia</a></td>
+        </tr>
+        <tr>
+          <td><a href="https://www.doctoralia.co/ricardo-botache-pinzon/cirujano-plastico/bogota" target="_blank">Dr. Ricardo Botache</a></td>
+          <td><span class="rating-badge"><span class="rating-star">★</span> 5.0</span></td>
+          <td>238</td>
+          <td>SCCP certificado</td>
+          <td><a href="https://www.doctoralia.co/cirujano-plastico/bogota" target="_blank">Doctoralia</a></td>
+        </tr>
+        <tr>
+          <td><a href="https://www.doctoralia.co/stephania-pinedo-garcia/cirujano-plastico/bogota" target="_blank">Dra. Stephanía Pinedo</a></td>
+          <td><span class="rating-badge"><span class="rating-star">★</span> 5.0</span></td>
+          <td>151</td>
+          <td>SCCP · TikTok activo</td>
+          <td><a href="https://www.doctoralia.co/stephania-pinedo-garcia/cirujano-plastico/bogota" target="_blank">Doctoralia</a></td>
+        </tr>
+        <tr class="target-row">
+          <td><strong>Dra. Natalia Linares Cruz ← Usted</strong></td>
+          <td><span class="rating-badge"><span class="rating-star">★</span> 5.0</span></td>
+          <td><strong>166</strong></td>
+          <td>Cert. Excelencia · SCCP · FILACP · Motiva®</td>
+          <td><a href="https://www.doctoralia.co/natalia-linares-cruz/cirujano-plastico/bogota" target="_blank">Doctoralia</a></td>
+        </tr>
+        <tr>
+          <td><a href="https://www.doctoralia.co/katrina-duplat-2/cirujano-plastico-cirujano-general-medico-estetico/bogota" target="_blank">Dra. Katrina Duplat</a></td>
+          <td><span class="rating-badge"><span class="rating-star">★</span> 5.0</span></td>
+          <td>96</td>
+          <td>TopDoctors Colombia</td>
+          <td><a href="https://www.doctoralia.co/katrina-duplat-2/cirujano-plastico-cirujano-general-medico-estetico/bogota" target="_blank">Doctoralia</a></td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-size:12px;color:var(--gray-1);margin-top:12px;">Nota: La calificación de la Dra. Linares en Doctoralia es 5.0★, sin embargo el número de opiniones es 166, frente a 374 del líder. La brecha es recuperable con una estrategia sistemática de captación de reseñas.</p>
+  </div>
+</section>
+
+<!-- AUDITORIA POR DIMENSIÓN -->
+<section class="section alt" id="auditoria">
+  <div class="section-inner">
+    <div class="section-label">Auditoría por Dimensión</div>
+    <h2 class="section-title">El detalle de cada <em>brecha</em> y qué hacer</h2>
+    <p class="section-sub">Cada sección muestra el estado actual, el benchmark del mercado y las acciones concretas con su nivel de prioridad.</p>
+
+    <!-- 1. REPUTACIÓN -->
+    <div class="audit-section">
+      <div class="audit-header" onclick="toggleAudit(this)">
+        <div class="audit-header-left">
+          <h3>Reputación y Reseñas</h3>
+          <div class="audit-insight">5.0★ en Doctoralia, pero con velocidad de nuevas reseñas por debajo del mercado</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div class="score-pill amber">2.5 / 5</div>
+          <span style="color:var(--gray-2);">▼</span>
+        </div>
+      </div>
+      <div class="audit-body">
+        <div class="audit-row">
+          <div class="audit-col">
+            <h4>Estado Actual</h4>
+            <div class="finding-item"><span class="fi-icon">✅</span><span>166 opiniones verificadas en Doctoralia con calificación perfecta 5.0★</span></div>
+            <div class="finding-item"><span class="fi-icon">✅</span><span>Certificado de Excelencia Doctoralia 2020 y 2023 — distinción otorgada solo al top de especialistas</span></div>
+            <div class="finding-item"><span class="fi-icon">✅</span><span>Nominada a Doctoralia Awards 2020, 2021 y 2022</span></div>
+            <div class="finding-item"><span class="fi-icon">⚠️</span><span>Perfil en Google Business Profile no encontrado con datos confirmados de reseñas públicas</span></div>
+            <div class="finding-item"><span class="fi-icon">❌</span><span>Sin respuestas sistemáticas a las reseñas existentes (88% de pacientes prefieren proveedores que responden todas sus reseñas — Fuente: <a href="https://www.brightlocal.com/research/local-consumer-review-survey-2024/" target="_blank" style="color:var(--accent-dim)">BrightLocal 2024</a>)</span></div>
+            <div class="finding-item"><span class="fi-icon">❌</span><span>Velocidad de nuevas reseñas: sin datos de recencia visibles en búsqueda pública</span></div>
+          </div>
+          <div class="audit-col">
+            <h4>Qué Hacen los Líderes</h4>
+            <div class="finding-item"><span class="fi-icon">→</span><span>Dr. Azocar: 374 opiniones en Doctoralia + fuerte presencia en Google Maps</span></div>
+            <div class="finding-item"><span class="fi-icon">→</span><span>Dr. Suárez: 299 opiniones + ganador Doctoralia Awards 2021/2022</span></div>
+            <div class="finding-item"><span class="fi-icon">→</span><span>Los top 3 mantienen flujo constante de nuevas reseñas (estimado 5–10/mes)</span></div>
+            <div class="finding-item"><span class="fi-icon">→</span><span>Responden a cada opinión dentro de 48 horas, creando confianza pública</span></div>
+          </div>
+        </div>
+        <h4 style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--gray-1);margin-bottom:12px;">Recomendaciones</h4>
+        <div class="reco-card red">
+          <div class="reco-priority red">Alta</div>
+          <div class="reco-content">
+            <div class="reco-title">Activar flujo de captación de reseñas post-consulta</div>
+            <div class="reco-desc">Implementar WhatsApp automatizado o email 5–7 días después de cada cirugía con enlace directo a Google Maps y Doctoralia. Meta: +15 reseñas nuevas/mes para alcanzar 300 en 12 meses.</div>
+          </div>
+        </div>
+        <div class="reco-card amber">
+          <div class="reco-priority amber">Media</div>
+          <div class="reco-content">
+            <div class="reco-title">Optimizar y verificar Google Business Profile</div>
+            <div class="reco-desc">Reclamar y completar el perfil con fotos de alta calidad, horarios actualizados, categorías correctas (Cirujana Plástica), y activar mensajes directos desde Google.</div>
+          </div>
+        </div>
+        <div class="reco-card green">
+          <div class="reco-priority green">Rápida</div>
+          <div class="reco-content">
+            <div class="reco-title">Responder todas las reseñas existentes en Doctoralia</div>
+            <div class="reco-desc">Responder las 166 reseñas actuales con un mensaje personalizado y profesional. Esto aumenta la confianza del nuevo visitante y mejora el ranking en la plataforma.</div>
+          </div>
+        </div>
+        <div class="quickwins-box">
+          <h4>Quick Wins (próximos 30 días)</h4>
+          <ul>
+            <li>Crear plantilla de WhatsApp de solicitud de reseña y enviarla a los últimos 20 pacientes intervenidos</li>
+            <li>Responder todas las reseñas de Doctoralia en menos de una semana</li>
+            <li>Añadir el enlace de Google Maps en la firma de email de citas@natalialinarescplastica.com</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. SITIO WEB -->
+    <div class="audit-section">
+      <div class="audit-header" onclick="toggleAudit(this)">
+        <div class="audit-header-left">
+          <h3>Sitio Web y Conversión</h3>
+          <div class="audit-insight">Buena estructura de base, pero sin financiamiento ni chat en vivo. Le falta el último escalón de conversión.</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div class="score-pill teal">3.0 / 5</div>
+          <span style="color:var(--gray-2);">▼</span>
+        </div>
+      </div>
+      <div class="audit-body">
+        <div class="audit-row">
+          <div class="audit-col">
+            <h4>Estado Actual</h4>
+            <div class="finding-item"><span class="fi-icon">✅</span><span>Reserva de cita en línea ("Reserva tu Cita") integrada en el menú principal</span></div>
+            <div class="finding-item"><span class="fi-icon">✅</span><span>Portal de pago en línea ("Paga tu Cita") — diferenciador fuerte</span></div>
+            <div class="finding-item"><span class="fi-icon">✅</span><span>Botón de WhatsApp presente, formulario de contacto y múltiples teléfonos</span></div>
+            <div class="finding-item"><span class="fi-icon">✅</span><span>6 categorías de servicios con sub-páginas (corporal, facial, mama, reconstructiva, no quirúrgica, hombres)</span></div>
+            <div class="finding-item"><span class="fi-icon">✅</span><span>Galería de antes/después por procedimiento (3–5 imágenes/categoría)</span></div>
+            <div class="finding-item"><span class="fi-icon">❌</span><span>Sin información de financiamiento o planes de pago</span></div>
+            <div class="finding-item"><span class="fi-icon">❌</span><span>Sin chat en vivo ni bot de WhatsApp automatizado</span></div>
+            <div class="finding-item"><span class="fi-icon">❌</span><span>Sin schema markup (impacta SEO y visibilidad en IA)</span></div>
+          </div>
+          <div class="audit-col">
+            <h4>Qué Hacen los Líderes</h4>
+            <div class="finding-item"><span class="fi-icon">→</span><span>Dra. Pinedo: sitio completamente bilingüe (español/inglés) capturando turismo médico internacional</span></div>
+            <div class="finding-item"><span class="fi-icon">→</span><span>Dr. Suárez: información clara de financiamiento con opciones de pago fraccionado</span></div>
+            <div class="finding-item"><span class="fi-icon">→</span><span>Los top 3 tienen chat de WhatsApp automatizado con respuesta inmediata 24/7</span></div>
+            <div class="finding-item"><span class="fi-icon">→</span><span>Páginas individuales por procedimiento con 500+ palabras, FAQs y schema médico</span></div>
+          </div>
+        </div>
+        <h4 style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--gray-1);margin-bottom:12px;">Recomendaciones</h4>
+        <div class="reco-card red">
+          <div class="reco-priority red">Alta</div>
+          <div class="reco-content">
+            <div class="reco-title">Implementar schema markup de médico y servicios</div>
+            <div class="reco-desc">Agregar JSON-LD con Physician schema (nombre, especialidad, dirección, credenciales SCCP), MedicalService schema por procedimiento, y LocalBusiness schema. Tiempo de implementación: 1 día de desarrollo.</div>
+          </div>
+        </div>
+        <div class="reco-card amber">
+          <div class="reco-priority amber">Media</div>
+          <div class="reco-content">
+            <div class="reco-title">Agregar sección de financiamiento y aliados de pago</div>
+            <div class="reco-desc">Con Coomeva y Mapfre ya como aliados, crear una página dedicada a opciones de pago y cobertura. El 60% de decisiones de cirugía plástica incluyen consideración de financiamiento.</div>
+          </div>
+        </div>
+        <div class="reco-card green">
+          <div class="reco-priority green">Rápida</div>
+          <div class="reco-content">
+            <div class="reco-title">Activar bot de WhatsApp con respuesta inmediata</div>
+            <div class="reco-desc">Configurar un chatbot básico en WhatsApp Business que capture nombre, procedimiento de interés y fecha preferida. Las consultas que no reciben respuesta en menos de 1 hora tienen 10× menos probabilidad de agendar.</div>
+          </div>
+        </div>
+        <div class="quickwins-box">
+          <h4>Quick Wins (próximos 30 días)</h4>
+          <ul>
+            <li>Configurar WhatsApp Business con mensaje automático de bienvenida</li>
+            <li>Expandir cada página de procedimiento a mínimo 400 palabras con sección de preguntas frecuentes</li>
+            <li>Agregar testimonios en video corto (30 seg) de pacientes satisfechos en la página principal</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. SEO -->
+    <div class="audit-section">
+      <div class="audit-header" onclick="toggleAudit(this)">
+        <div class="audit-header-left">
+          <h3>SEO y Contenido</h3>
+          <div class="audit-insight">La brecha más crítica: sin blog, sin FAQs, sin estrategia de contenido. Los pacientes buscan respuestas y encuentran a la competencia.</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div class="score-pill red">1.5 / 5</div>
+          <span style="color:var(--gray-2);">▼</span>
+        </div>
+      </div>
+      <div class="audit-body">
+        <div class="audit-row">
+          <div class="audit-col">
+            <h4>Estado Actual</h4>
+            <div class="finding-item"><span class="fi-icon">⚠️</span><span>6 páginas de servicios con contenido básico (promedio ~200 palabras/página)</span></div>
+            <div class="finding-item"><span class="fi-icon">❌</span><span>Sin blog ni artículos educativos — cero contenido indexable sobre procedimientos</span></div>
+            <div class="finding-item"><span class="fi-icon">❌</span><span>Sin secciones de preguntas frecuentes (FAQs) por procedimiento</span></div>
+            <div class="finding-item"><span class="fi-icon">❌</span><span>Sin schema markup de ningún tipo detectado</span></div>
+            <div class="finding-item"><span class="fi-icon">❌</span><span>No rankea en primera página para términos como "cirujana plástica Bogotá" o "rinoplastia Bogotá"</span></div>
+            <div class="finding-item"><span class="fi-icon">❌</span><span>Sin estrategia de backlinks o menciones en medios especializados</span></div>
+          </div>
+          <div class="audit-col">
+            <h4>Oportunidades de Contenido Inmediatas</h4>
+            <div class="finding-item"><span class="fi-icon">→</span><span>"¿Cuánto cuesta una rinoplastia en Bogotá?" — alta búsqueda, baja competencia</span></div>
+            <div class="finding-item"><span class="fi-icon">→</span><span>"Recuperación abdominoplastia: guía completa" — contenido de autoridad</span></div>
+            <div class="finding-item"><span class="fi-icon">→</span><span>"Cirujana plástica certificada SCCP en Bogotá" — diferenciador de credencial</span></div>
+            <div class="finding-item"><span class="fi-icon">→</span><span>"Turismo médico Colombia: qué necesita saber antes de su cirugía" — captación internacional</span></div>
+            <div class="finding-item"><span class="fi-icon">→</span><span>"Aumento de senos Motiva® Bogotá: ventajas e implantes" — posicionamiento de marca</span></div>
+          </div>
+        </div>
+        <h4 style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--gray-1);margin-bottom:12px;">Recomendaciones</h4>
+        <div class="reco-card red">
+          <div class="reco-priority red">Alta</div>
+          <div class="reco-content">
+            <div class="reco-title">Crear blog con estrategia de contenido SEO (4 artículos/mes)</div>
+            <div class="reco-desc">Iniciar con los 10 términos de búsqueda con mayor intención de paciente en Bogotá. Cada artículo: 800–1,200 palabras, FAQs integradas, schema de preguntas frecuentes, y CTA a cita.</div>
+          </div>
+        </div>
+        <div class="reco-card red">
+          <div class="reco-priority red">Alta</div>
+          <div class="reco-content">
+            <div class="reco-title">Expandir páginas de procedimientos con FAQs y contenido profundo</div>
+            <div class="reco-desc">Cada procedimiento debe tener: descripción técnica, candidatos ideales, riesgos honestos, recuperación detallada (con fotos propias), precio orientativo, y mínimo 5 preguntas frecuentes con respuestas. Esto es lo que los modelos de IA indexan.</div>
+          </div>
+        </div>
+        <div class="reco-card amber">
+          <div class="reco-priority amber">Media</div>
+          <div class="reco-content">
+            <div class="reco-title">Estrategia de backlinks con SCCP, FILACP y medios de salud</div>
+            <div class="reco-desc">Solicitar enlace desde el directorio oficial de la SCCP (cirugiaplastica.org.co), publicar columna en medios de salud colombianos, y aparecer en artículos de turismo médico en Colombia.</div>
+          </div>
+        </div>
+        <div class="quickwins-box">
+          <h4>Quick Wins (próximos 30 días)</h4>
+          <ul>
+            <li>Publicar el primer artículo de blog: "5 preguntas que toda paciente debe hacer antes de una rinoplastia en Bogotá"</li>
+            <li>Agregar sección de FAQs en las 3 páginas de mayor tráfico (corporal, facial, mama)</li>
+            <li>Instalar Google Search Console y Google Analytics para medir tráfico de búsqueda</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. DIRECTORIOS -->
+    <div class="audit-section">
+      <div class="audit-header" onclick="toggleAudit(this)">
+        <div class="audit-header-left">
+          <h3>Directorios y Citaciones</h3>
+          <div class="audit-insight">Doctoralia activo y certificaciones de primer nivel, pero falta presencia en TopDoctors Colombia</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div class="score-pill amber">2.5 / 5</div>
+          <span style="color:var(--gray-2);">▼</span>
+        </div>
+      </div>
+      <div class="audit-body">
+        <div class="audit-row">
+          <div class="audit-col">
+            <h4>Estado Actual</h4>
+            <div class="finding-item"><span class="fi-icon">✅</span><span>Doctoralia Colombia: perfil activo con 166 opiniones — la plataforma #1 en Colombia</span></div>
+            <div class="finding-item"><span class="fi-icon">✅</span><span>SCCP (Sociedad Colombiana de Cirugía Plástica): directorio oficial verificado</span></div>
+            <div class="finding-item"><span class="fi-icon">✅</span><span>FILACP: membresía verificada — distinción internacional</span></div>
+            <div class="finding-item"><span class="fi-icon">✅</span><span>Motiva® Health: perfil certificado como clínica autorizada en Bogotá</span></div>
+            <div class="finding-item"><span class="fi-icon">⚠️</span><span>Google Business Profile: existencia no confirmada con datos de reseñas públicos</span></div>
+            <div class="finding-item"><span class="fi-icon">❌</span><span>TopDoctors Colombia (topdoctors.com.co): no encontrada en búsqueda — plataforma clave para turismo médico</span></div>
+          </div>
+          <div class="audit-col">
+            <h4>Lo que Tienen los Líderes</h4>
+            <div class="finding-item"><span class="fi-icon">→</span><span>Dr. Azocar: activo en Doctoralia + TopDoctors + múltiples directorios hospitalarios</span></div>
+            <div class="finding-item"><span class="fi-icon">→</span><span>Dra. Duplat: TopDoctors Colombia + Doctoralia + Google Business optimizado</span></div>
+            <div class="finding-item"><span class="fi-icon">→</span><span>Dr. Suárez: RealSelf (plataforma internacional para turismo médico angloparlante) + Doctoralia</span></div>
+          </div>
+        </div>
+        <h4 style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--gray-1);margin-bottom:12px;">Recomendaciones</h4>
+        <div class="reco-card red">
+          <div class="reco-priority red">Alta</div>
+          <div class="reco-content">
+            <div class="reco-title">Crear y optimizar Google Business Profile completo</div>
+            <div class="reco-desc">Reclamar el perfil con fotos de la clínica (mínimo 10), horarios, descripción optimizada con keywords, servicios listados individualmente, y atributo "Acepta seguros" (Coomeva, Mapfre). Tiempo: 2 horas.</div>
+          </div>
+        </div>
+        <div class="reco-card amber">
+          <div class="reco-priority amber">Media</div>
+          <div class="reco-content">
+            <div class="reco-title">Registrarse en TopDoctors Colombia</div>
+            <div class="reco-desc">TopDoctors (topdoctors.com.co) es la segunda plataforma más visitada por pacientes de cirugía plástica en Colombia, especialmente internacionales. La Dra. Katrina Duplat ya está listada — usted aún no.</div>
+          </div>
+        </div>
+        <div class="quickwins-box">
+          <h4>Quick Wins (próximos 30 días)</h4>
+          <ul>
+            <li>Verificar Google Business Profile en maps.google.com/business</li>
+            <li>Subir 10 fotos profesionales de la clínica y consultorios al GBP</li>
+            <li>Solicitar registro en TopDoctors Colombia: topdoctors.com.co/registro</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. SOCIAL -->
+    <div class="audit-section">
+      <div class="audit-header" onclick="toggleAudit(this)">
+        <div class="audit-header-left">
+          <h3>Redes Sociales y Video</h3>
+          <div class="audit-insight">Canal de YouTube inactivo desde 2017. Su competencia publica video educativo semanalmente — y eso se traduce en pacientes</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div class="score-pill red">2.0 / 5</div>
+          <span style="color:var(--gray-2);">▼</span>
+        </div>
+      </div>
+      <div class="audit-body">
+        <div class="audit-row">
+          <div class="audit-col">
+            <h4>Estado Actual</h4>
+            <div class="finding-item"><span class="fi-icon">✅</span><span>Instagram activo (@doc_linares) — frecuencia y seguidores no confirmados públicamente</span></div>
+            <div class="finding-item"><span class="fi-icon">✅</span><span>Facebook page vinculada al sitio web</span></div>
+            <div class="finding-item"><span class="fi-icon">⚠️</span><span>YouTube: solo 1 video encontrado — "Abdominoplastia y lipoescultura" publicado en 2017</span></div>
+            <div class="finding-item"><span class="fi-icon">❌</span><span>TikTok: sin presencia encontrada (plataforma de alto crecimiento en cirugía plástica en LATAM)</span></div>
+            <div class="finding-item"><span class="fi-icon">❌</span><span>Sin contenido de video educativo reciente (factor clave en decisión de procedimiento de cirugía plástica)</span></div>
+          </div>
+          <div class="audit-col">
+            <h4>Lo que Hacen los Líderes</h4>
+            <div class="finding-item"><span class="fi-icon">→</span><span>Dra. Pinedo (@doctorapinedo): activa en Instagram y TikTok con contenido educativo, casos de éxito y reels de procedimientos 4–5×/semana</span></div>
+            <div class="finding-item"><span class="fi-icon">→</span><span>Dr. Suárez: presencia en RealSelf con fotos antes/después y preguntas de pacientes respondidas públicamente</span></div>
+            <div class="finding-item"><span class="fi-icon">→</span><span>Los cirujanos top de Bogotá promedian 5 publicaciones semanales en Instagram con mezcla de educación (50%), casos (30%) y vida profesional (20%)</span></div>
+          </div>
+        </div>
+        <h4 style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--gray-1);margin-bottom:12px;">Recomendaciones</h4>
+        <div class="reco-card red">
+          <div class="reco-priority red">Alta</div>
+          <div class="reco-content">
+            <div class="reco-title">Reactivar YouTube con contenido educativo mensual</div>
+            <div class="reco-desc">Producir 1–2 videos/mes de 5–10 minutos: guías de procedimientos, recuperación, preguntas frecuentes. El video de YouTube indexa en Google y aparece en respuestas de IA. El último video de la Dra. Linares tiene 8 años.</div>
+          </div>
+        </div>
+        <div class="reco-card amber">
+          <div class="reco-priority amber">Media</div>
+          <div class="reco-content">
+            <div class="reco-title">Lanzar TikTok con estrategia de contenido corto</div>
+            <div class="reco-desc">TikTok es el canal de mayor crecimiento para cirugía plástica en Colombia 2024–2025. Videos de 30–60 segundos sobre mitos, recuperación, preguntas frecuentes. Puede reutilizar el contenido de Instagram Reels.</div>
+          </div>
+        </div>
+        <div class="reco-card green">
+          <div class="reco-priority green">Rápida</div>
+          <div class="reco-content">
+            <div class="reco-title">Aumentar frecuencia en Instagram a 4×/semana</div>
+            <div class="reco-desc">Con un banco de contenido de casos antes/después, testimonios en video corto y carruseles educativos. Mezcla recomendada: 2 posts educativos + 1 caso de éxito + 1 de life/confianza. Sin filtros de cara — autenticidad convierte.</div>
+          </div>
+        </div>
+        <div class="quickwins-box">
+          <h4>Quick Wins (próximos 30 días)</h4>
+          <ul>
+            <li>Grabar en smartphone 1 video de 3–5 minutos respondiendo "las 5 preguntas más frecuentes sobre rinoplastia en Bogotá" y subirlo a YouTube e Instagram</li>
+            <li>Crear cuenta en TikTok @natalialinarecirugia y publicar primer video corto</li>
+            <li>Pedir a 3 pacientes satisfechos recientes un video testimonio de 30 segundos para Instagram Stories</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. AI READINESS -->
+    <div class="audit-section">
+      <div class="audit-header" onclick="toggleAudit(this)">
+        <div class="audit-header-left">
+          <h3>Preparación para IA</h3>
+          <div class="audit-insight">Sin schema, sin FAQs, sin menciones en medios — invisible para ChatGPT, Perplexity y Google AI Overview</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div class="score-pill red">1.5 / 5</div>
+          <span style="color:var(--gray-2);">▼</span>
+        </div>
+      </div>
+      <div class="audit-body">
+        <div class="audit-row">
+          <div class="audit-col">
+            <h4>Estado Actual</h4>
+            <div class="finding-item"><span class="fi-icon">❌</span><span>Sin schema markup de ningún tipo (Physician, MedicalService, FAQPage, LocalBusiness)</span></div>
+            <div class="finding-item"><span class="fi-icon">❌</span><span>Sin FAQs estructuradas que las IAs puedan extraer como respuestas directas</span></div>
+            <div class="finding-item"><span class="fi-icon">❌</span><span>Sin artículos en medios externos (El Tiempo, Semana, Cromos Health) que creen menciones de autoridad</span></div>
+            <div class="finding-item"><span class="fi-icon">✅</span><span>Membresías en SCCP y FILACP crean señales de autoridad base para IA</span></div>
+            <div class="finding-item"><span class="fi-icon">✅</span><span>Perfil en Doctoralia con 166 reseñas genera señales de entidad reconocida</span></div>
+          </div>
+          <div class="audit-col">
+            <h4>Qué Señales Buscan las IAs</h4>
+            <div class="finding-item"><span class="fi-icon">→</span><span>Datos estructurados (schema.org) que identifiquen inequívocamente al especialista y sus servicios</span></div>
+            <div class="finding-item"><span class="fi-icon">→</span><span>Contenido con preguntas y respuestas claras que se pueden extraer como fragmentos de respuesta</span></div>
+            <div class="finding-item"><span class="fi-icon">→</span><span>Menciones en fuentes de autoridad: universidades, hospitales, colegios médicos, medios reconocidos</span></div>
+            <div class="finding-item"><span class="fi-icon">→</span><span>Consistencia del nombre + especialidad + ciudad en múltiples plataformas (NAP consistency)</span></div>
+          </div>
+        </div>
+        <h4 style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--gray-1);margin-bottom:12px;">Recomendaciones</h4>
+        <div class="reco-card red">
+          <div class="reco-priority red">Alta</div>
+          <div class="reco-content">
+            <div class="reco-title">Implementar JSON-LD schema completo en el sitio web</div>
+            <div class="reco-desc">Agregar Physician schema (nombre completo, especialidad, educación UN + U. del Valle, membresías SCCP/FILACP, dirección), MedicalService por procedimiento, y FAQPage. Esto es lo más impactante que puede hacer para aparecer en IA en 90 días.</div>
+          </div>
+        </div>
+        <div class="reco-card amber">
+          <div class="reco-priority amber">Media</div>
+          <div class="reco-content">
+            <div class="reco-title">Publicar columna de opinión en medios de salud colombianos</div>
+            <div class="reco-desc">Una aparición en El Tiempo Salud, Semana o Canal RCN sobre "qué preguntar antes de una cirugía plástica" genera el tipo de mención de autoridad que las IAs priorizan. Su membresía en SCCP es la llave para acceder a estos canales.</div>
+          </div>
+        </div>
+        <div class="quickwins-box">
+          <h4>Quick Wins (próximos 30 días)</h4>
+          <ul>
+            <li>Generar el schema JSON-LD de Physician y añadirlo al &lt;head&gt; de la página principal (puede generarse en 30 minutos con Google's Structured Data Markup Helper)</li>
+            <li>Crear página "Acerca de la Dra. Natalia Linares Cruz" con Wikipedia-style de credenciales completas — fuente perfecta para que las IAs construyan su perfil de entidad</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section class="section" id="roadmap">
+  <div class="section-inner">
+    <div class="section-label">Hoja de Ruta</div>
+    <h2 class="section-title">De invisible a <em>referente</em>: 12 meses</h2>
+    <p class="section-sub">Un plan estructurado por fases para convertir la visibilidad digital en ventaja competitiva sostenible.</p>
+
+    <div class="roadmap-grid">
+      <div class="roadmap-card phase-1">
+        <div class="roadmap-phase">Fase 1 · Días 1–30</div>
+        <div class="roadmap-title">Fundación</div>
+        <ul class="roadmap-list">
+          <li>Reclamar y optimizar Google Business Profile con fotos y servicios</li>
+          <li>Implementar schema markup JSON-LD completo (Physician + MedicalService)</li>
+          <li>Configurar WhatsApp Business con respuesta automática</li>
+          <li>Activar flujo de captación de reseñas post-cirugía (WhatsApp + email)</li>
+          <li>Instalar Google Analytics 4 + Search Console</li>
+          <li>Registrar perfil en TopDoctors Colombia</li>
+          <li>Responder las 166 reseñas actuales de Doctoralia</li>
+        </ul>
+      </div>
+      <div class="roadmap-card phase-2">
+        <div class="roadmap-phase">Fase 2 · Días 31–90</div>
+        <div class="roadmap-title">Construcción</div>
+        <ul class="roadmap-list">
+          <li>Lanzar blog con los primeros 8 artículos SEO de alto volumen</li>
+          <li>Expandir páginas de procedimientos con FAQs y contenido profundo</li>
+          <li>Crear página bilingüe (español/inglés) para turismo médico</li>
+          <li>Reactivar YouTube con 2 videos educativos de 5–8 minutos</li>
+          <li>Lanzar TikTok @natalialinarescirugia con calendario de contenido</li>
+          <li>Subir frecuencia de Instagram a 4 posts/semana</li>
+          <li>Primer artículo de opinión enviado a medios (El Tiempo Salud)</li>
+        </ul>
+      </div>
+      <div class="roadmap-card phase-3">
+        <div class="roadmap-phase">Fase 3 · Meses 4–12</div>
+        <div class="roadmap-title">Escala y Defensa</div>
+        <ul class="roadmap-list">
+          <li>Superar 300 reseñas en Doctoralia y 500 en Google Maps</li>
+          <li>Dominar top 3 en Google para 10 términos de cirugía plástica en Bogotá</li>
+          <li>Lanzar serie de video larga en YouTube (10+ videos, 10K+ vistas)</li>
+          <li>Programa de referidos médicos (alianzas con dermatólogos y ginecólogos)</li>
+          <li>Aparecer mencionada en 3+ artículos de medios nacionales</li>
+          <li>Establecerse como voz autorizada en turismo médico de cirugía plástica en Colombia</li>
+          <li>Dashboard de IA: monitorear menciones en ChatGPT/Perplexity mensualmente</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KPIs -->
+<section class="section alt">
+  <div class="section-inner">
+    <div class="section-label">Métricas Clave</div>
+    <h2 class="section-title">Lo que hay que <em>medir</em> cada mes</h2>
+    <p class="section-sub">Cuatro indicadores que revelan si la visibilidad digital se está convirtiendo en resultados reales.</p>
+
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-icon">⭐</div>
+        <div class="kpi-name">Velocidad de Reseñas</div>
+        <div class="kpi-desc">Nuevas reseñas por mes en Google + Doctoralia. Meta: +15/mes en los primeros 6 meses.</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon">🔍</div>
+        <div class="kpi-name">Posición en Google</div>
+        <div class="kpi-desc">Ranking promedio para 10 términos clave (ej. "rinoplastia Bogotá", "cirujana plástica SCCP Bogotá"). Meta: top 5 en 6 meses.</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon">📱</div>
+        <div class="kpi-name">Crecimiento de Audiencia</div>
+        <div class="kpi-desc">Seguidores en Instagram + TikTok + YouTube. Meta: +500 seguidores nuevos/mes al finalizar mes 3.</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon">🤖</div>
+        <div class="kpi-name">Menciones en IA</div>
+        <div class="kpi-desc">Presencia en respuestas de ChatGPT y Perplexity para búsquedas de cirugía plástica en Bogotá. Meta: 1+ mención confirmada en 90 días.</div>
+      </div>
+    </div>
+
+    <div style="margin-top:32px;background:var(--bg-page);border:1px solid #E8EEF4;border-radius:12px;padding:24px;">
+      <div style="font-size:13px;font-weight:700;color:var(--gray-4);margin-bottom:12px;">HERRAMIENTAS RECOMENDADAS</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;">
+        <div style="font-size:13px;color:var(--text-dark);"><strong>Google Search Console</strong> — tráfico orgánico y posiciones</div>
+        <div style="font-size:13px;color:var(--text-dark);"><strong>Doctoralia Pro</strong> — analíticas de perfil y conversiones</div>
+        <div style="font-size:13px;color:var(--text-dark);"><strong>Meta Business Suite</strong> — rendimiento Instagram/Facebook</div>
+        <div style="font-size:13px;color:var(--text-dark);"><strong>Google Analytics 4</strong> — conversiones web y fuentes de tráfico</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <div class="final-cta-inner">
+    <div style="font-size:12px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;">Siguiente Paso</div>
+    <h2>Su agenda ya está llena.<br>Ahora toca que <em>Google y la IA</em><br>sepan quién es la referente.</h2>
+    <p>Conversemos 30 minutos sin compromiso. Le mostramos exactamente cómo cerrar estas brechas y cuáles priorizaríamos primero basándonos en su caso específico.</p>
+    <div class="cta-buttons">
+      <a href="https://calendly.com/recheverria-flow/sesion-de-estrategia-con-flow-results-clone" class="btn-primary" target="_blank">
+        Agendar Sesión Estratégica — 30 min
+      </a>
+      <button class="btn-secondary" onclick="window.print()">
+        Imprimir Reporte
+      </button>
+    </div>
+    <div style="margin-top:32px;font-size:12px;color:var(--gray-1);">
+      Preparado por <strong style="color:var(--accent)">FLOW Results</strong> · recheverria@flowresults.com<br>
+      <a href="https://doctorrank.clinic" target="_blank" style="color:var(--accent-dim);text-decoration:none;">doctorrank.clinic</a> · Mayo 2026
+    </div>
+  </div>
+</section>
+
+<script>
+  // ===== TOGGLE AUDIT SECTIONS =====
+  function toggleAudit(header) {
+    const body = header.nextElementSibling;
+    const arrow = header.querySelector('span:last-child');
+    if (body.hidden) {
+      body.hidden = false;
+      arrow.textContent = '▲';
+    } else {
+      body.hidden = true;
+      arrow.textContent = '▼';
+    }
+  }
+
+  // Open first 3 sections by default
+  document.querySelectorAll('.audit-body').forEach((b, i) => {
+    if (i < 3) b.hidden = false;
+    else b.hidden = true;
+  });
+  document.querySelectorAll('.audit-header span:last-child').forEach((a, i) => {
+    a.textContent = i < 3 ? '▲' : '▼';
+  });
+
+  // ===== RADAR CHART =====
+  (function() {
+    const ctx = document.getElementById('radarChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'radar',
+      data: {
+        labels: ['Reseñas\ny Reputación', 'Sitio Web\ny Conversión', 'SEO\ny Contenido', 'Directorios\ny Citaciones', 'Redes\ny Video', 'Preparación\npara IA'],
+        datasets: [
+          {
+            label: 'Dra. Natalia Linares',
+            data: [2.5, 3.0, 1.5, 2.5, 2.0, 1.5],
+            borderColor: '#5EEBC2',
+            backgroundColor: 'rgba(94,235,194,0.18)',
+            borderWidth: 2.5,
+            pointRadius: 5,
+            pointBackgroundColor: '#5EEBC2',
+            pointBorderColor: '#0B1929',
+            pointBorderWidth: 2,
+          },
+          {
+            label: 'Promedio Top Competidores (Bogotá)',
+            data: [3.5, 3.2, 2.8, 3.0, 3.5, 2.0],
+            borderColor: '#728698',
+            backgroundColor: 'rgba(114,134,152,0.08)',
+            borderWidth: 2,
+            borderDash: [6, 4],
+            pointRadius: 3,
+            pointBackgroundColor: '#728698',
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          r: {
+            min: 0,
+            max: 5,
+            ticks: { display: false, stepSize: 1 },
+            grid: { color: 'rgba(255,255,255,0.08)' },
+            angleLines: { color: 'rgba(255,255,255,0.06)' },
+            pointLabels: {
+              color: '#C4CFDD',
+              font: { size: 12, weight: '600', family: 'Outfit' }
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            position: 'bottom',
+            labels: {
+              color: '#9AABBD',
+              font: { size: 12, family: 'Outfit' },
+              usePointStyle: true,
+              pointStyle: 'circle',
+              padding: 20
+            }
+          },
+          tooltip: {
+            callbacks: {
+              label: function(ctx) {
+                return ' ' + ctx.dataset.label + ': ' + ctx.raw + ' / 5';
+              }
+            }
+          }
+        }
+      }
+    });
+  })();
+
+  // ===== BAR CHART =====
+  (function() {
+    const ctx = document.getElementById('barChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: [
+          'Dr. Jorge Azocar',
+          'Dr. José Suárez',
+          'Dr. Ricardo Botache',
+          'Dra. Stephanía Pinedo',
+          'Dra. Natalia Linares ← Usted',
+          'Dra. Katrina Duplat'
+        ],
+        datasets: [{
+          label: 'Opiniones en Doctoralia',
+          data: [374, 299, 238, 151, 166, 96],
+          backgroundColor: [
+            '#3A4D62', '#3A4D62', '#3A4D62',
+            '#3A4D62',
+            '#5EEBC2',
+            '#3A4D62'
+          ],
+          borderRadius: 6,
+          barThickness: 22
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: {
+            grid: { color: 'rgba(0,0,0,0.05)' },
+            ticks: { color: '#728698', font: { size: 12, family: 'Outfit' } }
+          },
+          y: {
+            grid: { display: false },
+            ticks: { color: '#3D5066', font: { size: 13, family: 'Outfit', weight: '500' } }
+          }
+        },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: function(ctx) {
+                return ' ' + ctx.raw + ' opiniones verificadas en Doctoralia';
+              }
+            }
+          }
+        }
+      }
+    });
+  })();
+</script>
+
+</body>
+</html>
