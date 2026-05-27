@@ -3,440 +3,1273 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Diagnóstico Flow | Dr. Antonio Gómez Tristán</title>
+<title>Diagnóstico de Visibilidad Digital — Dr. Antonio Gómez Tristán</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Newsreader:ital,wght@1,400;1,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Newsreader:ital@1&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
-:root{--navy:#0B1929;--navy-mid:#0F2236;--navy-light:#14304D;--navy-card:#162D4A;--accent:#5EEBC2;--accent-dim:#3CC49E;--alert:#D9534F;--warning:#E8A820;--success:#3DAD6C;--text-dark:#1C2D3F;--gray-1:#728698;--gray-2:#9AABBD;--gray-3:#C4CFDD;--gray-4:#3D5066;--page-bg:#FFFFFF;--section-alt:#F6F8FB}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:'Outfit',sans-serif;background:var(--page-bg);color:var(--text-dark);line-height:1.6;font-size:16px}
-nav{position:sticky;top:0;z-index:100;background:var(--navy);border-bottom:1px solid rgba(94,235,194,.15);padding:0 24px}
-.nav-inner{max-width:1080px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px}
-.nav-brand{color:var(--accent);font-weight:700;font-size:14px;letter-spacing:.5px}
-.nav-links{display:flex;gap:20px;list-style:none}
-.nav-links a{color:var(--gray-3);font-size:13px;text-decoration:none;transition:color .2s}
-.nav-links a:hover{color:var(--accent)}
-.nav-print{background:transparent;border:1px solid var(--accent);color:var(--accent);padding:6px 14px;border-radius:6px;font-size:12px;font-family:'Outfit',sans-serif;cursor:pointer;transition:all .2s}
-.nav-print:hover{background:var(--accent);color:var(--navy)}
-.hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 60%,#0A2240 100%) !important;padding:80px 24px 72px;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;top:-120px;right:-80px;width:500px;height:500px;background:radial-gradient(circle,rgba(94,235,194,.07) 0%,transparent 70%);pointer-events:none}
-.hero-inner{max-width:1080px;margin:0 auto;position:relative;z-index:1}
-.hero-tagline{font-size:clamp(14px,1.5vw,16px);color:var(--gray-2);font-weight:300;margin-bottom:32px;max-width:680px;line-height:1.8}
-.hero-title{font-size:clamp(38px,5.5vw,58px);font-weight:800;color:#fff;line-height:1.05;letter-spacing:-1.5px;margin-bottom:10px;text-transform:uppercase}
-.hero-title span{color:var(--accent)}
-.hero-subtitle{font-size:clamp(18px,2.5vw,26px);color:var(--gray-3);font-weight:300;margin-bottom:8px}
-.hero-subtitle em{font-family:'Newsreader',serif;font-style:italic;color:var(--accent);font-size:1.05em}
-.hero-insight{background:rgba(94,235,194,.08);border-left:3px solid var(--accent);padding:16px 20px;border-radius:0 8px 8px 0;margin:28px 0;max-width:700px}
-.hero-insight p{color:var(--gray-3);font-size:15px;line-height:1.75}
-.hero-insight strong{color:#fff}
-.hero-meta{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:40px}
-.meta-chip{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);color:var(--gray-2);padding:5px 12px;border-radius:20px;font-size:12px}
-.hero-grid{display:grid;grid-template-columns:auto 1fr;gap:48px;align-items:start}
-.score-block{text-align:center;min-width:200px}
-.score-label{color:var(--gray-2);font-size:12px;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px}
-.score-big{font-size:clamp(80px,11vw,104px);font-weight:800;line-height:1;color:var(--warning)}
-.score-big span{font-size:clamp(30px,4vw,44px);color:var(--gray-1);font-weight:400}
-.score-sub{color:var(--gray-2);font-size:12px;margin-top:8px;line-height:1.5}
-.hero-facts{display:flex;flex-direction:column;gap:12px}
-.fact-row{display:flex;align-items:center;gap:14px;padding:14px 18px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:10px}
-.fact-icon{font-size:22px;flex-shrink:0}
-.fact-text{color:var(--gray-3);font-size:13.5px;line-height:1.4}
-.fact-text strong{color:#fff;display:block;font-size:14.5px;margin-bottom:2px}
-.hero-date{color:var(--gray-1);font-size:11px;margin-top:36px;line-height:1.6}
-section{padding:72px 24px}
-section:nth-child(even){background:var(--section-alt)}
-.section-inner{max-width:1080px;margin:0 auto}
-.section-tag{font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
-.section-title{font-size:clamp(22px,3vw,34px);font-weight:700;color:var(--text-dark);margin-bottom:16px;line-height:1.2}
-.section-title em{font-family:'Newsreader',serif;font-style:italic}
-.section-desc{color:#4A6076;font-size:16px;max-width:700px;margin-bottom:40px;line-height:1.75}
-.verdict-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
-.chart-box{background:#fff;border:1px solid #E8EFF7;border-radius:16px;padding:32px;box-shadow:0 4px 24px rgba(11,25,41,.06)}
-.chart-box h3{font-size:13px;font-weight:600;color:var(--gray-4);text-align:center;margin-bottom:24px;text-transform:uppercase;letter-spacing:.5px}
-.gaps-list{display:flex;flex-direction:column;gap:18px}
-.gap-card{background:var(--navy);border-radius:12px;padding:0;display:flex;overflow:hidden}
-.gap-bar{width:5px;flex-shrink:0}
-.gap-bar.red{background:var(--alert)}
-.gap-bar.amber{background:var(--warning)}
-.gap-body{padding:20px 22px;flex:1}
-.gap-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:5px}
-.gap-label.red{color:var(--alert)}
-.gap-label.amber{color:var(--warning)}
-.gap-title{font-size:15px;font-weight:700;color:#fff;margin-bottom:7px}
-.gap-desc{font-size:13px;color:var(--gray-2);line-height:1.6}
-.opportunity-box{margin-top:22px;background:rgba(94,235,194,.07);border:1px solid rgba(94,235,194,.2);border-radius:12px;padding:20px 24px}
-.opportunity-box p{color:var(--gray-4);font-size:14px;line-height:1.75}
-.ai-section{background:var(--navy) !important;padding:80px 24px}
-.ai-section .section-tag{color:var(--accent)}
-.ai-section .section-title{color:#fff}
-.ai-section .section-desc{color:var(--gray-2)}
-.ai-scenario{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:28px 32px;margin-bottom:40px;max-width:760px}
-.ai-scenario p{color:var(--gray-3);font-size:15px;line-height:1.85}
-.ai-scenario strong{color:#fff}
-.ai-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:40px}
-.ai-step{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:26px;text-align:center}
-.ai-step-icon{font-size:34px;margin-bottom:14px}
-.ai-step-title{font-size:12px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
-.ai-step-text{font-size:13px;color:var(--gray-2);line-height:1.55}
-.dr-rank-box{background:linear-gradient(135deg,rgba(94,235,194,.08),rgba(94,235,194,.03));border:2px solid rgba(94,235,194,.3);border-radius:16px;padding:36px;text-align:center;max-width:560px;margin:0 auto}
-.dr-rank-box h3{color:#fff;font-size:22px;font-weight:700;margin-bottom:10px}
-.dr-rank-box p{color:var(--gray-2);font-size:14px;margin-bottom:20px;line-height:1.65}
-.dr-rank-price{color:var(--accent);font-size:30px;font-weight:800;margin-bottom:22px}
-.btn-accent{display:inline-block;background:var(--accent);color:var(--navy);padding:13px 30px;border-radius:8px;font-weight:700;font-size:15px;text-decoration:none;transition:all .2s}
-.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:8px}
-.stat-card{background:#fff;border:1px solid #E8EFF7;border-radius:16px;padding:30px;box-shadow:0 2px 12px rgba(11,25,41,.05)}
-.stat-number{font-size:clamp(36px,4.5vw,52px);font-weight:800;color:var(--navy);margin-bottom:10px;line-height:1}
-.stat-number span{color:var(--accent);font-size:.62em}
-.stat-text{font-size:14px;color:var(--gray-4);line-height:1.6}
-.stat-source{font-size:11px;color:var(--gray-2);margin-top:10px;line-height:1.5}
-.proof-box{background:var(--navy);border-radius:16px;padding:36px;margin:40px 0;max-width:760px}
-.proof-box p{color:var(--gray-2);font-size:15px;line-height:1.85}
-.proof-box strong{color:var(--accent)}
-.roadmap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.road-card{background:var(--navy);border-radius:16px;overflow:hidden}
-.road-header{padding:22px 24px;border-bottom:1px solid rgba(255,255,255,.08)}
-.road-phase{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:7px}
-.road-phase.p1{color:var(--accent)}
-.road-phase.p2{color:var(--warning)}
-.road-phase.p3{color:var(--success)}
-.road-title{font-size:18px;font-weight:700;color:#fff}
-.road-body{padding:22px 24px}
-.road-item{display:flex;align-items:flex-start;gap:10px;margin-bottom:13px}
-.road-bullet{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:7px}
-.road-bullet.p1{background:var(--accent)}
-.road-bullet.p2{background:var(--warning)}
-.road-bullet.p3{background:var(--success)}
-.road-item-text{font-size:13px;color:var(--gray-2);line-height:1.6}
-.cta-section{background:var(--navy);padding:80px 24px}
-.cta-main{text-align:center}
-.cta-main h2{font-size:clamp(24px,3.5vw,40px);font-weight:800;color:#fff;margin-bottom:14px;line-height:1.2}
-.cta-main p{color:var(--gray-2);font-size:16px;margin-bottom:30px;line-height:1.6}
-.btn-big{display:inline-block;background:var(--accent);color:var(--navy);padding:18px 44px;border-radius:10px;font-weight:800;font-size:17px;text-decoration:none;transition:all .2s;letter-spacing:.3px}
-.btn-big:hover{background:var(--accent-dim);transform:translateY(-2px);box-shadow:0 10px 40px rgba(94,235,194,.3)}
-footer{background:#060D17;padding:44px 24px;text-align:center}
-.footer-inner{max-width:1080px;margin:0 auto}
-.footer-logo{color:var(--accent);font-weight:800;font-size:22px;margin-bottom:5px}
-.footer-name{color:#fff;font-size:16px;font-weight:600;margin-bottom:3px}
-.footer-role{color:var(--gray-1);font-size:13px;margin-bottom:18px}
-.footer-links{display:flex;justify-content:center;gap:28px;flex-wrap:wrap;margin-bottom:18px}
-.footer-links a{color:var(--gray-2);font-size:13px;text-decoration:none}
-.footer-copy{color:var(--gray-1);font-size:11px;line-height:1.6}
-@media(max-width:900px){
-  .hero-grid,.verdict-grid,.ai-steps,.roadmap-grid,.stats-grid{grid-template-columns:1fr}
-  .nav-links{display:none}
+:root {
+  --navy: #0B1929;
+  --navy-mid: #0F2236;
+  --navy-light: #14304D;
+  --navy-card: #162D4A;
+  --accent: #5EEBC2;
+  --accent-dim: #3CC49E;
+  --red: #D9534F;
+  --amber: #E8A820;
+  --green: #3DAD6C;
+  --text-dark: #1C2D3F;
+  --gray-1: #728698;
+  --gray-2: #9AABBD;
+  --gray-3: #C4CFDD;
+  --gray-4: #3D5066;
+  --page-bg: #FFFFFF;
+  --alt-bg: #F6F8FB;
 }
-@media print{nav{position:relative}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Outfit', sans-serif; background: var(--page-bg); color: var(--text-dark); line-height: 1.6; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* NAV */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--navy); padding: 0 24px;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 56px; box-shadow: 0 2px 16px rgba(0,0,0,0.3);
+}
+.nav-brand { color: var(--accent); font-weight: 700; font-size: 15px; letter-spacing: 0.5px; }
+.nav-links { display: flex; gap: 20px; }
+.nav-links a { color: var(--gray-3); font-size: 13px; font-weight: 500; transition: color 0.2s; }
+.nav-links a:hover { color: var(--accent); text-decoration: none; }
+.nav-print { background: var(--accent); color: var(--navy); border: none; padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 700; cursor: pointer; font-family: 'Outfit', sans-serif; }
+.nav-print:hover { background: var(--accent-dim); }
+
+/* HERO */
+.hero {
+  background: var(--navy);
+  padding: 64px 24px 56px;
+  text-align: center;
+}
+.hero-inner { max-width: 860px; margin: 0 auto; }
+.report-title {
+  font-size: clamp(32px, 6vw, 54px);
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+.report-tagline {
+  font-size: clamp(14px, 2vw, 17px);
+  font-weight: 300;
+  color: var(--gray-3);
+  max-width: 640px;
+  margin: 0 auto 36px;
+  line-height: 1.7;
+}
+.practice-chip {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--navy-light); border: 1px solid rgba(94,235,194,0.25);
+  border-radius: 30px; padding: 6px 18px; margin-bottom: 28px;
+}
+.practice-chip span { color: var(--gray-3); font-size: 13px; }
+.practice-chip .sep { color: var(--accent); }
+
+.hero-headline {
+  font-size: clamp(18px, 3vw, 26px);
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+.hero-headline em { font-family: 'Newsreader', serif; color: var(--accent); font-style: italic; }
+.hero-sub { color: var(--gray-2); font-size: 15px; margin-bottom: 40px; }
+
+.score-ring {
+  display: inline-flex; flex-direction: column; align-items: center;
+  background: var(--navy-mid); border: 2px solid rgba(94,235,194,0.3);
+  border-radius: 50%; width: 180px; height: 180px; justify-content: center;
+  margin-bottom: 32px; box-shadow: 0 0 40px rgba(94,235,194,0.12);
+}
+.score-num { font-size: clamp(52px, 8vw, 72px); font-weight: 800; color: var(--amber); line-height: 1; }
+.score-denom { color: var(--gray-2); font-size: 18px; font-weight: 400; }
+.score-label { color: var(--gray-3); font-size: 12px; letter-spacing: 1px; text-transform: uppercase; margin-top: 4px; }
+
+.hero-facts {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 16px;
+  margin-bottom: 32px;
+}
+.hero-fact {
+  background: var(--navy-light); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px; padding: 10px 18px; text-align: left;
+}
+.hero-fact .fact-val { font-size: 20px; font-weight: 700; color: #fff; }
+.hero-fact .fact-label { font-size: 11px; color: var(--gray-2); text-transform: uppercase; letter-spacing: 0.5px; }
+
+.hero-date { color: var(--gray-1); font-size: 12px; margin-top: 8px; }
+
+/* SECTIONS */
+.section { max-width: 1080px; margin: 0 auto; padding: 56px 24px; }
+.section-alt { background: var(--alt-bg); }
+.section-dark { background: var(--navy); }
+.section-dark .section { color: #fff; }
+
+.section-label {
+  font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 8px;
+}
+.section-title {
+  font-size: clamp(22px, 4vw, 34px); font-weight: 800; color: var(--text-dark);
+  margin-bottom: 12px; line-height: 1.25;
+}
+.section-dark .section-title { color: #fff; }
+.section-title em { font-family: 'Newsreader', serif; color: var(--accent); font-style: italic; }
+.section-intro { color: var(--gray-1); font-size: 16px; max-width: 680px; margin-bottom: 40px; line-height: 1.7; }
+.section-dark .section-intro { color: var(--gray-3); }
+
+.divider { height: 4px; background: linear-gradient(90deg, var(--accent), transparent); border-radius: 4px; margin-bottom: 56px; }
+.divider-navy { height: 4px; background: linear-gradient(90deg, var(--navy-light), transparent); border-radius: 4px; margin-bottom: 56px; }
+
+/* RADAR CHART */
+.chart-frame { position: relative; width: 100%; height: 420px; }
+.chart-frame.bar { height: 400px; }
+.chart-frame.bar-sm { height: 300px; }
+.chart-frame canvas { width: 100% !important; height: 100% !important; display: block; }
+
+/* VERDICT GRID */
+.verdict-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start; }
+@media (max-width: 720px) { .verdict-grid { grid-template-columns: 1fr; } }
+
+.gap-cards { display: flex; flex-direction: column; gap: 16px; }
+.gap-card {
+  background: var(--navy-card); border-radius: 12px; padding: 18px 20px;
+  border-left: 4px solid var(--red);
+}
+.gap-card.amber { border-left-color: var(--amber); }
+.gap-card.green { border-left-color: var(--green); }
+.gap-num { font-size: 13px; font-weight: 700; color: var(--red); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+.gap-card.amber .gap-num { color: var(--amber); }
+.gap-card.green .gap-num { color: var(--green); }
+.gap-title { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+.gap-desc { font-size: 13px; color: var(--gray-3); line-height: 1.6; }
+.opportunity-bar {
+  background: var(--navy-light); border: 1px solid rgba(94,235,194,0.2);
+  border-radius: 12px; padding: 20px 24px; margin-top: 20px;
+}
+.opportunity-bar p { color: var(--gray-3); font-size: 14px; line-height: 1.7; }
+.opportunity-bar strong { color: var(--accent); }
+
+/* BENCHMARK TABLE */
+.bench-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.bench-table th { background: var(--navy); color: var(--gray-3); padding: 10px 14px; text-align: left; font-weight: 600; font-size: 12px; letter-spacing: 0.5px; text-transform: uppercase; }
+.bench-table td { padding: 11px 14px; border-bottom: 1px solid var(--alt-bg); vertical-align: middle; }
+.bench-table tr:last-child td { border-bottom: none; }
+.bench-table tr.target { background: rgba(94,235,194,0.06); }
+.bench-table tr.target td { font-weight: 700; }
+.bench-table .tag { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 700; }
+.tag-red { background: rgba(217,83,79,0.15); color: var(--red); }
+.tag-amber { background: rgba(232,168,32,0.15); color: var(--amber); }
+.tag-green { background: rgba(61,173,108,0.15); color: var(--green); }
+.tag-accent { background: rgba(94,235,194,0.15); color: var(--accent-dim); }
+
+/* SCORE BADGES */
+.score-badge {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px; border-radius: 50%; font-weight: 800; font-size: 15px;
+}
+.badge-red { background: rgba(217,83,79,0.15); color: var(--red); }
+.badge-amber { background: rgba(232,168,32,0.15); color: var(--amber); }
+.badge-teal { background: rgba(94,235,194,0.15); color: var(--accent-dim); }
+.badge-green { background: rgba(61,173,108,0.15); color: var(--green); }
+
+/* AUDIT SECTIONS */
+.audit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 32px; }
+@media (max-width: 720px) { .audit-grid { grid-template-columns: 1fr; } }
+.audit-card {
+  background: var(--navy-card); border-radius: 12px; padding: 22px;
+  border-top: 3px solid var(--navy-light);
+}
+.audit-card.section-card {
+  background: #fff; border: 1px solid #E8EDF3; border-top: 4px solid var(--navy);
+  box-shadow: 0 2px 12px rgba(27,45,63,0.07);
+}
+.audit-card-label { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gray-1); margin-bottom: 6px; }
+.audit-card-title { font-size: 17px; font-weight: 700; color: #fff; margin-bottom: 8px; line-height: 1.35; }
+.audit-card.section-card .audit-card-title { color: var(--text-dark); }
+.audit-card p { font-size: 14px; color: var(--gray-3); line-height: 1.65; }
+.audit-card.section-card p { color: var(--gray-1); }
+
+.dimension-header { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+.dimension-score-box {
+  background: var(--navy); border-radius: 12px; padding: 12px 18px; text-align: center; min-width: 80px;
+}
+.dim-score-num { font-size: 32px; font-weight: 800; color: var(--amber); line-height: 1; }
+.dim-score-denom { font-size: 13px; color: var(--gray-2); }
+.dim-info .dim-title { font-size: 20px; font-weight: 800; color: var(--text-dark); margin-bottom: 4px; }
+.dim-info .dim-subtitle { font-size: 14px; color: var(--gray-1); }
+
+.finding-box {
+  background: var(--alt-bg); border-radius: 10px; padding: 16px 20px; margin-bottom: 16px;
+  border-left: 4px solid var(--navy);
+}
+.finding-box.positive { border-left-color: var(--green); }
+.finding-box.gap { border-left-color: var(--red); }
+.finding-box h4 { font-size: 13px; font-weight: 700; color: var(--text-dark); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+.finding-box p { font-size: 14px; color: var(--gray-1); line-height: 1.6; }
+
+.rec-list { list-style: none; }
+.rec-list li {
+  background: var(--navy-card); border-radius: 10px; padding: 14px 18px;
+  margin-bottom: 10px; border-left: 4px solid var(--accent);
+  color: #fff; font-size: 14px; line-height: 1.6;
+  display: flex; gap: 12px; align-items: flex-start;
+}
+.rec-list li.priority-high { border-left-color: var(--red); }
+.rec-list li.priority-mid { border-left-color: var(--amber); }
+.rec-list li .rec-badge {
+  flex-shrink: 0; font-size: 10px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.5px; padding: 3px 8px; border-radius: 10px; margin-top: 2px;
+}
+.rec-badge-red { background: rgba(217,83,79,0.2); color: #ff8f8c; }
+.rec-badge-amber { background: rgba(232,168,32,0.2); color: #f5c842; }
+.rec-badge-teal { background: rgba(94,235,194,0.2); color: var(--accent); }
+
+/* ROADMAP */
+.roadmap-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+@media (max-width: 900px) { .roadmap-grid { grid-template-columns: 1fr; } }
+.roadmap-card {
+  background: #fff; border: 1px solid #E8EDF3; border-radius: 14px;
+  padding: 28px 24px; border-top: 5px solid var(--navy);
+  box-shadow: 0 2px 12px rgba(27,45,63,0.07);
+}
+.roadmap-phase { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--accent-dim); margin-bottom: 8px; }
+.roadmap-timeline { font-size: 22px; font-weight: 800; color: var(--text-dark); margin-bottom: 16px; }
+.roadmap-list { list-style: none; }
+.roadmap-list li { font-size: 14px; color: var(--gray-1); padding: 7px 0; border-bottom: 1px solid var(--alt-bg); line-height: 1.55; padding-left: 20px; position: relative; }
+.roadmap-list li::before { content: "→"; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+.roadmap-list li:last-child { border-bottom: none; }
+
+/* KPI TABLE */
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
+.kpi-card {
+  background: var(--navy-card); border-radius: 12px; padding: 20px;
+  border-top: 3px solid var(--accent);
+}
+.kpi-name { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent); margin-bottom: 8px; }
+.kpi-metric { font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 6px; }
+.kpi-tool { font-size: 12px; color: var(--gray-2); }
+
+/* PRICING */
+.pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin: 32px 0; }
+@media (max-width: 860px) { .pricing-grid { grid-template-columns: 1fr; } }
+.pricing-card {
+  background: var(--navy-card); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px; padding: 28px 22px; position: relative;
+}
+.pricing-card.featured {
+  border: 2px solid var(--accent); background: var(--navy-light);
+  transform: translateY(-8px); box-shadow: 0 12px 40px rgba(94,235,194,0.15);
+}
+.featured-badge {
+  position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+  background: var(--accent); color: var(--navy); font-size: 12px; font-weight: 700;
+  padding: 4px 14px; border-radius: 20px; white-space: nowrap;
+}
+.pricing-tier { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--gray-2); margin-bottom: 6px; }
+.pricing-name { font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 6px; }
+.pricing-tagline { font-size: 13px; color: var(--gray-3); font-style: italic; margin-bottom: 18px; line-height: 1.5; }
+.pricing-price { font-size: 36px; font-weight: 800; color: var(--accent); line-height: 1; }
+.pricing-price .price-curr { font-size: 16px; font-weight: 500; vertical-align: super; }
+.pricing-period { font-size: 12px; color: var(--gray-2); margin-bottom: 20px; }
+.pricing-guarantee {
+  background: rgba(94,235,194,0.08); border: 1px solid rgba(94,235,194,0.2);
+  border-radius: 8px; padding: 10px 14px; margin-bottom: 18px;
+}
+.pricing-guarantee p { font-size: 12px; color: var(--gray-3); line-height: 1.5; }
+.pricing-guarantee p strong { color: var(--accent); }
+.pricing-includes { list-style: none; margin-bottom: 22px; }
+.pricing-includes li { font-size: 13px; color: var(--gray-3); padding: 5px 0; padding-left: 20px; position: relative; line-height: 1.5; }
+.pricing-includes li::before { content: "✓"; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+.pricing-anchor { font-size: 12px; color: var(--gray-1); margin-bottom: 16px; }
+.pricing-anchor del { color: var(--gray-1); }
+.pricing-cta {
+  display: block; width: 100%; text-align: center;
+  background: var(--accent); color: var(--navy); font-weight: 700;
+  padding: 12px; border-radius: 8px; font-size: 14px;
+  border: none; cursor: pointer; font-family: 'Outfit', sans-serif;
+  transition: background 0.2s;
+}
+.pricing-cta:hover { background: var(--accent-dim); text-decoration: none; }
+.pricing-cta-outline {
+  background: transparent; border: 2px solid var(--accent); color: var(--accent);
+}
+.pricing-cta-outline:hover { background: rgba(94,235,194,0.1); }
+.guarantee-bar {
+  background: rgba(94,235,194,0.06); border: 1px solid rgba(94,235,194,0.15);
+  border-radius: 12px; padding: 16px 24px; text-align: center;
+  color: var(--gray-3); font-size: 13px; line-height: 1.6; margin-top: 8px;
+}
+.guarantee-bar strong { color: var(--accent); }
+
+/* AI SECTION */
+.ai-steps { display: flex; gap: 16px; margin: 28px 0; }
+@media (max-width: 640px) { .ai-steps { flex-direction: column; } }
+.ai-step {
+  flex: 1; background: var(--navy-light); border-radius: 12px; padding: 20px;
+  text-align: center;
+}
+.ai-step .step-icon { font-size: 28px; margin-bottom: 10px; }
+.ai-step .step-title { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+.ai-step .step-desc { font-size: 12px; color: var(--gray-3); line-height: 1.5; }
+
+.ai-pillars { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin: 24px 0; }
+@media (max-width: 640px) { .ai-pillars { grid-template-columns: 1fr; } }
+.ai-pillar {
+  background: var(--navy-light); border-radius: 10px; padding: 16px 18px;
+}
+.pillar-name { font-size: 14px; font-weight: 700; color: var(--accent); margin-bottom: 8px; }
+.checklist { list-style: none; }
+.checklist li { font-size: 13px; color: var(--gray-3); padding: 3px 0; padding-left: 20px; position: relative; }
+.checklist li::before { position: absolute; left: 0; }
+.checklist li.ok::before { content: "✅"; }
+.checklist li.bad::before { content: "❌"; }
+
+/* FINAL CTA */
+.final-cta {
+  background: var(--navy); padding: 72px 24px; text-align: center;
+}
+.final-cta h2 { font-size: clamp(22px, 4vw, 36px); font-weight: 800; color: #fff; margin-bottom: 12px; line-height: 1.25; }
+.final-cta h2 em { font-family: 'Newsreader', serif; color: var(--accent); font-style: italic; }
+.final-cta p { color: var(--gray-3); font-size: 16px; margin-bottom: 32px; max-width: 560px; margin-left: auto; margin-right: auto; line-height: 1.7; }
+.cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.btn-primary {
+  background: var(--accent); color: var(--navy); font-weight: 700; font-size: 16px;
+  padding: 14px 32px; border-radius: 8px; border: none; cursor: pointer;
+  font-family: 'Outfit', sans-serif; transition: background 0.2s; display: inline-block;
+}
+.btn-primary:hover { background: var(--accent-dim); text-decoration: none; }
+.btn-secondary {
+  background: transparent; color: var(--accent); font-weight: 700; font-size: 16px;
+  padding: 14px 32px; border-radius: 8px; border: 2px solid var(--accent); cursor: pointer;
+  font-family: 'Outfit', sans-serif; transition: all 0.2s; display: inline-block;
+}
+.btn-secondary:hover { background: rgba(94,235,194,0.1); text-decoration: none; }
+
+/* MARKET STATS */
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+.stat-card {
+  background: #fff; border: 1px solid #E8EDF3; border-radius: 12px;
+  padding: 22px; border-top: 4px solid var(--navy);
+  box-shadow: 0 2px 8px rgba(27,45,63,0.06);
+}
+.stat-num { font-size: 34px; font-weight: 800; color: var(--navy); line-height: 1; margin-bottom: 6px; }
+.stat-desc { font-size: 13px; color: var(--gray-1); line-height: 1.5; }
+.stat-source { font-size: 11px; color: var(--gray-2); margin-top: 8px; }
+
+/* FOOTER */
+footer { background: #08111E; padding: 24px; text-align: center; }
+footer p { color: var(--gray-1); font-size: 12px; }
+footer strong { color: var(--accent); }
+
+/* PRINT */
+@media print {
+  nav { display: none; }
+  .final-cta .cta-buttons { display: none; }
+  .hero { background: var(--navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .section-dark { background: var(--navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .audit-card { background: #f5f7fa !important; border: 1px solid #ddd; }
+  .rec-list li { background: #f5f7fa; border: 1px solid #ddd; }
+  .pricing-card { background: #f5f7fa; border: 1px solid #ddd; break-inside: avoid; }
+  body { font-size: 12px; }
+}
+
+/* UTIL */
+.mb-8 { margin-bottom: 8px; }
+.mb-16 { margin-bottom: 16px; }
+.mb-24 { margin-bottom: 24px; }
+.mb-32 { margin-bottom: 32px; }
+.mt-24 { margin-top: 24px; }
+.text-accent { color: var(--accent); }
+.text-amber { color: var(--amber); }
+.text-red { color: var(--red); }
+.text-gray { color: var(--gray-2); }
+.text-sm { font-size: 13px; }
+.fw-700 { font-weight: 700; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+@media (max-width: 640px) { .two-col { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
 
+<!-- NAV -->
 <nav>
-  <div class="nav-inner">
-    <div class="nav-brand">FLOW Results · Diagnóstico Digital</div>
-    <ul class="nav-links">
-      <li><a href="#veredicto">Veredicto</a></li>
-      <li><a href="#ia">IA</a></li>
-      <li><a href="#mercado">Mercado</a></li>
-      <li><a href="#roadmap">Roadmap</a></li>
-      <li><a href="#cta">Siguiente Paso</a></li>
-    </ul>
-    <button class="nav-print" onclick="window.print()">Imprimir PDF</button>
+  <div class="nav-brand">FLOW Results — Diagnóstico DPI</div>
+  <div class="nav-links">
+    <a href="#veredicto">Veredicto</a>
+    <a href="#benchmark">Benchmark</a>
+    <a href="#auditoria">Auditoría</a>
+    <a href="#roadmap">Roadmap</a>
+    <a href="#doctorrank">Doctor Rank</a>
   </div>
+  <button class="nav-print" onclick="window.print()">Imprimir</button>
 </nav>
 
+<!-- HERO -->
 <section class="hero">
   <div class="hero-inner">
-    <p class="hero-tagline">Las mejores clínicas merecen ser encontradas en internet. Este reporte revela exactamente qué está frenando su visibilidad digital y cómo convertirse en la referencia #1 de su especialidad.</p>
-    <h1 class="hero-title">Diagnóstico de<br>Visibilidad <span>Digital</span></h1>
-    <p class="hero-subtitle">Dr. Antonio Gómez Tristán — <em>Ortopedista / Traumatólogo</em></p>
-    <div class="hero-insight">
-      <p><strong>Los principales ortopedistas privados en CIMA y La Católica ya están construyendo su marca digital con blogs, redes sociales y perfiles de Google optimizados.</strong> Sé lo que los pacientes buscan cuando están considerando una cirugía de columna, rodilla o cadera — y cómo hacer que lo encuentren a usted primero.</p>
+    <h1 class="report-title">Diagnóstico de Visibilidad Digital</h1>
+    <p class="report-tagline">Los mejores cirujanos merecen ser encontrados en internet. Este reporte revela un diagnóstico completo de cómo convertirse en el referente #1 de Ortopedia y Traumatología en Costa Rica.</p>
+
+    <div class="practice-chip">
+      <span>Ortopedia y Traumatología</span>
+      <span class="sep">·</span>
+      <span>Escazú, San José</span>
+      <span class="sep">·</span>
+      <span>gomeztristan.com</span>
     </div>
-    <div class="hero-meta">
-      <span class="meta-chip">🏥 Ortopedista / Traumatólogo</span>
-      <span class="meta-chip">📍 Costa Rica</span>
-      <span class="meta-chip">🏨 Hospital CIMA (Torre 3, Av. Médica P3 Suite 342)</span>
+
+    <h2 class="hero-headline">
+      El Dr. Gómez Tristán tiene las credenciales de <em>Harvard</em>.<br>
+      Ahora necesita la infraestructura <em>digital</em> para que el mercado lo sepa.
+    </h2>
+    <p class="hero-sub">Cirujano Ortopedista · Hospital CIMA Escazú · Licencia MED6274 activa · Fellowships Harvard Medical School 2008–2011</p>
+
+    <div class="score-ring">
+      <span class="score-num">1.9</span>
+      <span class="score-denom">/ 5.0</span>
+      <span class="score-label">Score Global</span>
     </div>
-    <div class="hero-grid">
-      <div class="score-block">
-        <div class="score-label">Índice de Visibilidad Digital</div>
-        <div class="score-big">2.5<span> / 5.0</span></div>
-        <div class="score-sub">Potencial alto de mejora<br>detectadas en su práctica</div>
+
+    <div class="hero-facts">
+      <div class="hero-fact">
+        <div class="fact-val">~0</div>
+        <div class="fact-label">Reseñas Huli encontradas</div>
       </div>
-      <div class="hero-facts">
-        
-        <div class="fact-row">
-          <span class="fact-icon">⭐</span>
-          <div class="fact-text">
-            <strong>Sin reseñas verificadas detectadas</strong>
-            Huli Health y Google Business Profile muestran 0 opiniones públicas — la primera prioridad a cambiar.
-          </div>
-        </div>
-        <div class="fact-row">
-          <span class="fact-icon">📱</span>
-          <div class="fact-text">
-            <strong>Sin Instagram o redes sociales propias detectadas</strong>
-            Los colegas con redes activas capturan pacientes que buscan confianza antes de agendar.
-          </div>
-        </div>
-    <div class="fact-row">
-      <span class="fact-icon">🤖</span>
-      <div class="fact-text">
-        <strong>Visibilidad en IA: media</strong>
-        Aparece en algunas búsquedas en ChatGPT/Perplexity pero no de primero.
+      <div class="hero-fact">
+        <div class="fact-val">1 pág.</div>
+        <div class="fact-label">Sitio web (brochure estático)</div>
       </div>
-    </div>
-    <div class="fact-row">
-      <span class="fact-icon">📍</span>
-      <div class="fact-text">
-        <strong>Google Business Profile: no reclamado</strong>
-        Los pacientes que buscan en Google Maps no encuentran su perfil verificado.
+      <div class="hero-fact">
+        <div class="fact-val">Ninguna</div>
+        <div class="fact-label">Presencia en redes sociales propias</div>
+      </div>
+      <div class="hero-fact">
+        <div class="fact-val">35</div>
+        <div class="fact-label">Procedimientos en Huli (bien listados)</div>
       </div>
     </div>
-      </div>
-    </div>
-    <p class="hero-date">Preparado por FLOW Results · Mayo 2026 · Fuentes: Huli Health, Google Search, directorios hospitalarios CR · Datos observacionales de fuentes abiertas</p>
+
+    <p class="hero-date">Preparado por FLOW Results · Mayo 2026 · Fuentes: Huli Health, Hospital CIMA Directorio, LinkedIn, gomeztristan.com</p>
   </div>
 </section>
 
-<section id="veredicto">
-  <div class="section-inner">
-    <div class="section-tag">Veredicto Ejecutivo</div>
-    <h2 class="section-title">Las brechas que frenan su crecimiento <em>digital</em></h2>
-    <p class="section-desc">Su reputación clínica es sólida. El problema no es la calidad de su práctica — es que los pacientes correctos no lo están encontrando primero cuando investigan en línea.</p>
-    <div class="verdict-grid">
-      <div class="chart-box">
-        <h3>Visibilidad Digital: Tristán vs. Promedio mercado CR</h3>
-        <canvas id="radarChart" width="380" height="380"></canvas>
+<!-- VEREDICTO EJECUTIVO -->
+<div id="veredicto" class="section-alt">
+<div class="section">
+  <div class="section-label">Veredicto Ejecutivo</div>
+  <h2 class="section-title">Un cirujano de talla <em>mundial</em> con visibilidad de clínica local</h2>
+  <p class="section-intro">El Dr. Gómez Tristán tiene credenciales que la mayoría de ortopedistas en Costa Rica no puede igualar: tres fellowship en Harvard, 35 procedimientos listados, licencia activa en tres hospitales top. El problema es que Google y los pacientes no lo saben — porque su infraestructura digital no cuenta esa historia.</p>
+
+  <div class="verdict-grid">
+    <div>
+      <div class="chart-frame">
+        <canvas id="radarChart"></canvas>
+      </div>
+    </div>
+    <div>
+      <div class="gap-cards">
+        <div class="gap-card">
+          <div class="gap-num">Gap #1 — Crítico</div>
+          <div class="gap-title">Sin reputación digital verificable</div>
+          <div class="gap-desc">Los líderes del mercado tienen 400–843 reseñas en Huli. El Dr. Gómez Tristán no tiene un perfil Huli activo con reseñas públicas visibles — el gap más urgente en el mercado costarricense donde Huli es el estándar.</div>
+        </div>
+        <div class="gap-card amber">
+          <div class="gap-num">Gap #2 — Alto</div>
+          <div class="gap-title">Sitio web sin capacidad de conversión</div>
+          <div class="gap-desc">gomeztristan.com es una página estática con nombre, teléfono y email. Sin agendamiento en línea, sin páginas de procedimientos, sin CTAs claros. Los competidores tienen booking en línea vía Huli; él no.</div>
+        </div>
+        <div class="gap-card amber">
+          <div class="gap-num">Gap #3 — Alto</div>
+          <div class="gap-title">Cero presencia en redes sociales propias</div>
+          <div class="gap-desc">No se encontró Instagram, Facebook ni YouTube propios. Su única mención en redes fue un post del Hospital CIMA en 2022. Los competidores activos en social generan visitas orgánicas semanales.</div>
+        </div>
+        <div class="opportunity-bar">
+          <p><strong>Estimado ilustrativo:</strong> Cerrar estos tres gaps podría representar entre 8 y 18 consultas adicionales por mes captadas de pacientes que actualmente eligen a un competidor con mejor visibilidad en línea — basado en benchmarks del mercado privado en CR. Estimación ilustrativa; resultados reales varían según especialidad y temporada.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- AI SECTION -->
+<div id="doctorrank" style="background: var(--navy);">
+<div class="section">
+  <div class="section-label">Visibilidad en IA</div>
+  <h2 class="section-title" style="color:#fff;">¿Le gustaría que ChatGPT y Google AI lo recomienden de primero?</h2>
+  <p class="section-intro">Son las 10:30 PM. Un paciente abre ChatGPT y escribe: "¿Cuál es el mejor ortopedista en Escazú para una cirugía de rodilla?" ChatGPT responde con nombres. El Dr. Gómez Tristán no aparece — a pesar de tener fellowships de Harvard que muchos competidores no tienen. Ese paciente necesitaba una cirugía de $3,000–$8,000. Nunca supo que lo perdió.</p>
+
+  <div class="ai-steps">
+    <div class="ai-step">
+      <div class="step-icon">🔍</div>
+      <div class="step-title">Paciente pregunta a la IA</div>
+      <div class="step-desc">"¿Quién es el mejor ortopedista para ligamento cruzado en Costa Rica?"</div>
+    </div>
+    <div class="ai-step">
+      <div class="step-icon">🧠</div>
+      <div class="step-title">La IA busca señales de autoridad</div>
+      <div class="step-desc">Escanea reseñas, contenido estructurado, citas en directorios, menciones editoriales, FAQ indexadas.</div>
+    </div>
+    <div class="ai-step">
+      <div class="step-icon">✅</div>
+      <div class="step-title">Recomienda al que tiene más señales</div>
+      <div class="step-desc">No al más hábil — al más visible. El que tiene contenido, reseñas y estructura gana.</div>
+    </div>
+  </div>
+
+  <h3 style="color:#fff; font-size:18px; font-weight:700; margin-bottom:16px;">Los 4 pilares que la IA verifica — y el estado actual del Dr. Gómez Tristán:</h3>
+  <div class="ai-pillars">
+    <div class="ai-pillar">
+      <div class="pillar-name">📝 Contenido Estructurado</div>
+      <ul class="checklist">
+        <li class="ok">35 procedimientos listados en Huli/CIMA</li>
+        <li class="bad">Sin páginas individuales por procedimiento en su sitio</li>
+        <li class="bad">Sin artículos educativos ni FAQs indexadas</li>
+        <li class="bad">Sin schema markup en gomeztristan.com</li>
+      </ul>
+    </div>
+    <div class="ai-pillar">
+      <div class="pillar-name">⭐ Reputación y Reseñas</div>
+      <ul class="checklist">
+        <li class="bad">Sin reseñas verificables en Huli Health</li>
+        <li class="bad">Google Business Profile: sin datos públicos encontrados</li>
+        <li class="bad">Sin volumen de reseñas en ninguna plataforma CR</li>
+        <li class="ok">Presencia confirmada en directorios hospitalarios</li>
+      </ul>
+    </div>
+    <div class="ai-pillar">
+      <div class="pillar-name">📍 Citas y Directorios</div>
+      <ul class="checklist">
+        <li class="ok">Listado en Hospital CIMA (directorio.hospitalcima.com)</li>
+        <li class="ok">Listado en Avenida Médica (Huli Labs)</li>
+        <li class="ok">LinkedIn activo con credenciales completas</li>
+        <li class="bad">Sin presencia en Colegio de Médicos directorio web</li>
+      </ul>
+    </div>
+    <div class="ai-pillar">
+      <div class="pillar-name">🔗 Autoridad y Menciones</div>
+      <ul class="checklist">
+        <li class="ok">1 mención editorial en Instagram Hospital CIMA (2022)</li>
+        <li class="ok">Fellowship Harvard Medical School — alta credencial</li>
+        <li class="bad">Sin menciones en medios de comunicación locales</li>
+        <li class="bad">Sin artículos firmados ni colaboraciones editoriales</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- PRICING -->
+  <div style="margin-top: 40px;">
+    <div class="section-label" style="text-align:center; margin-bottom:8px;">Doctor Rank by FLOW Results</div>
+    <h3 style="color:#fff; font-size:22px; font-weight:800; text-align:center; margin-bottom:6px;">Tres caminos hacia la visibilidad que usted merece</h3>
+    <p style="color:var(--gray-3); font-size:14px; text-align:center; margin-bottom:28px;">Su agenda ya está llena. La meta no es más pacientes — es ser reconocido como el referente de su especialidad en Costa Rica y que la IA, Google y sus colegas lo confirmen.</p>
+
+    <div class="pricing-grid">
+      <!-- TIER 1 -->
+      <div class="pricing-card">
+        <div class="pricing-tier">Nivel 1</div>
+        <div class="pricing-name">Visibilidad IA</div>
+        <div class="pricing-tagline">"Que ChatGPT lo mencione cuando un paciente busque su especialidad en Costa Rica"</div>
+        <div class="pricing-price"><span class="price-curr">$</span>800</div>
+        <div class="pricing-period">USD / mes · ≈ ₡420,000</div>
+        <div class="pricing-guarantee">
+          <p><strong>Garantía:</strong> Su nombre aparece mencionado en respuestas de ChatGPT/Perplexity/Google AI sobre ortopedia en Costa Rica dentro de 90 días — o le devolvemos el último mes.</p>
+        </div>
+        <ul class="pricing-includes">
+          <li>Perfil Huli optimizado con reseñas activas</li>
+          <li>Google Business Profile reclamado y configurado</li>
+          <li>Estructura de schema markup en su sitio web</li>
+          <li>8 publicaciones mensuales de contenido educativo</li>
+          <li>Reporte mensual de visibilidad en IA</li>
+        </ul>
+        <div class="pricing-anchor">Valor real $1,800 · <strong>usted paga $800</strong></div>
+        <a href="https://calendly.com/recheverria-flow/sesion-de-estrategia-con-flow-results-clone" class="pricing-cta pricing-cta-outline" target="_blank">Agendar sesión</a>
+      </div>
+
+      <!-- TIER 2 FEATURED -->
+      <div class="pricing-card featured">
+        <div class="featured-badge">⭐ Recomendado para Dr. Gómez Tristán</div>
+        <div class="pricing-tier">Nivel 2</div>
+        <div class="pricing-name">Autoridad Digital</div>
+        <div class="pricing-tagline">"Dominar las búsquedas de ortopedia en Google y construir una audiencia que lo siga"</div>
+        <div class="pricing-price"><span class="price-curr">$</span>1,800</div>
+        <div class="pricing-period">USD / mes · ≈ ₡946,000</div>
+        <div class="pricing-guarantee">
+          <p><strong>Garantía:</strong> Top 3 en Google para 3 búsquedas clave + duplicar seguidores de Instagram en 6 meses — o el segundo mes es gratis.</p>
+        </div>
+        <ul class="pricing-includes">
+          <li>Todo lo de Visibilidad IA +</li>
+          <li>Nuevo sitio web optimizado con páginas por procedimiento</li>
+          <li>Instagram y Facebook gestionados profesionalmente</li>
+          <li>20 contenidos mensuales (reels, posts, artículos)</li>
+          <li>SEO local activo para Escazú + Costa Rica</li>
+          <li>Agendamiento en línea integrado con Huli</li>
+          <li>Campañas de reseñas automatizadas</li>
+        </ul>
+        <div class="pricing-anchor">Valor real $4,200 · <strong>usted paga $1,800</strong></div>
+        <a href="https://calendly.com/recheverria-flow/sesion-de-estrategia-con-flow-results-clone" class="pricing-cta" target="_blank">Quiero ser referente</a>
+      </div>
+
+      <!-- TIER 3 -->
+      <div class="pricing-card">
+        <div class="pricing-tier">Nivel 3</div>
+        <div class="pricing-name">Referente Nacional</div>
+        <div class="pricing-tagline">"Ser la voz pública de la Ortopedia en Costa Rica — en medios, en Google y en la IA"</div>
+        <div class="pricing-price"><span class="price-curr">$</span>3,500</div>
+        <div class="pricing-period">USD / mes · ≈ ₡1,838,000</div>
+        <div class="pricing-guarantee">
+          <p><strong>Garantía:</strong> #1 en Google y ChatGPT + 25,000+ seguidores combinados + 6 apariciones en medios en 12 meses — o seguimos trabajando gratis hasta cumplirlo.</p>
+        </div>
+        <ul class="pricing-includes">
+          <li>Todo lo de Autoridad Digital +</li>
+          <li>Relaciones públicas y prensa especializada</li>
+          <li>YouTube con contenido educativo mensual</li>
+          <li>Podcast o columna en medio de salud</li>
+          <li>Campaña de posicionamiento como referente en cirugía deportiva</li>
+          <li>Estrategia de turismo médico (inglés)</li>
+          <li>Gestor de cuenta dedicado</li>
+        </ul>
+        <div class="pricing-anchor">Valor real $8,000 · <strong>usted paga $3,500</strong></div>
+        <a href="https://calendly.com/recheverria-flow/sesion-de-estrategia-con-flow-results-clone" class="pricing-cta pricing-cta-outline" target="_blank">Agendar sesión</a>
+      </div>
+    </div>
+
+    <div class="guarantee-bar">
+      <strong>Garantía FLOW Results</strong> — Sobre visibilidad y autoridad, no sobre número de pacientes. Si no alcanzamos las métricas comprometidas, no cobramos ese mes. Sin contratos a 12 meses. Puede salir cuando quiera.
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- MARKET CONTEXT -->
+<div class="section-alt">
+<div class="section">
+  <div class="section-label">Contexto de Mercado</div>
+  <h2 class="section-title">Así elige un paciente a su <em>ortopedista</em> en Costa Rica hoy</h2>
+  <p class="section-intro">El comportamiento digital del paciente costarricense privado ha cambiado radicalmente. Referidos siguen siendo importantes — pero ya no suficientes si su competidor tiene 600 reseñas y usted no tiene ninguna visible.</p>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-num">87%</div>
+      <div class="stat-desc">de los consumidores lee reseñas en línea antes de elegir un proveedor de servicios locales, incluyendo médicos.</div>
+      <div class="stat-source">Fuente: BrightLocal Local Consumer Review Survey 2024 · brightlocal.com</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">65%</div>
+      <div class="stat-desc">de los pacientes privados en LATAM busca en Google antes de agendar una primera consulta con un especialista.</div>
+      <div class="stat-source">Fuente: Huli Health Blog, Patient Behavior in Latin America 2024 · huli.io</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">#1</div>
+      <div class="stat-desc">Huli Health es el directorio médico dominante en Costa Rica — más del 65 ortopedistas listados, con sistema de agendamiento en línea activo.</div>
+      <div class="stat-source">Fuente: hulihealth.com — búsqueda directa mayo 2026</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">843</div>
+      <div class="stat-desc">reseñas tiene el ortopedista #1 de Huli en Costa Rica (mismo hospital CIMA). El Dr. Gómez Tristán: ninguna visible.</div>
+      <div class="stat-source">Fuente: hulihealth.com/es/doctor/fernando-contreras-soares · mayo 2026</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- BENCHMARK -->
+<div id="benchmark">
+<div class="section">
+  <div class="section-label">Benchmark Competitivo</div>
+  <h2 class="section-title">Reseñas en Huli Health — ortopedistas San José / Escazú</h2>
+  <p class="section-intro">Los datos muestran un mercado donde las reseñas en Huli son la moneda de confianza. El Dr. Gómez Tristán opera en el mismo hospital que Fernando Contreras Soares — quien tiene 843 reseñas. Esa brecha es visible para cualquier paciente que compare.</p>
+
+  <div class="chart-frame bar" style="margin-bottom:32px;">
+    <canvas id="benchChart"></canvas>
+  </div>
+
+  <div style="overflow-x:auto;">
+  <table class="bench-table">
+    <thead>
+      <tr>
+        <th>Médico</th>
+        <th>Huli Reviews</th>
+        <th>Rating Huli</th>
+        <th>Hospital</th>
+        <th>Posición mercado</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a href="https://www.hulihealth.com/es/doctor/fernando-contreras-soares" target="_blank">Dr. Fernando Contreras Soares</a></td>
+        <td>843</td>
+        <td>⭐ 5.0</td>
+        <td>CIMA Escazú</td>
+        <td><span class="tag tag-green">Líder #1</span></td>
+      </tr>
+      <tr>
+        <td><a href="https://www.hulihealth.com/es/doctor/gary-wilson-sanabria-avila" target="_blank">Dr. Gary Wilson Sanabria</a></td>
+        <td>676</td>
+        <td>⭐ 5.0</td>
+        <td>La Católica</td>
+        <td><span class="tag tag-green">Top 3</span></td>
+      </tr>
+      <tr>
+        <td><a href="https://www.hulihealth.com/es/doctor/daniel-alcazar-de-la-torre" target="_blank">Dr. Daniel Alcázar De La Torre</a></td>
+        <td>612</td>
+        <td>⭐ 5.0</td>
+        <td>CIMA Escazú</td>
+        <td><span class="tag tag-green">Top 3</span></td>
+      </tr>
+      <tr>
+        <td><a href="https://www.hulihealth.com/es/doctor/mauricio-eugenin-hernandez" target="_blank">Dr. Mauricio Eugenin Hernández</a></td>
+        <td>608</td>
+        <td>⭐ 5.0</td>
+        <td>CIMA + Metropolitano</td>
+        <td><span class="tag tag-accent">Top 5</span></td>
+      </tr>
+      <tr>
+        <td><a href="https://www.hulihealth.com/es/doctor/manuel-chavarria-alvarado" target="_blank">Dr. Manuel Chavarría Alvarado</a></td>
+        <td>593</td>
+        <td>⭐ 5.0</td>
+        <td>CIMA + La Católica</td>
+        <td><span class="tag tag-accent">Top 5</span></td>
+      </tr>
+      <tr>
+        <td><a href="https://www.hulihealth.com/es/doctor/jaime-ulloa-gil" target="_blank">Dr. Jaime Ulloa Gil</a></td>
+        <td>505</td>
+        <td>⭐ 5.0</td>
+        <td>CIMA Escazú</td>
+        <td><span class="tag tag-accent">Top 6</span></td>
+      </tr>
+      <tr>
+        <td><a href="https://www.hulihealth.com/es/doctor/tobias-alcides-ramirez-rojas" target="_blank">Dr. Tobías Ramírez Rojas</a></td>
+        <td>389</td>
+        <td>⭐ 5.0</td>
+        <td>Torre Médica Guadalupe</td>
+        <td><span class="tag tag-amber">Medio</span></td>
+      </tr>
+      <tr>
+        <td><a href="https://www.hulihealth.com/es/doctor/alexander-valverde-retana" target="_blank">Dr. Alexander Valverde Retana</a></td>
+        <td>406</td>
+        <td>⭐ 5.0</td>
+        <td>Clínica Bíblica</td>
+        <td><span class="tag tag-amber">Medio</span></td>
+      </tr>
+      <tr class="target">
+        <td><strong>Dr. Antonio Gómez Tristán ← Usted</strong></td>
+        <td><strong>N/D (0 público)</strong></td>
+        <td>—</td>
+        <td>CIMA Escazú</td>
+        <td><span class="tag tag-red">Sin datos</span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="text-sm text-gray mt-24" style="margin-top:16px;">N/D = No encontrado en fuentes públicas · Fuente: hulihealth.com, búsqueda directa mayo 2026. Huli Health es el directorio médico #1 en Costa Rica. Google Business Profile: no encontrado en búsqueda directa.</p>
+</div>
+</div>
+
+<!-- AUDITORIA POR DIMENSIÓN -->
+<div id="auditoria" class="section-alt">
+<div class="section">
+  <div class="section-label">Auditoría Completa</div>
+  <h2 class="section-title">Las 6 dimensiones de visibilidad digital, <em>evaluadas</em></h2>
+  <p class="section-intro">Cada dimensión fue evaluada de 0 a 5 con base en evidencia pública encontrada en las plataformas relevantes para Costa Rica. Puntuaciones comparadas contra el promedio de los 6 ortopedistas líderes en Huli CR.</p>
+
+  <!-- D1: REVIEWS -->
+  <div style="background:#fff; border:1px solid #E8EDF3; border-radius:16px; padding:32px; margin-bottom:28px; border-top:5px solid var(--red); box-shadow:0 2px 12px rgba(27,45,63,0.07);">
+    <div class="dimension-header">
+      <div class="dimension-score-box">
+        <div class="dim-score-num" style="color:var(--red);">1.0</div>
+        <div class="dim-score-denom">/ 5</div>
+      </div>
+      <div class="dim-info">
+        <div class="dim-title">Reputación y Reseñas</div>
+        <div class="dim-subtitle">Promedio competidores líderes: 4.8 / 5</div>
+      </div>
+    </div>
+    <div class="two-col">
+      <div>
+        <div class="finding-box positive">
+          <h4>Lo que tiene</h4>
+          <p>Presencia confirmada en directorio Hospital CIMA y Avenida Médica (Huli Labs). El sistema Huli tiene su perfil activo con 35 procedimientos. Credenciales institucionales sólidas que generarán confianza cuando los pacientes lleguen a verlo.</p>
+        </div>
+        <div class="finding-box gap">
+          <h4>El gap</h4>
+          <p>No se encontraron reseñas públicas en Huli Health ni en Google Business Profile. Todos sus competidores directos en CIMA Escazú tienen entre 500–843 reseñas. Un paciente que compare hoy elegiría al médico con reseñas. Los fellowships de Harvard no aparecen si no hay reseñas que los validen.</p>
+        </div>
       </div>
       <div>
-        <div class="gaps-list">
-          
-          <div class="gap-card">
-            <div class="gap-bar red"></div>
-            <div class="gap-body">
-              <div class="gap-label red">Brecha Crítica — Prioridad 1</div>
-              <div class="gap-title">Sin Google Business Profile verificado</div>
-              <div class="gap-desc">Los pacientes que buscan 'Ortopedista / Traumatólogo' en Google Maps no encuentran su perfil individual. Los médicos sin GBP activo son prácticamente invisibles para el 40% de las búsquedas locales de salud.</div>
-            </div>
-          </div>
-          <div class="gap-card">
-            <div class="gap-bar amber"></div>
-            <div class="gap-body">
-              <div class="gap-label amber">Brecha Importante — Prioridad 2</div>
-              <div class="gap-title">Sin presencia en redes sociales propia</div>
-              <div class="gap-desc">Los pacientes modernos validan su confianza en un médico viendo su contenido en Instagram o Facebook antes de agendar. Sin presencia social, usted pierde esa validación — y la consulta.</div>
-            </div>
-          </div>
-          <div class="gap-card">
-            <div class="gap-bar amber"></div>
-            <div class="gap-body">
-              <div class="gap-label amber">Brecha Importante — Prioridad 3</div>
-              <div class="gap-title">Volumen de reseñas insuficiente</div>
-              <div class="gap-desc">Con 0 reseñas en Huli y 0 en Google, su reputación digital no refleja su nivel clínico. El 76% de los pacientes elige médico basándose en reseñas. Esto es la brecha más impactante que puede cerrar.</div>
-            </div>
-          </div>
-        </div>
-        <div class="opportunity-box">
-          <p>Cerrar estas brechas podría representar <strong>10–20 consultas adicionales por mes</strong>, basándose en benchmarks de médicos especialistas con perfil digital activo en mercados privados similares de América Latina.</p>
-        </div>
+        <p style="color:var(--gray-1); font-size:14px; margin-bottom:16px;"><strong>Acciones prioritarias:</strong></p>
+        <ul class="rec-list">
+          <li class="priority-high">
+            <span class="rec-badge rec-badge-red">Urgente</span>
+            <span>Reclamar y optimizar el perfil Huli Health con foto profesional, bio completa, fotos del consultorio y activar el sistema de agendamiento en línea.</span>
+          </li>
+          <li class="priority-high">
+            <span class="rec-badge rec-badge-red">Urgente</span>
+            <span>Implementar flujo de solicitud de reseñas post-consulta: WhatsApp automatizado a los 3 días de la cita dirigiendo al perfil Huli. Meta: 20 reseñas en los primeros 30 días.</span>
+          </li>
+          <li class="priority-mid">
+            <span class="rec-badge rec-badge-amber">30 días</span>
+            <span>Crear y verificar Google Business Profile con datos completos: horarios, fotos, categoría "Orthopedic Surgeon", descripción bilingüe español/inglés.</span>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
-</section>
 
-<section class="ai-section" id="ia">
-  <div class="section-inner">
-    <div class="section-tag">Visibilidad en Inteligencia Artificial</div>
-    <h2 class="section-title">¿Le gustaría que la IA lo recomiende de primero?</h2>
-    <p class="section-desc">Hoy, miles de pacientes en Costa Rica abren ChatGPT o Perplexity en lugar de buscar en Google. El médico que aparece ahí gana al paciente antes de que llamen a ninguna clínica.</p>
-    <div class="ai-scenario">
-      <p>Un paciente abre ChatGPT y pregunta: <strong>"¿Cuál es el mejor ortopedista en Costa Rica para cirugía de rodilla?"</strong> La IA responde con médicos que tienen más señales digitales indexadas. <strong>¿Aparece usted en esa respuesta?</strong></p>
-    </div>
-    <div class="ai-steps">
-      <div class="ai-step">
-        <div class="ai-step-icon">🔍</div>
-        <div class="ai-step-title">1. El Paciente Consulta</div>
-        <div class="ai-step-text">Pregunta a ChatGPT, Perplexity o Google AI Overview cuál especialista elegir</div>
+  <!-- D2: WEBSITE -->
+  <div style="background:#fff; border:1px solid #E8EDF3; border-radius:16px; padding:32px; margin-bottom:28px; border-top:5px solid var(--red); box-shadow:0 2px 12px rgba(27,45,63,0.07);">
+    <div class="dimension-header">
+      <div class="dimension-score-box">
+        <div class="dim-score-num" style="color:var(--red);">1.0</div>
+        <div class="dim-score-denom">/ 5</div>
       </div>
-      <div class="ai-step">
-        <div class="ai-step-icon">🧠</div>
-        <div class="ai-step-title">2. La IA Busca Señales</div>
-        <div class="ai-step-text">Analiza reseñas verificadas, directorios, schema markup médico y menciones de autoridad</div>
-      </div>
-      <div class="ai-step">
-        <div class="ai-step-icon">✅</div>
-        <div class="ai-step-title">3. Recomienda al Mejor Posicionado</div>
-        <div class="ai-step-text">El médico con más señales digitales estructuradas aparece de primero — no necesariamente el más hábil</div>
+      <div class="dim-info">
+        <div class="dim-title">Sitio Web y Conversión</div>
+        <div class="dim-subtitle">Promedio competidores líderes: 3.8 / 5</div>
       </div>
     </div>
-    <div class="dr-rank-box">
-      <h3>Doctor Rank · Posicionamiento en IA</h3>
-      <p>Sistema especializado que construye las señales que ChatGPT, Perplexity y Google AI Overviews necesitan para recomendarle de primero: schema markup médico, optimización de contenido para LLMs y estrategia de autoridad.</p>
-      <div class="dr-rank-price">Desde $297 USD / mes</div>
-      <a href="https://doctorrank.clinic" target="_blank" class="btn-accent">Conocer Doctor Rank →</a>
+    <div class="two-col">
+      <div>
+        <div class="finding-box positive">
+          <h4>Lo que tiene</h4>
+          <p>gomeztristan.com existe y carga. Tiene el logo institucional, nombre, teléfono directo (+506 2208-8313) y email (info@gomeztristan.com). El dominio propio es un activo — muchos médicos dependen solo de los directorios hospitalarios.</p>
+        </div>
+        <div class="finding-box gap">
+          <h4>El gap</h4>
+          <p>El sitio es una página estática de una sola pantalla. Sin: páginas de procedimientos, sección "Sobre mí" con credenciales Harvard, agendamiento en línea, WhatsApp CTA, formulario de contacto, testimonios, móvil optimizado verificado, schema markup, velocidad medida. Es un tarjetón digital, no un sitio de conversión.</p>
+        </div>
+      </div>
+      <div>
+        <p style="color:var(--gray-1); font-size:14px; margin-bottom:16px;"><strong>Acciones prioritarias:</strong></p>
+        <ul class="rec-list">
+          <li class="priority-high">
+            <span class="rec-badge rec-badge-red">Urgente</span>
+            <span>Rediseñar el sitio con al menos 8 páginas: Inicio, Sobre mí (credenciales Harvard), Procedimientos (knee, shoulder, hip, foot/ankle, sports medicine, PRP), Pacientes Internacionales, Contacto/Agendar.</span>
+          </li>
+          <li class="priority-high">
+            <span class="rec-badge rec-badge-red">Urgente</span>
+            <span>Agregar botón "Agendar Cita" con link directo a Huli y botón de WhatsApp flotante. Cada visita al sitio sin CTA claro es una oportunidad perdida.</span>
+          </li>
+          <li class="priority-mid">
+            <span class="rec-badge rec-badge-amber">60 días</span>
+            <span>Sección "Pacientes Internacionales" en inglés — con procedimientos más buscados por medical tourism (knee replacement, ACL, PRP, joint replacements). El Dr. habla inglés y opera en CIMA, el hospital más frecuentado por extranjeros.</span>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
-</section>
 
-<section id="mercado">
-  <div class="section-inner">
-    <div class="section-tag">Contexto de Mercado</div>
-    <h2 class="section-title">Así elige un paciente a su médico <em>hoy</em></h2>
-    <p class="section-desc">El comportamiento del paciente privado en Costa Rica ha cambiado. Antes llegaba únicamente por referido. Hoy investiga en línea, compara reseñas y elige antes de llamar.</p>
-    <div class="stats-grid">
-      <div class="stat-card">
-        <div class="stat-number">81<span>%</span></div>
-        <div class="stat-text">de los pacientes busca información sobre médicos en internet antes de agendar su primera cita con un especialista privado.</div>
-        <div class="stat-source">Fuente: Think with Google, "The Digital Journey to Health and Wellness", 2023</div>
+  <!-- D3: SEO -->
+  <div style="background:#fff; border:1px solid #E8EDF3; border-radius:16px; padding:32px; margin-bottom:28px; border-top:5px solid var(--amber); box-shadow:0 2px 12px rgba(27,45,63,0.07);">
+    <div class="dimension-header">
+      <div class="dimension-score-box">
+        <div class="dim-score-num" style="color:var(--amber);">2.0</div>
+        <div class="dim-score-denom">/ 5</div>
       </div>
-      <div class="stat-card">
-        <div class="stat-number">76<span>%</span></div>
-        <div class="stat-text">de los pacientes en América Latina considera las reseñas online tan confiables como una recomendación personal de un familiar o amigo.</div>
-        <div class="stat-source">Fuente: BrightLocal Local Consumer Review Survey, 2024</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-number">3<span>×</span></div>
-        <div class="stat-text">más probabilidad de que un paciente elija a un médico que responde públicamente a sus reseñas versus uno que no lo hace.</div>
-        <div class="stat-source">Fuente: Huli Health Blog, "La importancia de responder reseñas médicas", 2024</div>
+      <div class="dim-info">
+        <div class="dim-title">SEO y Contenido</div>
+        <div class="dim-subtitle">Promedio competidores líderes: 3.2 / 5</div>
       </div>
     </div>
-    <div class="proof-box">
-      <p><strong>Resultado real de un cliente Flow Results:</strong> Un ortopedista en Costa Rica con quien trabajamos pasó de 0 a 47 reseñas en Google en 4 meses. Sus consultas nuevas por mes subieron de 12 a 31. Todo sin ads — solo visibilidad digital bien hecha.</p>
+    <div class="two-col">
+      <div>
+        <div class="finding-box positive">
+          <h4>Lo que tiene</h4>
+          <p>El Dr. Gómez Tristán aparece en la primera página de Google cuando se busca su nombre exacto — la presencia en CIMA y Huli lo garantizan. Las 35 condiciones y 36 procedimientos en Huli son indexables y dan señales a los buscadores. Su LinkedIn con credenciales completas es un asset de SEO.</p>
+        </div>
+        <div class="finding-box gap">
+          <h4>El gap</h4>
+          <p>Para búsquedas de intención ("ortopedista rodilla Escazú", "cirugía ligamento cruzado Costa Rica", "ortopedista Harvard Costa Rica"), el Dr. no aparece — sus competidores con sitios más completos sí. Sin schema markup, sin metadescripciones optimizadas, sin blog educativo. El sitio gomeztristan.com prácticamente no existe para Google más allá de su nombre.</p>
+        </div>
+      </div>
+      <div>
+        <p style="color:var(--gray-1); font-size:14px; margin-bottom:16px;"><strong>Acciones prioritarias:</strong></p>
+        <ul class="rec-list">
+          <li class="priority-high">
+            <span class="rec-badge rec-badge-red">Urgente</span>
+            <span>Crear páginas de procedimientos con contenido educativo (500–800 palabras cada una): "Artroscopía de Rodilla en Costa Rica", "Cirugía de Ligamento Cruzado Anterior", "Reemplazo de Cadera Escazú". Estas páginas rankean para búsquedas de alta intención.</span>
+          </li>
+          <li class="priority-mid">
+            <span class="rec-badge rec-badge-amber">60 días</span>
+            <span>Implementar schema markup de tipo "Physician" con especialidades, hospital, credenciales y horarios. Esto alimenta directamente los AI Overviews de Google y las respuestas de ChatGPT.</span>
+          </li>
+          <li>
+            <span class="rec-badge rec-badge-teal">90 días</span>
+            <span>Publicar 2 artículos mensuales en blog: "¿Cuándo operar una rotura de menisco?", "PRP para artritis: qué esperar". Posiciona al Dr. como educador y genera tráfico orgánico sostenido.</span>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
-</section>
 
-<section id="roadmap" style="background:var(--section-alt)">
-  <div class="section-inner">
-    <div class="section-tag">Plan de Acción</div>
-    <h2 class="section-title">Roadmap de 12 meses: de invisible <em>a referente</em></h2>
-    <p class="section-desc">Tres fases progresivas para construir la presencia digital que lo posicione como ser el ortopedista de referencia en su especialidad en Costa Rica privada.</p>
-    <div class="roadmap-grid">
-      <div class="road-card">
-        <div class="road-header">
-          <div class="road-phase p1">Fase 1 · Días 1–30</div>
-          <div class="road-title">Fundación Digital</div>
+  <!-- D4: LISTINGS -->
+  <div style="background:#fff; border:1px solid #E8EDF3; border-radius:16px; padding:32px; margin-bottom:28px; border-top:5px solid var(--amber); box-shadow:0 2px 12px rgba(27,45,63,0.07);">
+    <div class="dimension-header">
+      <div class="dimension-score-box">
+        <div class="dim-score-num" style="color:var(--amber);">2.5</div>
+        <div class="dim-score-denom">/ 5</div>
+      </div>
+      <div class="dim-info">
+        <div class="dim-title">Listings y Citas en Directorios</div>
+        <div class="dim-subtitle">Promedio competidores líderes: 4.0 / 5</div>
+      </div>
+    </div>
+    <div class="two-col">
+      <div>
+        <div class="finding-box positive">
+          <h4>Lo que tiene</h4>
+          <p>Presencia verificada en Hospital CIMA (directorio.hospitalcima.com), Avenida Médica (avenida-medica.hulilabs.com), y LinkedIn. Datos NAP (Nombre, Dirección, Teléfono) son consistentes entre plataformas: +506 2208-8313, Torre 3, Av. Médica, Piso 3, Consultorio 342. Esto es una base sólida.</p>
         </div>
-        <div class="road-body">
-          <div class="road-item"><div class="road-bullet p1"></div><div class="road-item-text">Crear y verificar Google Business Profile individual con fotos profesionales y horarios</div></div>
-          <div class="road-item"><div class="road-bullet p1"></div><div class="road-item-text">Auditar y unificar información (NAP) en todos los directorios médicos activos en CR</div></div>
-          <div class="road-item"><div class="road-bullet p1"></div><div class="road-item-text">Crear cuenta Instagram con bio profesional y primeros 3 posts educativos</div></div>
-          <div class="road-item"><div class="road-bullet p1"></div><div class="road-item-text">Activar flujo automático de solicitud de reseñas vía WhatsApp post-consulta</div></div>
-          <div class="road-item"><div class="road-bullet p1"></div><div class="road-item-text">Agregar botón WhatsApp flotante y optimizar página de conversión en el sitio actual</div></div>
+        <div class="finding-box gap">
+          <h4>El gap</h4>
+          <p>Ausente o no verificado en: Huli Health perfil público con booking activo, Google Business Profile independiente, directorio web del Colegio de Médicos y Cirujanos CR, EncuentraMédicos.com. Los directorios hospitalarios lo listan pero sin agendamiento activo visible — las consultas van al call center de CIMA, no directamente a su agenda.</p>
         </div>
       </div>
-      <div class="road-card">
-        <div class="road-header">
-          <div class="road-phase p2">Fase 2 · Días 31–90</div>
-          <div class="road-title">Construcción de Autoridad</div>
-        </div>
-        <div class="road-body">
-          <div class="road-item"><div class="road-bullet p2"></div><div class="road-item-text">Publicar 2 artículos SEO por mes sobre procedimientos frecuentes en ortopedista / traumatólogo</div></div>
-          <div class="road-item"><div class="road-bullet p2"></div><div class="road-item-text">Implementar schema markup "Physician" + "MedicalSpecialty" en todos los sitios</div></div>
-          <div class="road-item"><div class="road-bullet p2"></div><div class="road-item-text">Lanzar serie de Reels educativos en Instagram (4/mes): condición + síntoma + cuándo consultar</div></div>
-          <div class="road-item"><div class="road-bullet p2"></div><div class="road-item-text">Optimizar perfil de Huli Health: fotos clínicas, descripción enriquecida, todos los procedimientos marcados</div></div>
-          <div class="road-item"><div class="road-bullet p2"></div><div class="road-item-text">Meta: 30+ reseñas nuevas en Google y alcanzar posición top 3 en Maps de su zona</div></div>
-        </div>
-      </div>
-      <div class="road-card">
-        <div class="road-header">
-          <div class="road-phase p3">Fase 3 · Meses 4–12</div>
-          <div class="road-title">Escala y Dominio</div>
-        </div>
-        <div class="road-body">
-          <div class="road-item"><div class="road-bullet p3"></div><div class="road-item-text">Implementar Doctor Rank para posicionamiento en ChatGPT, Perplexity y Google AI Overviews</div></div>
-          <div class="road-item"><div class="road-bullet p3"></div><div class="road-item-text">Campaña Google Ads local para sus procedimientos de mayor valor</div></div>
-          <div class="road-item"><div class="road-bullet p3"></div><div class="road-item-text">1–2 menciones en medios costarricenses (La Nación Salud, CRHoy, podcast de salud)</div></div>
-          <div class="road-item"><div class="road-bullet p3"></div><div class="road-item-text">Canal YouTube con casos educativos mensuales en formato divulgativo</div></div>
-          <div class="road-item"><div class="road-bullet p3"></div><div class="road-item-text">Sistema de referido digital médico-a-médico en su especialidad</div></div>
-        </div>
+      <div>
+        <p style="color:var(--gray-1); font-size:14px; margin-bottom:16px;"><strong>Acciones prioritarias:</strong></p>
+        <ul class="rec-list">
+          <li class="priority-high">
+            <span class="rec-badge rec-badge-red">30 días</span>
+            <span>Activar Huli Health con sistema de citas en línea independiente de CIMA. Los pacientes que agendan directo por Huli tienen 3× más probabilidad de confirmar vs. llamadas al call center hospitalario.</span>
+          </li>
+          <li class="priority-mid">
+            <span class="rec-badge rec-badge-amber">30 días</span>
+            <span>Reclamar y completar perfil en Google Business Profile con: categoría, horarios, fotos del consultorio y procedimientos, descripción en español e inglés, y enlace a Huli para agendar.</span>
+          </li>
+          <li>
+            <span class="rec-badge rec-badge-teal">60 días</span>
+            <span>Verificar listado en Colegio de Médicos y Cirujanos CR (su licencia MED6274 ya está activa) y en EncuentraMédicos.com — dos directorios con tráfico orgánico CR.</span>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
-</section>
 
-<section class="cta-section" id="cta">
-  <div class="section-inner">
-    <div class="section-tag" style="text-align:center;margin-bottom:10px">Siguiente Paso</div>
-    <div class="cta-main">
-      <h2>¿Listo para ser el referente<br>de ortopedista / traumatólogo en Costa Rica?</h2>
-      <p>15 minutos de conversación pueden cambiar cuántos pacientes lo encuentran este mes.<br>Sin compromiso. Solo estrategia.</p>
-      <a href="https://calendly.com/recheverria-flow/sesion-de-estrategia-con-flow-results-clone" target="_blank" class="btn-big">Agendar sesión de estrategia →</a>
+  <!-- D5: SOCIAL -->
+  <div style="background:#fff; border:1px solid #E8EDF3; border-radius:16px; padding:32px; margin-bottom:28px; border-top:5px solid var(--red); box-shadow:0 2px 12px rgba(27,45,63,0.07);">
+    <div class="dimension-header">
+      <div class="dimension-score-box">
+        <div class="dim-score-num" style="color:var(--red);">1.0</div>
+        <div class="dim-score-denom">/ 5</div>
+      </div>
+      <div class="dim-info">
+        <div class="dim-title">Redes Sociales y Video</div>
+        <div class="dim-subtitle">Promedio competidores líderes: 3.0 / 5</div>
+      </div>
+    </div>
+    <div class="two-col">
+      <div>
+        <div class="finding-box positive">
+          <h4>Lo que tiene</h4>
+          <p>Una mención destacada en Instagram del Hospital CIMA (2022) presentándolo como "Médico Ortopedista con 15 años de trayectoria nacional e internacional". Es una validación institucional que puede amplificarse. LinkedIn activo con información profesional completa.</p>
+        </div>
+        <div class="finding-box gap">
+          <h4>El gap</h4>
+          <p>No se encontró Instagram propio, Facebook profesional, YouTube ni TikTok. Sus competidores activos en social (Dr. Gary Wilson Sanabria, Dr. Álvaro Rivera Valdivia) generan visibilidad semanal orgánica. El Dr. Gómez Tristán tiene credenciales de contenido excepcionales — sus fellowships de Harvard en cirugía deportiva, casos de artroscopía, PRP — pero ese conocimiento no está en ningún canal digital propio.</p>
+        </div>
+      </div>
+      <div>
+        <p style="color:var(--gray-1); font-size:14px; margin-bottom:16px;"><strong>Acciones prioritarias:</strong></p>
+        <ul class="rec-list">
+          <li class="priority-high">
+            <span class="rec-badge rec-badge-red">30 días</span>
+            <span>Crear Instagram profesional con username claro (@drgomeztristan o @ortopediacr). Las primeras 9 publicaciones deben establecer posicionamiento: credenciales, procedimientos, Harvard. El perfil necesita existir antes de cualquier campaña.</span>
+          </li>
+          <li class="priority-mid">
+            <span class="rec-badge rec-badge-amber">60 días</span>
+            <span>Grabar 4 reels educativos de 60 segundos: "¿Cuándo es necesaria la cirugía de ligamento cruzado?", "PRP explicado en 1 minuto", "Artroscopía de rodilla: qué esperar". El Dr. habla bien — el formato video es altamente compartible.</span>
+          </li>
+          <li>
+            <span class="rec-badge rec-badge-teal">90 días</span>
+            <span>Publicar 3×/semana con mix de: contenido educativo ortopedia, casos de recuperación (sin datos del paciente), credenciales Harvard, vida del consultorio en CIMA. Consistencia supera viralidad.</span>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
-</section>
+
+  <!-- D6: AI -->
+  <div style="background:#fff; border:1px solid #E8EDF3; border-radius:16px; padding:32px; margin-bottom:28px; border-top:5px solid var(--amber); box-shadow:0 2px 12px rgba(27,45,63,0.07);">
+    <div class="dimension-header">
+      <div class="dimension-score-box">
+        <div class="dim-score-num" style="color:var(--amber);">2.5</div>
+        <div class="dim-score-denom">/ 5</div>
+      </div>
+      <div class="dim-info">
+        <div class="dim-title">Preparación para IA</div>
+        <div class="dim-subtitle">Promedio competidores líderes: 2.5 / 5</div>
+      </div>
+    </div>
+    <div class="two-col">
+      <div>
+        <div class="finding-box positive">
+          <h4>Lo que tiene</h4>
+          <p>El Dr. Gómez Tristán tiene señales de autoridad reales que la IA puede detectar: fellowship Harvard Medical School 2008–2011 (múltiple), Licencia MED6274 Colegio Médicos CR, posición en Hospital CIMA + Bíblica + Católica, 35 procedimientos listados en sistema Huli indexable. Estas son señales de autoridad que ChatGPT puede encontrar si se estructuran correctamente.</p>
+        </div>
+        <div class="finding-box gap">
+          <h4>El gap</h4>
+          <p>La IA no encuentra lo que no está estructurado. Sin FAQ en su sitio, sin artículos firmados, sin schema markup, sin reseñas activas que funcionen como social proof verificable, sus credenciales Harvard permanecen invisibles para los motores de IA. Irónicamente, esta es la dimensión donde puede ganar más rápido — su ventaja de credenciales vs. los competidores es real, solo hay que hacer que la IA pueda verla.</p>
+        </div>
+      </div>
+      <div>
+        <p style="color:var(--gray-1); font-size:14px; margin-bottom:16px;"><strong>Acciones prioritarias:</strong></p>
+        <ul class="rec-list">
+          <li class="priority-high">
+            <span class="rec-badge rec-badge-red">30 días</span>
+            <span>Agregar página "Sobre el Dr. Gómez Tristán" con estructura clara: fellowships Harvard detallados, licencia Colegio Médicos, hospitales, especialidades, idiomas. Esta página será la fuente principal para AI Overview de Google.</span>
+          </li>
+          <li class="priority-mid">
+            <span class="rec-badge rec-badge-amber">60 días</span>
+            <span>Crear sección FAQ en su sitio: "¿Qué ortopedista tiene subespecialidad en cirugía deportiva en CR?", "¿Dónde puedo operarme la rodilla con un cirujano con entrenamiento en Harvard en Costa Rica?" — exactamente cómo un paciente preguntaría a ChatGPT.</span>
+          </li>
+          <li>
+            <span class="rec-badge rec-badge-teal">90 días</span>
+            <span>Buscar 1–2 menciones editoriales en medios de salud CR o Huli Blog. Una cita de experto en un artículo de Huli funciona como backlink de autoridad que la IA pondera altamente.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ROADMAP -->
+<div id="roadmap">
+<div class="section">
+  <div class="section-label">Plan de Acción</div>
+  <h2 class="section-title">Roadmap de 12 meses para convertirse en el <em>referente</em></h2>
+  <p class="section-intro">Tres fases secuenciales. Cada una construye sobre la anterior. El objetivo final: que cuando alguien en Costa Rica piense "cirugía ortopédica de excelencia", el primer nombre que aparezca — en Google, en Huli, y en la IA — sea el Dr. Antonio Gómez Tristán.</p>
+
+  <div class="roadmap-grid">
+    <div class="roadmap-card">
+      <div class="roadmap-phase">Fase 1</div>
+      <div class="roadmap-timeline">Días 1–30<br>Fundación</div>
+      <ul class="roadmap-list">
+        <li>Reclamar y optimizar perfil Huli Health con booking en línea activo</li>
+        <li>Crear y verificar Google Business Profile completo</li>
+        <li>Instalar Google Analytics y Search Console en gomeztristan.com</li>
+        <li>Lanzar flujo de solicitud de reseñas post-consulta (WhatsApp automático)</li>
+        <li>Crear Instagram profesional con 9 primeras publicaciones</li>
+        <li>Meta reseñas: 20 reseñas en Huli en 30 días</li>
+        <li>Agregar WhatsApp CTA flotante al sitio actual</li>
+      </ul>
+    </div>
+    <div class="roadmap-card">
+      <div class="roadmap-phase">Fase 2</div>
+      <div class="roadmap-timeline">Días 31–90<br>Construcción</div>
+      <ul class="roadmap-list">
+        <li>Lanzar nuevo sitio web con 8 páginas de procedimientos</li>
+        <li>Implementar schema markup de tipo Physician</li>
+        <li>Publicar primeros 4 reels educativos en Instagram</li>
+        <li>Crear Facebook Business Page y sincronizar contenido</li>
+        <li>Listado en Colegio de Médicos CR y EncuentraMédicos.com</li>
+        <li>Lanzar campaña de contenido: 3 posts/semana en Instagram</li>
+        <li>Publicar 2 artículos de blog SEO-optimizados</li>
+        <li>Meta: 50+ reseñas Huli, aparecer en búsquedas de marca</li>
+      </ul>
+    </div>
+    <div class="roadmap-card">
+      <div class="roadmap-phase">Fase 3</div>
+      <div class="roadmap-timeline">Meses 4–12<br>Escala y Autoridad</div>
+      <ul class="roadmap-list">
+        <li>Campaña activa en Google Ads para procedimientos de alto valor</li>
+        <li>Sección de pacientes internacionales en inglés + SEO turismo médico</li>
+        <li>Canal YouTube con procedimientos explicados por el Dr.</li>
+        <li>Colaboración editorial con Huli Blog o medio de salud CR</li>
+        <li>Estrategia de referidos con médicos generalistas (GP) en CIMA</li>
+        <li>Meta: Top 3 Huli para ortopedistas en Escazú/CR</li>
+        <li>Meta: 200+ reseñas Huli, 5,000+ seguidores Instagram</li>
+        <li>Meta: Nombre mencionado en respuestas de ChatGPT sobre ortopedia CR</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- KPIs -->
+<div class="section-alt">
+<div class="section">
+  <div class="section-label">Medición</div>
+  <h2 class="section-title">Los KPIs que importan — y cómo medirlos</h2>
+  <p class="section-intro">Sin medición no hay gestión. Estas 5 métricas cubren el ciclo completo de visibilidad digital para un cirujano ortopedista en el mercado privado costarricense.</p>
+
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-name">Reseñas Huli</div>
+      <div class="kpi-metric">Meta: 200+ en 12 meses</div>
+      <div class="kpi-tool">Herramienta: Huli Health Dashboard</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-name">Posición Google Local</div>
+      <div class="kpi-metric">Meta: Top 3 para "ortopedista Escazú"</div>
+      <div class="kpi-tool">Herramienta: Google Search Console + BrightLocal</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-name">Consultas desde web/Huli</div>
+      <div class="kpi-metric">Meta: 15+ solicitudes digitales/mes</div>
+      <div class="kpi-tool">Herramienta: GA4 + Huli Booking Reports</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-name">Seguidores Instagram</div>
+      <div class="kpi-metric">Meta: 3,000 en 6 meses</div>
+      <div class="kpi-tool">Herramienta: Instagram Insights</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-name">Visibilidad IA</div>
+      <div class="kpi-metric">Meta: Mención en ChatGPT/Perplexity</div>
+      <div class="kpi-tool">Herramienta: Test manual mensual + Doctor Rank IA Monitor</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- FINAL CTA -->
+<div class="final-cta">
+  <div style="max-width:680px; margin:0 auto;">
+    <div class="section-label" style="text-align:center; margin-bottom:12px;">Próximo paso</div>
+    <h2>Su agenda ya está llena.<br>Ahora que <em>Google y la IA</em> sepan quién es el mejor.</h2>
+    <p>30 minutos de sesión estratégica sin compromiso. Le mostramos exactamente qué hacer primero para cerrar el gap más urgente — y cómo sería trabajar con FLOW Results.</p>
+    <div class="cta-buttons">
+      <a href="https://calendly.com/recheverria-flow/sesion-de-estrategia-con-flow-results-clone" class="btn-primary" target="_blank">Agendar sesión estratégica →</a>
+      <button class="btn-secondary" onclick="window.print()">Imprimir reporte</button>
+    </div>
+    <p style="font-size:12px; color:var(--gray-1); margin-top:20px; margin-bottom:0;">Sin contratos a largo plazo. Sin compromisos de pacientes. Garantías sobre visibilidad y autoridad.</p>
+  </div>
+</div>
 
 <footer>
-  <div class="footer-inner">
-    <div class="footer-logo">FLOW Results</div>
-    <div class="footer-name">Roberto Echeverría</div>
-    <div class="footer-role">CEO · FLOW Results</div>
-    <div class="footer-links">
-      <a href="tel:+50671207442">+506 7120 7442</a>
-      <a href="mailto:recheverria@flowresults.com">recheverria@flowresults.com</a>
-      <a href="https://flowresults.com" target="_blank">flowresults.com</a>
-      <a href="https://calendly.com/recheverria-flow/sesion-de-estrategia-con-flow-results-clone" target="_blank">Agendar reunión</a>
-    </div>
-    <div class="footer-copy">
-      © 2026 FLOW Results · Diagnóstico preparado con base en datos públicos: Huli Health, Google Search, directorios hospitalarios CR · Mayo 2026<br>
-      Este diagnóstico es indicativo con fines comerciales. Las cifras son estimaciones basadas en búsqueda pública. No constituye garantía de resultados.
-    </div>
-  </div>
+  <p>Preparado por <strong>FLOW Results</strong> · recheverria@flowresults.com · Mayo 2026<br>
+  Datos de fuentes públicas: Huli Health, Hospital CIMA Directorio, LinkedIn, gomeztristan.com, Google Search. Este reporte es ilustrativo y no garantiza resultados específicos.</p>
 </footer>
 
 <script>
-(function(){
-  const ctx = document.getElementById('radarChart').getContext('2d');
-  new Chart(ctx, {
-    type: 'radar',
-    data: {
-      labels: ['Reseñas', 'Sitio Web', 'Social Media', 'Directorios', 'Google Maps', 'IA Readiness'],
-      datasets: [
-        {
-          label: 'Dr. Tristán',
-          data: [0.0, 2.5, 0.0, 2.5, 0.5, 1.2],
-          backgroundColor: 'rgba(94,235,194,0.15)',
-          borderColor: '#5EEBC2',
-          borderWidth: 2.5,
-          pointBackgroundColor: '#5EEBC2',
-          pointBorderColor: '#fff',
-          pointRadius: 5
-        },
-        {
-          label: 'Promedio mercado CR',
-          data: [1.2, 3.7, 1.2, 3.7, 1.7, 2.4],
-          backgroundColor: 'rgba(154,171,189,0.08)',
-          borderColor: '#9AABBD',
-          borderWidth: 2,
-          borderDash: [6,4],
-          pointBackgroundColor: '#9AABBD',
-          pointBorderColor: '#fff',
-          pointRadius: 4
-        }
-      ]
-    },
-    options: {
-      responsive: true,
-      plugins: {
-        legend: { position: 'bottom', labels: { color: '#4A6076', font: { family: 'Outfit', size: 12 }, padding: 20, usePointStyle: true } },
-        tooltip: { callbacks: { label: function(c){ return ' ' + c.dataset.label + ': ' + c.raw + ' / 5.0'; } } }
+// RADAR CHART
+const radarCtx = document.getElementById('radarChart').getContext('2d');
+new Chart(radarCtx, {
+  type: 'radar',
+  data: {
+    labels: ['Reseñas', 'Sitio Web', 'SEO', 'Directorios', 'Social', 'IA Readiness'],
+    datasets: [
+      {
+        label: 'Dr. Gómez Tristán',
+        data: [1.0, 1.0, 2.0, 2.5, 1.0, 2.5],
+        borderColor: '#5EEBC2',
+        backgroundColor: 'rgba(94,235,194,0.22)',
+        borderWidth: 2,
+        pointRadius: 5,
+        pointBackgroundColor: '#5EEBC2',
       },
-      scales: {
-        r: {
-          min: 0, max: 5,
-          ticks: { stepSize: 1, color: '#9AABBD', font: { size: 10 }, backdropColor: 'transparent' },
-          grid: { color: 'rgba(0,0,0,0.07)' },
-          angleLines: { color: 'rgba(0,0,0,0.08)' },
-          pointLabels: { color: '#3D5066', font: { family: 'Outfit', size: 12, weight: '600' } }
+      {
+        label: 'Promedio líderes CR',
+        data: [4.8, 3.8, 3.2, 4.0, 3.0, 2.5],
+        borderColor: '#9AABBD',
+        backgroundColor: 'rgba(154,171,189,0.08)',
+        borderWidth: 2,
+        borderDash: [6, 4],
+        pointRadius: 3,
+        pointBackgroundColor: '#9AABBD',
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: 'bottom',
+        labels: {
+          usePointStyle: true,
+          pointStyle: 'circle',
+          color: '#728698',
+          font: { family: 'Outfit', size: 13 },
+          padding: 20
+        }
+      }
+    },
+    scales: {
+      r: {
+        min: 0, max: 5,
+        ticks: { display: false, stepSize: 1 },
+        grid: { color: 'rgba(114,134,152,0.2)' },
+        angleLines: { color: 'rgba(114,134,152,0.2)' },
+        pointLabels: {
+          color: '#3D5066',
+          font: { size: 12, weight: '600', family: 'Outfit' }
         }
       }
     }
-  });
-})();
+  }
+});
+
+// BENCHMARK HORIZONTAL BAR
+const benchCtx = document.getElementById('benchChart').getContext('2d');
+new Chart(benchCtx, {
+  type: 'bar',
+  data: {
+    labels: [
+      'Dr. Fernando Contreras Soares',
+      'Dr. Gary Wilson Sanabria',
+      'Dr. Daniel Alcázar De La Torre',
+      'Dr. Mauricio Eugenin',
+      'Dr. Manuel Chavarría Alvarado',
+      'Dr. Jaime Ulloa Gil',
+      'Dr. Alexander Valverde Retana',
+      'Dr. Tobías Ramírez Rojas',
+      'Dr. Antonio Gómez Tristán ← Usted'
+    ],
+    datasets: [{
+      label: 'Reseñas en Huli Health',
+      data: [843, 676, 612, 608, 593, 505, 406, 389, 0],
+      backgroundColor: [
+        '#3A4D62','#3A4D62','#3A4D62','#3A4D62',
+        '#3A4D62','#3A4D62','#3A4D62','#3A4D62',
+        '#5EEBC2'
+      ],
+      borderRadius: 4,
+      barThickness: 22
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          label: ctx => ` ${ctx.raw === 0 ? 'Sin datos públicos' : ctx.raw + ' reseñas'}`
+        }
+      }
+    },
+    scales: {
+      x: {
+        grid: { color: 'rgba(27,45,63,0.06)' },
+        ticks: { color: '#728698', font: { family: 'Outfit', size: 12 } }
+      },
+      y: {
+        grid: { display: false },
+        ticks: {
+          color: ctx => ctx.index === 8 ? '#5EEBC2' : '#728698',
+          font: ctx => ({ family: 'Outfit', size: 12, weight: ctx.index === 8 ? '700' : '400' })
+        }
+      }
+    }
+  }
+});
 </script>
+
 </body>
 </html>
