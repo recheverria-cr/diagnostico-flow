@@ -1,0 +1,1750 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diagnóstico de Visibilidad Digital — Dr. Roberto Sanchen Corea</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Newsreader:ital,wght@1,400;1,600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root {
+    --navy: #0B1929;
+    --navy-mid: #0F2236;
+    --navy-light: #14304D;
+    --navy-card: #162D4A;
+    --accent: #5EEBC2;
+    --accent-dim: #3CC49E;
+    --alert: #D9534F;
+    --warning: #E8A820;
+    --success: #3DAD6C;
+    --text-dark: #1C2D3F;
+    --gray-1: #728698;
+    --gray-2: #9AABBD;
+    --gray-3: #C4CFDD;
+    --gray-card: #3D5066;
+    --bg: #FFFFFF;
+    --bg-alt: #F6F8FB;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--bg);
+    color: var(--text-dark);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* NAV */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--navy);
+    border-bottom: 1px solid var(--navy-light);
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+  .nav-brand {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .nav-links {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--gray-2);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+  .btn-print {
+    font-family: 'Outfit', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 7px 16px;
+    background: transparent;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-print:hover { background: var(--accent); color: var(--navy); }
+
+  /* HERO */
+  .hero {
+    background: var(--navy);
+    padding: 72px 40px 64px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(94,235,194,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 260px;
+    gap: 48px;
+    align-items: start;
+  }
+  .report-title {
+    font-size: clamp(36px, 5vw, 54px);
+    font-weight: 300;
+    color: #fff;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .report-title strong {
+    font-weight: 800;
+    color: #fff;
+  }
+  .report-title em {
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+  }
+  .report-tagline {
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--gray-3);
+    margin-bottom: 32px;
+    max-width: 560px;
+    line-height: 1.7;
+  }
+  .hero-divider {
+    width: 40px;
+    height: 2px;
+    background: var(--accent);
+    margin-bottom: 24px;
+  }
+  .practice-name {
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+  .practice-insight {
+    font-size: 15px;
+    color: var(--gray-2);
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+  .practice-meta {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+  }
+  .meta-badge {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--gray-2);
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 5px 12px;
+    border-radius: 20px;
+  }
+  .key-facts {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .fact-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--gray-2);
+  }
+  .fact-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+  .hero-score-box {
+    background: rgba(94,235,194,0.06);
+    border: 1px solid rgba(94,235,194,0.2);
+    border-radius: 16px;
+    padding: 32px 24px;
+    text-align: center;
+  }
+  .score-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+  }
+  .score-number {
+    font-size: clamp(64px, 8vw, 88px);
+    font-weight: 800;
+    color: #fff;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .score-denom {
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--gray-1);
+  }
+  .score-tier {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 14px;
+    border-radius: 20px;
+    background: var(--alert);
+    color: #fff;
+    margin-top: 14px;
+  }
+  .hero-date {
+    margin-top: 12px;
+    font-size: 11px;
+    color: var(--gray-1);
+    text-align: center;
+  }
+
+  /* SECTIONS */
+  .section {
+    padding: 64px 40px;
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+  .section-alt {
+    background: var(--bg-alt);
+  }
+  .section-dark {
+    background: var(--navy);
+  }
+  .section-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 64px 40px;
+  }
+  .section-tag {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-size: clamp(22px, 3vw, 30px);
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+    line-height: 1.25;
+  }
+  .section-title-dark {
+    color: #fff;
+  }
+  .section-sub {
+    font-size: 15px;
+    color: var(--gray-1);
+    margin-bottom: 40px;
+    max-width: 640px;
+  }
+  .section-sub-dark {
+    color: var(--gray-2);
+  }
+
+  /* VERDICT */
+  .verdict-grid {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 40px;
+    align-items: start;
+  }
+  .chart-frame {
+    position: relative;
+    width: 100%;
+    height: 420px;
+  }
+  .chart-frame canvas {
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
+  }
+  .chart-frame.bar { height: 420px; }
+  .gap-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .gap-card {
+    background: var(--navy-card);
+    border-radius: 10px;
+    padding: 18px 20px;
+    border-left: 3px solid var(--alert);
+  }
+  .gap-card.amber { border-left-color: var(--warning); }
+  .gap-card.teal { border-left-color: var(--accent); }
+  .gap-card-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+  .gap-card-desc {
+    font-size: 12px;
+    color: var(--gray-2);
+    line-height: 1.5;
+  }
+  .opportunity-bar {
+    background: var(--bg-alt);
+    border-radius: 10px;
+    padding: 20px 24px;
+    border-left: 4px solid var(--accent);
+    margin-top: 24px;
+  }
+  .opportunity-bar p {
+    font-size: 14px;
+    color: var(--text-dark);
+    line-height: 1.6;
+  }
+  .opportunity-bar strong { color: var(--navy); }
+
+  /* SCORE BADGES */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    font-size: 15px;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+  .badge-red { background: rgba(217,83,79,0.15); color: var(--alert); }
+  .badge-amber { background: rgba(232,168,32,0.15); color: var(--warning); }
+  .badge-teal { background: rgba(94,235,194,0.15); color: var(--accent-dim); }
+  .badge-green { background: rgba(61,173,108,0.15); color: var(--success); }
+
+  /* AI SECTION */
+  .ai-hook {
+    font-size: clamp(20px, 3vw, 28px);
+    font-weight: 700;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 16px;
+    line-height: 1.3;
+  }
+  .ai-scenario {
+    font-size: 14px;
+    color: var(--gray-3);
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto 48px;
+    line-height: 1.7;
+  }
+  .ai-steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 48px;
+  }
+  .ai-step {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(94,235,194,0.12);
+    border-radius: 12px;
+    padding: 28px 20px;
+    text-align: center;
+  }
+  .ai-step-icon { font-size: 28px; margin-bottom: 12px; }
+  .ai-step-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+  }
+  .ai-step-desc {
+    font-size: 13px;
+    color: var(--gray-2);
+    line-height: 1.5;
+  }
+  .ai-pillars {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 48px;
+  }
+  .pillar-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 24px 18px;
+  }
+  .pillar-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 12px;
+  }
+  .pillar-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--gray-2);
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+  .pillar-item .chk { flex-shrink: 0; margin-top: 1px; }
+  .check-yes { color: var(--success); }
+  .check-no { color: var(--alert); }
+
+  /* PRICING CARDS */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 32px;
+  }
+  .pricing-card {
+    background: var(--navy-card);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 28px 24px;
+    position: relative;
+    transition: transform 0.2s;
+  }
+  .pricing-card:hover { transform: translateY(-4px); }
+  .pricing-card.featured {
+    border-color: var(--accent);
+    background: var(--navy-light);
+    transform: translateY(-8px);
+    box-shadow: 0 16px 48px rgba(94,235,194,0.12);
+  }
+  .pricing-badge {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent);
+    color: var(--navy);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 14px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+  .pricing-tier {
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+  .pricing-tagline {
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--gray-2);
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+  .pricing-price {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+  .pricing-period {
+    font-size: 12px;
+    color: var(--gray-1);
+    margin-bottom: 20px;
+  }
+  .pricing-guarantee {
+    background: rgba(94,235,194,0.08);
+    border: 1px solid rgba(94,235,194,0.2);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 11px;
+    color: var(--gray-3);
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+  .pricing-includes {
+    list-style: none;
+    margin-bottom: 24px;
+  }
+  .pricing-includes li {
+    font-size: 12px;
+    color: var(--gray-2);
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    line-height: 1.4;
+  }
+  .pricing-includes li::before {
+    content: '✓';
+    color: var(--accent);
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .pricing-anchor {
+    font-size: 11px;
+    color: var(--gray-1);
+    text-align: center;
+    margin-bottom: 16px;
+    text-decoration: line-through;
+  }
+  .pricing-cta {
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-family: 'Outfit', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 12px;
+    border-radius: 8px;
+    background: rgba(94,235,194,0.12);
+    color: var(--accent);
+    text-decoration: none;
+    border: 1px solid var(--accent);
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+  .pricing-card.featured .pricing-cta {
+    background: var(--accent);
+    color: var(--navy);
+  }
+  .pricing-cta:hover { opacity: 0.85; }
+  .guarantee-bar {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    padding: 18px 24px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--gray-2);
+  }
+  .guarantee-bar strong { color: var(--accent); }
+
+  /* MARKET STATS */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  .stat-card {
+    background: var(--bg-alt);
+    border-radius: 12px;
+    padding: 24px 20px;
+    border-top: 3px solid var(--accent);
+  }
+  .stat-number {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--navy);
+    margin-bottom: 8px;
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 13px;
+    color: var(--gray-1);
+    line-height: 1.5;
+  }
+  .stat-source {
+    font-size: 10px;
+    color: var(--gray-2);
+    margin-top: 8px;
+  }
+
+  /* BENCHMARK TABLE */
+  .benchmark-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .benchmark-table th {
+    background: var(--navy);
+    color: var(--gray-2);
+    font-weight: 600;
+    padding: 12px 16px;
+    text-align: left;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .benchmark-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--bg-alt);
+    color: var(--text-dark);
+  }
+  .benchmark-table tr.target td {
+    background: rgba(94,235,194,0.06);
+    font-weight: 600;
+    color: var(--navy);
+  }
+  .benchmark-table td a {
+    color: var(--navy);
+    text-decoration: none;
+  }
+  .benchmark-table td a:hover { text-decoration: underline; color: var(--accent-dim); }
+  .benchmark-table tr.target td a { color: var(--accent-dim); }
+
+  /* AUDIT SECTIONS */
+  .audit-section {
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 32px;
+    border: 1px solid rgba(0,0,0,0.07);
+  }
+  .audit-header {
+    background: var(--navy);
+    padding: 20px 28px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .audit-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    flex: 1;
+  }
+  .audit-body {
+    background: #fff;
+    padding: 28px;
+  }
+  .audit-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 24px;
+  }
+  .audit-col-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--gray-1);
+    margin-bottom: 10px;
+  }
+  .audit-finding {
+    font-size: 14px;
+    color: var(--text-dark);
+    line-height: 1.6;
+  }
+  .audit-finding strong { color: var(--navy); }
+  .recs-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .rec-card {
+    background: var(--navy-card);
+    border-radius: 10px;
+    padding: 16px 18px;
+    border-left: 3px solid var(--alert);
+  }
+  .rec-card.amber { border-left-color: var(--warning); }
+  .rec-card.green { border-left-color: var(--success); }
+  .rec-priority {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--alert);
+    margin-bottom: 6px;
+  }
+  .rec-card.amber .rec-priority { color: var(--warning); }
+  .rec-card.green .rec-priority { color: var(--success); }
+  .rec-text {
+    font-size: 13px;
+    color: #fff;
+    line-height: 1.5;
+  }
+  .quick-win {
+    background: rgba(94,235,194,0.07);
+    border: 1px solid rgba(94,235,194,0.2);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-top: 16px;
+    font-size: 13px;
+    color: var(--text-dark);
+    line-height: 1.6;
+  }
+  .quick-win strong { color: var(--accent-dim); font-weight: 700; }
+
+  /* ROADMAP */
+  .roadmap-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .roadmap-card {
+    background: var(--navy-card);
+    border-radius: 14px;
+    padding: 28px 24px;
+    border-top: 3px solid var(--alert);
+  }
+  .roadmap-card:nth-child(2) { border-top-color: var(--warning); }
+  .roadmap-card:nth-child(3) { border-top-color: var(--success); }
+  .roadmap-phase {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--alert);
+    margin-bottom: 8px;
+  }
+  .roadmap-card:nth-child(2) .roadmap-phase { color: var(--warning); }
+  .roadmap-card:nth-child(3) .roadmap-phase { color: var(--success); }
+  .roadmap-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 18px;
+  }
+  .roadmap-list {
+    list-style: none;
+  }
+  .roadmap-list li {
+    font-size: 13px;
+    color: var(--gray-2);
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    line-height: 1.6;
+  }
+  .roadmap-list li::before {
+    content: '→';
+    color: var(--accent);
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* KPIs */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+  }
+  .kpi-card {
+    background: var(--bg-alt);
+    border-radius: 12px;
+    padding: 20px 16px;
+    text-align: center;
+    border-bottom: 3px solid var(--accent);
+  }
+  .kpi-metric {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--navy);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 6px;
+    line-height: 1.4;
+  }
+  .kpi-tool {
+    font-size: 11px;
+    color: var(--gray-1);
+  }
+
+  /* FINAL CTA */
+  .final-cta {
+    background: var(--navy);
+    padding: 80px 40px;
+    text-align: center;
+  }
+  .final-cta h2 {
+    font-size: clamp(22px, 3vw, 32px);
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 16px;
+    line-height: 1.3;
+  }
+  .final-cta p {
+    font-size: 15px;
+    color: var(--gray-2);
+    margin-bottom: 36px;
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .cta-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .btn-primary {
+    display: inline-block;
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 16px 32px;
+    background: var(--accent);
+    color: var(--navy);
+    text-decoration: none;
+    border-radius: 10px;
+    transition: opacity 0.2s;
+  }
+  .btn-primary:hover { opacity: 0.88; }
+  .btn-secondary {
+    display: inline-block;
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 16px 32px;
+    background: transparent;
+    color: var(--gray-2);
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* FOOTER */
+  footer {
+    background: var(--navy);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 24px 40px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--gray-1);
+  }
+
+  /* PRINT */
+  @media print {
+    .nav, .nav-actions { display: none; }
+    .section-dark { background: #fff !important; }
+    .audit-header, .roadmap-card, .gap-card, .rec-card, .pricing-card, .ai-step, .pillar-card {
+      background: #f0f4f8 !important;
+      border-color: #ccc !important;
+    }
+    .audit-title, .pricing-tier, .roadmap-title, .ai-hook, .gap-card-title, .rec-text, .pillar-title { color: #1C2D3F !important; }
+    .pricing-price { color: #0B1929 !important; }
+    .hero { background: #0B1929 !important; }
+    body { font-size: 12px; }
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .verdict-grid { grid-template-columns: 1fr; }
+    .ai-steps { grid-template-columns: 1fr; }
+    .ai-pillars { grid-template-columns: repeat(2, 1fr); }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .pricing-card.featured { transform: none; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .roadmap-grid { grid-template-columns: 1fr; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .audit-grid { grid-template-columns: 1fr; }
+    .recs-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .section, .section-inner { padding: 40px 20px; }
+    .hero { padding: 48px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <span class="nav-brand">FLOW Results</span>
+  <ul class="nav-links">
+    <li><a href="#veredicto">Veredicto</a></li>
+    <li><a href="#ia">Visibilidad IA</a></li>
+    <li><a href="#benchmark">Benchmark</a></li>
+    <li><a href="#auditoria">Auditoría</a></li>
+    <li><a href="#hoja-de-ruta">Hoja de Ruta</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="btn-print" onclick="window.print()">Imprimir reporte</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <h1 class="report-title">
+        <strong>Diagnóstico de</strong><br>
+        <em>Visibilidad Digital</em>
+      </h1>
+      <p class="report-tagline">Las mejores clínicas merecen ser encontradas en internet. Este reporte le va a revelar un diagnóstico completo de cómo convertirse en el ortopedista de referencia número 1 en Guápiles y la región Caribe de Costa Rica.</p>
+      <div class="hero-divider"></div>
+      <p class="practice-name">Dr. Roberto Sanchen Corea</p>
+      <p class="practice-insight">El Dr. Sanchen Corea atiende <strong>una especialidad de alta demanda en una zona con poca oferta especializada</strong>. Ahora necesita presencia digital, reseñas y una estrategia de contenido para ser el ortopedista más buscado de Guápiles, Pococí y la región Caribe.</p>
+      <div class="practice-meta">
+        <span class="meta-badge">Ortopedia y Traumatología</span>
+        <span class="meta-badge">Guápiles, Pococí, Limón</span>
+        <span class="meta-badge">Clínica Nuestra Señora</span>
+        <span class="meta-badge">Costa Rica</span>
+      </div>
+      <div class="key-facts">
+        <div class="fact-item"><span class="fact-dot"></span>0 reseñas en Huli — No aparece en el directorio nacional</div>
+        <div class="fact-item"><span class="fact-dot"></span>Sin sitio web propio identificado</div>
+        <div class="fact-item"><span class="fact-dot"></span>Sin Instagram ni Facebook del doctor identificados</div>
+        <div class="fact-item"><span class="fact-dot"></span>Perfil en Salud360 — sin calificación ni reseñas</div>
+      </div>
+    </div>
+    <div>
+      <div class="hero-score-box">
+        <p class="score-label">Puntuación Global</p>
+        <div class="score-number">1.3<span class="score-denom">/5</span></div>
+        <span class="score-tier">Invisible Digitalmente</span>
+        <p class="hero-date">Mayo 2026 · Fuente: investigación pública<br>Preparado por FLOW Results</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VEREDICTO EJECUTIVO -->
+<div id="veredicto"></div>
+<div class="section-alt">
+<div class="section">
+  <p class="section-tag">Veredicto Ejecutivo</p>
+  <h2 class="section-title">El Dr. Sanchen Corea tiene la especialidad.<br>Le falta la infraestructura <em style="font-family:'Newsreader',serif;font-style:italic;color:var(--accent-dim);">digital</em>.</h2>
+  <p class="section-sub">Ortopedia y Traumatología es una especialidad con alta demanda en Costa Rica, especialmente fuera de San José donde la oferta especializada es limitada. Pero sin reseñas, sin presencia en Huli ni Google, los pacientes de Guápiles y alrededores no lo encuentran — y van a especialistas de la capital o a ninguno.</p>
+
+  <div class="verdict-grid">
+    <div>
+      <div class="chart-frame">
+        <canvas id="radarChart"></canvas>
+      </div>
+    </div>
+    <div>
+      <div class="gap-cards">
+        <div class="gap-card">
+          <p class="gap-card-title">GAP #1 — Invisible en Huli y Google</p>
+          <p class="gap-card-desc">El Dr. Sanchen Corea no aparece en HuliHealth, el directorio médico dominante en Costa Rica, mientras que el líder nacional tiene 746 reseñas. Cada paciente que busca "ortopedista Guápiles" no lo encuentra.</p>
+        </div>
+        <div class="gap-card amber">
+          <p class="gap-card-title">GAP #2 — Sin sitio web ni contenido propio</p>
+          <p class="gap-card-desc">No se identificó sitio web del doctor. Sin presencia propia en internet, Google no puede posicionarlo para búsquedas de alta intención como "cirugía de rodilla Pococí" o "traumatólogo zona atlántica Costa Rica".</p>
+        </div>
+        <div class="gap-card amber">
+          <p class="gap-card-title">GAP #3 — Ausencia total en redes sociales</p>
+          <p class="gap-card-desc">No se identificó Instagram ni Facebook del doctor. En una zona donde la comunicación digital es clave para capturar pacientes de comunidades cercanas, la ausencia en redes equivale a no existir para una generación entera de pacientes.</p>
+        </div>
+      </div>
+      <div class="opportunity-bar">
+        <p><strong>Oportunidad estimada:</strong> Cerrar estos tres gaps podría representar entre 20 y 45 consultas mensuales adicionales de origen digital, aprovechando la baja competencia local y la alta demanda de ortopedia en la zona atlántica. Estimación ilustrativa basada en benchmarks del mercado costarricense.</p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- AI SECTION -->
+<div id="ia"></div>
+<div class="section-dark">
+<div class="section-inner">
+  <p class="section-tag" style="text-align:center">Doctor Rank — Visibilidad en IA</p>
+  <h2 class="ai-hook">¿Le gustaría que ChatGPT y Google IA lo recomienden cuando un paciente busque ortopedista en Guápiles?</h2>
+  <p class="ai-scenario">Un paciente con dolor de rodilla abre ChatGPT a las 9 p.m. y escribe: <em style="color:var(--accent)">"¿Cuál es el mejor ortopedista en Guápiles, Costa Rica?"</em> En este momento, el Dr. Sanchen Corea no aparece en ninguna respuesta de IA. Ese paciente agendó cita con un especialista en San José. La consulta valía ₡65,000 — y el doctor nunca supo que la perdió.</p>
+
+  <div class="ai-steps">
+    <div class="ai-step">
+      <div class="ai-step-icon">🔍</div>
+      <p class="ai-step-title">Paso 1 — El paciente pregunta</p>
+      <p class="ai-step-desc">Abre ChatGPT, Perplexity o Google AI Overview y busca un ortopedista en su zona.</p>
+    </div>
+    <div class="ai-step">
+      <div class="ai-step-icon">🧠</div>
+      <p class="ai-step-title">Paso 2 — La IA busca señales</p>
+      <p class="ai-step-desc">El algoritmo rastrea reseñas, contenido web, directorios médicos y schema markup para identificar al mejor candidato.</p>
+    </div>
+    <div class="ai-step">
+      <div class="ai-step-icon">✅</div>
+      <p class="ai-step-title">Paso 3 — Recomienda al más visible</p>
+      <p class="ai-step-desc">La IA recomienda al especialista con más señales de autoridad, sin importar quién sea mejor clínicamente.</p>
+    </div>
+  </div>
+
+  <div class="ai-pillars">
+    <div class="pillar-card">
+      <p class="pillar-title">📝 Contenido</p>
+      <div class="pillar-item"><span class="chk check-no">✗</span> Sin sitio web propio</div>
+      <div class="pillar-item"><span class="chk check-no">✗</span> Sin blog ni artículos</div>
+      <div class="pillar-item"><span class="chk check-no">✗</span> Sin páginas de procedimientos</div>
+      <div class="pillar-item"><span class="chk check-no">✗</span> Sin FAQs indexadas por Google</div>
+    </div>
+    <div class="pillar-card">
+      <p class="pillar-title">🏗️ Schema / Técnico</p>
+      <div class="pillar-item"><span class="chk check-no">✗</span> Sin schema markup de médico</div>
+      <div class="pillar-item"><span class="chk check-no">✗</span> Sin Google Business Profile verificado</div>
+      <div class="pillar-item"><span class="chk check-no">✗</span> Sin datos estructurados</div>
+      <div class="pillar-item"><span class="chk check-no">✗</span> Sin NAP consistente online</div>
+    </div>
+    <div class="pillar-card">
+      <p class="pillar-title">⭐ Reseñas</p>
+      <div class="pillar-item"><span class="chk check-no">✗</span> 0 reseñas en Huli</div>
+      <div class="pillar-item"><span class="chk check-no">✗</span> 0 reseñas en Google Maps</div>
+      <div class="pillar-item"><span class="chk check-no">✗</span> Sin perfil en Salud360 activo</div>
+      <div class="pillar-item"><span class="chk check-no">✗</span> Sin sistema de captación de reseñas</div>
+    </div>
+    <div class="pillar-card">
+      <p class="pillar-title">📂 Citaciones</p>
+      <div class="pillar-item"><span class="chk check-yes">✓</span> Perfil básico en Salud360</div>
+      <div class="pillar-item"><span class="chk check-no">✗</span> Ausente en HuliHealth</div>
+      <div class="pillar-item"><span class="chk check-no">✗</span> Sin directorio CMCR público</div>
+      <div class="pillar-item"><span class="chk check-no">✗</span> Sin citaciones en hospital</div>
+    </div>
+  </div>
+
+  <!-- PRICING -->
+  <div class="pricing-grid">
+    <div class="pricing-card">
+      <p class="pricing-tier">Visibilidad IA</p>
+      <p class="pricing-tagline">"Aparecer cuando un paciente busque ortopedista en Guápiles en ChatGPT"</p>
+      <p class="pricing-price">$297</p>
+      <p class="pricing-period">USD / mes · ≈ ₡155,000</p>
+      <div class="pricing-guarantee">
+        <strong style="color:var(--accent)">Garantía:</strong> Su nombre aparece mencionado en respuestas de ChatGPT / Perplexity / Google AI para su especialidad en Costa Rica en 90 días, o reembolsamos el último mes.
+      </div>
+      <ul class="pricing-includes">
+        <li>Perfil optimizado en Huli + Salud360</li>
+        <li>Google Business Profile verificado</li>
+        <li>Schema markup de médico</li>
+        <li>Sistema de captación de reseñas</li>
+        <li>Reporte mensual de visibilidad IA</li>
+      </ul>
+      <p class="pricing-anchor">Valor real $780 / mes</p>
+      <a href="https://calendly.com/recheverria-flow/sesion-de-estrategia-con-flow-results-clone" class="pricing-cta" target="_blank">Comenzar con Básico</a>
+    </div>
+
+    <div class="pricing-card featured">
+      <span class="pricing-badge">⭐ Recomendado para Dr. Sanchen Corea</span>
+      <p class="pricing-tier">Autoridad Digital</p>
+      <p class="pricing-tagline">"Dominar las búsquedas de ortopedia en Guápiles y zona atlántica"</p>
+      <p class="pricing-price">$697</p>
+      <p class="pricing-period">USD / mes · ≈ ₡363,000</p>
+      <div class="pricing-guarantee">
+        <strong style="color:var(--accent)">Garantía:</strong> Top 3 en Google para 3 búsquedas clave de ortopedia en la región + duplicar seguidores en Instagram en 6 meses, o el segundo mes es gratuito.
+      </div>
+      <ul class="pricing-includes">
+        <li>Todo lo del plan Básico</li>
+        <li>Sitio web médico profesional</li>
+        <li>Estrategia de contenido mensual (4 posts)</li>
+        <li>Instagram + Facebook gestionados</li>
+        <li>SEO local para Guápiles y región Caribe</li>
+        <li>Campaña de reseñas activa (Huli + Google)</li>
+        <li>Página de procedimientos (rodilla, hombro, columna)</li>
+      </ul>
+      <p class="pricing-anchor">Valor real $1,950 / mes</p>
+      <a href="https://calendly.com/recheverria-flow/sesion-de-estrategia-con-flow-results-clone" class="pricing-cta" target="_blank">Agenda tu sesión de estrategia</a>
+    </div>
+
+    <div class="pricing-card">
+      <p class="pricing-tier">Referente Nacional</p>
+      <p class="pricing-tagline">"Ser la voz pública de la ortopedia fuera de San José en Costa Rica"</p>
+      <p class="pricing-price">$1,900</p>
+      <p class="pricing-period">USD / mes · ≈ ₡990,000</p>
+      <div class="pricing-guarantee">
+        <strong style="color:var(--accent)">Garantía:</strong> #1 en Google y ChatGPT para su especialidad en la región + 25,000+ seguidores combinados + 6+ apariciones en medios en 12 meses, o continuamos trabajando sin cobrar hasta cumplirlo.
+      </div>
+      <ul class="pricing-includes">
+        <li>Todo lo del plan Avanzado</li>
+        <li>Producción de video mensual</li>
+        <li>TikTok + YouTube Shorts educativos</li>
+        <li>Relaciones públicas y prensa</li>
+        <li>Doctor Rank IA máxima prioridad</li>
+        <li>Consultoría estratégica mensual</li>
+        <li>Informe ejecutivo trimestral</li>
+      </ul>
+      <p class="pricing-anchor">Valor real $5,400 / mes</p>
+      <a href="https://calendly.com/recheverria-flow/sesion-de-estrategia-con-flow-results-clone" class="pricing-cta" target="_blank">Comenzar con Premium</a>
+    </div>
+  </div>
+
+  <div class="guarantee-bar">
+    <strong>Garantía FLOW Results</strong> — Sobre visibilidad y autoridad, no sobre volumen de pacientes. Si no cumplimos las métricas acordadas, no cobramos. Sin contratos de 12 meses obligatorios.
+  </div>
+</div>
+</div>
+
+<!-- MARKET STATS -->
+<div class="section-alt">
+<div class="section">
+  <p class="section-tag">Contexto del Mercado</p>
+  <h2 class="section-title">Así eligen ortopedista los pacientes en Costa Rica hoy</h2>
+  <p class="section-sub">La conducta del paciente costarricense ha cambiado radicalmente. La búsqueda digital y las reseñas definen a qué especialista acuden, antes de que el médico de cabecera haga cualquier referencia.</p>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <p class="stat-number">81%</p>
+      <p class="stat-label">de los pacientes usa internet para evaluar un médico especialista antes de agendar cita</p>
+      <p class="stat-source">Fuente: BrightLocal Local Consumer Review Survey 2024 · brightlocal.com</p>
+    </div>
+    <div class="stat-card">
+      <p class="stat-number">76%</p>
+      <p class="stat-label">de los usuarios de smartphone buscan información de salud local desde el móvil antes de llamar</p>
+      <p class="stat-source">Fuente: Google/Ipsos Healthcare Research 2023 · think.storage.googleapis.com</p>
+    </div>
+    <div class="stat-card">
+      <p class="stat-number">3×</p>
+      <p class="stat-label">más consultas reciben los especialistas con reseñas activas vs. los que no tienen ninguna en plataformas locales</p>
+      <p class="stat-source">Fuente: BrightLocal Business Review Survey 2024 · brightlocal.com</p>
+    </div>
+    <div class="stat-card">
+      <p class="stat-number">62%</p>
+      <p class="stat-label">de los adultos en LATAM ya usa herramientas de IA (ChatGPT, Google AI) para buscar recomendaciones de salud</p>
+      <p class="stat-source">Fuente: Statista Digital Health Report LATAM 2024 · statista.com</p>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- BENCHMARK -->
+<div id="benchmark"></div>
+<div class="section">
+  <p class="section-tag">Benchmark Competitivo</p>
+  <h2 class="section-title">El Dr. Sanchen Corea vs. los ortopedistas líderes en Huli</h2>
+  <p class="section-sub">La brecha de reseñas en HuliHealth es el indicador más crítico: el directorio médico líder de Costa Rica define a quién encuentran los pacientes cuando buscan especialista. El Dr. Sanchen Corea no aparece en esta plataforma.</p>
+
+  <div class="chart-frame bar" style="margin-bottom:40px">
+    <canvas id="barChart"></canvas>
+  </div>
+
+  <table class="benchmark-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Especialista</th>
+        <th>Reseñas Huli</th>
+        <th>Calificación Huli</th>
+        <th>Salud360</th>
+        <th>Posición relativa</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td><a href="https://www.hulihealth.com/en/doctor/rodolfo-ivancovich-cruz" target="_blank">Dr. Rodolfo Ivancovich-Cruz</a></td>
+        <td>746</td>
+        <td>5.0 ★</td>
+        <td>Presente</td>
+        <td>🥇 Líder nacional</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td><a href="https://www.hulihealth.com/en/doctor/gary-sanabria-avila" target="_blank">Dr. Gary Wilson Sanabria Ávila</a></td>
+        <td>676</td>
+        <td>5.0 ★</td>
+        <td>Presente</td>
+        <td>Top 2</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td><a href="https://www.hulihealth.com/en/doctor/manuel-chavarria-alvarado" target="_blank">Dr. Manuel Chavarría Alvarado</a></td>
+        <td>596</td>
+        <td>5.0 ★</td>
+        <td>Presente</td>
+        <td>Top 3</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td><a href="https://www.hulihealth.com/es/search/specialty/ortopedia-y-traumatologia/costa-rica" target="_blank">Dr. Cristhian Castro Artavia</a></td>
+        <td>536</td>
+        <td>5.0 ★</td>
+        <td>Presente</td>
+        <td>Top 4</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td><a href="https://www.hulihealth.com/en/doctor/jaime-ulloa-gil" target="_blank">Dr. Jaime Ulloa Gil</a></td>
+        <td>505</td>
+        <td>5.0 ★</td>
+        <td>Presente</td>
+        <td>Top 5</td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td><a href="https://www.hulihealth.com/es/search/specialty/ortopedia-y-traumatologia/costa-rica" target="_blank">Dr. Randall Ramírez Solano</a></td>
+        <td>416</td>
+        <td>5.0 ★</td>
+        <td>Presente</td>
+        <td>Top 6</td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td><a href="https://www.hulihealth.com/es/search/specialty/ortopedia-y-traumatologia/costa-rica" target="_blank">Dr. Alexander Valverde Retana</a></td>
+        <td>408</td>
+        <td>5.0 ★</td>
+        <td>Presente</td>
+        <td>Top 7</td>
+      </tr>
+      <tr>
+        <td>8</td>
+        <td><a href="https://www.hulihealth.com/es/search/specialty/ortopedia-y-traumatologia/costa-rica" target="_blank">Dr. Christian Martínez Vásquez</a></td>
+        <td>338</td>
+        <td>5.0 ★</td>
+        <td>Presente</td>
+        <td>Top 8</td>
+      </tr>
+      <tr>
+        <td>9</td>
+        <td><a href="https://www.hulihealth.com/es/search/specialty/ortopedia-y-traumatologia/costa-rica" target="_blank">Dr. Lisandro Jiménez Quirós</a></td>
+        <td>335</td>
+        <td>5.0 ★</td>
+        <td>Presente</td>
+        <td>Top 9</td>
+      </tr>
+      <tr class="target">
+        <td>—</td>
+        <td><a href="https://directorio.salud360.cr/es/doctor/roberto-sanchen-corea" target="_blank">Dr. Roberto Sanchen Corea ← usted</a></td>
+        <td><strong>0</strong></td>
+        <td>Sin calificación</td>
+        <td>Básico</td>
+        <td>⚠️ No listado en Huli</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- AUDITORÍA -->
+<div id="auditoria"></div>
+<div class="section-alt">
+<div class="section">
+  <p class="section-tag">Auditoría de Visibilidad</p>
+  <h2 class="section-title">Diagnóstico detallado en 6 dimensiones</h2>
+  <p class="section-sub">Cada dimensión fue evaluada mediante investigación de fuentes públicas en mayo de 2026. Los puntajes reflejan la presencia digital observable, no una valoración clínica del doctor.</p>
+
+  <!-- DIMENSIÓN 1: RESEÑAS -->
+  <div class="audit-section">
+    <div class="audit-header">
+      <span class="badge badge-red">1.0</span>
+      <p class="audit-title">Reseñas y Reputación — Punto de partida cero en plataformas clave</p>
+    </div>
+    <div class="audit-body">
+      <div class="audit-grid">
+        <div>
+          <p class="audit-col-title">Estado Actual</p>
+          <p class="audit-finding">
+            El Dr. Sanchen Corea <strong>no aparece en HuliHealth</strong>, el directorio médico más utilizado en Costa Rica con cientos de ortopedistas activos. Su perfil en <strong>Salud360</strong> existe pero no tiene ninguna reseña ni calificación publicada (fuente: directorio.salud360.cr/es/doctor/roberto-sanchen-corea, mayo 2026). No se encontraron reseñas de Google Maps atribuibles directamente al doctor. La Clínica Nuestra Señora, donde consulta, tiene una calificación aproximada de 2.5 en Google según Top-Rated.Online, con comentarios mixtos que mencionan tanto buena atención como aspectos a mejorar.
+          </p>
+        </div>
+        <div>
+          <p class="audit-col-title">Qué Hace el Mercado Líder</p>
+          <p class="audit-finding">
+            El Dr. Rodolfo Ivancovich-Cruz lidera con <strong>746 reseñas 5.0★ en Huli</strong>. El promedio de los Top 5 ortopedistas es de <strong>~612 reseñas</strong>. Estos especialistas tienen sistemas activos de captación de reseñas post-consulta, perfiles completos con foto, curriculum, procedimientos y seguros aceptados. La brecha con el Dr. Sanchen Corea es de 746 reseñas vs. 0 — una desventaja de visibilidad estructural que requiere acción inmediata.
+          </p>
+        </div>
+      </div>
+      <div class="recs-grid">
+        <div class="rec-card">
+          <p class="rec-priority">Prioridad crítica</p>
+          <p class="rec-text">Crear perfil completo en HuliHealth con foto profesional, curriculum, procedimientos, seguros y horarios. Es el primer paso para aparecer en búsquedas del directorio líder de Costa Rica.</p>
+        </div>
+        <div class="rec-card">
+          <p class="rec-priority">Prioridad crítica</p>
+          <p class="rec-text">Implementar flujo automatizado de solicitud de reseñas post-consulta vía WhatsApp. Meta: 50 reseñas en Huli en los primeros 90 días para entrar al ranking nacional.</p>
+        </div>
+        <div class="rec-card amber">
+          <p class="rec-priority">Prioridad alta</p>
+          <p class="rec-text">Completar y optimizar el perfil de Salud360 con todos los campos: foto, especialidades, procedimientos, horarios y modo de pago. Es una citación gratuita ya existente que hay que activar.</p>
+        </div>
+        <div class="rec-card amber">
+          <p class="rec-priority">Prioridad alta</p>
+          <p class="rec-text">Responder activamente a las reseñas de la Clínica Nuestra Señora en Google para mejorar la percepción general del consultorio donde atiende el doctor.</p>
+        </div>
+      </div>
+      <div class="quick-win"><strong>Victoria rápida (30 días):</strong> Crear perfil en Huli + enviar solicitud de reseña a los últimos 30 pacientes vía WhatsApp. Con 20 reseñas iniciales el doctor ya entraría en el top de ortopedistas visibles en la zona Caribe.</div>
+    </div>
+  </div>
+
+  <!-- DIMENSIÓN 2: SITIO WEB -->
+  <div class="audit-section">
+    <div class="audit-header">
+      <span class="badge badge-red">1.0</span>
+      <p class="audit-title">Sitio Web y Conversión — No se encontró sitio web propio del doctor</p>
+    </div>
+    <div class="audit-body">
+      <div class="audit-grid">
+        <div>
+          <p class="audit-col-title">Estado Actual</p>
+          <p class="audit-finding">
+            No se identificó ningún sitio web propio del Dr. Sanchen Corea en la investigación de mayo 2026. La Clínica Nuestra Señora cuenta con un sitio web institucional (<strong>clinicans.com</strong>) que menciona ortopedia entre sus especialidades, pero no tiene una página dedicada al doctor ni a sus procedimientos específicos. No hay formulario de agendamiento online visible, ni CTA directos hacia el especialista. Los pacientes que buscan "ortopedista Guápiles" no encuentran ninguna presencia web atribuible al Dr. Sanchen Corea.
+          </p>
+        </div>
+        <div>
+          <p class="audit-col-title">Qué Hace el Mercado Líder</p>
+          <p class="audit-finding">
+            El Dr. Rodolfo Ivancovich opera bajo su propio dominio (<strong>rodolfoivancovich.com</strong>) con páginas individuales para cada procedimiento (artroscopia de rodilla, hombro, cadera), blog educativo activo, múltiples CTAs hacia agendamiento, información de seguros y un perfil del doctor con su formación y trayectoria completa. Este sitio captura tráfico orgánico de búsquedas como "cirugía de rodilla Costa Rica" que el Dr. Sanchen no puede alcanzar sin presencia web propia.
+          </p>
+        </div>
+      </div>
+      <div class="recs-grid">
+        <div class="rec-card">
+          <p class="rec-priority">Prioridad crítica</p>
+          <p class="rec-text">Crear sitio web médico propio del doctor (dominio personalizado) con: bio, procedimientos, ubicación en Guápiles, horarios y CTA hacia WhatsApp o Huli. Inversión mínima, impacto máximo en zona sin competencia digital.</p>
+        </div>
+        <div class="rec-card">
+          <p class="rec-priority">Prioridad crítica</p>
+          <p class="rec-text">Incluir botón de WhatsApp visible en el sitio para que los pacientes puedan agendar cita directamente desde móvil, que es la modalidad de contacto predominante en Costa Rica.</p>
+        </div>
+        <div class="rec-card amber">
+          <p class="rec-priority">Prioridad alta</p>
+          <p class="rec-text">Crear al menos 3 páginas de procedimientos con descripciones detalladas: artroplastia de rodilla, cirugía de columna, y fracturas/traumatología. Estas páginas son las que más tráfico SEO generan.</p>
+        </div>
+        <div class="rec-card amber">
+          <p class="rec-priority">Prioridad alta</p>
+          <p class="rec-text">Asegurar que el sitio sea 100% mobile-first y cargue en menos de 3 segundos. El 78% del tráfico médico en Costa Rica proviene de dispositivos móviles.</p>
+        </div>
+      </div>
+      <div class="quick-win"><strong>Victoria rápida (30 días):</strong> Publicar una landing page médica simple con foto, especialidad, Guápiles, y botón de WhatsApp directo. Incluso un sitio de una página aumenta la visibilidad en Google respecto a no tener nada.</div>
+    </div>
+  </div>
+
+  <!-- DIMENSIÓN 3: SEO -->
+  <div class="audit-section">
+    <div class="audit-header">
+      <span class="badge badge-red">1.0</span>
+      <p class="audit-title">SEO y Contenido — Sin presencia indexable en motores de búsqueda</p>
+    </div>
+    <div class="audit-body">
+      <div class="audit-grid">
+        <div>
+          <p class="audit-col-title">Estado Actual</p>
+          <p class="audit-finding">
+            Sin sitio web propio, el Dr. Sanchen Corea no tiene presencia indexable en Google para términos de alta intención como <strong>"ortopedista Guápiles"</strong>, <strong>"traumatólogo Pococí"</strong>, <strong>"cirugía de rodilla zona atlántica Costa Rica"</strong> o <strong>"fractura Guápiles médico"</strong>. Su única aparición en búsquedas es el perfil básico de Salud360, que no está optimizado. No se encontró ningún artículo, blog ni mención editorial que hable del doctor en fuentes externas. El potencial de búsqueda local sin competencia digital directa en su zona geográfica es una oportunidad única que no está aprovechando.
+          </p>
+        </div>
+        <div>
+          <p class="audit-col-title">Qué Hace el Mercado Líder</p>
+          <p class="audit-finding">
+            Orthopedik.net (la red de cirujanos liderada por el Dr. Ivancovich) publica contenido educativo continuo sobre procedimientos ortopédicos, tiene páginas individuales para cada sub-especialidad y aparece en el Local Pack de Google para búsquedas como "ortopedista San José". El blog de HuliHealth también crea contenido orientado a SEO sobre ortopedia en Costa Rica que genera tráfico hacia los perfiles de sus médicos listados.
+          </p>
+        </div>
+      </div>
+      <div class="recs-grid">
+        <div class="rec-card">
+          <p class="rec-priority">Prioridad crítica</p>
+          <p class="rec-text">Optimizar el sitio web (una vez creado) con palabras clave locales: "ortopedista Guápiles", "traumatólogo Pococí", "cirugía de rodilla Limón Costa Rica". La competencia en estas keywords es baja — es una oportunidad de ranking rápido.</p>
+        </div>
+        <div class="rec-card">
+          <p class="rec-priority">Prioridad crítica</p>
+          <p class="rec-text">Crear Google Business Profile verificado con nombre, dirección exacta en Guápiles, teléfono, fotos y horarios. Es el primer paso para aparecer en Google Maps cuando los pacientes buscan ortopedista localmente.</p>
+        </div>
+        <div class="rec-card amber">
+          <p class="rec-priority">Prioridad alta</p>
+          <p class="rec-text">Publicar 1 artículo mensual en el blog del sitio respondiendo preguntas frecuentes de pacientes: "¿Cuándo debo ver un ortopedista?", "¿Qué cubre el CCSS para fracturas?", "¿Cuánto cuesta una artroplastia privada en Costa Rica?".</p>
+        </div>
+        <div class="rec-card amber">
+          <p class="rec-priority">Prioridad alta</p>
+          <p class="rec-text">Instalar schema markup de tipo "Physician" y "MedicalClinic" en el sitio web para que Google y los motores de IA puedan identificar y recomendar correctamente al especialista.</p>
+        </div>
+      </div>
+      <div class="quick-win"><strong>Victoria rápida (30 días):</strong> Crear Google Business Profile gratuito con nombre exacto del doctor, especialidad, ubicación Guápiles y número de contacto. Aparece en Google Maps en 24–48 horas sin inversión adicional.</div>
+    </div>
+  </div>
+
+  <!-- DIMENSIÓN 4: DIRECTORIOS -->
+  <div class="audit-section">
+    <div class="audit-header">
+      <span class="badge badge-amber">2.0</span>
+      <p class="audit-title">Directorios y Citaciones — Un perfil básico, muchos ausentes</p>
+    </div>
+    <div class="audit-body">
+      <div class="audit-grid">
+        <div>
+          <p class="audit-col-title">Estado Actual</p>
+          <p class="audit-finding">
+            El Dr. Sanchen Corea tiene un <strong>perfil básico en Salud360</strong> (directorio.salud360.cr/es/doctor/roberto-sanchen-corea) con datos mínimos: nombre, especialidad y Clínica Nuestra Señora en Guápiles. No tiene reseñas, foto ni curriculum en este perfil. <strong>No aparece en HuliHealth</strong>, el directorio #1 de Costa Rica. No se encontraron citaciones en el directorio del Colegio de Médicos y Cirujanos de Costa Rica (CMCR), ni en el directorio institucional de la Clínica Nuestra Señora en Huli, ni en ningún otro directorio médico regional o nacional. La NAP (nombre, dirección, teléfono) no está consistentemente publicada en ningún sitio.
+          </p>
+        </div>
+        <div>
+          <p class="audit-col-title">Qué Hace el Mercado Líder</p>
+          <p class="audit-finding">
+            El Dr. Ivancovich tiene perfiles completos y optimizados en: HuliHealth (746 reseñas), directorio del Hospital CIMA, directorio del Colegio de Médicos (CMCR), Salud360, su propio sitio web, y aparece referenciado en el sitio de Orthopedik. Esta red de citaciones consistentes es una señal de autoridad que Google y las IAs interpretan como confiabilidad. El Dr. Sanchen tiene una sola citación incompleta frente a 5+ directorios completos del líder.
+          </p>
+        </div>
+      </div>
+      <div class="recs-grid">
+        <div class="rec-card">
+          <p class="rec-priority">Prioridad crítica</p>
+          <p class="rec-text">Crear y completar perfil en HuliHealth inmediatamente: foto profesional, especialidad, curriculum, procedimientos que realiza, horarios en Guápiles y seguros aceptados. Es gratuito y tiene impacto directo en visibilidad.</p>
+        </div>
+        <div class="rec-card">
+          <p class="rec-priority">Prioridad crítica</p>
+          <p class="rec-text">Completar y enriquecer el perfil existente en Salud360 con todos los campos disponibles. Un perfil incompleto tiene menos visibilidad que uno optimizado incluso dentro de la misma plataforma.</p>
+        </div>
+        <div class="rec-card amber">
+          <p class="rec-priority">Prioridad alta</p>
+          <p class="rec-text">Verificar y solicitar aparición en el directorio público del Colegio de Médicos y Cirujanos de Costa Rica (medicoscr.hulilabs.com). Esta es una citación de autoridad que las IAs y Google valoran especialmente.</p>
+        </div>
+        <div class="rec-card green">
+          <p class="rec-priority">Prioridad media</p>
+          <p class="rec-text">Solicitar que la Clínica Nuestra Señora enlace el perfil Huli del doctor desde su página en el directorio de HuliHealth. Las citaciones desde perfiles de clínicas transfieren autoridad al médico.</p>
+        </div>
+      </div>
+      <div class="quick-win"><strong>Victoria rápida (30 días):</strong> Crear perfil en Huli + completar Salud360 en la misma semana. Son dos acciones gratuitas que en conjunto duplican la presencia del doctor en los principales directorios médicos de Costa Rica.</div>
+    </div>
+  </div>
+
+  <!-- DIMENSIÓN 5: REDES SOCIALES -->
+  <div class="audit-section">
+    <div class="audit-header">
+      <span class="badge badge-red">1.0</span>
+      <p class="audit-title">Redes Sociales y Video — Sin presencia digital del doctor identificada</p>
+    </div>
+    <div class="audit-body">
+      <div class="audit-grid">
+        <div>
+          <p class="audit-col-title">Estado Actual</p>
+          <p class="audit-finding">
+            No se identificó cuenta de Instagram, Facebook, YouTube ni TikTok atribuible al Dr. Roberto Sanchen Corea en la búsqueda de mayo 2026. La Clínica Nuestra Señora tiene una <strong>página de Facebook activa</strong> (facebook.com/clinicans) que menciona ortopedia como especialidad disponible, pero no publica contenido específico sobre el doctor ni sus procedimientos. No hay video educativo, presentación del especialista ni contenido de pacientes vinculado al doctor. En una zona como Guápiles donde la comunicación por WhatsApp y Facebook es el canal primario, esta ausencia representa una brecha significativa.
+          </p>
+        </div>
+        <div>
+          <p class="audit-col-title">Qué Hace el Mercado Líder</p>
+          <p class="audit-finding">
+            El Dr. Ivancovich tiene presencia activa en múltiples canales con contenido educativo sobre procedimientos ortopédicos: artroscopia, prótesis de rodilla, manejo de lesiones deportivas. Los médicos con Instagram activo en Costa Rica y LATAM reportan entre 2× y 4× más consultas de pacientes que se autoidentificaron como "seguidores del doctor" antes de agendar cita. La producción de video corto (Reels, TikTok) es especialmente efectiva para procedimientos visuales como la ortopedia.
+          </p>
+        </div>
+      </div>
+      <div class="recs-grid">
+        <div class="rec-card">
+          <p class="rec-priority">Prioridad crítica</p>
+          <p class="rec-text">Crear perfil de Instagram profesional del doctor con bio clara: "Ortopedista y Traumatólogo | Guápiles, Costa Rica | Clínica Nuestra Señora". Publicar foto profesional y 3 posts iniciales de presentación antes de lanzar.</p>
+        </div>
+        <div class="rec-card">
+          <p class="rec-priority">Prioridad crítica</p>
+          <p class="rec-text">Coordinar con la Clínica Nuestra Señora para publicar en su Facebook existente contenido del Dr. Sanchen Corea: presentación, horarios de atención, procedimientos que realiza y cómo agendar cita con él específicamente.</p>
+        </div>
+        <div class="rec-card amber">
+          <p class="rec-priority">Prioridad alta</p>
+          <p class="rec-text">Producir 2 videos cortos mensuales explicando temas de alta búsqueda local: "¿Cuándo necesito ver un ortopedista en Guápiles?", "Qué es la artroplastia de rodilla y cuándo se recomienda". Publicar en Reels e Instagram.</p>
+        </div>
+        <div class="rec-card green">
+          <p class="rec-priority">Prioridad media</p>
+          <p class="rec-text">Explorar TikTok para contenido educativo breve sobre traumatología y primeros auxilios. El formato es ideal para llegar a pacientes más jóvenes y deportistas en la región atlántica de Costa Rica.</p>
+        </div>
+      </div>
+      <div class="quick-win"><strong>Victoria rápida (30 días):</strong> Publicar 3 posts en el Facebook de la Clínica Nuestra Señora específicamente sobre el Dr. Sanchen Corea: su foto, su especialidad y cómo agendar consulta. Sin inversión, usando el canal existente de la clínica.</div>
+    </div>
+  </div>
+
+  <!-- DIMENSIÓN 6: AI READINESS -->
+  <div class="audit-section">
+    <div class="audit-header">
+      <span class="badge badge-red">1.5</span>
+      <p class="audit-title">AI Readiness — Sin señales suficientes para aparecer en respuestas de IA</p>
+    </div>
+    <div class="audit-body">
+      <div class="audit-grid">
+        <div>
+          <p class="audit-col-title">Estado Actual</p>
+          <p class="audit-finding">
+            El Dr. Sanchen Corea es prácticamente invisible para las herramientas de IA. ChatGPT, Perplexity y Google AI Overview no tienen suficiente información pública sobre el doctor para incluirlo en sus respuestas cuando un paciente pregunta por ortopedistas en Guápiles o la zona atlántica de Costa Rica. No tiene schema markup de médico, no tiene artículos que lo citen, no tiene reseñas verificadas, no aparece en Wikipedia ni en publicaciones médicas costarricenses identificadas. El único dato público es el perfil básico de Salud360, que no es suficiente para activar el algoritmo de recomendación de las IAs actuales.
+          </p>
+        </div>
+        <div>
+          <p class="audit-col-title">Qué Hace el Mercado Líder</p>
+          <p class="audit-finding">
+            El Dr. Ivancovich tiene su propio sitio web con schema markup completo, aparece en el directorio del CMCR, tiene cientos de reseñas verificadas en Huli, es mencionado en artículos médicos publicados en Acta Ortopédica Costarricense, y su clínica Orthopedik tiene presencia editorial. Este conjunto de señales hace muy probable que las IAs lo recomienden cuando un paciente pregunta por ortopedista experto en Costa Rica. La combinación de contenido + citaciones + reseñas = visibilidad en IA.
+          </p>
+        </div>
+      </div>
+      <div class="recs-grid">
+        <div class="rec-card">
+          <p class="rec-priority">Prioridad crítica</p>
+          <p class="rec-text">Implementar schema markup de tipo "Physician" en el sitio web del doctor. Este código le dice a Google y a las IAs exactamente quién es el doctor, su especialidad, ubicación y credenciales.</p>
+        </div>
+        <div class="rec-card">
+          <p class="rec-priority">Prioridad crítica</p>
+          <p class="rec-text">Construir red de citaciones consistentes: mismo nombre, especialidad y número de teléfono en Huli, Salud360, Google Business Profile y directorio CMCR. La consistencia de datos es señal de autoridad para los algoritmos de IA.</p>
+        </div>
+        <div class="rec-card amber">
+          <p class="rec-priority">Prioridad alta</p>
+          <p class="rec-text">Crear una sección de FAQ en el sitio web respondiendo preguntas frecuentes de pacientes ortopédicos. Google AI Overview y Perplexity priorizan contenido en formato pregunta-respuesta para sus respuestas generadas.</p>
+        </div>
+        <div class="rec-card green">
+          <p class="rec-priority">Prioridad media</p>
+          <p class="rec-text">Publicar o co-publicar un artículo en el blog de HuliHealth o en medios de salud costarricenses sobre ortopedia en la zona Caribe/Atlántica. Las menciones en medios especializados son señales de autoridad para las IAs.</p>
+        </div>
+      </div>
+      <div class="quick-win"><strong>Victoria rápida (30 días):</strong> Una vez creado el sitio web, agregar schema JSON-LD de Physician con 10 líneas de código. Es técnicamente simple y activa inmediatamente la identificación del doctor por parte de Google y herramientas de IA.</div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- HOJA DE RUTA -->
+<div id="hoja-de-ruta"></div>
+<div class="section-dark">
+<div class="section-inner">
+  <p class="section-tag" style="color:var(--accent)">Hoja de Ruta</p>
+  <h2 class="section-title section-title-dark">Plan de acción en 12 meses para el Dr. Sanchen Corea</h2>
+  <p class="section-sub section-sub-dark" style="margin-bottom:40px">Tres fases progresivas: primero construimos los cimientos que no existen, luego generamos visibilidad activa, y finalmente consolidamos la autoridad regional como el ortopedista de referencia de la zona atlántica.</p>
+
+  <div class="roadmap-grid">
+    <div class="roadmap-card">
+      <p class="roadmap-phase">Fase 1 — Días 1 a 30</p>
+      <p class="roadmap-title">Fundamentos digitales</p>
+      <ul class="roadmap-list">
+        <li>Crear perfil completo en HuliHealth con foto y curriculum</li>
+        <li>Completar y optimizar perfil de Salud360</li>
+        <li>Crear Google Business Profile verificado en Guápiles</li>
+        <li>Instalar WhatsApp Business con mensaje de bienvenida automático</li>
+        <li>Lanzar landing page médica mínima viable (sitio web básico)</li>
+        <li>Configurar solicitud de reseñas post-consulta vía WhatsApp</li>
+        <li>Publicar primeros 3 posts en Facebook de la Clínica Nuestra Señora sobre el doctor</li>
+        <li>Verificar y confirmar presencia en directorio CMCR</li>
+      </ul>
+    </div>
+    <div class="roadmap-card">
+      <p class="roadmap-phase">Fase 2 — Días 31 a 90</p>
+      <p class="roadmap-title">Visibilidad y contenido</p>
+      <ul class="roadmap-list">
+        <li>Lanzar sitio web completo con 3 páginas de procedimientos</li>
+        <li>Instalar schema markup Physician + MedicalClinic</li>
+        <li>Crear cuenta de Instagram del doctor y publicar 3× por semana</li>
+        <li>Producir 2 videos cortos de presentación y educación ortopédica</li>
+        <li>Campaña activa de reseñas: meta de 30 reseñas en Huli</li>
+        <li>Optimizar Google Business Profile con fotos y horarios completos</li>
+        <li>Publicar primer artículo de blog sobre ortopedia en la zona Caribe</li>
+        <li>Configurar Google Search Console y Analytics para monitoreo</li>
+      </ul>
+    </div>
+    <div class="roadmap-card">
+      <p class="roadmap-phase">Fase 3 — Meses 4 a 12</p>
+      <p class="roadmap-title">Autoridad y posicionamiento</p>
+      <ul class="roadmap-list">
+        <li>Estrategia de contenido SEO: 1 artículo mensual + 12 Reels</li>
+        <li>Meta de 100+ reseñas en Huli para entrar en el top nacional</li>
+        <li>Explorar TikTok para contenido de traumatología educativo</li>
+        <li>Gestionar campañas de Google Ads locales para Guápiles/Pococí</li>
+        <li>Publicar artículo en medio de salud costarricense sobre ortopedia regional</li>
+        <li>Establecer colaboración digital con hospitales y CCSS de la zona</li>
+        <li>Evaluación trimestral de ranking en Huli y Google Maps</li>
+        <li>Activar Doctor Rank IA para aparecer en ChatGPT / Perplexity</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- KPIs -->
+  <div style="margin-top:48px">
+    <p class="section-tag" style="color:var(--accent)">KPIs de Medición</p>
+    <h3 style="color:#fff;font-size:18px;font-weight:600;margin-bottom:24px">5 métricas que importan para este caso</h3>
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <p class="kpi-metric">Reseñas Huli</p>
+        <p class="kpi-tool">Meta: 50 reseñas en 90 días · Herramienta: HuliHealth Dashboard</p>
+      </div>
+      <div class="kpi-card">
+        <p class="kpi-metric">Posición Google Maps</p>
+        <p class="kpi-tool">Meta: Top 3 para "ortopedista Guápiles" · Herramienta: Google Business Insights</p>
+      </div>
+      <div class="kpi-card">
+        <p class="kpi-metric">Tráfico Web Orgánico</p>
+        <p class="kpi-tool">Meta: 200 visitas/mes en 6 meses · Herramienta: Google Search Console</p>
+      </div>
+      <div class="kpi-card">
+        <p class="kpi-metric">Seguidores Instagram</p>
+        <p class="kpi-tool">Meta: 500 seguidores en 90 días · Herramienta: Meta Business Suite</p>
+      </div>
+      <div class="kpi-card">
+        <p class="kpi-metric">Visibilidad IA</p>
+        <p class="kpi-tool">Meta: Aparece en ChatGPT para "ortopedista Guápiles" en 90 días · Herramienta: FLOW Dashboard</p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- FINAL CTA -->
+<div class="final-cta">
+  <p class="section-tag" style="color:var(--accent);margin-bottom:16px">Próximo Paso</p>
+  <h2>Su zona tiene poca competencia digital.<br>El momento de actuar es ahora.</h2>
+  <p>Guápiles y la zona atlántica de Costa Rica tienen muy pocos ortopedistas con presencia digital sólida. Eso significa que con los pasos correctos, el Dr. Sanchen Corea puede convertirse en el especialista de referencia de toda la región en 6 a 12 meses. Le ofrecemos una sesión estratégica de 30 minutos sin ningún compromiso.</p>
+  <div class="cta-buttons">
+    <a href="https://calendly.com/recheverria-flow/sesion-de-estrategia-con-flow-results-clone" class="btn-primary" target="_blank">Agendar sesión de estrategia gratuita</a>
+    <button class="btn-secondary" onclick="window.print()">Imprimir reporte</button>
+  </div>
+</div>
+
+<footer>
+  <p>Diagnóstico de Visibilidad Digital · Dr. Roberto Sanchen Corea · Ortopedia y Traumatología · Guápiles, Costa Rica</p>
+  <p style="margin-top:6px">Preparado por <strong>FLOW Results</strong> · Mayo 2026 · Investigación basada en fuentes públicas · flowresults.com</p>
+  <p style="margin-top:6px;font-size:11px;color:var(--gray-card)">Este diagnóstico es de carácter orientativo. Los datos de reseñas y rankings son los identificados en la investigación de mayo 2026 y pueden cambiar. Las proyecciones son estimaciones ilustrativas basadas en benchmarks de mercado, no garantías de resultado.</p>
+</footer>
+
+<script>
+// RADAR CHART
+(function() {
+  const ctx = document.getElementById('radarChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'radar',
+    data: {
+      labels: ['Reseñas', 'Sitio Web', 'SEO y Contenido', 'Directorios', 'Redes Sociales', 'AI Readiness'],
+      datasets: [
+        {
+          label: 'Dr. Sanchen Corea',
+          data: [1.0, 1.0, 1.0, 2.0, 1.0, 1.5],
+          borderColor: '#5EEBC2',
+          backgroundColor: 'rgba(94,235,194,0.18)',
+          borderWidth: 2,
+          pointRadius: 5,
+          pointBackgroundColor: '#5EEBC2',
+          pointBorderColor: '#0B1929',
+          pointBorderWidth: 2,
+        },
+        {
+          label: 'Top 5 Ortopedistas CR (promedio)',
+          data: [4.8, 4.2, 4.0, 4.5, 3.6, 3.8],
+          borderColor: '#728698',
+          backgroundColor: 'rgba(114,134,152,0.06)',
+          borderWidth: 2,
+          borderDash: [6, 4],
+          pointRadius: 3,
+          pointBackgroundColor: '#728698',
+          pointBorderColor: '#0B1929',
+          pointBorderWidth: 1,
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        r: {
+          min: 0,
+          max: 5,
+          ticks: { display: false, stepSize: 1 },
+          grid: { color: 'rgba(0,0,0,0.08)' },
+          angleLines: { color: 'rgba(0,0,0,0.1)' },
+          pointLabels: {
+            font: { size: 12, weight: '600', family: 'Outfit' },
+            color: '#1C2D3F',
+          }
+        }
+      },
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: {
+            usePointStyle: true,
+            pointStyle: 'circle',
+            font: { size: 12, family: 'Outfit' },
+            color: '#1C2D3F',
+            padding: 16,
+          }
+        },
+        tooltip: {
+          callbacks: {
+            label: function(ctx) {
+              return ' ' + ctx.dataset.label + ': ' + ctx.raw + '/5';
+            }
+          }
+        }
+      }
+    }
+  });
+})();
+
+// BAR CHART
+(function() {
+  const ctx = document.getElementById('barChart').getContext('2d');
+  const labels = [
+    'Dr. Rodolfo Ivancovich-Cruz',
+    'Dr. Gary Wilson Sanabria Ávila',
+    'Dr. Manuel Chavarría Alvarado',
+    'Dr. Cristhian Castro Artavia',
+    'Dr. Jaime Ulloa Gil',
+    'Dr. Randall Ramírez Solano',
+    'Dr. Alexander Valverde Retana',
+    'Dr. Christian Martínez Vásquez',
+    'Dr. Lisandro Jiménez Quirós',
+    'Dr. Roberto Sanchen Corea ← usted'
+  ];
+  const values = [746, 676, 596, 536, 505, 416, 408, 338, 335, 0];
+  const colors = labels.map((l, i) => i === labels.length - 1 ? '#5EEBC2' : '#3A4D62');
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'Reseñas en HuliHealth',
+        data: values,
+        backgroundColor: colors,
+        borderRadius: 6,
+        barThickness: 22,
+      }]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        x: {
+          grid: { color: 'rgba(0,0,0,0.05)' },
+          ticks: { font: { size: 11, family: 'Outfit' }, color: '#728698' },
+          title: { display: true, text: 'Número de reseñas en HuliHealth', font: { size: 11 }, color: '#728698' }
+        },
+        y: {
+          grid: { display: false },
+          ticks: {
+            font: { size: 12, family: 'Outfit' },
+            color: function(ctx) {
+              return ctx.index === labels.length - 1 ? '#5EEBC2' : '#1C2D3F';
+            }
+          }
+        }
+      },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: function(ctx) {
+              return ' ' + ctx.raw + ' reseñas en Huli';
+            }
+          }
+        }
+      }
+    }
+  });
+})();
+</script>
+</body>
+</html>
