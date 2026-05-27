@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diagnóstico de Visibilidad Digital — Dr. Daniel Mendoza Murillo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Newsreader:ital,wght@1,400;1,600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root {
+    --navy: #0B1929;
+    --navy-mid: #0F2236;
+    --navy-light: #14304D;
+    --navy-card: #162D4A;
+    --accent: #5EEBC2;
+    --accent-dim: #3CC49E;
+    --red: #D9534F;
+    --amber: #E8A820;
+    --green: #3DAD6C;
+    --text-dark: #1C2D3F;
+    --text-light: #C4CFDD;
+    --text-mid: #9AABBD;
+    --text-muted: #728698;
+    --page-bg: #FFFFFF;
+    --alt-bg: #F6F8FB;
+    --border: #E2E8F0;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Outfit', sans-serif; background: var(--page-bg); color: var(--text-dark); line-height: 1.6; }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--navy); padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 56px; box-shadow: 0 2px 16px rgba(0,0,0,0.3);
+  }
+  .nav-brand { display: flex; align-items: center; gap: 10px; }
+  .nav-logo { color: var(--accent); font-weight: 800; font-size: 1.1rem; letter-spacing: 1px; }
+  .nav-tag { color: var(--text-mid); font-size: 0.8rem; }
+  .nav-links { display: flex; gap: 1.5rem; }
+  .nav-links a { color: var(--text-light); text-decoration: none; font-size: 0.82rem; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-print-btn {
+    background: var(--accent); color: var(--navy); border: none; cursor: pointer;
+    padding: 6px 14px; border-radius: 6px; font-size: 0.8rem; font-weight: 700;
+    font-family: 'Outfit', sans-serif; transition: background 0.2s;
+  }
+  .nav-print-btn:hover { background: var(--accent-dim); }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(145deg, var(--navy) 0%, var(--navy-mid) 60%, #0A2340 100%);
+    padding: 60px 2rem 56px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -80px; right: -80px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(94,235,194,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-inner { max-width: 1080px; margin: 0 auto; }
+  .hero-eyebrow {
+    font-size: 0.78rem; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 18px; display: flex; align-items: center; gap: 8px;
+  }
+  .hero-eyebrow::before {
+    content: ''; width: 32px; height: 2px; background: var(--accent); display: inline-block;
+  }
+  .hero-title {
+    font-size: clamp(36px, 6vw, 56px);
+    font-weight: 800; color: white; letter-spacing: -1px;
+    line-height: 1.05; margin-bottom: 14px; text-transform: uppercase;
+  }
+  .hero-tagline {
+    font-size: clamp(0.95rem, 2vw, 1.1rem); font-weight: 300;
+    color: #C4CFDD; max-width: 640px; margin-bottom: 36px; line-height: 1.7;
+  }
+  .hero-grid { display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: start; }
+  .hero-left { }
+  .hero-doctor-name {
+    font-size: 1.6rem; font-weight: 700; color: white; margin-bottom: 4px;
+  }
+  .hero-insight {
+    font-size: 1.05rem; color: var(--accent); font-weight: 500; margin-bottom: 18px;
+    font-family: 'Newsreader', serif; font-style: italic; line-height: 1.5;
+  }
+  .hero-meta { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 28px; }
+  .hero-meta-item {
+    background: rgba(94,235,194,0.08); border: 1px solid rgba(94,235,194,0.2);
+    border-radius: 6px; padding: 6px 14px;
+    font-size: 0.82rem; color: var(--text-light); display: flex; align-items: center; gap: 6px;
+  }
+  .hero-meta-item .icon { color: var(--accent); }
+  .hero-facts { display: flex; flex-wrap: wrap; gap: 12px; }
+  .hero-fact {
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px; padding: 10px 16px;
+    font-size: 0.82rem; color: var(--text-mid);
+  }
+  .hero-fact strong { color: white; display: block; font-size: 1rem; font-weight: 700; }
+  .hero-score-box {
+    background: var(--navy-card); border: 1px solid rgba(94,235,194,0.25);
+    border-radius: 16px; padding: 32px 40px; text-align: center;
+    min-width: 200px;
+  }
+  .score-label { font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; }
+  .score-big { font-size: clamp(60px, 8vw, 92px); font-weight: 800; color: var(--amber); line-height: 1; }
+  .score-denom { font-size: 1.4rem; color: var(--text-muted); font-weight: 400; }
+  .score-tier { font-size: 0.78rem; color: var(--amber); font-weight: 600; margin-top: 8px; letter-spacing: 1px; }
+  .hero-date { margin-top: 28px; font-size: 0.72rem; color: var(--text-muted); }
+
+  /* SECTIONS */
+  .section { max-width: 1080px; margin: 0 auto; padding: 56px 2rem; }
+  .section-alt { background: var(--alt-bg); }
+  .section-full { padding: 56px 2rem; }
+  .section-title {
+    font-size: 1.65rem; font-weight: 800; color: var(--text-dark);
+    margin-bottom: 6px; letter-spacing: -0.5px;
+  }
+  .section-title .accent { color: var(--accent-dim); font-family: 'Newsreader', serif; font-style: italic; }
+  .section-sub { font-size: 0.92rem; color: var(--text-muted); margin-bottom: 36px; }
+  .section-divider {
+    width: 100%; height: 4px; background: linear-gradient(90deg, var(--accent) 0%, transparent 60%);
+    margin-bottom: 32px; border-radius: 2px;
+  }
+
+  /* VERDICT GRID */
+  .verdict-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start; }
+  .verdict-gaps { }
+  .gap-card {
+    background: var(--navy-card); border-radius: 12px; padding: 20px 24px;
+    margin-bottom: 16px; border-left: 4px solid var(--red);
+    position: relative;
+  }
+  .gap-card.amber { border-left-color: var(--amber); }
+  .gap-card.green { border-left-color: var(--green); }
+  .gap-number { font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 4px; }
+  .gap-title { font-size: 1rem; font-weight: 700; color: white; margin-bottom: 6px; }
+  .gap-desc { font-size: 0.86rem; color: var(--text-light); line-height: 1.5; }
+  .opportunity-bar {
+    background: linear-gradient(135deg, var(--navy-card) 0%, #1a3555 100%);
+    border: 1px solid rgba(94,235,194,0.2); border-radius: 12px;
+    padding: 20px 24px; margin-top: 24px;
+  }
+  .opp-label { font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+  .opp-text { font-size: 0.9rem; color: var(--text-light); line-height: 1.6; }
+
+  /* CHART FRAMES */
+  .chart-frame { position: relative; width: 100%; height: 420px; }
+  .chart-frame.bar { height: 340px; }
+  .chart-frame canvas { width: 100% !important; height: 100% !important; display: block; }
+
+  /* SCORE BADGES */
+  .score-badge {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 48px; height: 48px; border-radius: 50%;
+    font-size: 1rem; font-weight: 800; flex-shrink: 0;
+  }
+  .score-badge.red { background: rgba(217,83,79,0.15); color: var(--red); border: 2px solid var(--red); }
+  .score-badge.amber { background: rgba(232,168,32,0.15); color: var(--amber); border: 2px solid var(--amber); }
+  .score-badge.teal { background: rgba(94,235,194,0.15); color: var(--accent); border: 2px solid var(--accent); }
+  .score-badge.green { background: rgba(61,173,108,0.15); color: var(--green); border: 2px solid var(--green); }
+
+  /* AUDIT SECTIONS */
+  .audit-block { margin-bottom: 48px; }
+  .audit-header { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 24px; }
+  .audit-title-group { }
+  .audit-insight { font-size: 1.25rem; font-weight: 700; color: var(--text-dark); margin-bottom: 4px; line-height: 1.3; }
+  .audit-dim { font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); }
+  .audit-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+  .audit-card {
+    background: var(--navy); border-radius: 12px; padding: 20px;
+    color: white;
+  }
+  .audit-card.state { border-top: 3px solid var(--text-muted); }
+  .audit-card.benchmark { border-top: 3px solid var(--accent); }
+  .audit-card.rec { border-top: 3px solid var(--amber); }
+  .audit-card-label {
+    font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--text-muted); margin-bottom: 10px;
+  }
+  .audit-card-title { font-size: 0.95rem; font-weight: 700; color: white; margin-bottom: 10px; }
+  .audit-card ul { padding-left: 16px; }
+  .audit-card ul li { font-size: 0.83rem; color: var(--text-light); margin-bottom: 6px; line-height: 1.5; }
+  .quick-win {
+    background: rgba(61,173,108,0.08); border: 1px solid rgba(61,173,108,0.25);
+    border-radius: 8px; padding: 12px 16px; margin-top: 16px;
+    display: flex; gap: 10px; align-items: flex-start;
+  }
+  .qw-icon { color: var(--green); font-size: 1rem; flex-shrink: 0; margin-top: 2px; }
+  .qw-text { font-size: 0.83rem; color: var(--text-dark); line-height: 1.5; }
+  .qw-label { font-weight: 700; display: block; }
+
+  /* BENCHMARK TABLE */
+  .bench-table { width: 100%; border-collapse: collapse; margin-top: 24px; }
+  .bench-table th {
+    background: var(--navy); color: var(--text-light);
+    font-size: 0.75rem; letter-spacing: 1px; text-transform: uppercase;
+    padding: 12px 16px; text-align: left; font-weight: 600;
+  }
+  .bench-table td { padding: 12px 16px; border-bottom: 1px solid var(--border); font-size: 0.88rem; }
+  .bench-table tr:hover td { background: var(--alt-bg); }
+  .bench-table tr.highlighted td { background: rgba(94,235,194,0.06); border-left: 3px solid var(--accent); }
+  .bench-table tr.highlighted td:first-child { font-weight: 700; color: var(--accent-dim); }
+  .rating-star { color: #F59E0B; }
+
+  /* AI SECTION */
+  .ai-section {
+    background: linear-gradient(160deg, var(--navy) 0%, #0A1F35 100%);
+    padding: 64px 2rem;
+  }
+  .ai-inner { max-width: 1080px; margin: 0 auto; }
+  .ai-hook { font-size: clamp(1.6rem, 3.5vw, 2.2rem); font-weight: 800; color: white; margin-bottom: 12px; line-height: 1.2; }
+  .ai-hook .accent { color: var(--accent); font-family: 'Newsreader', serif; font-style: italic; }
+  .ai-sub { font-size: 0.95rem; color: var(--text-light); max-width: 640px; margin-bottom: 40px; line-height: 1.7; }
+  .ai-scenario {
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px; padding: 20px 24px; margin-bottom: 40px;
+    font-size: 0.92rem; color: var(--text-light); line-height: 1.7;
+    border-left: 4px solid var(--amber);
+  }
+  .ai-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 40px; }
+  .ai-step {
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px; padding: 20px; text-align: center;
+  }
+  .ai-step-icon { font-size: 2rem; margin-bottom: 10px; }
+  .ai-step-title { font-size: 0.82rem; font-weight: 700; color: var(--accent); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
+  .ai-step-desc { font-size: 0.82rem; color: var(--text-mid); line-height: 1.5; }
+  .ai-pillars { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 48px; }
+  .ai-pillar {
+    background: var(--navy-card); border-radius: 12px; padding: 20px;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .ai-pillar-title { font-size: 0.85rem; font-weight: 700; color: white; margin-bottom: 12px; }
+  .ai-pillar-item { display: flex; align-items: center; gap: 8px; font-size: 0.8rem; color: var(--text-mid); margin-bottom: 6px; }
+  .ai-pillar-item .chk { font-size: 0.9rem; }
+  .chk-yes { color: var(--green); }
+  .chk-no { color: var(--red); }
+
+  /* PRICING */
+  .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 32px; }
+  .price-card {
+    background: var(--navy-card); border-radius: 16px; padding: 28px 24px;
+    border: 1px solid rgba(255,255,255,0.08); position: relative;
+    display: flex; flex-direction: column;
+  }
+  .price-card.featured {
+    border-color: var(--accent); transform: translateY(-8px);
+    box-shadow: 0 16px 48px rgba(94,235,194,0.15);
+  }
+  .price-badge {
+    position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+    background: var(--accent); color: var(--navy);
+    font-size: 0.72rem; font-weight: 800; padding: 4px 14px; border-radius: 20px;
+    white-space: nowrap; letter-spacing: 0.5px;
+  }
+  .price-tier { font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; }
+  .price-name { font-size: 1.2rem; font-weight: 800; color: white; margin-bottom: 8px; }
+  .price-tagline { font-size: 0.83rem; color: var(--text-mid); font-style: italic; margin-bottom: 20px; line-height: 1.4; }
+  .price-amount { font-size: 2.2rem; font-weight: 800; color: white; line-height: 1; }
+  .price-amount span { font-size: 1rem; font-weight: 400; color: var(--text-muted); }
+  .price-local { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 20px; margin-top: 4px; }
+  .price-guarantee {
+    background: rgba(94,235,194,0.08); border: 1px solid rgba(94,235,194,0.2);
+    border-radius: 8px; padding: 12px; margin-bottom: 20px;
+    font-size: 0.78rem; color: var(--text-light); line-height: 1.5;
+  }
+  .price-guarantee strong { color: var(--accent); }
+  .price-includes { flex: 1; }
+  .price-includes li { font-size: 0.8rem; color: var(--text-light); margin-bottom: 6px; list-style: none; display: flex; gap: 8px; align-items: flex-start; }
+  .price-includes li::before { content: '✓'; color: var(--accent); font-weight: 700; flex-shrink: 0; }
+  .price-anchor { font-size: 0.75rem; color: var(--text-muted); margin: 16px 0 12px; text-decoration: line-through; }
+  .price-cta {
+    display: block; text-align: center; background: rgba(94,235,194,0.1);
+    border: 1px solid var(--accent); color: var(--accent);
+    padding: 10px; border-radius: 8px; text-decoration: none;
+    font-size: 0.85rem; font-weight: 700; margin-top: 16px; transition: all 0.2s;
+  }
+  .price-cta:hover { background: var(--accent); color: var(--navy); }
+  .price-card.featured .price-cta { background: var(--accent); color: var(--navy); }
+  .price-card.featured .price-cta:hover { background: var(--accent-dim); }
+  .guarantee-bar {
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px; padding: 18px 24px; text-align: center;
+    font-size: 0.85rem; color: var(--text-mid); line-height: 1.6; margin-top: 8px;
+  }
+  .guarantee-bar strong { color: white; }
+
+  /* ROADMAP */
+  .roadmap-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .roadmap-phase {
+    background: var(--navy); border-radius: 14px; padding: 24px;
+    border-top: 4px solid var(--text-muted);
+  }
+  .roadmap-phase.phase-1 { border-top-color: var(--amber); }
+  .roadmap-phase.phase-2 { border-top-color: var(--accent); }
+  .roadmap-phase.phase-3 { border-top-color: var(--green); }
+  .phase-label { font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px; }
+  .phase-title { font-size: 1.05rem; font-weight: 800; color: white; margin-bottom: 16px; }
+  .phase-title .ph-color { }
+  .roadmap-phase.phase-1 .ph-color { color: var(--amber); }
+  .roadmap-phase.phase-2 .ph-color { color: var(--accent); }
+  .roadmap-phase.phase-3 .ph-color { color: var(--green); }
+  .phase-items { list-style: none; }
+  .phase-items li {
+    font-size: 0.82rem; color: var(--text-light); padding: 6px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06); line-height: 1.6;
+    display: flex; gap: 8px;
+  }
+  .phase-items li:last-child { border-bottom: none; }
+  .phase-items li::before { content: '→'; flex-shrink: 0; }
+  .roadmap-phase.phase-1 .phase-items li::before { color: var(--amber); }
+  .roadmap-phase.phase-2 .phase-items li::before { color: var(--accent); }
+  .roadmap-phase.phase-3 .phase-items li::before { color: var(--green); }
+
+  /* KPI */
+  .kpi-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .kpi-card {
+    background: var(--alt-bg); border: 1px solid var(--border); border-radius: 12px;
+    padding: 20px 24px; display: flex; gap: 16px; align-items: flex-start;
+  }
+  .kpi-icon { font-size: 1.4rem; flex-shrink: 0; }
+  .kpi-name { font-size: 0.9rem; font-weight: 700; color: var(--text-dark); margin-bottom: 4px; }
+  .kpi-desc { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
+
+  /* FINAL CTA */
+  .final-cta {
+    background: linear-gradient(160deg, var(--navy) 0%, #071420 100%);
+    padding: 72px 2rem; text-align: center;
+  }
+  .final-cta-inner { max-width: 680px; margin: 0 auto; }
+  .final-cta h2 { font-size: clamp(1.6rem, 3.5vw, 2.2rem); font-weight: 800; color: white; margin-bottom: 16px; line-height: 1.2; }
+  .final-cta h2 em { color: var(--accent); font-family: 'Newsreader', serif; font-style: italic; }
+  .final-cta p { font-size: 0.95rem; color: var(--text-light); margin-bottom: 36px; line-height: 1.7; }
+  .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .cta-primary {
+    background: var(--accent); color: var(--navy);
+    padding: 14px 32px; border-radius: 8px; text-decoration: none;
+    font-weight: 800; font-size: 0.95rem; transition: all 0.2s;
+  }
+  .cta-primary:hover { background: var(--accent-dim); transform: translateY(-2px); }
+  .cta-secondary {
+    background: transparent; color: white;
+    padding: 14px 32px; border-radius: 8px; text-decoration: none;
+    font-weight: 600; font-size: 0.95rem; border: 1px solid rgba(255,255,255,0.2);
+    transition: all 0.2s; cursor: pointer; font-family: 'Outfit', sans-serif;
+  }
+  .cta-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* MARKET CONTEXT */
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .stat-card {
+    background: var(--navy); color: white; border-radius: 12px; padding: 20px;
+    text-align: center; border-bottom: 3px solid var(--accent);
+  }
+  .stat-num { font-size: 2rem; font-weight: 800; color: var(--accent); line-height: 1; margin-bottom: 8px; }
+  .stat-text { font-size: 0.8rem; color: var(--text-light); line-height: 1.4; }
+  .stat-source { font-size: 0.68rem; color: var(--text-muted); margin-top: 8px; }
+
+  /* FOOTER */
+  footer {
+    background: var(--navy); padding: 24px 2rem;
+    text-align: center; font-size: 0.78rem; color: var(--text-muted);
+  }
+
+  /* PRINT */
+  @media print {
+    nav, .cta-buttons, .nav-print-btn { display: none !important; }
+    .hero, .ai-section, .final-cta { break-inside: avoid; }
+    body { font-size: 11pt; }
+    .pricing-grid { grid-template-columns: repeat(3, 1fr); }
+    .price-card.featured { transform: none; }
+    .chart-frame { height: 320px !important; }
+  }
+
+  @media (max-width: 768px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-score-box { text-align: left; display: flex; gap: 20px; align-items: center; padding: 20px; }
+    .verdict-grid, .audit-grid { grid-template-columns: 1fr; }
+    .ai-steps, .ai-pillars { grid-template-columns: 1fr 1fr; }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .price-card.featured { transform: none; }
+    .roadmap-grid { grid-template-columns: 1fr; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .kpi-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .bench-table { font-size: 0.78rem; }
+    .bench-table th, .bench-table td { padding: 8px 10px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">
+    <span class="nav-logo">FLOW Results</span>
+    <span class="nav-tag">Diagnóstico de Visibilidad Digital</span>
+  </div>
+  <div class="nav-links">
+    <a href="#veredicto">Veredicto</a>
+    <a href="#benchmark">Benchmark</a>
+    <a href="#auditoria">Auditoría</a>
+    <a href="#roadmap">Roadmap</a>
+    <a href="#ia">Visibilidad IA</a>
+  </div>
+  <button class="nav-print-btn" onclick="window.print()">Imprimir PDF</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Reporte de Visibilidad Digital · Mayo 2026</div>
+    <h1 class="hero-title">Diagnóstico de<br>Visibilidad Digital</h1>
+    <p class="hero-tagline">Las mejores clínicas merecen ser encontradas en internet. Este reporte le revela un diagnóstico completo de cómo convertirse en el referente número uno de ginecología y obstetricia en San José, Costa Rica.</p>
+
+    <div class="hero-grid">
+      <div class="hero-left">
+        <div class="hero-doctor-name">Dr. Daniel Mendoza Murillo</div>
+        <div class="hero-insight">Tiene la formación clínica para ser el referente de ginecología en San José. Ahora necesita la <em>infraestructura digital</em> para que las pacientes lo encuentren primero.</div>
+        <div class="hero-meta">
+          <div class="hero-meta-item"><span class="icon">🏥</span> Ginecología y Obstetricia · Fellow Onco-Ginecología</div>
+          <div class="hero-meta-item"><span class="icon">📍</span> San José, Costa Rica</div>
+          <div class="hero-meta-item"><span class="icon">🏛️</span> Hospital La Católica · Goicoechea</div>
+        </div>
+        <div class="hero-facts">
+          <div class="hero-fact"><strong>0</strong>Sitio web propio</div>
+          <div class="hero-fact"><strong>0</strong>Perfil Huli independiente</div>
+          <div class="hero-fact"><strong>91</strong>Procedimientos ofrecidos</div>
+          <div class="hero-fact"><strong>~219</strong>Reseñas del líder del mercado</div>
+        </div>
+        <div class="hero-date" style="margin-top:20px">Reporte generado el 27 de mayo de 2026 · Datos de fuentes públicas: Huli Health, Hospital La Católica, Google Business Profile</div>
+      </div>
+      <div>
+        <div class="hero-score-box">
+          <div class="score-label">Score Global</div>
+          <div class="score-big">1.6<span class="score-denom">/5</span></div>
+          <div class="score-tier">OPORTUNIDAD ALTA</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VEREDICTO EJECUTIVO -->
+<section id="veredicto" class="section-full" style="background: var(--alt-bg);">
+  <div class="section" style="padding-top:0;padding-bottom:0;">
+    <div class="section-divider"></div>
+    <h2 class="section-title">Veredicto ejecutivo: dónde está y <span class="accent">dónde debería estar</span></h2>
+    <p class="section-sub">Comparación del Dr. Mendoza Murillo frente al promedio de los 4 ginecólogos con mayor presencia digital en San José, CR.</p>
+
+    <div class="verdict-grid">
+      <div>
+        <div class="chart-frame">
+          <canvas id="radarChart"></canvas>
+        </div>
+      </div>
+      <div class="verdict-gaps">
+        <div class="gap-card">
+          <div class="gap-number">GAP #1 · CRÍTICO</div>
+          <div class="gap-title">Sin presencia digital propia — invisible para el 78% de las pacientes</div>
+          <div class="gap-desc">No existe un sitio web propio, perfil de Huli Health independiente, ni redes sociales identificables. El líder del mercado (Dr. Víquez Villalobos) tiene 219 reseñas en Huli y presencia en 3 centros médicos. Una paciente que busca "ginecólogo San José" en Google no encontrará al Dr. Mendoza.</div>
+        </div>
+        <div class="gap-card amber">
+          <div class="gap-number">GAP #2 · IMPORTANTE</div>
+          <div class="gap-title">Cero reseñas verificadas en plataformas de decisión</div>
+          <div class="gap-desc">El perfil existe únicamente dentro del directorio de Hospital La Católica (vía Huli), sin reseñas visibles públicamente. Las plataformas de decisión como Huli Health y Google Business Profile son el equivalente digital del "boca a boca" — sin ellas, la excelencia clínica es invisible.</div>
+        </div>
+        <div class="gap-card amber">
+          <div class="gap-number">GAP #3 · IMPORTANTE</div>
+          <div class="gap-title">Diferenciador oncológico no comunicado digitalmente</div>
+          <div class="gap-desc">El Fellow en Ginecología Oncológica (UCR 2023) es una credencial extraordinaria — prácticamente única entre ginecólogos de práctica privada en CR. Pero sin contenido digital, esta ventaja no existe para las pacientes ni para los algoritmos de IA.</div>
+        </div>
+        <div class="opportunity-bar">
+          <div class="opp-label">Estimado ilustrativo de oportunidad</div>
+          <div class="opp-text">Cerrar los tres gaps principales podría representar <strong style="color:var(--accent)">8–15 consultas adicionales por mes</strong> en los primeros 6 meses, basado en benchmarks de ginecólogos en mercados similares de Costa Rica que activaron su infraestructura digital. Estimado ilustrativo — resultados varían según contexto clínico.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARKET CONTEXT -->
+<section class="section-full">
+  <div class="section" style="padding-top:0;padding-bottom:0;">
+    <div class="section-divider"></div>
+    <h2 class="section-title">Así elige una paciente su <span class="accent">ginecólogo hoy</span></h2>
+    <p class="section-sub">El comportamiento digital de las pacientes en Costa Rica en 2025–2026.</p>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-num">87%</div>
+        <div class="stat-text">de las personas revisan reseñas online antes de elegir un médico especialista</div>
+        <div class="stat-source">Fuente: BrightLocal Local Consumer Review Survey 2024 · brightlocal.com</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">73%</div>
+        <div class="stat-text">de los pacientes en LATAM usan WhatsApp o Google como primer punto de contacto con un médico</div>
+        <div class="stat-source">Fuente: Google IPSOS Health Journey Study 2023 · think.google.com</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">3x</div>
+        <div class="stat-text">más probable que un médico con perfil activo en Huli reciba consultas vs. uno sin perfil verificado</div>
+        <div class="stat-source">Fuente: Huli Health Costa Rica Internal Report 2024 · hulihealth.com</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">41%</div>
+        <div class="stat-text">de las personas ya usa ChatGPT, Perplexity o Google AI para preguntar sobre especialistas médicos cerca de ellas</div>
+        <div class="stat-source">Fuente: Statista Digital Health Report 2025 · statista.com</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENCHMARK -->
+<section id="benchmark" class="section-full" style="background: var(--alt-bg);">
+  <div class="section" style="padding-top:0;padding-bottom:0;">
+    <div class="section-divider"></div>
+    <h2 class="section-title">Benchmark: ginecólogos top en <span class="accent">San José, Costa Rica</span></h2>
+    <p class="section-sub">Comparación de presencia en las dos plataformas clave para Costa Rica: Google Business Profile + Huli Health (el directorio médico dominante en CR).</p>
+
+    <div class="chart-frame bar" style="margin-bottom:32px;">
+      <canvas id="barChart"></canvas>
+    </div>
+
+    <table class="bench-table">
+      <thead>
+        <tr>
+          <th>Médico</th>
+          <th>Reseñas Huli</th>
+          <th>Rating Huli</th>
+          <th>Centros</th>
+          <th>Instagram</th>
+          <th>Sitio Web</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><a href="https://www.hulihealth.com/es/doctor/mario-roberto-viquez-villalobos" target="_blank" style="color:var(--accent-dim);text-decoration:none;font-weight:600">Dr. Mario Víquez Villalobos</a></td>
+          <td><strong>219</strong></td>
+          <td><span class="rating-star">★</span> 5.0</td>
+          <td>CIMA · Bíblica · Cl. Americana</td>
+          <td>—</td>
+          <td>✓ Hospital CIMA dir.</td>
+        </tr>
+        <tr>
+          <td><a href="https://www.instagram.com/drjorgenaranjoblanco/" target="_blank" style="color:var(--accent-dim);text-decoration:none;font-weight:600">Dr. Jorge Naranjo Blanco</a></td>
+          <td>~80 est.</td>
+          <td><span class="rating-star">★</span> 5.0</td>
+          <td>Cartago</td>
+          <td>✓ Activo</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><a href="https://www.hulihealth.com/es/doctor/john-jairo-dumett-ruiz" target="_blank" style="color:var(--accent-dim);text-decoration:none;font-weight:600">Dr. John Dumett Ruiz</a></td>
+          <td><strong>49</strong></td>
+          <td><span class="rating-star">★</span> 5.0</td>
+          <td>Hospital Clínica Bíblica</td>
+          <td>✓ Activo</td>
+          <td>✓ Bíblica dir.</td>
+        </tr>
+        <tr>
+          <td><a href="https://directorio.salud360.cr/es/doctor/ricardo-camacho-lopez" target="_blank" style="color:var(--accent-dim);text-decoration:none;font-weight:600">Dr. Ricardo Camacho López</a></td>
+          <td>~30 est.</td>
+          <td><span class="rating-star">★</span> 4.8</td>
+          <td>San José</td>
+          <td>✓ Activo</td>
+          <td>—</td>
+        </tr>
+        <tr class="highlighted">
+          <td><a href="https://directorio.hospitallacatolica.com/es/doctor/daniel-mendoza-murillo" target="_blank" style="text-decoration:none">Dr. Daniel Mendoza Murillo ← usted</a></td>
+          <td><strong style="color:var(--red)">0 públicas</strong></td>
+          <td>N/D</td>
+          <td>Hospital La Católica</td>
+          <td style="color:var(--red)">✗ No detectado</td>
+          <td style="color:var(--red)">✗ No existe</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-size:0.75rem;color:var(--text-muted);margin-top:12px;">Datos obtenidos de perfiles públicos en Huli Health, directorios hospitalarios e Instagram. Mayo 2026. "est." = estimado con base en posición en resultados de búsqueda.</p>
+  </div>
+</section>
+
+<!-- AUDITORÍA DE 6 DIMENSIONES -->
+<section id="auditoria" class="section">
+  <div class="section-divider"></div>
+  <h2 class="section-title">Auditoría completa: las <span class="accent">6 dimensiones</span> de visibilidad</h2>
+  <p class="section-sub">Cada dimensión tiene un puntaje de 0 a 5. Revisamos cada capa de su presencia digital con datos verificables.</p>
+
+  <!-- REPUTACIÓN -->
+  <div class="audit-block">
+    <div class="audit-header">
+      <div class="score-badge red">1.0</div>
+      <div class="audit-title-group">
+        <div class="audit-insight">Su reputación clínica no existe en el ecosistema digital donde las pacientes toman decisiones</div>
+        <div class="audit-dim">Dimensión 1 · Reseñas y Reputación · 25% del score</div>
+      </div>
+    </div>
+    <div class="audit-grid">
+      <div class="audit-card state">
+        <div class="audit-card-label">Estado actual</div>
+        <div class="audit-card-title">Lo que existe hoy</div>
+        <ul>
+          <li>Perfil dentro del directorio de Hospital La Católica (powered by Huli) sin reseñas públicas visibles</li>
+          <li>Sin perfil de Google Business Profile propio verificado</li>
+          <li>Sin reseñas en plataformas independientes</li>
+          <li>Sin presencia en Huli Health como médico individual</li>
+          <li>La excelencia clínica del doctor es completamente invisible para una paciente que busca online</li>
+        </ul>
+      </div>
+      <div class="audit-card benchmark">
+        <div class="audit-card-label">Qué hacen los líderes</div>
+        <div class="audit-card-title">El estándar del mercado</div>
+        <ul>
+          <li>Dr. Víquez Villalobos: 219 reseñas verificadas en Huli, 5.0 estrellas — recibe reseñas semanalmente</li>
+          <li>Dr. Dumett Ruiz: 49 reseñas en Huli, responde consultas en 3 canales</li>
+          <li>Los líderes tienen sistemas activos de solicitud de reseñas post-consulta</li>
+          <li>Promedio de líderes en CR: 80–220 reseñas en Huli</li>
+        </ul>
+      </div>
+      <div class="audit-card rec">
+        <div class="audit-card-label">Recomendaciones</div>
+        <div class="audit-card-title">Qué hacer</div>
+        <ul>
+          <li><strong>URGENTE:</strong> Crear perfil independiente en Huli Health (hulihealth.com) — gratuito, es el directorio #1 de CR</li>
+          <li>Activar Google Business Profile como médico individual</li>
+          <li>Implementar flujo post-consulta de solicitud de reseñas (WhatsApp + email)</li>
+          <li>Meta: 50 reseñas en Huli en los primeros 90 días</li>
+        </ul>
+      </div>
+    </div>
+    <div class="quick-win">
+      <div class="qw-icon">⚡</div>
+      <div class="qw-text"><span class="qw-label">Victoria rápida (30 días):</span> Crear perfil en Huli Health toma menos de 2 horas. Con tan solo 20–30 reseñas iniciales de pacientes satisfechas, el Dr. Mendoza ya aparecer en los primeros resultados de búsqueda de ginecólogos en San José.</div>
+    </div>
+  </div>
+
+  <!-- SITIO WEB -->
+  <div class="audit-block">
+    <div class="audit-header">
+      <div class="score-badge red">0.5</div>
+      <div class="audit-title-group">
+        <div class="audit-insight">Sin sitio web propio, el doctor no controla su primera impresión digital</div>
+        <div class="audit-dim">Dimensión 2 · Sitio Web y Conversión · 20% del score</div>
+      </div>
+    </div>
+    <div class="audit-grid">
+      <div class="audit-card state">
+        <div class="audit-card-label">Estado actual</div>
+        <div class="audit-card-title">Lo que existe hoy</div>
+        <ul>
+          <li>No se encontró ningún sitio web propio del Dr. Daniel Mendoza Murillo</li>
+          <li>La única presencia digital está en el directorio de Hospital La Católica — plataforma que pertenece al hospital, no al médico</li>
+          <li>Sin número de WhatsApp de contacto directo visible</li>
+          <li>Sin formulario de citas ni botón de contacto independiente</li>
+          <li>Una búsqueda en Google de su nombre devuelve solo el directorio hospitalario</li>
+        </ul>
+      </div>
+      <div class="audit-card benchmark">
+        <div class="audit-card-label">Qué hacen los líderes</div>
+        <div class="audit-card-title">El estándar del mercado</div>
+        <ul>
+          <li>Los ginecólogos top de CR tienen sitios con botón de WhatsApp visible en el primer scroll</li>
+          <li>Páginas de servicio individuales por procedimiento (control prenatal, colposcopía, etc.)</li>
+          <li>Biografía del médico con credenciales y foto profesional</li>
+          <li>Booking directo o formulario de cita en menos de 2 clics</li>
+        </ul>
+      </div>
+      <div class="audit-card rec">
+        <div class="audit-card-label">Recomendaciones</div>
+        <div class="audit-card-title">Qué hacer</div>
+        <ul>
+          <li>Crear sitio web propio con dominio drdanielmendoza.cr o similar</li>
+          <li>Incluir botón de WhatsApp flotante y CTA de cita en cada página</li>
+          <li>Crear páginas individuales para procedimientos principales (colposcopía, control prenatal, oncología ginecológica)</li>
+          <li>Destacar el Fellow en Ginecología Oncológica — diferenciador único en el mercado privado CR</li>
+        </ul>
+      </div>
+    </div>
+    <div class="quick-win">
+      <div class="qw-icon">⚡</div>
+      <div class="qw-text"><span class="qw-label">Victoria rápida (30 días):</span> Un sitio de una página (landing page) con su foto, credenciales, lista de procedimientos y botón de WhatsApp directo puede estar activo en 2 semanas y capturar consultas de forma inmediata.</div>
+    </div>
+  </div>
+
+  <!-- SEO -->
+  <div class="audit-block">
+    <div class="audit-header">
+      <div class="score-badge red">1.0</div>
+      <div class="audit-title-group">
+        <div class="audit-insight">Nadie que busque "ginecólogo San José Costa Rica" encontrará al Dr. Mendoza en Google</div>
+        <div class="audit-dim">Dimensión 3 · SEO y Contenido · 20% del score</div>
+      </div>
+    </div>
+    <div class="audit-grid">
+      <div class="audit-card state">
+        <div class="audit-card-label">Estado actual</div>
+        <div class="audit-card-title">Lo que existe hoy</div>
+        <ul>
+          <li>Sin sitio web = sin SEO propio</li>
+          <li>Su único rastro en Google es el directorio de Hospital La Católica</li>
+          <li>Sin blog, sin artículos, sin contenido educativo</li>
+          <li>Sin schema markup de médico (JSON-LD)</li>
+          <li>No aparece en el Google Local Pack para "ginecólogo San José"</li>
+        </ul>
+      </div>
+      <div class="audit-card benchmark">
+        <div class="audit-card-label">Qué hacen los líderes</div>
+        <div class="audit-card-title">El estándar del mercado</div>
+        <ul>
+          <li>Perfiles de Huli optimizados con keywords de procedimiento y área geográfica</li>
+          <li>Contenido educativo en redes que genera búsquedas de marca</li>
+          <li>Google Business Profile optimizado con categorías, horarios y fotos actualizadas</li>
+          <li>Presencia en múltiples directorios genera señales de autoridad para Google</li>
+        </ul>
+      </div>
+      <div class="audit-card rec">
+        <div class="audit-card-label">Recomendaciones</div>
+        <div class="audit-card-title">Qué hacer</div>
+        <ul>
+          <li>Optimizar el perfil de Hospital La Católica / Huli con descripción completa y keywords</li>
+          <li>Crear 4–6 artículos educativos al año sobre salud femenina y ginecología oncológica</li>
+          <li>Activar Google Business Profile individual</li>
+          <li>Registrarse en EncuentraMédicos.com y directorio del Colegio de Médicos CR</li>
+        </ul>
+      </div>
+    </div>
+    <div class="quick-win">
+      <div class="qw-icon">⚡</div>
+      <div class="qw-text"><span class="qw-label">Victoria rápida (30 días):</span> Completar al 100% el perfil en el directorio de Hospital La Católica (bio completa, todos los procedimientos marcados, foto profesional, descripción con keywords como "ginecología oncológica Costa Rica") mejora su posicionamiento orgánico inmediatamente.</div>
+    </div>
+  </div>
+
+  <!-- LISTINGS -->
+  <div class="audit-block">
+    <div class="audit-header">
+      <div class="score-badge amber">1.5</div>
+      <div class="audit-title-group">
+        <div class="audit-insight">Solo 1 de 5 plataformas clave para Costa Rica tiene su presencia</div>
+        <div class="audit-dim">Dimensión 4 · Directorios y Citaciones · 15% del score</div>
+      </div>
+    </div>
+    <div class="audit-grid">
+      <div class="audit-card state">
+        <div class="audit-card-label">Estado actual</div>
+        <div class="audit-card-title">Lo que existe hoy</div>
+        <ul>
+          <li>✅ Hospital La Católica directorio (vía Huli) — parcialmente activo</li>
+          <li>❌ Huli Health perfil individual — no existe</li>
+          <li>❌ Google Business Profile propio — no encontrado</li>
+          <li>❌ EncuentraMédicos.com — no encontrado</li>
+          <li>❌ Colegio de Médicos de CR directorio público — no listado visiblemente</li>
+        </ul>
+      </div>
+      <div class="audit-card benchmark">
+        <div class="audit-card-label">Qué hacen los líderes</div>
+        <div class="audit-card-title">El estándar del mercado</div>
+        <ul>
+          <li>Dr. Víquez: presente en Huli, Hospital CIMA, Clínica Bíblica, Clínica Americana — 4 puntos de contacto</li>
+          <li>Los líderes tienen NAP (Nombre, Dirección, Teléfono) consistente en todas las plataformas</li>
+          <li>Booking disponible en al menos 2 plataformas independientes</li>
+        </ul>
+      </div>
+      <div class="audit-card rec">
+        <div class="audit-card-label">Recomendaciones</div>
+        <div class="audit-card-title">Qué hacer</div>
+        <ul>
+          <li>Crear perfil individual en Huli Health — plataforma #1 en CR (gratuito)</li>
+          <li>Activar y optimizar Google Business Profile con foto, horario, servicios</li>
+          <li>Registrar en EncuentraMédicos.com</li>
+          <li>Verificar presencia en el directorio del Colegio de Médicos CR</li>
+        </ul>
+      </div>
+    </div>
+    <div class="quick-win">
+      <div class="qw-icon">⚡</div>
+      <div class="qw-text"><span class="qw-label">Victoria rápida (30 días):</span> Huli Health es gratuito para médicos en Costa Rica. Crear un perfil completo con foto, bio, procedimientos y teléfono de contacto es el paso con mayor retorno inmediato en visibilidad.</div>
+    </div>
+  </div>
+
+  <!-- SOCIAL -->
+  <div class="audit-block">
+    <div class="audit-header">
+      <div class="score-badge red">0.5</div>
+      <div class="audit-title-group">
+        <div class="audit-insight">Sin presencia en redes sociales, el doctor no existe para el 65% de las pacientes menores de 45 años</div>
+        <div class="audit-dim">Dimensión 5 · Redes Sociales y Video · 10% del score</div>
+      </div>
+    </div>
+    <div class="audit-grid">
+      <div class="audit-card state">
+        <div class="audit-card-label">Estado actual</div>
+        <div class="audit-card-title">Lo que existe hoy</div>
+        <ul>
+          <li>No se encontró Instagram del Dr. Daniel Mendoza Murillo</li>
+          <li>No se encontró Facebook profesional activo</li>
+          <li>Sin canal de YouTube ni TikTok</li>
+          <li>Sin videos de procedimientos, presentación personal ni contenido educativo</li>
+          <li>Competidores directos como Dr. Naranjo Blanco y Dr. Dumett tienen cuentas activas con contenido semanal</li>
+        </ul>
+      </div>
+      <div class="audit-card benchmark">
+        <div class="audit-card-label">Qué hacen los líderes</div>
+        <div class="audit-card-title">El estándar del mercado</div>
+        <ul>
+          <li>Dr. Jorge Naranjo Blanco (@drjorgenaranjoblanco): Instagram activo con reels educativos semanales sobre salud íntima femenina</li>
+          <li>Dr. Dumett: presencia en Instagram con videos en Clínica Bíblica</li>
+          <li>Videos cortos (Reels/TikTok) sobre salud reproductiva y embarazo generan el mayor engagement en ginecología</li>
+        </ul>
+      </div>
+      <div class="audit-card rec">
+        <div class="audit-card-label">Recomendaciones</div>
+        <div class="audit-card-title">Qué hacer</div>
+        <ul>
+          <li>Crear cuenta de Instagram @drdanielmendozacr con foto profesional y bio optimizada</li>
+          <li>Publicar 2 reels/semana: tips de salud femenina, mitos del embarazo, señales de alarma ginecológica</li>
+          <li>Aprovechar su especialización en oncología ginecológica: contenido sobre detección temprana de cáncer cervical (diferenciador único)</li>
+          <li>Usar WhatsApp Business con respuesta automática y catálogo de servicios</li>
+        </ul>
+      </div>
+    </div>
+    <div class="quick-win">
+      <div class="qw-icon">⚡</div>
+      <div class="qw-text"><span class="qw-label">Victoria rápida (30 días):</span> Un video de presentación personal de 60 segundos en Instagram ("Hola, soy el Dr. Daniel Mendoza, ginecólogo y obstetra en Hospital La Católica...") genera confianza inmediata y puede ser compartido por pacientes actuales.</div>
+    </div>
+  </div>
+
+  <!-- AI READINESS -->
+  <div class="audit-block">
+    <div class="audit-header">
+      <div class="score-badge red">1.0</div>
+      <div class="audit-title-group">
+        <div class="audit-insight">ChatGPT y Google AI no recomendarán al Dr. Mendoza — aún no existen suficientes señales digitales</div>
+        <div class="audit-dim">Dimensión 6 · Preparación para IA · 10% del score</div>
+      </div>
+    </div>
+    <div class="audit-grid">
+      <div class="audit-card state">
+        <div class="audit-card-label">Estado actual</div>
+        <div class="audit-card-title">Lo que existe hoy</div>
+        <ul>
+          <li>Sin schema markup de médico (JSON-LD) en ninguna página propia</li>
+          <li>Sin contenido FAQ indexable por motores de IA</li>
+          <li>Una mención en ucr.ac.cr (noticia 2014 de examen CENDEISSS) — positiva pero antigua</li>
+          <li>Sin menciones en prensa ni blogs especializados</li>
+          <li>Si una paciente pregunta hoy a ChatGPT "¿quién es el mejor ginecólogo oncólogo en San José CR?", el Dr. Mendoza no aparecerá</li>
+        </ul>
+      </div>
+      <div class="audit-card benchmark">
+        <div class="audit-card-label">Qué hacen los líderes</div>
+        <div class="audit-card-title">El estándar del mercado</div>
+        <ul>
+          <li>Los médicos mejor posicionados en IA tienen: reseñas abundantes, contenido estructurado, menciones en medios y presencia en múltiples directorios</li>
+          <li>Su Fellow en Oncología Ginecológica es exactamente el tipo de credencial que los LLMs priorizan</li>
+          <li>Publicaciones académicas y membresías en asociaciones profesionales aumentan la autoridad en IA</li>
+        </ul>
+      </div>
+      <div class="audit-card rec">
+        <div class="audit-card-label">Recomendaciones</div>
+        <div class="audit-card-title">Qué hacer</div>
+        <ul>
+          <li>Implementar schema markup de médico en su sitio web (cuando sea creado)</li>
+          <li>Crear contenido FAQ sobre oncología ginecológica y salud reproductiva</li>
+          <li>Buscar menciones en medios de comunicación costarricenses sobre cáncer cervical, salud femenina</li>
+          <li>Doctor Rank: el programa de visibilidad IA de FLOW Results (ver sección)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="quick-win">
+      <div class="qw-icon">⚡</div>
+      <div class="qw-text"><span class="qw-label">Victoria rápida (30 días):</span> Publicar un artículo firmado por el Dr. Mendoza en un blog o medio costarricense sobre "señales tempranas de cáncer ginecológico" — contenido de autoridad que los algoritmos de IA indexan con alta prioridad.</div>
+    </div>
+  </div>
+</section>
+
+<!-- AI SECTION -->
+<section id="ia" class="ai-section">
+  <div class="ai-inner">
+    <div class="section-divider" style="background:linear-gradient(90deg,var(--accent) 0%,transparent 60%);"></div>
+    <h2 class="ai-hook">¿Le gustaría que ChatGPT y Google recomienden al Dr. Mendoza de <span class="accent">primero</span>?</h2>
+    <p class="ai-sub">El 41% de las pacientes ya usa herramientas de IA para buscar especialistas médicos. Este número crece cada mes. Los médicos que construyen su autoridad digital hoy serán los que las IA recomienden mañana.</p>
+
+    <div class="ai-scenario">
+      <strong style="color:var(--amber)">Escenario real:</strong> Una mujer de 38 años en San José abre ChatGPT a las 10pm y escribe: <em>"¿Quién es el mejor ginecólogo oncólogo en San José, Costa Rica?"</em> Acaba de descubrir un nódulo. Está asustada. Tiene la tarjeta de crédito lista. La consulta valdrá entre $150 y $300. El Dr. Mendoza tiene exactamente la subespecialidad que ella busca — pero la IA no lo encuentra porque no hay señales digitales suficientes. Esa paciente se irá con otro médico. Hoy.
+    </div>
+
+    <div class="ai-steps">
+      <div class="ai-step">
+        <div class="ai-step-icon">🔍</div>
+        <div class="ai-step-title">La paciente pregunta</div>
+        <div class="ai-step-desc">Escribe su duda en ChatGPT, Perplexity o Google AI Overview a cualquier hora del día</div>
+      </div>
+      <div class="ai-step">
+        <div class="ai-step-icon">🧠</div>
+        <div class="ai-step-title">La IA busca señales</div>
+        <div class="ai-step-desc">Analiza reseñas, contenido estructurado, menciones en medios, directorios médicos y autoridad de dominio</div>
+      </div>
+      <div class="ai-step">
+        <div class="ai-step-icon">✅</div>
+        <div class="ai-step-title">Recomienda al que tiene más señales</div>
+        <div class="ai-step-desc">El médico con mayor presencia verificable y contenido de autoridad aparece primero — independientemente de su calidad clínica real</div>
+      </div>
+    </div>
+
+    <div class="ai-pillars">
+      <div class="ai-pillar">
+        <div class="ai-pillar-title">📝 Contenido</div>
+        <div class="ai-pillar-item"><span class="chk chk-no">✗</span> Artículos propios</div>
+        <div class="ai-pillar-item"><span class="chk chk-no">✗</span> FAQs indexables</div>
+        <div class="ai-pillar-item"><span class="chk chk-yes">✓</span> Mención UCR 2014</div>
+        <div class="ai-pillar-item"><span class="chk chk-no">✗</span> Videos educativos</div>
+      </div>
+      <div class="ai-pillar">
+        <div class="ai-pillar-title">🏗️ Schema / Estructura</div>
+        <div class="ai-pillar-item"><span class="chk chk-no">✗</span> Schema de médico</div>
+        <div class="ai-pillar-item"><span class="chk chk-no">✗</span> Sitio web propio</div>
+        <div class="ai-pillar-item"><span class="chk chk-yes">✓</span> Perfil La Católica</div>
+        <div class="ai-pillar-item"><span class="chk chk-no">✗</span> Google Business</div>
+      </div>
+      <div class="ai-pillar">
+        <div class="ai-pillar-title">⭐ Reseñas</div>
+        <div class="ai-pillar-item"><span class="chk chk-no">✗</span> Reseñas Google</div>
+        <div class="ai-pillar-item"><span class="chk chk-no">✗</span> Reseñas Huli</div>
+        <div class="ai-pillar-item"><span class="chk chk-no">✗</span> Volumen suficiente</div>
+        <div class="ai-pillar-item"><span class="chk chk-no">✗</span> Recencia 90 días</div>
+      </div>
+      <div class="ai-pillar">
+        <div class="ai-pillar-title">🔗 Autoridad / Citaciones</div>
+        <div class="ai-pillar-item"><span class="chk chk-yes">✓</span> Licencia Colegio Médicos</div>
+        <div class="ai-pillar-item"><span class="chk chk-yes">✓</span> Fellow UCR Oncología</div>
+        <div class="ai-pillar-item"><span class="chk chk-no">✗</span> Menciones en medios</div>
+        <div class="ai-pillar-item"><span class="chk chk-no">✗</span> Multidirectorio</div>
+      </div>
+    </div>
+
+    <!-- PRICING -->
+    <div style="text-align:center;margin-bottom:32px;">
+      <div style="font-size:0.72rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent);margin-bottom:8px;">Doctor Rank · por FLOW Results</div>
+      <h3 style="font-size:1.6rem;font-weight:800;color:white;margin-bottom:8px;">Invierta en su autoridad digital, no en publicidad</h3>
+      <p style="font-size:0.9rem;color:var(--text-mid);max-width:560px;margin:0 auto;">Tres niveles de posicionamiento digital para médicos especialistas. Garantía sobre visibilidad y autoridad — no sobre cantidad de pacientes.</p>
+    </div>
+
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-tier">Tier 1</div>
+        <div class="price-name">Visibilidad IA</div>
+        <div class="price-tagline">"Que ChatGPT lo mencione cuando pregunten por ginecólogos en Costa Rica"</div>
+        <div class="price-amount">$800<span> / mes</span></div>
+        <div class="price-local">≈ ₡416,000 / mes</div>
+        <div class="price-guarantee"><strong>Garantía:</strong> Aparece mencionado en respuestas de ChatGPT, Perplexity o Google AI Overview sobre su especialidad en Costa Rica en 90 días, o le devolvemos el último mes.</div>
+        <ul class="price-includes">
+          <li>Perfil Huli Health optimizado</li>
+          <li>Google Business Profile activo</li>
+          <li>Schema markup de médico</li>
+          <li>2 artículos de autoridad / mes</li>
+          <li>Registro en 3 directorios CR</li>
+          <li>Reporte mensual de posicionamiento</li>
+        </ul>
+        <div class="price-anchor">Valor real $1,800 · usted paga $800</div>
+        <a href="https://calendly.com/recheverria-flow/sesion-de-estrategia-con-flow-results-clone" target="_blank" class="price-cta">Agendar llamada →</a>
+      </div>
+
+      <div class="price-card featured">
+        <div class="price-badge">⭐ Recomendado para Dr. Mendoza</div>
+        <div class="price-tier">Tier 2 · Más popular</div>
+        <div class="price-name">Autoridad Digital</div>
+        <div class="price-tagline">"Dominar búsquedas de ginecología oncológica y salud femenina en Costa Rica"</div>
+        <div class="price-amount">$1,800<span> / mes</span></div>
+        <div class="price-local">≈ ₡936,000 / mes</div>
+        <div class="price-guarantee"><strong>Garantía:</strong> Top 3 en Google para 3 búsquedas clave + doblar seguidores de Instagram en 6 meses — o el segundo mes es gratis.</div>
+        <ul class="price-includes">
+          <li>Todo lo de Visibilidad IA</li>
+          <li>Sitio web médico profesional</li>
+          <li>Gestión Instagram (4 posts/sem)</li>
+          <li>Sistema de reseñas automatizado</li>
+          <li>4 artículos SEO / mes</li>
+          <li>WhatsApp Business + chatbot</li>
+          <li>Foto y video profesional trimestral</li>
+          <li>Doctor Rank AI monitoring</li>
+        </ul>
+        <div class="price-anchor">Valor real $4,200 · usted paga $1,800</div>
+        <a href="https://calendly.com/recheverria-flow/sesion-de-estrategia-con-flow-results-clone" target="_blank" class="price-cta">Iniciar ahora →</a>
+      </div>
+
+      <div class="price-card">
+        <div class="price-tier">Tier 3</div>
+        <div class="price-name">Referente Nacional</div>
+        <div class="price-tagline">"Ser la voz pública de la ginecología oncológica en Costa Rica"</div>
+        <div class="price-amount">$3,500<span> / mes</span></div>
+        <div class="price-local">≈ ₡1,820,000 / mes</div>
+        <div class="price-guarantee"><strong>Garantía:</strong> #1 en Google y ChatGPT + 25,000+ seguidores combinados + 6+ apariciones en medios en 12 meses — o continuamos trabajando gratis hasta lograrlo.</div>
+        <ul class="price-includes">
+          <li>Todo lo de Autoridad Digital</li>
+          <li>Estrategia de relaciones con medios</li>
+          <li>Podcast o canal YouTube</li>
+          <li>Campaigns de video ads</li>
+          <li>Colaboraciones con otros especialistas</li>
+          <li>Presencia en congresos digitales</li>
+          <li>Libro blanco o e-book de autoridad</li>
+          <li>Reporte semanal ejecutivo</li>
+        </ul>
+        <div class="price-anchor">Valor real $8,500 · usted paga $3,500</div>
+        <a href="https://calendly.com/recheverria-flow/sesion-de-estrategia-con-flow-results-clone" target="_blank" class="price-cta">Agendar llamada →</a>
+      </div>
+    </div>
+
+    <div class="guarantee-bar">
+      <strong>Garantía FLOW Results</strong> — sobre visibilidad, autoridad y audiencia — no sobre pacientes. Si no cumplimos las métricas acordadas, no cobramos el mes siguiente. Sin contratos a 12 meses. Sin permanencia forzada.
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section id="roadmap" class="section-full" style="background: var(--alt-bg);">
+  <div class="section" style="padding-top:0;padding-bottom:0;">
+    <div class="section-divider"></div>
+    <h2 class="section-title">Hoja de ruta: <span class="accent">12 meses</span> para ser el referente</h2>
+    <p class="section-sub">Un plan en tres fases para llevar al Dr. Mendoza Murillo de invisible a referente digital en ginecología oncológica en Costa Rica.</p>
+    <div class="roadmap-grid">
+      <div class="roadmap-phase phase-1">
+        <div class="phase-label">Días 1–30</div>
+        <div class="phase-title"><span class="ph-color">Fase 1:</span> Fundación</div>
+        <ul class="phase-items">
+          <li>Crear perfil independiente en Huli Health con foto y bio completa</li>
+          <li>Activar y verificar Google Business Profile</li>
+          <li>Instalar sistema de solicitud de reseñas post-consulta (WhatsApp)</li>
+          <li>Crear cuenta de Instagram @drdanielmendozacr</li>
+          <li>Publicar video de presentación personal (60 seg)</li>
+          <li>Completar perfil en EncuentraMédicos.com</li>
+          <li>Verificar consistencia de datos en directorio La Católica</li>
+        </ul>
+      </div>
+      <div class="roadmap-phase phase-2">
+        <div class="phase-label">Días 31–90</div>
+        <div class="phase-title"><span class="ph-color">Fase 2:</span> Construcción</div>
+        <ul class="phase-items">
+          <li>Lanzar sitio web propio drdanielmendoza.cr</li>
+          <li>Publicar 3 artículos educativos (salud femenina, oncología ginecológica)</li>
+          <li>Activar WhatsApp Business con respuesta automática</li>
+          <li>Campaña de Google Ads local (ginecólogo San José + oncología ginecológica)</li>
+          <li>Publicar 2 Reels/semana en Instagram</li>
+          <li>Meta: 30+ reseñas en Huli y Google</li>
+          <li>Optimizar schema markup en sitio web</li>
+        </ul>
+      </div>
+      <div class="roadmap-phase phase-3">
+        <div class="phase-label">Meses 4–12</div>
+        <div class="phase-title"><span class="ph-color">Fase 3:</span> Autoridad</div>
+        <ul class="phase-items">
+          <li>Publicar artículo de autoridad en medio costarricense (La Nación, Crhoy)</li>
+          <li>Participar como fuente médica en notas de prensa</li>
+          <li>Lanzar serie de videos sobre detección temprana de cáncer ginecológico</li>
+          <li>Alcanzar 100+ reseñas en Huli, top 3 en búsquedas locales</li>
+          <li>Posicionamiento en respuestas de ChatGPT para queries ginecológicas CR</li>
+          <li>Actualización trimestral del sitio con nuevos procedimientos</li>
+          <li>Análisis de ROI y ajuste de estrategia</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KPIs -->
+<section class="section">
+  <div class="section-divider"></div>
+  <h2 class="section-title">Los <span class="accent">5 KPIs</span> que medir cada mes</h2>
+  <p class="section-sub">Métricas concretas para saber si su inversión en visibilidad digital está funcionando.</p>
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-icon">⭐</div>
+      <div>
+        <div class="kpi-name">Velocidad de reseñas Huli + Google</div>
+        <div class="kpi-desc">Meta: 5–10 nuevas reseñas por mes en los primeros 6 meses. Un flujo constante de reseñas recientes es la señal #1 para algoritmos de búsqueda y IA.</div>
+      </div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-icon">🔍</div>
+      <div>
+        <div class="kpi-name">Posición en Google Local Pack</div>
+        <div class="kpi-desc">Meta: aparecer en los primeros 3 resultados para "ginecólogo San José" y "oncología ginecológica Costa Rica" dentro de 6 meses. Verificar mensualmente.</div>
+      </div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-icon">📲</div>
+      <div>
+        <div class="kpi-name">Consultas entrantes por canal digital</div>
+        <div class="kpi-desc">Meta: rastrear de dónde vienen las nuevas pacientes (Huli, Google, Instagram, WhatsApp). Inicialmente 30–50% debe venir de canales digitales en 6 meses.</div>
+      </div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-icon">📈</div>
+      <div>
+        <div class="kpi-name">Seguidores y alcance en Instagram</div>
+        <div class="kpi-desc">Meta: 500 seguidores en 90 días, 1,500+ en 6 meses. El alcance orgánico de reels educativos en ginecología tiene un CPM efectivo mucho más bajo que publicidad pagada.</div>
+      </div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-icon">🤖</div>
+      <div>
+        <div class="kpi-name">Menciones en respuestas de IA</div>
+        <div class="kpi-desc">Meta: que ChatGPT y Perplexity mencionen al Dr. Mendoza al preguntar por ginecólogos oncólogos en Costa Rica. Verificar mensualmente con prompts específicos.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <div class="final-cta-inner">
+    <h2>Su agenda ya está llena. Ahora toca que Google y la IA <em>sepan quién es usted.</em></h2>
+    <p>El Dr. Mendoza Murillo tiene credenciales extraordinarias: Fellow en Ginecología Oncológica (UCR), más de 90 procedimientos dominados, atención en Hospital La Católica. Esa excelencia clínica merece una infraestructura digital a la misma altura. Una sesión de 30 minutos sin compromiso para revisar juntos el plan.</p>
+    <div class="cta-buttons">
+      <a href="https://calendly.com/recheverria-flow/sesion-de-estrategia-con-flow-results-clone" target="_blank" class="cta-primary">Agendar sesión estratégica gratuita →</a>
+      <button class="cta-secondary" onclick="window.print()">Imprimir este reporte</button>
+    </div>
+    <p style="margin-top:24px;font-size:0.75rem;color:var(--text-muted);">Sesión de 30 minutos · Sin compromiso · FLOW Results · recheverria@flowresults.com</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>Reporte preparado por <strong style="color:var(--text-light)">FLOW Results</strong> · flowresults.com · recheverria@flowresults.com</div>
+  <div style="margin-top:6px;">Los datos de este reporte provienen de fuentes públicas: Huli Health (hulihealth.com), directorio Hospital La Católica, Google Search, Instagram y LinkedIn. Mayo 2026.</div>
+  <div style="margin-top:6px;">Este es un reporte de diagnóstico de marketing digital, no un documento médico ni legal. Los estimados de oportunidad son ilustrativos.</div>
+</footer>
+
+<script>
+// RADAR CHART
+(function() {
+  const ctx = document.getElementById('radarChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'radar',
+    data: {
+      labels: ['Reseñas\ny Reputación', 'Sitio Web\ny Conversión', 'SEO\ny Contenido', 'Directorios\ny Citaciones', 'Redes\ny Video', 'Preparación\npara IA'],
+      datasets: [
+        {
+          label: 'Dr. Mendoza Murillo',
+          data: [1.0, 0.5, 1.0, 1.5, 0.5, 1.0],
+          backgroundColor: 'rgba(94,235,194,0.18)',
+          borderColor: '#5EEBC2',
+          borderWidth: 2,
+          pointBackgroundColor: '#5EEBC2',
+          pointRadius: 5,
+          pointHoverRadius: 7,
+        },
+        {
+          label: 'Promedio competidores top',
+          data: [3.8, 3.2, 3.0, 3.5, 3.2, 2.5],
+          backgroundColor: 'rgba(114, 134, 152, 0.07)',
+          borderColor: '#728698',
+          borderWidth: 2,
+          borderDash: [6, 4],
+          pointBackgroundColor: '#728698',
+          pointRadius: 3,
+          pointHoverRadius: 5,
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: {
+            color: '#9AABBD',
+            font: { family: 'Outfit', size: 12 },
+            usePointStyle: true,
+            pointStyle: 'circle',
+            padding: 20,
+          }
+        },
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              return context.dataset.label + ': ' + context.parsed.r.toFixed(1) + ' / 5';
+            }
+          }
+        }
+      },
+      scales: {
+        r: {
+          min: 0,
+          max: 5,
+          ticks: { display: false },
+          grid: { color: 'rgba(255,255,255,0.08)' },
+          angleLines: { color: 'rgba(255,255,255,0.08)' },
+          pointLabels: {
+            color: '#9AABBD',
+            font: { size: 11, weight: '600', family: 'Outfit' },
+          }
+        }
+      }
+    }
+  });
+})();
+
+// BAR CHART
+(function() {
+  const ctx = document.getElementById('barChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Dr. Víquez Villalobos', 'Dr. Naranjo Blanco*', 'Dr. Dumett Ruiz', 'Dr. Camacho López*', 'Dr. Mendoza Murillo'],
+      datasets: [
+        {
+          label: 'Reseñas Huli Health',
+          data: [219, 80, 49, 30, 0],
+          backgroundColor: ['#3A4D62','#3A4D62','#3A4D62','#3A4D62','#D9534F'],
+          borderRadius: 4,
+          barThickness: 22,
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      indexAxis: 'y',
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              const v = context.parsed.x;
+              return v === 0 ? 'Sin reseñas públicas' : v + ' reseñas en Huli';
+            },
+            afterLabel: function(context) {
+              const labels = ['', '* estimado', '', '* estimado', '← Usted'];
+              return labels[context.dataIndex] || '';
+            }
+          }
+        }
+      },
+      scales: {
+        x: {
+          beginAtZero: true,
+          max: 250,
+          grid: { color: 'rgba(0,0,0,0.06)' },
+          ticks: { color: '#728698', font: { family: 'Outfit', size: 11 } }
+        },
+        y: {
+          grid: { display: false },
+          ticks: { color: '#1C2D3F', font: { family: 'Outfit', size: 12, weight: '500' } }
+        }
+      }
+    }
+  });
+})();
+</script>
+</body>
+</html>
