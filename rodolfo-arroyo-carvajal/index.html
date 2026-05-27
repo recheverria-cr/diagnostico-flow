@@ -1,0 +1,1714 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diagnóstico de Visibilidad Digital — Dr. Rodolfo Arroyo Carvajal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Newsreader:ital,wght@1,400;1,600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root {
+    --navy: #0B1929;
+    --navy-mid: #0F2236;
+    --navy-light: #14304D;
+    --navy-card: #162D4A;
+    --accent: #5EEBC2;
+    --accent-dim: #3CC49E;
+    --alert: #D9534F;
+    --warning: #E8A820;
+    --success: #3DAD6C;
+    --text-dark: #1C2D3F;
+    --gray-1: #728698;
+    --gray-2: #9AABBD;
+    --gray-3: #C4CFDD;
+    --gray-card: #3D5066;
+    --bg: #FFFFFF;
+    --bg-alt: #F6F8FB;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--bg);
+    color: var(--text-dark);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* NAV */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--navy);
+    border-bottom: 1px solid var(--navy-light);
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+  .nav-brand {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .nav-links {
+    display: flex;
+    gap: 24px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--gray-2);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-actions { display: flex; gap: 12px; align-items: center; }
+  .btn-print {
+    font-family: 'Outfit', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 7px 16px;
+    background: transparent;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-print:hover { background: var(--accent); color: var(--navy); }
+
+  /* HERO */
+  .hero {
+    background: var(--navy);
+    padding: 72px 40px 64px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(94,235,194,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 260px;
+    gap: 48px;
+    align-items: start;
+  }
+  .report-title {
+    font-size: clamp(36px, 5vw, 54px);
+    font-weight: 300;
+    color: #fff;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .report-title strong { font-weight: 800; color: #fff; }
+  .report-title em {
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+  }
+  .report-tagline {
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--gray-3);
+    margin-bottom: 32px;
+    max-width: 560px;
+    line-height: 1.7;
+  }
+  .hero-divider {
+    width: 40px;
+    height: 2px;
+    background: var(--accent);
+    margin-bottom: 24px;
+  }
+  .practice-name {
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+  .practice-insight {
+    font-size: 15px;
+    color: var(--gray-2);
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+  .practice-meta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+  }
+  .meta-badge {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--gray-2);
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 5px 12px;
+    border-radius: 20px;
+  }
+  .key-facts { display: flex; flex-direction: column; gap: 10px; }
+  .fact-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--gray-2);
+  }
+  .fact-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+  .hero-score-box {
+    background: rgba(94,235,194,0.06);
+    border: 1px solid rgba(94,235,194,0.2);
+    border-radius: 16px;
+    padding: 32px 24px;
+    text-align: center;
+  }
+  .score-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+  }
+  .score-number {
+    font-size: clamp(64px, 8vw, 88px);
+    font-weight: 800;
+    color: #fff;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .score-denom {
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--gray-1);
+  }
+  .score-tier {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 14px;
+    border-radius: 20px;
+    background: var(--alert);
+    color: #fff;
+    margin-top: 14px;
+  }
+  .hero-date {
+    margin-top: 12px;
+    font-size: 11px;
+    color: var(--gray-1);
+    text-align: center;
+  }
+
+  /* SECTIONS */
+  .section {
+    padding: 64px 40px;
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+  .section-alt { background: var(--bg-alt); }
+  .section-dark { background: var(--navy); }
+  .section-dark .section { max-width: 1080px; margin: 0 auto; }
+  .section-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 64px 40px;
+  }
+  .section-tag {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-size: clamp(22px, 3vw, 30px);
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+    line-height: 1.25;
+  }
+  .section-title-dark { color: #fff; }
+  .section-sub {
+    font-size: 15px;
+    color: var(--gray-1);
+    margin-bottom: 40px;
+    max-width: 640px;
+  }
+  .section-sub-dark { color: var(--gray-2); }
+
+  /* VERDICT */
+  .verdict-grid {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 40px;
+    align-items: start;
+  }
+  .chart-frame {
+    position: relative;
+    width: 100%;
+    height: 420px;
+  }
+  .chart-frame canvas {
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
+  }
+  .chart-frame.bar { height: 380px; }
+  .gap-cards { display: flex; flex-direction: column; gap: 16px; }
+  .gap-card {
+    background: var(--navy-card);
+    border-radius: 10px;
+    padding: 18px 20px;
+    border-left: 3px solid var(--alert);
+  }
+  .gap-card.amber { border-left-color: var(--warning); }
+  .gap-card.teal { border-left-color: var(--accent); }
+  .gap-card-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+  .gap-card-desc {
+    font-size: 12px;
+    color: var(--gray-2);
+    line-height: 1.5;
+  }
+  .opportunity-bar {
+    background: var(--bg-alt);
+    border-radius: 10px;
+    padding: 20px 24px;
+    border-left: 4px solid var(--accent);
+    margin-top: 24px;
+  }
+  .opportunity-bar p { font-size: 14px; color: var(--text-dark); line-height: 1.6; }
+  .opportunity-bar strong { color: var(--navy); }
+
+  /* BADGES */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    font-size: 15px;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+  .badge-red { background: rgba(217,83,79,0.15); color: var(--alert); }
+  .badge-amber { background: rgba(232,168,32,0.15); color: var(--warning); }
+  .badge-teal { background: rgba(94,235,194,0.15); color: var(--accent-dim); }
+  .badge-green { background: rgba(61,173,108,0.15); color: var(--success); }
+
+  /* AI SECTION */
+  .ai-hook {
+    font-size: clamp(20px, 3vw, 28px);
+    font-weight: 700;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 16px;
+    line-height: 1.3;
+  }
+  .ai-scenario {
+    font-size: 14px;
+    color: var(--gray-3);
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto 48px;
+    line-height: 1.7;
+  }
+  .ai-steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 48px;
+  }
+  .ai-step {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(94,235,194,0.12);
+    border-radius: 12px;
+    padding: 28px 20px;
+    text-align: center;
+  }
+  .ai-step-icon { font-size: 28px; margin-bottom: 12px; }
+  .ai-step-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+  }
+  .ai-step-desc { font-size: 13px; color: var(--gray-2); line-height: 1.5; }
+  .ai-pillars {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 48px;
+  }
+  .pillar-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 24px 18px;
+  }
+  .pillar-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 12px;
+  }
+  .pillar-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--gray-2);
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+  .pillar-item .chk { flex-shrink: 0; margin-top: 1px; }
+  .check-yes { color: var(--success); }
+  .check-no { color: var(--alert); }
+
+  /* PRICING */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 32px;
+  }
+  .pricing-card {
+    background: var(--navy-card);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 28px 24px;
+    position: relative;
+    transition: transform 0.2s;
+  }
+  .pricing-card:hover { transform: translateY(-4px); }
+  .pricing-card.featured {
+    border-color: var(--accent);
+    background: var(--navy-light);
+    transform: translateY(-8px);
+    box-shadow: 0 16px 48px rgba(94,235,194,0.12);
+  }
+  .pricing-badge {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent);
+    color: var(--navy);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 14px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+  .pricing-tier { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+  .pricing-tagline {
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--gray-2);
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+  .pricing-price {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+  .pricing-period { font-size: 12px; color: var(--gray-1); margin-bottom: 20px; }
+  .pricing-guarantee {
+    background: rgba(94,235,194,0.08);
+    border: 1px solid rgba(94,235,194,0.2);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 11px;
+    color: var(--gray-3);
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+  .pricing-includes { list-style: none; margin-bottom: 24px; }
+  .pricing-includes li {
+    font-size: 12px;
+    color: var(--gray-2);
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    line-height: 1.4;
+  }
+  .pricing-includes li::before {
+    content: '✓';
+    color: var(--accent);
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .pricing-anchor {
+    font-size: 11px;
+    color: var(--gray-1);
+    text-align: center;
+    margin-bottom: 16px;
+    text-decoration: line-through;
+  }
+  .pricing-cta {
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-family: 'Outfit', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 12px;
+    border-radius: 8px;
+    background: rgba(94,235,194,0.12);
+    color: var(--accent);
+    text-decoration: none;
+    border: 1px solid var(--accent);
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+  .pricing-card.featured .pricing-cta { background: var(--accent); color: var(--navy); }
+  .pricing-cta:hover { opacity: 0.85; }
+  .guarantee-bar {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    padding: 18px 24px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--gray-2);
+  }
+  .guarantee-bar strong { color: var(--accent); }
+
+  /* MARKET STATS */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  .stat-card {
+    background: var(--bg-alt);
+    border-radius: 12px;
+    padding: 24px 20px;
+    border-top: 3px solid var(--accent);
+  }
+  .stat-number {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--navy);
+    margin-bottom: 8px;
+    line-height: 1;
+  }
+  .stat-label { font-size: 13px; color: var(--gray-1); line-height: 1.5; }
+  .stat-source { font-size: 10px; color: var(--gray-2); margin-top: 8px; }
+
+  /* BENCHMARK */
+  .benchmark-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .benchmark-table th {
+    background: var(--navy);
+    color: var(--gray-2);
+    font-weight: 600;
+    padding: 12px 16px;
+    text-align: left;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .benchmark-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--bg-alt);
+    color: var(--text-dark);
+  }
+  .benchmark-table tr.target td {
+    background: rgba(94,235,194,0.06);
+    font-weight: 600;
+    color: var(--navy);
+  }
+  .benchmark-table td a { color: var(--navy); text-decoration: none; }
+  .benchmark-table td a:hover { text-decoration: underline; color: var(--accent-dim); }
+  .benchmark-table tr.target td a { color: var(--accent-dim); }
+
+  /* AUDIT */
+  .audit-section {
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 32px;
+    border: 1px solid rgba(0,0,0,0.07);
+  }
+  .audit-header {
+    background: var(--navy);
+    padding: 20px 28px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .audit-title { font-size: 18px; font-weight: 700; color: #fff; flex: 1; }
+  .audit-body { background: #fff; padding: 28px; }
+  .audit-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 24px;
+  }
+  .audit-col-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--gray-1);
+    margin-bottom: 10px;
+  }
+  .audit-finding { font-size: 14px; color: var(--text-dark); line-height: 1.6; }
+  .audit-finding strong { color: var(--navy); }
+  .recs-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .rec-card {
+    background: var(--navy-card);
+    border-radius: 10px;
+    padding: 16px 18px;
+    border-left: 3px solid var(--alert);
+  }
+  .rec-card.amber { border-left-color: var(--warning); }
+  .rec-card.green { border-left-color: var(--success); }
+  .rec-priority {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--alert);
+    margin-bottom: 6px;
+  }
+  .rec-card.amber .rec-priority { color: var(--warning); }
+  .rec-card.green .rec-priority { color: var(--success); }
+  .rec-text { font-size: 13px; color: #fff; line-height: 1.5; }
+  .quick-win {
+    background: rgba(94,235,194,0.07);
+    border: 1px solid rgba(94,235,194,0.2);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-top: 16px;
+    font-size: 13px;
+    color: var(--text-dark);
+    line-height: 1.6;
+  }
+  .quick-win strong { color: var(--accent-dim); font-weight: 700; }
+
+  /* ROADMAP */
+  .roadmap-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .roadmap-card {
+    background: var(--navy-card);
+    border-radius: 14px;
+    padding: 28px 24px;
+    border-top: 3px solid var(--alert);
+  }
+  .roadmap-card:nth-child(2) { border-top-color: var(--warning); }
+  .roadmap-card:nth-child(3) { border-top-color: var(--success); }
+  .roadmap-phase {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--alert);
+    margin-bottom: 8px;
+  }
+  .roadmap-card:nth-child(2) .roadmap-phase { color: var(--warning); }
+  .roadmap-card:nth-child(3) .roadmap-phase { color: var(--success); }
+  .roadmap-title { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 18px; }
+  .roadmap-list { list-style: none; }
+  .roadmap-list li {
+    font-size: 13px;
+    color: var(--gray-2);
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    line-height: 1.6;
+  }
+  .roadmap-list li::before {
+    content: '→';
+    color: var(--accent);
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* KPIs */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+  }
+  .kpi-card {
+    background: var(--bg-alt);
+    border-radius: 12px;
+    padding: 20px 16px;
+    text-align: center;
+    border-bottom: 3px solid var(--accent);
+  }
+  .kpi-metric {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--navy);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 6px;
+    line-height: 1.4;
+  }
+  .kpi-tool { font-size: 11px; color: var(--gray-1); }
+
+  /* FINAL CTA */
+  .final-cta {
+    background: var(--navy);
+    padding: 80px 40px;
+    text-align: center;
+  }
+  .final-cta h2 {
+    font-size: clamp(22px, 3vw, 32px);
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 16px;
+    line-height: 1.3;
+  }
+  .final-cta p {
+    font-size: 15px;
+    color: var(--gray-2);
+    margin-bottom: 36px;
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .cta-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .btn-primary {
+    display: inline-block;
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 16px 32px;
+    background: var(--accent);
+    color: var(--navy);
+    text-decoration: none;
+    border-radius: 10px;
+    transition: opacity 0.2s;
+  }
+  .btn-primary:hover { opacity: 0.88; }
+  .btn-secondary {
+    display: inline-block;
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 16px 32px;
+    background: transparent;
+    color: var(--gray-2);
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-secondary:hover { border-color: var(--gray-2); color: #fff; }
+
+  /* UTILS */
+  .mb-8 { margin-bottom: 8px; }
+  .mb-16 { margin-bottom: 16px; }
+  .mb-24 { margin-bottom: 24px; }
+  .mb-32 { margin-bottom: 32px; }
+  .mb-40 { margin-bottom: 40px; }
+  .text-accent { color: var(--accent); }
+  .text-alert { color: var(--alert); }
+  .text-warning { color: var(--warning); }
+  .text-success { color: var(--success); }
+
+  /* FOOTER */
+  .footer {
+    background: #060f1a;
+    padding: 28px 40px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--gray-card);
+  }
+  .footer a { color: var(--accent-dim); text-decoration: none; }
+
+  /* PRINT */
+  @media print {
+    .nav, .btn-print { display: none !important; }
+    .hero { padding: 40px 24px; }
+    .section { padding: 32px 24px; }
+    .section-dark { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .audit-section, .roadmap-card, .pricing-card { break-inside: avoid; }
+    .pricing-grid { grid-template-columns: 1fr 1fr 1fr; }
+    .pricing-card.featured { transform: none; }
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-score-box { text-align: left; }
+    .verdict-grid { grid-template-columns: 1fr; }
+    .ai-steps { grid-template-columns: 1fr; }
+    .ai-pillars { grid-template-columns: 1fr 1fr; }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .pricing-card.featured { transform: none; }
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+    .kpi-grid { grid-template-columns: 1fr 1fr; }
+    .roadmap-grid { grid-template-columns: 1fr; }
+    .audit-grid { grid-template-columns: 1fr; }
+    .recs-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <span class="nav-brand">FLOW Results</span>
+  <ul class="nav-links">
+    <li><a href="#veredicto">Veredicto</a></li>
+    <li><a href="#ia">IA</a></li>
+    <li><a href="#benchmark">Benchmark</a></li>
+    <li><a href="#auditoria">Auditoría 6D</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#planes">Planes</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="btn-print" onclick="window.print()">Imprimir reporte</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <h1 class="report-title">
+        <strong>Diagnóstico</strong> de<br>
+        <em>Visibilidad</em> Digital
+      </h1>
+      <p class="report-tagline">
+        Los mejores especialistas merecen ser encontrados en internet. Este reporte le va a revelar un diagnóstico completo de cómo posicionarse como referente número 1 en ortopedia de Alajuela.
+      </p>
+      <div class="hero-divider"></div>
+      <p class="practice-name">Dr. Rodolfo Arroyo Carvajal</p>
+      <p class="practice-insight">
+        El Dr. Arroyo tiene credenciales sólidas y una especialidad doble en ortopedia adulta y pediátrica. Ahora necesita infraestructura digital — presencia en Huli, reseñas activas y visibilidad en Google — para convertir su experiencia clínica en autoridad online en Alajuela.
+      </p>
+      <div class="practice-meta">
+        <span class="meta-badge">Ortopedia y Traumatología</span>
+        <span class="meta-badge">Ortopedia Pediátrica</span>
+        <span class="meta-badge">Alajuela, Costa Rica</span>
+        <span class="meta-badge">Licencia MED2452 · Activa</span>
+      </div>
+      <div class="key-facts">
+        <div class="fact-item"><span class="fact-dot"></span>0 reseñas encontradas en Huli Health o Google Business</div>
+        <div class="fact-item"><span class="fact-dot"></span>Sin perfil en Huli Health — directorio #1 en Costa Rica</div>
+        <div class="fact-item"><span class="fact-dot"></span>Sin sitio web propio ni redes sociales activas identificadas</div>
+        <div class="fact-item"><span class="fact-dot"></span>Competidores líderes acumulan 400–750 reseñas en Huli</div>
+      </div>
+    </div>
+    <div>
+      <div class="hero-score-box">
+        <p class="score-label">Score Global DPI</p>
+        <p class="score-number">1.3<span class="score-denom"> / 5.0</span></p>
+        <span class="score-tier">Visibilidad Crítica</span>
+      </div>
+      <p class="hero-date">Diagnóstico preparado por FLOW Results · Mayo 2026<br>Datos de: Salud360.cr, HuliHealth.com, ADISA.cr</p>
+    </div>
+  </div>
+</section>
+
+<!-- VEREDICTO -->
+<div id="veredicto" class="section-alt">
+<div class="section">
+  <p class="section-tag">Veredicto Ejecutivo</p>
+  <h2 class="section-title">La experiencia está. La visibilidad digital, todavía no.</h2>
+  <p class="section-sub">El Dr. Arroyo tiene un perfil clínico diferenciador: ortopedia adulta + pediátrica, con 11 condiciones tratadas y licencia activa del Colegio de Médicos. El problema es que Google, Huli y los pacientes de Alajuela no lo pueden encontrar.</p>
+
+  <div class="verdict-grid">
+    <div>
+      <div class="chart-frame">
+        <canvas id="radarChart"></canvas>
+      </div>
+    </div>
+    <div class="gap-cards">
+      <div class="gap-card">
+        <p class="gap-card-title">Ausencia total en Huli Health</p>
+        <p class="gap-card-desc">Huli es el directorio médico dominante en Costa Rica. Los líderes del mercado tienen 400–750 reseñas. El Dr. Arroyo no aparece. Esta es la brecha más urgente.</p>
+      </div>
+      <div class="gap-card amber">
+        <p class="gap-card-title">Sin sitio web ni presencia de marca</p>
+        <p class="gap-card-desc">Ningún sitio web propio identificado. Los pacientes que buscan "ortopedista Alajuela" no encuentran ninguna propiedad digital del doctor.</p>
+      </div>
+      <div class="gap-card teal">
+        <p class="gap-card-title">Especialidad pediátrica sin explotación digital</p>
+        <p class="gap-card-desc">La ortopedia pediátrica es un diferenciador valioso en Alajuela. Ningún competidor local la comunica bien online. Hay una ventana abierta.</p>
+      </div>
+      <div class="opportunity-bar">
+        <p><strong>Oportunidad estimada:</strong> Los ortopedistas líderes en Huli reciben entre 15 y 40 consultas mensuales por fuentes digitales. Cerrar la brecha de visibilidad podría representar <strong>10–25 consultas adicionales al mes</strong> en un horizonte de 6–12 meses. Estimado ilustrativo basado en benchmarks del mercado.</p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- AI SECTION -->
+<div id="ia" class="section-dark">
+<div class="section">
+  <p class="section-tag" style="text-align:center;">Doctor Rank · IA Médica</p>
+  <h2 class="ai-hook">¿Le gustaría que ChatGPT recomiende al Dr. Arroyo cuando un padre busca ortopedista pediátrico en Alajuela?</h2>
+  <p class="ai-scenario">
+    Son las 10:30pm. Una madre en Alajuela abre ChatGPT y escribe: "¿cuál es el mejor ortopedista pediátrico en Alajuela, Costa Rica?" La IA responde con dos o tres nombres. El Dr. Arroyo no aparece. Esa familia agenda con otro especialista. El valor de ese procedimiento: entre ₡150,000 y ₡600,000. El Dr. Arroyo nunca supo que los perdió.
+  </p>
+
+  <div class="ai-steps">
+    <div class="ai-step">
+      <div class="ai-step-icon">🔍</div>
+      <p class="ai-step-title">El paciente pregunta</p>
+      <p class="ai-step-desc">Abre ChatGPT, Perplexity o Google AI Overview y busca un especialista en su ciudad.</p>
+    </div>
+    <div class="ai-step">
+      <div class="ai-step-icon">🧠</div>
+      <p class="ai-step-title">La IA evalúa señales</p>
+      <p class="ai-step-desc">Analiza quién tiene más contenido, reseñas, autoridad en directorios y menciones web verificables.</p>
+    </div>
+    <div class="ai-step">
+      <div class="ai-step-icon">✅</div>
+      <p class="ai-step-title">Recomienda al más visible</p>
+      <p class="ai-step-desc">El especialista con más señales digitales queda en el top de respuestas. Los demás no existen para ese paciente.</p>
+    </div>
+  </div>
+
+  <div class="ai-pillars">
+    <div class="pillar-card">
+      <p class="pillar-title">Contenido</p>
+      <div class="pillar-item"><span class="chk check-no">✗</span>Sin sitio web con páginas de servicios</div>
+      <div class="pillar-item"><span class="chk check-no">✗</span>Sin blog ni artículos educativos</div>
+      <div class="pillar-item"><span class="chk check-no">✗</span>Sin FAQ sobre sus especialidades</div>
+      <div class="pillar-item"><span class="chk check-no">✗</span>Sin perfil biográfico completo en línea</div>
+    </div>
+    <div class="pillar-card">
+      <p class="pillar-title">Schema &amp; Técnico</p>
+      <div class="pillar-item"><span class="chk check-no">✗</span>Sin schema markup de médico</div>
+      <div class="pillar-item"><span class="chk check-no">✗</span>Sin Google Business Profile optimizado</div>
+      <div class="pillar-item"><span class="chk check-no">✗</span>Sin datos estructurados para IA</div>
+      <div class="pillar-item"><span class="chk check-yes">✓</span>Licencia médica verificable (MED2452)</div>
+    </div>
+    <div class="pillar-card">
+      <p class="pillar-title">Reseñas</p>
+      <div class="pillar-item"><span class="chk check-no">✗</span>0 reseñas en Huli Health</div>
+      <div class="pillar-item"><span class="chk check-no">✗</span>Sin reseñas Google verificadas</div>
+      <div class="pillar-item"><span class="chk check-no">✗</span>Sin sistema de captación de reseñas</div>
+      <div class="pillar-item"><span class="chk check-yes">✓</span>Plataforma Salud360 (perfil básico)</div>
+    </div>
+    <div class="pillar-card">
+      <p class="pillar-title">Citaciones</p>
+      <div class="pillar-item"><span class="chk check-yes">✓</span>Salud360.cr (sin reseñas)</div>
+      <div class="pillar-item"><span class="chk check-yes">✓</span>ADISA.cr (perfil básico)</div>
+      <div class="pillar-item"><span class="chk check-no">✗</span>Sin Huli Health</div>
+      <div class="pillar-item"><span class="chk check-no">✗</span>Sin EncuentraMédicos.com</div>
+    </div>
+  </div>
+
+  <!-- PRICING -->
+  <p class="section-tag" style="text-align:center;margin-bottom:24px;">Planes Doctor Rank · FLOW Results</p>
+  <div class="pricing-grid">
+
+    <div class="pricing-card">
+      <p class="pricing-tier">Visibilidad IA</p>
+      <p class="pricing-tagline">"Aparecer cuando un paciente busque ortopedista en Alajuela en ChatGPT"</p>
+      <p class="pricing-price">$297</p>
+      <p class="pricing-period">USD / mes · ≈ ₡153,000</p>
+      <div class="pricing-guarantee">
+        <strong>Garantía:</strong> Mencionado en respuestas de ChatGPT/Perplexity sobre ortopedia en Alajuela en 90 días, o se devuelve el último mes.
+      </div>
+      <ul class="pricing-includes">
+        <li>Perfil Huli Health optimizado + reseñas</li>
+        <li>Google Business Profile reclamado y actualizado</li>
+        <li>Presencia en EncuentraMédicos y Salud360</li>
+        <li>Schema markup médico implementado</li>
+        <li>Monitoreo mensual de menciones IA</li>
+      </ul>
+      <p class="pricing-anchor">Valor real $620 / mes</p>
+      <a href="https://calendly.com/recheverria-flow/sesion-de-estrategia-con-flow-results-clone" class="pricing-cta" target="_blank">Comenzar</a>
+    </div>
+
+    <div class="pricing-card featured">
+      <span class="pricing-badge">⭐ Recomendado para Dr. Arroyo</span>
+      <p class="pricing-tier">Autoridad Digital</p>
+      <p class="pricing-tagline">"Dominar las búsquedas de ortopedia y ortopedia pediátrica en Alajuela"</p>
+      <p class="pricing-price">$697</p>
+      <p class="pricing-period">USD / mes · ≈ ₡360,000</p>
+      <div class="pricing-guarantee">
+        <strong>Garantía:</strong> Top 3 en Google para 3 búsquedas clave + duplicar seguidores de Instagram en 6 meses, o el segundo mes es gratis.
+      </div>
+      <ul class="pricing-includes">
+        <li>Todo lo del plan Visibilidad IA</li>
+        <li>Sitio web profesional (5 páginas de servicios)</li>
+        <li>Contenido SEO mensual (4 artículos especializados)</li>
+        <li>Gestión de Instagram + Facebook</li>
+        <li>Campaña Google Ads local (budget incluido parcial)</li>
+        <li>Reporte mensual de posicionamiento</li>
+        <li>Estrategia de ortopedia pediátrica como diferenciador</li>
+      </ul>
+      <p class="pricing-anchor">Valor real $1,450 / mes</p>
+      <a href="https://calendly.com/recheverria-flow/sesion-de-estrategia-con-flow-results-clone" class="pricing-cta" target="_blank">Agenda sesión estratégica</a>
+    </div>
+
+    <div class="pricing-card">
+      <p class="pricing-tier">Referente Nacional</p>
+      <p class="pricing-tagline">"Ser la voz pública de la ortopedia pediátrica en Costa Rica"</p>
+      <p class="pricing-price">$1,900</p>
+      <p class="pricing-period">USD / mes · ≈ ₡980,000</p>
+      <div class="pricing-guarantee">
+        <strong>Garantía:</strong> #1 en Google y ChatGPT para ortopedia Alajuela + 25,000+ seguidores combinados + 6+ apariciones en medios en 12 meses, o se continúa trabajando sin costo hasta cumplirlo.
+      </div>
+      <ul class="pricing-includes">
+        <li>Todo lo del plan Autoridad Digital</li>
+        <li>Estrategia de video (YouTube + Reels educativos)</li>
+        <li>PR y relaciones con medios de salud CR</li>
+        <li>Podcast o columna de salud ósea infantil</li>
+        <li>Gestión de reputación avanzada</li>
+        <li>TikTok médico educativo</li>
+        <li>Dashboard analítico en tiempo real</li>
+      </ul>
+      <p class="pricing-anchor">Valor real $3,800 / mes</p>
+      <a href="https://calendly.com/recheverria-flow/sesion-de-estrategia-con-flow-results-clone" class="pricing-cta" target="_blank">Comenzar</a>
+    </div>
+  </div>
+
+  <div class="guarantee-bar">
+    <strong>Garantía FLOW Results</strong> — sobre visibilidad y autoridad digital, no sobre volumen de pacientes. Si no cumplimos las métricas acordadas, no cobramos. Sin contratos forzados a 12 meses.
+  </div>
+</div>
+</div>
+
+<!-- MARKET STATS -->
+<div>
+<div class="section">
+  <p class="section-tag">Contexto de Mercado</p>
+  <h2 class="section-title">Cómo eligen ortopedista los pacientes en Costa Rica hoy</h2>
+  <p class="section-sub">La decisión de a quién operar su rodilla, columna o el pie de su hijo ya no la toma el médico de cabecera solo. El paciente investiga online antes de llamar.</p>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <p class="stat-number">87%</p>
+      <p class="stat-label">de consumidores lee reseñas online antes de elegir un proveedor de salud local</p>
+      <p class="stat-source">Fuente: BrightLocal Local Consumer Review Survey 2024 · brightlocal.com</p>
+    </div>
+    <div class="stat-card">
+      <p class="stat-number">63%</p>
+      <p class="stat-label">de pacientes en LATAM usa WhatsApp o herramientas de búsqueda para agendar su primera consulta</p>
+      <p class="stat-source">Fuente: Doctoralia Salud Digital en América Latina 2023 · doctoralia.com</p>
+    </div>
+    <div class="stat-card">
+      <p class="stat-number">3×</p>
+      <p class="stat-label">más clics reciben los perfiles médicos en Huli Health con foto + 50+ reseñas vs. perfiles sin completar</p>
+      <p class="stat-source">Fuente: HuliHealth blog, benchmark de directorio médico CR 2023 · blog.hulihealth.com</p>
+    </div>
+    <div class="stat-card">
+      <p class="stat-number">41%</p>
+      <p class="stat-label">de búsquedas de salud en Google terminan en una llamada directa al consultorio en menos de 24 horas</p>
+      <p class="stat-source">Fuente: Google Health Insights Report 2023 · think.storage.googleapis.com</p>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- BENCHMARK -->
+<div id="benchmark" class="section-alt">
+<div class="section">
+  <p class="section-tag">Benchmark Competitivo</p>
+  <h2 class="section-title">Los líderes de ortopedia en Costa Rica tienen 400–750 reseñas. El Dr. Arroyo, 0.</h2>
+  <p class="section-sub">Comparativa de los ortopedistas mejor posicionados digitalmente en Huli Health — el directorio médico más usado en Costa Rica. Datos verificados en mayo 2026.</p>
+
+  <div class="chart-frame bar mb-40">
+    <canvas id="barChart"></canvas>
+  </div>
+
+  <table class="benchmark-table mb-24">
+    <thead>
+      <tr>
+        <th>Especialista</th>
+        <th>Reseñas Huli</th>
+        <th>Rating Huli</th>
+        <th>Google GBP</th>
+        <th>Sitio Web</th>
+        <th>Hospital Principal</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a href="https://www.hulihealth.com/en/doctor/rodolfo-ivancovich-cruz" target="_blank">Dr. Rodolfo Ivancovich Cruz</a></td>
+        <td><strong>746</strong></td>
+        <td>⭐ 5.0</td>
+        <td>Sí</td>
+        <td>Sí</td>
+        <td>Orthopedik / CIMA</td>
+      </tr>
+      <tr>
+        <td><a href="https://www.hulihealth.com/en/doctor/manuel-chavarria-alvarado" target="_blank">Dr. Manuel Chavarría Alvarado</a></td>
+        <td><strong>596</strong></td>
+        <td>⭐ 5.0</td>
+        <td>Sí</td>
+        <td>Sí</td>
+        <td>CIMA / La Católica</td>
+      </tr>
+      <tr>
+        <td><a href="https://www.hulihealth.com/en/doctor/cristhian-jose-castro-artavia" target="_blank">Dr. Cristhian Castro Artavia</a></td>
+        <td><strong>536</strong></td>
+        <td>⭐ 5.0</td>
+        <td>Sí</td>
+        <td>Sí</td>
+        <td>La Católica / Escazú</td>
+      </tr>
+      <tr>
+        <td><a href="https://www.hulihealth.com/en/doctor/alexander-valverde-retana" target="_blank">Dr. Alexander Valverde Retana</a></td>
+        <td><strong>408</strong></td>
+        <td>⭐ 5.0</td>
+        <td>Sí</td>
+        <td>Sí</td>
+        <td>Clínica Bíblica / La Católica</td>
+      </tr>
+      <tr>
+        <td><a href="https://www.hulihealth.com/es/search/specialty/ortopedia-y-traumatologia/costa-rica/alajuela/alajuela-9527f" target="_blank">Dr. Felipe Meza Argüello</a></td>
+        <td><strong>160</strong></td>
+        <td>⭐ 5.0</td>
+        <td>Sí</td>
+        <td>Sí</td>
+        <td>Clínica Maja, Alajuela</td>
+      </tr>
+      <tr>
+        <td><a href="https://www.hulihealth.com/es/search/specialty/ortopedia-y-traumatologia/costa-rica/alajuela/alajuela-9527f" target="_blank">Dr. Manuel Alvarado Calderón</a></td>
+        <td><strong>30</strong></td>
+        <td>⭐ 5.0</td>
+        <td>Parcial</td>
+        <td>No</td>
+        <td>Clínica Da Luz, Alajuela</td>
+      </tr>
+      <tr class="target">
+        <td><a href="https://directorio.salud360.cr/es/doctor/rodolfo-arroyo-carvajal" target="_blank">Dr. Rodolfo Arroyo Carvajal ← usted</a></td>
+        <td><strong style="color:var(--alert)">0</strong></td>
+        <td>— sin datos —</td>
+        <td>No confirmado</td>
+        <td>No</td>
+        <td>Plaza Real Alajuela</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p style="font-size:12px;color:var(--gray-1);">Fuente: HuliHealth.com, directorios hospitalarios y búsqueda directa · Mayo 2026. Reseñas Google GBP no verificadas para todos los perfiles.</p>
+</div>
+</div>
+
+<!-- AUDITORÍA 6D -->
+<div id="auditoria">
+<div class="section">
+  <p class="section-tag">Auditoría 6 Dimensiones</p>
+  <h2 class="section-title">El diagnóstico detallado: dónde está y adónde puede llegar</h2>
+  <p class="section-sub">Cada dimensión evaluada con evidencia de fuentes públicas. Escala 1.0–5.0.</p>
+
+  <!-- D1: RESEÑAS -->
+  <div class="audit-section">
+    <div class="audit-header">
+      <span class="badge badge-red">1.0</span>
+      <h3 class="audit-title">Reseñas y Reputación · Punto de partida cero</h3>
+    </div>
+    <div class="audit-body">
+      <div class="audit-grid">
+        <div>
+          <p class="audit-col-title">Estado actual</p>
+          <p class="audit-finding">
+            <strong>0 reseñas</strong> encontradas en Huli Health — el directorio médico dominante en Costa Rica. Sin perfil activo en Huli.
+            <br><br>
+            El perfil de <strong>Salud360.cr</strong> existe (fuente primaria facilitada por el cliente) pero muestra 0 calificaciones de pacientes y ningún comentario.
+            <br><br>
+            <strong>Google Business Profile</strong>: no se encontró un perfil verificado del Dr. Arroyo Carvajal en una búsqueda directa. Sin datos de rating de Google.
+            <br><br>
+            No hay presencia en Facebook con reseñas, ni en EncuentraMédicos.com con calificaciones.
+          </p>
+        </div>
+        <div>
+          <p class="audit-col-title">Lo que hace el mercado líder</p>
+          <p class="audit-finding">
+            El <strong>Dr. Rodolfo Ivancovich Cruz</strong> acumula 746 reseñas en Huli con rating perfecto de 5.0. El Dr. Chavarría tiene 596. Incluso el especialista más próximo en Alajuela — el Dr. Felipe Meza — tiene 160 reseñas.
+            <br><br>
+            Los líderes responden públicamente a todas las reseñas (positivas y negativas), lo que señaliza al algoritmo de Huli y de Google que el perfil está activo y gestionado.
+            <br><br>
+            Velocidad de reseñas de los líderes: estimado 5–15 nuevas reseñas por mes.
+          </p>
+        </div>
+      </div>
+      <div class="recs-grid">
+        <div class="rec-card">
+          <p class="rec-priority">Prioridad crítica</p>
+          <p class="rec-text">Crear y completar perfil en Huli Health al 100%: foto profesional, especialidades, condiciones tratadas, horarios, ubicación exacta en Plaza Real Alajuela, foto del consultorio.</p>
+        </div>
+        <div class="rec-card">
+          <p class="rec-priority">Prioridad crítica</p>
+          <p class="rec-text">Implementar un sistema de solicitud de reseñas post-consulta: WhatsApp automatizado o tarjeta con QR al perfil de Huli, con mensaje personalizado del doctor.</p>
+        </div>
+        <div class="rec-card amber">
+          <p class="rec-priority">Importante</p>
+          <p class="rec-text">Reclamar y optimizar Google Business Profile con nombre exacto, especialidad, dirección Plaza Real Alajuela local #5, horario y fotos de consultorio.</p>
+        </div>
+        <div class="rec-card amber">
+          <p class="rec-priority">Importante</p>
+          <p class="rec-text">Establecer protocolo de respuesta a reseñas: responder en 24–48h, agradecer, mencionar la especialidad atendida (sin romper HIPAA local) para fortalecer SEO de perfil.</p>
+        </div>
+      </div>
+      <div class="quick-win">
+        <strong>Victoria rápida (primeros 7 días):</strong> Contactar los últimos 20 pacientes atendidos con un mensaje de WhatsApp simple: "Estimado/a [nombre], fue un gusto atenderle. Si tiene un momento, su opinión en Huli Health ayuda a otros pacientes a encontrarme. [Link]". Meta: llegar a 20 reseñas en el primer mes.
+      </div>
+    </div>
+  </div>
+
+  <!-- D2: SITIO WEB -->
+  <div class="audit-section">
+    <div class="audit-header">
+      <span class="badge badge-red">1.0</span>
+      <h3 class="audit-title">Sitio Web y Conversión · Propiedad digital inexistente</h3>
+    </div>
+    <div class="audit-body">
+      <div class="audit-grid">
+        <div>
+          <p class="audit-col-title">Estado actual</p>
+          <p class="audit-finding">
+            <strong>Ningún sitio web propio</strong> identificado para el Dr. Rodolfo Arroyo Carvajal. Las únicas presencias digitales son perfiles de terceros (Salud360, ADISA) con información mínima sin mecanismo de conversión.
+            <br><br>
+            <strong>Sin número de teléfono público</strong> encontrado en ninguna fuente digital. Sin WhatsApp de contacto. Sin formulario de citas.
+            <br><br>
+            Un paciente que llega a cualquiera de sus perfiles no tiene ningún camino directo para agendar consulta. La tasa de conversión digital es efectivamente 0%.
+          </p>
+        </div>
+        <div>
+          <p class="audit-col-title">Lo que hace el mercado líder</p>
+          <p class="audit-finding">
+            El Dr. Ivancovich Cruz tiene <a href="https://www.rodolfoivancovich.com" target="_blank">rodolfoivancovich.com</a> — sitio completo con páginas por condición (rodilla, cadera, deportes), formulario de cita y botón de WhatsApp directo.
+            <br><br>
+            Dr. Santiago Manzanal tiene <a href="https://www.drsantiagomanzanal.com" target="_blank">drsantiagomanzanal.com</a> con descripción de procedimientos, credenciales y múltiples CTAs.
+            <br><br>
+            Los sitios líderes tienen 5–8 páginas de servicios con descripciones de procedimientos, preguntas frecuentes y botones de WhatsApp flotante.
+          </p>
+        </div>
+      </div>
+      <div class="recs-grid">
+        <div class="rec-card">
+          <p class="rec-priority">Prioridad crítica</p>
+          <p class="rec-text">Crear sitio web de 5 páginas: Inicio (quién soy + CTA), Ortopedia Adultos, Ortopedia Pediátrica, Condiciones tratadas, Contacto y cita. Dominio sugerido: drarroyo.cr o droarroyo.cr</p>
+        </div>
+        <div class="rec-card">
+          <p class="rec-priority">Prioridad crítica</p>
+          <p class="rec-text">Implementar botón de WhatsApp flotante en todas las páginas para que los pacientes puedan agendar en un solo clic desde mobile.</p>
+        </div>
+        <div class="rec-card amber">
+          <p class="rec-priority">Importante</p>
+          <p class="rec-text">Agregar página específica de Ortopedia Pediátrica con síntomas comunes en niños (pies planos, escoliosis, piernas en "X"), orientada a padres de familia en Alajuela.</p>
+        </div>
+        <div class="rec-card green">
+          <p class="rec-priority">A mediano plazo</p>
+          <p class="rec-text">Agregar sección de preguntas frecuentes (FAQs) por condición. Estas respuestas son indexadas por Google y pueden ser citadas directamente por herramientas de IA como ChatGPT.</p>
+        </div>
+      </div>
+      <div class="quick-win">
+        <strong>Victoria rápida (30 días):</strong> Mientras se desarrolla el sitio completo, publicar una landing page de una sola página en Google Sites o Carrd con: foto profesional, especialidades, ubicación Plaza Real Alajuela, y botón de WhatsApp. Gratuito, en línea en 48 horas.
+      </div>
+    </div>
+  </div>
+
+  <!-- D3: SEO -->
+  <div class="audit-section">
+    <div class="audit-header">
+      <span class="badge badge-red">1.0</span>
+      <h3 class="audit-title">SEO y Contenido · Invisible para Google en su propio territorio</h3>
+    </div>
+    <div class="audit-body">
+      <div class="audit-grid">
+        <div>
+          <p class="audit-col-title">Estado actual</p>
+          <p class="audit-finding">
+            Sin sitio web = sin posicionamiento orgánico en Google. Una búsqueda de "ortopedista Alajuela" o "ortopedista pediátrico Alajuela Costa Rica" no arroja ningún resultado vinculado al Dr. Arroyo Carvajal.
+            <br><br>
+            <strong>No hay schema markup</strong> de tipo MedicalBusiness ni Physician implementado en ninguna de sus propiedades digitales actuales.
+            <br><br>
+            Sin contenido educativo (artículos, guías, respuestas a preguntas frecuentes) que permita a Google o a la IA entender su área de expertise.
+          </p>
+        </div>
+        <div>
+          <p class="audit-col-title">Oportunidades de mercado</p>
+          <p class="audit-finding">
+            <strong>Búsquedas de oportunidad local:</strong> "ortopedista Alajuela", "traumatólogo Alajuela", "ortopedia pediátrica Alajuela", "pie plano niños Alajuela" — todas con baja competencia y sin un líder claro en resultados orgánicos.
+            <br><br>
+            <strong>Ventana de ortopedia pediátrica:</strong> ningún especialista en Alajuela tiene contenido SEO orientado a padres buscando "escoliosis niños Costa Rica" o "piernas en X tratamiento".
+            <br><br>
+            El Blog de Huli Health sobre ortopedia en Costa Rica es de las fuentes más indexadas. Un perfil completo con reseñas aparece en esas páginas de categoría.
+          </p>
+        </div>
+      </div>
+      <div class="recs-grid">
+        <div class="rec-card">
+          <p class="rec-priority">Prioridad crítica</p>
+          <p class="rec-text">Crear páginas de servicio con keywords locales: "ortopedista Alajuela", "traumatólogo Alajuela Costa Rica", "cirugía de rodilla Alajuela" — una página por condición principal.</p>
+        </div>
+        <div class="rec-card amber">
+          <p class="rec-priority">Importante</p>
+          <p class="rec-text">Publicar 2 artículos mensuales orientados a padres en Alajuela: "¿Mi hijo necesita ver un ortopedista?", "Señales de alerta de escoliosis en adolescentes", "Qué esperar de una cirugía de pie plano".</p>
+        </div>
+        <div class="rec-card amber">
+          <p class="rec-priority">Importante</p>
+          <p class="rec-text">Implementar schema markup de tipo Physician con nombre completo, especialidad, dirección, licencia (MED2452) y horarios. Esto es lo que permite a las IA citarlo correctamente.</p>
+        </div>
+        <div class="rec-card green">
+          <p class="rec-priority">A mediano plazo</p>
+          <p class="rec-text">Crear sección FAQ con 15+ preguntas respondidas sobre fracturas, tratamiento de escoliosis, recuperación post-operatoria, seguros aceptados. Cada respuesta = señal para IA.</p>
+        </div>
+      </div>
+      <div class="quick-win">
+        <strong>Victoria rápida (30 días):</strong> Optimizar el título y descripción del perfil de Salud360 con keywords: "Dr. Rodolfo Arroyo Carvajal | Ortopedista y Traumatólogo Pediátrico | Alajuela, Costa Rica | Plaza Real Alajuela". Sin costo, impacto inmediato en búsquedas de nombre.
+      </div>
+    </div>
+  </div>
+
+  <!-- D4: DIRECTORIOS -->
+  <div class="audit-section">
+    <div class="audit-header">
+      <span class="badge badge-amber">1.5</span>
+      <h3 class="audit-title">Directorios y Citaciones · Presencia parcial sin el directorio que más importa</h3>
+    </div>
+    <div class="audit-body">
+      <div class="audit-grid">
+        <div>
+          <p class="audit-col-title">Estado actual</p>
+          <p class="audit-finding">
+            <strong>Salud360.cr:</strong> Perfil activo, con licencia verificada (MED2452) y listado de condiciones tratadas. Sin foto, sin reseñas, sin número de teléfono ni dirección completa. Puntuación: parcial.
+            <br><br>
+            <strong>ADISA.cr:</strong> Perfil básico encontrado en búsquedas. Sin evidencia de reseñas ni datos completos.
+            <br><br>
+            <strong>Huli Health:</strong> No aparece en búsquedas del directorio. Este es el gap más crítico en directorios — Huli es el directorio médico #1 en Costa Rica y el más usado por pacientes para encontrar especialistas.
+            <br><br>
+            <strong>EncuentraMédicos.com, Colegio de Médicos CR, Hospital Metropolitano:</strong> Sin presencia verificada públicamente.
+          </p>
+        </div>
+        <div>
+          <p class="audit-col-title">Lo que hace el mercado líder</p>
+          <p class="audit-finding">
+            Los ortopedistas líderes en CR tienen presencia activa y optimizada en: <strong>Huli Health</strong> (principal), <strong>directorios hospitalarios</strong> (CIMA, La Católica, Clínica Bíblica), <strong>Google Business Profile</strong>, y en algunos casos <strong>Encuentramedicos.com</strong>.
+            <br><br>
+            Los perfiles de Huli de los líderes tienen: foto profesional de alta calidad, foto del consultorio, horarios exactos, lista completa de condiciones, link a sitio web, y resumen biográfico.
+            <br><br>
+            La consistencia NAP (Nombre, Dirección, Teléfono) en todos los directorios es clave para el ranking local de Google.
+          </p>
+        </div>
+      </div>
+      <div class="recs-grid">
+        <div class="rec-card">
+          <p class="rec-priority">Prioridad crítica</p>
+          <p class="rec-text">Crear y completar perfil en Huli Health con foto, bio, horarios, condiciones, dirección Plaza Real Alajuela local #5, y link al sitio web una vez creado.</p>
+        </div>
+        <div class="rec-card">
+          <p class="rec-priority">Prioridad crítica</p>
+          <p class="rec-text">Reclamar y verificar Google Business Profile. Categoría: "Médico ortopédico". Agregar fotos, descripción, horarios y botón de llamada. Este perfil aparece en Maps para búsquedas locales.</p>
+        </div>
+        <div class="rec-card amber">
+          <p class="rec-priority">Importante</p>
+          <p class="rec-text">Actualizar Salud360.cr y ADISA.cr con datos completos: teléfono, dirección exacta, foto, y descripción de especialidades con keywords de Alajuela.</p>
+        </div>
+        <div class="rec-card green">
+          <p class="rec-priority">A mediano plazo</p>
+          <p class="rec-text">Verificar y solicitar perfil en EncuentraMédicos.com y asegurarse de que el Colegio de Médicos de Costa Rica tenga su información actualizada para pacientes que verifican credenciales.</p>
+        </div>
+      </div>
+      <div class="quick-win">
+        <strong>Victoria rápida (14 días):</strong> Ir directamente a hulihealth.com, hacer clic en "Soy un profesional de salud" y reclamar o crear perfil. El proceso toma menos de 30 minutos y es gratuito. Este solo paso lo pone en el radar del directorio con más tráfico médico de CR.
+      </div>
+    </div>
+  </div>
+
+  <!-- D5: REDES SOCIALES -->
+  <div class="audit-section">
+    <div class="audit-header">
+      <span class="badge badge-red">1.0</span>
+      <h3 class="audit-title">Redes Sociales y Video · Sin marca digital pública</h3>
+    </div>
+    <div class="audit-body">
+      <div class="audit-grid">
+        <div>
+          <p class="audit-col-title">Estado actual</p>
+          <p class="audit-finding">
+            <strong>No se encontró ninguna cuenta de Instagram, Facebook, YouTube o TikTok</strong> vinculada al Dr. Rodolfo Arroyo Carvajal en múltiples búsquedas directas.
+            <br><br>
+            Búsqueda en Instagram de "Rodolfo Arroyo Carvajal ortopedia" y variaciones no arrojó resultados atribuibles al doctor.
+            <br><br>
+            Sin presencia en Facebook Business Page. Sin canal de YouTube con contenido educativo.
+            <br><br>
+            La ausencia en redes sociales significa que no hay marca pública del doctor más allá de sus directorios básicos.
+          </p>
+        </div>
+        <div>
+          <p class="audit-col-title">Oportunidad diferencial</p>
+          <p class="audit-finding">
+            La ortopedia pediátrica es un nicho con alto potencial en Instagram y Facebook en Costa Rica, donde los padres buscan activamente guía visual sobre condiciones de sus hijos.
+            <br><br>
+            Contenido de alto valor sin explotar: videos explicando "¿cuándo preocuparse por el pie plano de mi hijo?", "Cómo leer una radiografía de columna", "Qué hacer en una fractura de muñeca".
+            <br><br>
+            El Dr. Ivancovich Cruz (<a href="https://www.rodolfoivancovich.com/rodolfo-ivancovich/" target="_blank">rodolfoivancovich.com</a>) ha construido autoridad con contenido educativo online. La mayoría de ortopedistas en Alajuela no tiene redes activas — ventana abierta.
+          </p>
+        </div>
+      </div>
+      <div class="recs-grid">
+        <div class="rec-card">
+          <p class="rec-priority">Prioridad crítica</p>
+          <p class="rec-text">Crear perfil de Instagram profesional @droarroyocr (o similar) con foto profesional, bio clara: "Ortopedista y Traumatólogo · Adultos y Niños · Plaza Real Alajuela · Cita por WhatsApp".</p>
+        </div>
+        <div class="rec-card amber">
+          <p class="rec-priority">Importante</p>
+          <p class="rec-text">Publicar 3 Reels educativos del primer mes: (1) "¿Cuándo llevar a mi hijo al ortopedista?", (2) "¿Qué trata un ortopedista?", (3) "Así funciona una consulta de ortopedia pediátrica".</p>
+        </div>
+        <div class="rec-card amber">
+          <p class="rec-priority">Importante</p>
+          <p class="rec-text">Crear Facebook Business Page con información completa, horarios y botón de WhatsApp. En Costa Rica, Facebook sigue siendo la red con mayor alcance 35+ años — la audiencia de padres.</p>
+        </div>
+        <div class="rec-card green">
+          <p class="rec-priority">A mediano plazo</p>
+          <p class="rec-text">Considerar TikTok médico educativo con formato de 30–60 segundos: "El ortopedista responde". Formato con altísimo alcance orgánico para condiciones comunes (esguinces, fracturas, dolor de espalda).</p>
+        </div>
+      </div>
+      <div class="quick-win">
+        <strong>Victoria rápida (7 días):</strong> Crear perfil de Instagram con foto profesional, bio optimizada y primeras 3 publicaciones estáticas: presentación del doctor, foto del consultorio, y lista de condiciones que trata. Sin video aún — solo presencia inicial establecida.
+      </div>
+    </div>
+  </div>
+
+  <!-- D6: AI READINESS -->
+  <div class="audit-section">
+    <div class="audit-header">
+      <span class="badge badge-red">1.0</span>
+      <h3 class="audit-title">AI Readiness · Las IAs no pueden recomendarlo porque no lo encuentran</h3>
+    </div>
+    <div class="audit-body">
+      <div class="audit-grid">
+        <div>
+          <p class="audit-col-title">Estado actual</p>
+          <p class="audit-finding">
+            ChatGPT, Perplexity y Google AI Overview construyen sus respuestas a partir de señales públicas: contenido de sitios web, reseñas verificadas, presencia en directorios autoritativos, menciones en medios, y datos estructurados (schema markup).
+            <br><br>
+            El Dr. Arroyo actualmente tiene: <strong>0 reseñas</strong>, <strong>0 contenido web propio</strong>, <strong>0 schema markup</strong>, y una <strong>presencia mínima en directorios</strong>. Las IAs no tienen material suficiente para recomendarlo.
+            <br><br>
+            Una búsqueda simulada de "ortopedista pediátrico Alajuela Costa Rica" en ChatGPT devolvería nombres como Ivancovich, Castro o Meza — no Arroyo.
+          </p>
+        </div>
+        <div>
+          <p class="audit-col-title">Lo que habilita la visibilidad en IA</p>
+          <p class="audit-finding">
+            Las IAs priorizan: <strong>(1) Autoridad en directorios</strong> — médicos con 100+ reseñas en Huli son más citables; <strong>(2) Contenido estructurado</strong> — artículos con preguntas y respuestas que la IA puede citar textualmente; <strong>(3) Menciones en medios</strong> — apariciones en La Nación, CRHoy, Teletica salud; <strong>(4) Schema markup</strong> — código en el sitio que le dice a Google exactamente quién es este médico y dónde práctica.
+            <br><br>
+            La ventaja para el Dr. Arroyo: en Alajuela, prácticamente ningún ortopedista tiene estos cuatro elementos. Quién llegue primero domina esa plaza.
+          </p>
+        </div>
+      </div>
+      <div class="recs-grid">
+        <div class="rec-card">
+          <p class="rec-priority">Prioridad crítica</p>
+          <p class="rec-text">Implementar schema markup tipo Physician en el sitio web con: nombre, especialidad, dirección, teléfono, licencia MED2452, y áreas de atención. Esto es el código que lee la IA.</p>
+        </div>
+        <div class="rec-card">
+          <p class="rec-priority">Prioridad crítica</p>
+          <p class="rec-text">Crear sección de FAQ con respuestas en primera persona: "¿Cuándo debo llevar a mi hijo a un ortopedista en Alajuela?" — estas respuestas son las que cita ChatGPT.</p>
+        </div>
+        <div class="rec-card amber">
+          <p class="rec-priority">Importante</p>
+          <p class="rec-text">Conseguir menciones en medios de salud costarricenses: entrevista en podcast médico, artículo en CRHoy sobre ortopedia pediátrica, columna de salud en medio local de Alajuela.</p>
+        </div>
+        <div class="rec-card green">
+          <p class="rec-priority">A mediano plazo</p>
+          <p class="rec-text">Solicitar afiliación visible a grupos de autoridad: Asociación Costarricense de Ortopedia, Colegio de Médicos CR (ya activo), y asegurarse de que esas páginas lo mencionen con link.</p>
+        </div>
+      </div>
+      <div class="quick-win">
+        <strong>Victoria rápida (30 días):</strong> Publicar un perfil en Google con respuesta a la pregunta "¿Qué atiende el Dr. Rodolfo Arroyo Carvajal en Alajuela?" dentro del panel de GBP. Google muestra estas respuestas directamente en búsquedas y las indexa para respuestas de IA.
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ROADMAP -->
+<div id="roadmap" class="section-dark">
+<div class="section">
+  <p class="section-tag" style="text-align:center;">Plan de 12 Meses</p>
+  <h2 class="section-title section-title-dark" style="text-align:center;">De invisible a referente en ortopedia de Alajuela</h2>
+  <p class="section-sub section-sub-dark" style="text-align:center;max-width:600px;margin-left:auto;margin-right:auto;">Tres fases secuenciales. Cada una construye sobre la anterior. Resultados medibles desde el primer mes.</p>
+
+  <div class="roadmap-grid mb-40">
+    <div class="roadmap-card">
+      <p class="roadmap-phase">Fase 1 · Días 1–30</p>
+      <h3 class="roadmap-title">Fundación Digital</h3>
+      <ul class="roadmap-list">
+        <li>Crear perfil completo en Huli Health con foto y bio profesional</li>
+        <li>Reclamar y optimizar Google Business Profile (Plaza Real Alajuela)</li>
+        <li>Actualizar Salud360 con teléfono, foto y condiciones tratadas</li>
+        <li>Instalar sistema de solicitud de reseñas post-consulta por WhatsApp</li>
+        <li>Publicar landing page provisional (Google Sites o Carrd)</li>
+        <li>Crear Instagram profesional con primeras 5 publicaciones</li>
+        <li>Meta: 20 reseñas en Huli Health en el primer mes</li>
+      </ul>
+    </div>
+    <div class="roadmap-card">
+      <p class="roadmap-phase">Fase 2 · Días 31–90</p>
+      <h3 class="roadmap-title">Construcción y Contenido</h3>
+      <ul class="roadmap-list">
+        <li>Lanzar sitio web profesional (5 páginas de servicios + contacto)</li>
+        <li>Implementar schema markup de Physician en el sitio</li>
+        <li>Publicar 4 artículos SEO: ortopedia pediátrica Alajuela, pie plano, escoliosis, esguinces</li>
+        <li>Primeros 3 Reels educativos en Instagram y Facebook</li>
+        <li>Crear Facebook Business Page con botón de cita</li>
+        <li>Inscribirse en EncuentraMédicos.com</li>
+        <li>Meta: 50 reseñas en Huli + top 10 Google para "ortopedista Alajuela"</li>
+      </ul>
+    </div>
+    <div class="roadmap-card">
+      <p class="roadmap-phase">Fase 3 · Meses 4–12</p>
+      <h3 class="roadmap-title">Escala y Autoridad</h3>
+      <ul class="roadmap-list">
+        <li>Publicar 2 artículos SEO mensuales sobre condiciones tratadas</li>
+        <li>Lanzar YouTube con series: "El ortopedista responde"</li>
+        <li>Gestionar campaña Google Ads local en Alajuela y Heredia</li>
+        <li>Buscar aparición en medios: podcast médico CR, artículo CRHoy</li>
+        <li>Construir red de referidos con médicos generales y pediatras en Alajuela</li>
+        <li>Optimizar para IA: FAQ extendidas, menciones en autoridades médicas</li>
+        <li>Meta: 150+ reseñas Huli + top 3 Google + mencionado en ChatGPT</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- KPIs -->
+  <p class="section-tag" style="text-align:center;margin-bottom:24px;">KPIs de Seguimiento</p>
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <p class="kpi-metric">Reseñas Huli / Mes</p>
+      <p class="kpi-tool">Meta: +5 nuevas/mes · Plataforma: Huli Health Dashboard</p>
+    </div>
+    <div class="kpi-card">
+      <p class="kpi-metric">Posición Google Local</p>
+      <p class="kpi-tool">Meta: Top 3 para "ortopedista Alajuela" · Herramienta: Google Search Console</p>
+    </div>
+    <div class="kpi-card">
+      <p class="kpi-metric">Tráfico Web Mensual</p>
+      <p class="kpi-tool">Meta: 300+ visitas/mes en meses 4–6 · Herramienta: Google Analytics</p>
+    </div>
+    <div class="kpi-card">
+      <p class="kpi-metric">Consultas por Fuente Digital</p>
+      <p class="kpi-tool">Meta: 10–20 citas/mes via Huli + web · Registrar fuente en cada cita</p>
+    </div>
+    <div class="kpi-card">
+      <p class="kpi-metric">Seguidores Instagram</p>
+      <p class="kpi-tool">Meta: 500 seguidores en 6 meses · Herramienta: Instagram Insights</p>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- FINAL CTA -->
+<div id="planes" class="final-cta">
+  <p class="section-tag" style="text-align:center;">Próximo Paso</p>
+  <h2>Alajuela no tiene un ortopedista referente en digital todavía.<br>Esa posición está disponible.</h2>
+  <p>
+    El Dr. Arroyo tiene la especialidad, la doble certificación y la experiencia. FLOW Results pone la infraestructura digital para que los pacientes en Alajuela, Heredia y la GAM lo encuentren primero — en Google, en Huli y en ChatGPT.
+  </p>
+  <p style="font-size:13px;color:var(--gray-card);margin-bottom:28px;">Sesión de estrategia de 30 minutos. Sin compromiso. Se diseña un plan personalizado según su situación actual.</p>
+  <div class="cta-buttons">
+    <a href="https://calendly.com/recheverria-flow/sesion-de-estrategia-con-flow-results-clone" class="btn-primary" target="_blank">Agendar sesión estratégica gratuita</a>
+    <button class="btn-secondary" onclick="window.print()">Imprimir este reporte</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p>Diagnóstico de Visibilidad Digital · Dr. Rodolfo Arroyo Carvajal · Ortopedia y Traumatología · Alajuela, Costa Rica</p>
+  <p style="margin-top:6px;">Preparado por <a href="https://flowresults.com" target="_blank">FLOW Results</a> · recheverria@flowresults.com · Mayo 2026</p>
+  <p style="margin-top:6px;">Este reporte es un análisis diagnóstico con fines de prospección. Las estimaciones son ilustrativas. Datos de fuentes públicas verificadas al momento de la investigación.</p>
+</footer>
+
+<script>
+// ============ RADAR CHART ============
+(function() {
+  const ctx = document.getElementById('radarChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'radar',
+    data: {
+      labels: ['Reseñas', 'Sitio Web', 'SEO', 'Directorios', 'Redes Sociales', 'AI Readiness'],
+      datasets: [
+        {
+          label: 'Dr. Arroyo Carvajal',
+          data: [1.0, 1.0, 1.0, 1.5, 1.0, 1.0],
+          backgroundColor: 'rgba(94,235,194,0.22)',
+          borderColor: '#5EEBC2',
+          borderWidth: 2,
+          pointBackgroundColor: '#5EEBC2',
+          pointRadius: 5,
+          pointHoverRadius: 7
+        },
+        {
+          label: 'Promedio Top Ortopedistas CR',
+          data: [4.5, 4.0, 3.5, 4.2, 3.0, 3.0],
+          backgroundColor: 'rgba(114,134,152,0.08)',
+          borderColor: '#728698',
+          borderWidth: 1.5,
+          borderDash: [6, 4],
+          pointBackgroundColor: '#728698',
+          pointRadius: 3,
+          pointHoverRadius: 5
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        r: {
+          min: 0,
+          max: 5,
+          ticks: { display: false, stepSize: 1 },
+          grid: { color: 'rgba(196,207,221,0.2)' },
+          angleLines: { color: 'rgba(196,207,221,0.2)' },
+          pointLabels: {
+            color: '#1C2D3F',
+            font: { size: 12, weight: '600', family: 'Outfit' }
+          }
+        }
+      },
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: {
+            usePointStyle: true,
+            pointStyle: 'circle',
+            padding: 20,
+            color: '#586D80',
+            font: { size: 12, family: 'Outfit' }
+          }
+        },
+        tooltip: {
+          backgroundColor: '#0B1929',
+          titleColor: '#5EEBC2',
+          bodyColor: '#C4CFDD',
+          padding: 12
+        }
+      }
+    }
+  });
+})();
+
+// ============ BAR CHART ============
+(function() {
+  const ctx = document.getElementById('barChart').getContext('2d');
+  const names = [
+    'Dr. Ivancovich Cruz',
+    'Dr. Chavarría Alvarado',
+    'Dr. Castro Artavia',
+    'Dr. Valverde Retana',
+    'Dr. Felipe Meza',
+    'Dr. Alvarado Calderón',
+    'Dr. Arroyo Carvajal'
+  ];
+  const values = [746, 596, 536, 408, 160, 30, 0];
+  const colors = [
+    '#3A4D62','#3A4D62','#3A4D62','#3A4D62',
+    '#3A4D62','#3A4D62',
+    '#5EEBC2'
+  ];
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: names,
+      datasets: [{
+        label: 'Reseñas en Huli Health',
+        data: values,
+        backgroundColor: colors,
+        borderRadius: 6,
+        barThickness: 22
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      indexAxis: 'y',
+      scales: {
+        x: {
+          grid: { color: 'rgba(0,0,0,0.05)' },
+          ticks: { color: '#728698', font: { size: 11, family: 'Outfit' } }
+        },
+        y: {
+          grid: { display: false },
+          ticks: { color: '#1C2D3F', font: { size: 12, family: 'Outfit', weight: '500' } }
+        }
+      },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#0B1929',
+          titleColor: '#5EEBC2',
+          bodyColor: '#C4CFDD',
+          padding: 12,
+          callbacks: {
+            label: function(ctx) {
+              return ctx.parsed.x === 0
+                ? ' 0 reseñas — sin perfil en Huli'
+                : ' ' + ctx.parsed.x + ' reseñas · Rating 5.0';
+            }
+          }
+        }
+      }
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
