@@ -244,7 +244,7 @@ footer p{color:var(--text-mid);font-size:12px}
 </div>
 </div>
 </div>
-<p class="note" style="text-align:center">Score máximo: 53/100. Dr. Murillo gana el primer lugar no por el mayor volumen Huli sino por la estrategia de contenido más completa: blog activo, YouTube, Instagram y web con FAQ. Es el único neurocirujano en CR con una estrategia AEO visible. Dr. Gamboa tiene el récord Huli (543) pero empata con Lang en el podio porque Lang compensa con contenido.</p>
+<p class="note" style="text-align:center">Score máximo: 75/100. Dr. Murillo gana el primer lugar no por el mayor volumen Huli sino por la estrategia de contenido más completa: blog activo, YouTube, Instagram y web con FAQ. Es el único neurocirujano en CR con una estrategia AEO visible. Dr. Gamboa tiene el récord Huli (543) pero empata con Lang en el podio porque Lang compensa con contenido.</p>
 </div>
 </section>
 <section class="alt-bg">
@@ -297,6 +297,16 @@ footer p{color:var(--text-mid);font-size:12px}
 </thead>
 <tbody><tr class="top3" data-tags="top10 huli ig">
 <td><span class="rank-num gold">1</span></td>
+<td><div class="dr-name"><a class="table-link" href="https://www.agneurocirugia.com" target="_blank">Dr. Andrés Gamboa Sanabria</a></div><div class="dr-spec">Clínica Bíblica · Hospital La Católica</div></td>
+<td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:75%"></div></div><span class="score-val">75</span></div></td>
+<td><span class="review-count">543</span><div class="review-plat">⭐ 5.0 · RÉCORD</div></td>
+<td><span class="review-count">114</span><div class="review-plat">⭐ 4.9</div></td>
+<td><span class="score-badge mid">7/15</span></td>
+<td><span class="web-badge web-yes">agneurocirugia.com</span></td>
+<td><span class="ig-count">@ag_neurocirugia 1.5K</span></td>
+<td>Neurocirugía General</td>
+</tr><tr class="top3" data-tags="top10 huli ig">
+<td><span class="rank-num silver">2</span></td>
 <td><div class="dr-name"><a class="table-link" href="https://www.drmurilloneurocirujano.com" target="_blank">Dr. Ricardo Murillo Álvarez</a></div><div class="dr-spec">Hospital La Católica</div></td>
 <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:53%"></div></div><span class="score-val">53</span></div></td>
 <td><span class="review-count">353</span><div class="review-plat">⭐ 5.0</div></td>
@@ -306,7 +316,7 @@ footer p{color:var(--text-mid);font-size:12px}
 <td><span class="ig-count">@dr.murillo_neurocirujano 1K</span></td>
 <td>Neurocirugía General · Blog/YouTube</td>
 </tr><tr class="top3" data-tags="top10">
-<td><span class="rank-num silver">2</span></td>
+<td><span class="rank-num bronze">3</span></td>
 <td><div class="dr-name"><a class="table-link" href="https://www.drfgcr.com" target="_blank">Dr. Francisco Gutiérrez Durán</a></div><div class="dr-spec">KUMA SPINE · CIMA</div></td>
 <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:52%"></div></div><span class="score-val">52</span></div></td>
 <td><span class="review-count">284</span><div class="review-plat">⭐ 5.0</div></td>
@@ -315,16 +325,6 @@ footer p{color:var(--text-mid);font-size:12px}
 <td><span class="web-badge web-yes">drfgcr.com</span></td>
 <td><span class="ig-count">—</span></td>
 <td>Columna · KUMA SPINE</td>
-</tr><tr class="top3" data-tags="top10 huli ig">
-<td><span class="rank-num bronze">3</span></td>
-<td><div class="dr-name"><a class="table-link" href="https://www.agneurocirugia.com" target="_blank">Dr. Andrés Gamboa Sanabria</a></div><div class="dr-spec">Clínica Bíblica · Hospital La Católica</div></td>
-<td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:51%"></div></div><span class="score-val">51</span></div></td>
-<td><span class="review-count">543</span><div class="review-plat">⭐ 5.0 · RÉCORD</div></td>
-<td><span class="review-count">—</span></td>
-<td><span class="score-badge mid">7/15</span></td>
-<td><span class="web-badge web-yes">agneurocirugia.com</span></td>
-<td><span class="ig-count">@ag_neurocirugia 1.5K</span></td>
-<td>Neurocirugía General</td>
 </tr><tr data-tags="top10 huli ig">
 <td><span class="rank-num">4</span></td>
 <td><div class="dr-name"><a class="table-link" href="https://www.drlangserrano.com" target="_blank">Dr. Gerardo Lang Serrano</a></div><div class="dr-spec">Jefe Neurocirugía CIMA</div></td>
@@ -605,7 +605,7 @@ function filterTable(tag, btn) {
 }
 new Chart(document.getElementById('chartTotal'), {
   type: 'bar',
-  data: { labels: ['R. Murillo', 'F. Gutiérrez', 'A. Gamboa', 'G. Lang', 'A. Lozada', 'A. Vargas', 'A. Morales', 'F. Carballo', 'E. Sánchez', 'M. Mejía', 'A. Cáceres', 'E. Jiménez', 'A. Piva', 'S. Marín', 'N. Romero'], datasets: [{ label: 'Score', data: [53,52,51,51,50,50,43,30,27,27,23,20,18,11,8], backgroundColor: ['#5EEBC2', '#4ECBA8', '#3CC49E', '#3DAD6C', '#3DAD6C', '#3DAD6C', '#3DAD6C', '#9AABBD', '#9AABBD', '#9AABBD', '#9AABBD', '#9AABBD', '#9AABBD', '#9AABBD', '#9AABBD'], borderRadius: 6 }] },
+  data: { labels: ['A. Gamboa', 'R. Murillo', 'F. Gutiérrez', 'G. Lang', 'A. Lozada', 'A. Vargas', 'A. Morales', 'F. Carballo', 'E. Sánchez', 'M. Mejía', 'A. Cáceres', 'E. Jiménez', 'A. Piva', 'S. Marín', 'N. Romero'], datasets: [{ label: 'Score', data: [75,53,52,51,50,50,43,30,27,27,23,20,18,11,8], backgroundColor: ['#5EEBC2', '#4ECBA8', '#3CC49E', '#3DAD6C', '#3DAD6C', '#3DAD6C', '#3DAD6C', '#9AABBD', '#9AABBD', '#9AABBD', '#9AABBD', '#9AABBD', '#9AABBD', '#9AABBD', '#9AABBD'], borderRadius: 6 }] },
   options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { max: 100, grid: { color: '#E2E8F0' } }, y: { grid: { display: false }, ticks: { font: { size: 11 } } } } }
 });
 new Chart(document.getElementById('chartHuli'), {
