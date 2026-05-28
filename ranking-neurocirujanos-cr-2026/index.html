@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ranking 2026 — Neurocirujanos con Mayor Visibilidad Digital en Costa Rica · Flow Results</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Newsreader:ital,wght@1,400;1,600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#0B1929;--navy-mid:#0F2236;--navy-light:#14304D;--navy-card:#162D4A;--accent:#5EEBC2;--accent-dim:#3CC49E;--red:#D9534F;--amber:#E8A820;--green:#3DAD6C;--text-dark:#1C2D3F;--text-light:#C4CFDD;--text-mid:#9AABBD;--bg:#FFFFFF;--bg-alt:#F6F8FB}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text-dark);line-height:1.6;font-size:16px}
+nav{position:sticky;top:0;z-index:100;background:var(--navy);border-bottom:2px solid var(--accent);padding:0 24px}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:52px}
+.nav-brand{color:var(--accent);font-weight:700;font-size:14px;letter-spacing:.04em}
+.nav-links{display:flex;gap:20px;list-style:none}
+.nav-links a{color:var(--text-light);font-size:13px;text-decoration:none;opacity:.8;transition:opacity .2s}
+.nav-links a:hover{opacity:1;color:var(--accent)}
+.btn-print{background:transparent;border:1px solid var(--accent);color:var(--accent);font-size:12px;padding:5px 14px;border-radius:20px;cursor:pointer;font-family:'Outfit',sans-serif;font-weight:600;transition:all .2s}
+.btn-print:hover{background:var(--accent);color:var(--navy)}
+.hero{background:var(--navy);padding:72px 24px 56px;text-align:center}
+.hero-inner{max-width:900px;margin:0 auto}
+.hero-eyebrow{color:var(--accent);font-size:12px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;margin-bottom:20px}
+.hero h1{font-size:clamp(32px,6vw,58px);font-weight:300;color:#fff;line-height:1.1;margin-bottom:16px}
+.hero h1 strong{font-weight:800}
+.hero h1 em{font-family:'Newsreader',serif;font-style:italic;color:var(--accent)}
+.hero-tagline{color:var(--text-mid);font-size:clamp(15px,2vw,18px);font-weight:300;max-width:640px;margin:0 auto 40px;line-height:1.6}
+.hero-stats{display:flex;justify-content:center;gap:32px;flex-wrap:wrap;margin-top:40px;padding-top:32px;border-top:1px solid rgba(94,235,194,.15)}
+.stat-pill{text-align:center}
+.stat-pill .num{font-size:clamp(28px,4vw,42px);font-weight:800;color:var(--accent);display:block}
+.stat-pill .lbl{font-size:12px;color:var(--text-mid);font-weight:500;text-transform:uppercase;letter-spacing:.08em}
+.hero-date{margin-top:28px;color:var(--text-mid);font-size:12px;opacity:.6}
+section{padding:64px 24px}
+.section-inner{max-width:1100px;margin:0 auto}
+.section-label{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+h2{font-size:clamp(22px,3vw,32px);font-weight:700;color:var(--text-dark);margin-bottom:24px;line-height:1.2}
+h2 em{font-family:'Newsreader',serif;font-style:italic;color:var(--accent)}
+.alt-bg{background:var(--bg-alt)}
+.dark-bg{background:var(--navy)}
+.method-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-top:24px}
+.method-card{background:var(--bg);border-radius:12px;padding:18px;border:1px solid #E2E8F0;border-left:3px solid var(--accent)}
+.method-card h3{font-size:13px;font-weight:700;margin-bottom:5px;color:var(--text-dark)}
+.method-card p{font-size:12px;color:#586D80;line-height:1.5}
+.method-card .weight{font-size:22px;font-weight:800;color:var(--accent);display:block;margin-bottom:4px}
+.method-card.featured{border-left-color:var(--green);background:#F0FBF4}
+.method-card.featured .weight{color:var(--green)}
+.podium{display:flex;justify-content:center;align-items:flex-end;gap:16px;margin:40px 0}
+.podium-card{border-radius:16px;padding:28px 20px 24px;text-align:center;flex:1;max-width:280px;position:relative}
+.podium-card.p1{background:linear-gradient(135deg,#14304D,#1a3d60);border:2px solid var(--accent);order:2;padding-top:40px}
+.podium-card.p2{background:var(--navy-card);border:1px solid rgba(94,235,194,.25);order:1}
+.podium-card.p3{background:var(--navy-card);border:1px solid rgba(94,235,194,.15);order:3}
+.medal{font-size:32px;display:block;margin-bottom:8px}
+.podium-name{color:#fff;font-size:15px;font-weight:700;margin-bottom:4px}
+.podium-spec{color:var(--text-mid);font-size:12px;margin-bottom:12px}
+.podium-score{font-size:36px;font-weight:800;color:var(--accent);display:block}
+.podium-score span{font-size:14px;color:var(--text-mid);font-weight:400}
+.podium-pills{display:flex;flex-wrap:wrap;justify-content:center;gap:5px;margin-top:10px}
+.pill{font-size:11px;font-weight:600;padding:3px 9px;border-radius:20px;background:rgba(94,235,194,.12);color:var(--accent)}
+.badge-1{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--accent);color:var(--navy);font-size:11px;font-weight:800;padding:4px 14px;border-radius:20px;white-space:nowrap}
+.charts-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:32px}
+@media(max-width:720px){.charts-grid{grid-template-columns:1fr}}
+.chart-wrap{background:var(--bg);border-radius:16px;padding:24px;border:1px solid #E2E8F0}
+.chart-wrap.dark{background:var(--navy-card);border-color:rgba(255,255,255,.08)}
+.chart-title{font-size:14px;font-weight:700;margin-bottom:16px;color:var(--text-dark)}
+.chart-title.light{color:#fff}
+.chart-frame{position:relative;width:100%;height:420px}
+.chart-frame.bar{height:480px}
+.chart-frame.bar-sm{height:300px}
+.chart-frame canvas{width:100%!important;height:100%!important;display:block}
+.ranking-table-wrap{overflow-x:auto;margin-top:24px;border-radius:16px;border:1px solid #E2E8F0}
+table{width:100%;border-collapse:collapse;font-size:13px}
+thead th{background:var(--navy);color:var(--text-light);font-size:11px;font-weight:600;padding:11px 12px;text-align:left;white-space:nowrap;letter-spacing:.04em}
+tbody tr{border-bottom:1px solid #F0F4F8;transition:background .15s}
+tbody tr:hover{background:#F6FAFF}
+tbody tr.top3{background:#F0FBF7}
+tbody td{padding:11px 12px;vertical-align:middle}
+.rank-num{font-size:15px;font-weight:800;color:var(--navy);width:32px;text-align:center}
+.rank-num.gold{color:#D4A017}
+.rank-num.silver{color:#7A8A99}
+.rank-num.bronze{color:#B5794A}
+.dr-name{font-weight:700;color:var(--text-dark);font-size:13px}
+.dr-spec{font-size:11px;color:#7A8A99;margin-top:1px}
+.score-bar-wrap{display:flex;align-items:center;gap:8px}
+.score-bar{height:7px;border-radius:4px;background:#E2E8F0;flex:1;min-width:50px}
+.score-bar-fill{height:100%;border-radius:4px;background:var(--accent)}
+.score-val{font-size:13px;font-weight:700;white-space:nowrap}
+.score-badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:12px;font-weight:700}
+.score-badge.high{background:#D4EDDA;color:#155724}
+.score-badge.mid{background:#FFF3CD;color:#856404}
+.score-badge.low{background:#F8D7DA;color:#721C24}
+.review-count{font-size:13px;font-weight:600;color:var(--text-dark)}
+.review-plat{font-size:11px;color:var(--text-mid)}
+.ig-count{font-size:13px;font-weight:600}
+.web-badge{font-size:11px;font-weight:600;padding:2px 7px;border-radius:8px}
+.web-yes{background:#D4EDDA;color:#155724}
+.web-no{background:#F8D7DA;color:#721C24}
+.web-basic{background:#FFF3CD;color:#856404}
+.filter-bar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
+.filter-btn{padding:7px 16px;border-radius:20px;border:1px solid #D0D9E3;background:#fff;font-size:13px;cursor:pointer;font-family:'Outfit',sans-serif;font-weight:600;color:#3D5066;transition:all .15s}
+.filter-btn.active,.filter-btn:hover{background:var(--navy);color:var(--accent);border-color:var(--navy)}
+.platform-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:24px}
+.platform-card{background:var(--navy-card);border-radius:14px;padding:22px;border:1px solid rgba(255,255,255,.07)}
+.platform-header{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.platform-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px}
+.platform-icon.google{background:#4285F4}
+.platform-icon.huli{background:var(--accent-dim)}
+.platform-icon.ig{background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)}
+.platform-name{font-size:13px;font-weight:700;color:#fff}
+.platform-sub{font-size:11px;color:var(--text-mid)}
+.platform-list{list-style:none}
+.platform-list li{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:13px}
+.platform-list li:last-child{border-bottom:none}
+.platform-list .p-name{color:var(--text-light);font-weight:500}
+.platform-list .p-val{font-weight:700;color:var(--accent)}
+.platform-list .p-rank{font-size:11px;color:var(--text-mid);margin-right:6px}
+.gap-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:24px}
+.gap-card{border-radius:14px;padding:22px;border-left:4px solid}
+.gap-card.gap-red{background:#FFF5F5;border-color:var(--red)}
+.gap-card.gap-amber{background:#FFFBEB;border-color:var(--amber)}
+.gap-card.gap-green{background:#F0FBF4;border-color:var(--green)}
+.gap-card h4{font-size:14px;font-weight:700;margin-bottom:8px}
+.gap-card p{font-size:13px;color:#586D80;line-height:1.5}
+.aeo-audit-section{background:var(--navy-mid);border-radius:20px;padding:40px;border:1px solid rgba(94,235,194,.15)}
+.aeo-title{font-size:clamp(18px,2.5vw,26px);font-weight:700;color:#fff;margin-bottom:10px;line-height:1.3}
+.aeo-sub{color:var(--text-mid);font-size:15px;margin-bottom:28px;line-height:1.6}
+.aeo-finding{background:rgba(255,255,255,.04);border-radius:12px;padding:16px;margin-bottom:12px;border-left:3px solid var(--accent)}
+.aeo-finding h4{color:#fff;font-size:14px;font-weight:700;margin-bottom:4px}
+.aeo-finding p{color:var(--text-mid);font-size:13px;line-height:1.5}
+.aeo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:24px 0}
+.aeo-card{background:rgba(255,255,255,.05);border-radius:12px;padding:16px;text-align:center}
+.aeo-card .aeo-icon{font-size:24px;display:block;margin-bottom:8px}
+.aeo-card h4{color:#fff;font-size:13px;font-weight:700;margin-bottom:4px}
+.aeo-card p{color:var(--text-mid);font-size:12px;line-height:1.4}
+.aeo-card .status-check{font-size:18px;display:block;margin-top:8px}
+.aeo-top-scores{margin-top:20px}
+.aeo-top-scores h4{color:var(--accent);font-size:13px;font-weight:700;margin-bottom:10px;text-transform:uppercase;letter-spacing:.08em}
+.aeo-score-row{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:13px}
+.aeo-score-row:last-child{border-bottom:none}
+.aeo-score-row .dr{color:var(--text-light)}
+.aeo-score-bar{height:6px;border-radius:3px;background:rgba(255,255,255,.1);flex:1;margin:0 12px;min-width:60px}
+.aeo-score-bar-fill{height:100%;border-radius:3px;background:var(--accent)}
+.aeo-score-num{color:var(--accent);font-weight:700;white-space:nowrap}
+.dr-rank-cta{background:var(--navy);border:2px solid var(--accent);border-radius:16px;padding:28px;text-align:center;margin-top:24px}
+.dr-rank-cta h3{color:#fff;font-size:18px;font-weight:700;margin-bottom:8px}
+.dr-rank-cta p{color:var(--text-mid);font-size:14px;margin-bottom:16px}
+.btn-accent{display:inline-block;background:var(--accent);color:var(--navy);font-weight:800;font-size:14px;padding:12px 28px;border-radius:30px;text-decoration:none;transition:all .2s}
+.btn-accent:hover{background:var(--accent-dim);transform:translateY(-1px)}
+.cta-section{background:var(--navy);padding:72px 24px;text-align:center}
+.cta-inner{max-width:640px;margin:0 auto}
+.cta-section h2{color:#fff;font-size:clamp(22px,3vw,34px);margin-bottom:16px}
+.cta-section p{color:var(--text-mid);font-size:16px;margin-bottom:32px}
+.cta-buttons{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.btn-outline{display:inline-block;border:2px solid rgba(255,255,255,.3);color:#fff;font-weight:600;font-size:14px;padding:12px 26px;border-radius:30px;text-decoration:none;transition:all .2s;cursor:pointer;background:transparent;font-family:'Outfit',sans-serif}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent)}
+footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.07);padding:20px 24px;text-align:center}
+footer p{color:var(--text-mid);font-size:12px}
+.note{font-size:12px;color:#7A8A99;margin-top:12px;line-height:1.5}
+.table-link{color:inherit;text-decoration:none;border-bottom:1px dashed rgba(0,0,0,.25);transition:color .15s,border-color .15s}
+.table-link:hover{color:var(--accent);border-bottom-color:var(--accent)}
+@media print{nav,#cta,.cta-section,footer{display:none}body{font-size:12px}section{padding:30px 16px}}
+@media(max-width:640px){.podium{flex-direction:column;align-items:center}.podium-card{max-width:100%;width:100%;order:unset!important}.nav-links{display:none}.charts-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <span class="nav-brand">FLOW Results · Ranking Digital</span>
+    <ul class="nav-links">
+      <li><a href="#podio">Podio</a></li><li><a href="#ranking">Ranking</a></li><li><a href="#aeo">AEO Audit</a></li><li><a href="#brechas">Brechas</a></li>
+    </ul>
+    <button class="btn-print" onclick="window.print()">Imprimir PDF</button>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Estudio de Visibilidad Digital · Mayo 2026</div>
+    <h1><strong>Ranking 2026</strong><br>Neurocirujanos con Mayor<br><em>Visibilidad Digital</em> en Costa Rica</h1>
+    <p class="hero-tagline">Análisis de 18 neurocirujanos privados certificados. La especialidad con mayor presencia AEO y la mayor brecha entre credenciales académicas y visibilidad digital real.</p>
+    <div class="hero-stats">
+      <div class="stat-pill"><span class="num">18</span><span class="lbl">Neurocirujanos Analizados</span></div>
+      <div class="stat-pill"><span class="num">53</span><span class="lbl">Score Máximo Alcanzado</span></div>
+      <div class="stat-pill"><span class="num">0/18</span><span class="lbl">Optimizados para IA</span></div>
+      <div class="stat-pill"><span class="num">543</span><span class="lbl">Récord Reseñas Huli</span></div>
+    </div>
+    <p class="hero-date">Datos recopilados en mayo 2026 · Fuentes: Google Business Profile, HuliHealth, Instagram, sitios web oficiales, Colegio de Médicos CR · Elaborado por FLOW Results</p>
+  </div>
+</section>
+
+<section class="alt-bg">
+  <div class="section-inner">
+    <div class="section-label">Metodología</div>
+    <h2>Cómo se <em>califica</em> la visibilidad digital en 2026</h2>
+    <p style="color:#586D80;max-width:700px;margin-bottom:8px">Score máximo: 100 puntos. Ponderación basada en el comportamiento real del paciente que busca neurocirugía privada en Costa Rica.</p>
+    <div class="method-grid">
+      <div class="method-card featured"><span class="weight">30 pts</span><h3>Reseñas Google</h3><p>Volumen y calificación en Google Business Profile. Penalización de 10 pts por rating &lt;4.0.</p></div>
+      <div class="method-card featured"><span class="weight">30 pts</span><h3>Reseñas Huli</h3><p>El directorio médico dominante en Costa Rica. Reseñas verificadas en HuliHealth.com.</p></div>
+      <div class="method-card"><span class="weight">15 pts</span><h3>AEO / IA</h3><p>¿Aparece en ChatGPT y Perplexity? FAQs estructuradas, schema markup, menciones en medios.</p></div>
+      <div class="method-card"><span class="weight">15 pts</span><h3>Sitio Web</h3><p>Conversión real: booking, WhatsApp, galería, bio médica, velocidad, FAQ.</p></div>
+      <div class="method-card"><span class="weight">5 pts</span><h3>Instagram</h3><p>Seguidores como señal de presencia social. Proxy de demanda y reconocimiento.</p></div>
+      <div class="method-card"><span class="weight">5 pts</span><h3>SEO / Directorios</h3><p>Presencia en Google Maps, Huli, directorios hospitalarios (CIMA, Bíblica, La Católica).</p></div>
+    </div>
+    <p class="note" style="margin-top:16px">Escala Huli: 0=0 · 1–9=2 · 10–49=5 · 50–99=10 · 100–199=20 · 200+=30 pts · Directorios válidos: Google Business Profile, HuliHealth, CIMA, Clínica Bíblica, Hospital La Católica.</p>
+  </div>
+</section>
+
+<section id="podio">
+  <div class="section-inner">
+    <div class="section-label">Top 3 del Ranking</div>
+    <h2>El <em>podio</em> de visibilidad digital</h2>
+    <div class="podium">
+      <div class="podium-card p2">
+        <span class="medal">🥈</span>
+        <div class="podium-name"><a href="https://www.agneurocirugia.com" target="_blank" style="color:#fff;text-decoration:none">Dr. Andrés Gamboa Sanabria</a></div>
+        <div class="podium-spec">Neurocirugía General · Bíblica / La Católica</div>
+        <span class="podium-score">51<span>/100</span></span>
+        <div class="podium-pills">
+          <span class="pill">Huli 543 ⭐5.0</span>
+          <span class="pill">agneurocirugia.com</span>
+          <span class="pill">@ag_neurocirugia 1.5K</span>
+        </div>
+      </div>
+      <div class="podium-card p1">
+        <div class="badge-1">🏆 Líder Digital CR 2026</div>
+        <span class="medal">🥇</span>
+        <div class="podium-name"><a href="https://www.drmurilloneurocirujano.com" target="_blank" style="color:#fff;text-decoration:none">Dr. Ricardo Murillo Álvarez</a></div>
+        <div class="podium-spec">Neurocirugía · Hospital La Católica</div>
+        <span class="podium-score">53<span>/100</span></span>
+        <div class="podium-pills">
+          <span class="pill">Huli 353 ⭐5.0</span>
+          <span class="pill">AEO 9/15</span>
+          <span class="pill">Blog activo · YouTube</span>
+        </div>
+      </div>
+      <div class="podium-card p3">
+        <span class="medal">🥉</span>
+        <div class="podium-name"><a href="https://www.drlangserrano.com" target="_blank" style="color:#fff;text-decoration:none">Dr. Gerardo Lang Serrano</a></div>
+        <div class="podium-spec">Cerebrovascular · Jefe Neuro CIMA</div>
+        <span class="podium-score">51<span>/100</span></span>
+        <div class="podium-pills">
+          <span class="pill">Huli 496 ⭐5.0</span>
+          <span class="pill">drlangserrano.com</span>
+          <span class="pill">@drlangserrano</span>
+        </div>
+      </div>
+    </div>
+    <p class="note" style="text-align:center">Score máximo: 53/100. Dr. Murillo gana el primer lugar no por el mayor volumen Huli sino por la estrategia de contenido más completa: blog activo, YouTube, Instagram y web con FAQ. Es el único neurocirujano en CR con una estrategia AEO visible. Dr. Gamboa tiene el récord Huli (543) pero empata con Lang en el podio porque Lang compensa con contenido.</p>
+  </div>
+</section>
+
+<section class="alt-bg">
+  <div class="section-inner">
+    <div class="section-label">Visualizaciones</div>
+    <h2>Comparativa <em>por plataforma</em></h2>
+    <div class="charts-grid">
+      <div class="chart-wrap">
+        <div class="chart-title">🏅 Score Total de Visibilidad (Top 12)</div>
+        <div class="chart-frame bar">
+          <canvas id="chartTotal"></canvas>
+        </div>
+      </div>
+      <div class="chart-wrap">
+        <div class="chart-title">📊 Reseñas Huli Health (Top 10)</div>
+        <div class="chart-frame bar">
+          <canvas id="chartHuli"></canvas>
+        </div>
+      </div>
+      <div class="chart-wrap">
+        <div class="chart-title">📸 Instagram — Top cuentas Neurocirugía CR</div>
+        <div class="chart-frame bar-sm">
+          <canvas id="chartIG"></canvas>
+        </div>
+      </div>
+      <div class="chart-wrap dark">
+        <div class="chart-title light">🌐 Score AEO — Visibilidad en IA (Top 8)</div>
+        <div class="chart-frame bar-sm">
+          <canvas id="chartAEO"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="ranking">
+  <div class="section-inner">
+    <div class="section-label">Tabla Completa</div>
+    <h2>Ranking completo de <em>18 neurocirujanos</em></h2>
+    <div class="filter-bar">
+      <button class="filter-btn active" onclick="filterTable('all',this)">Todos (18)</button>
+      <button class="filter-btn" onclick="filterTable('top10',this)">Top 10</button>
+      <button class="filter-btn" onclick="filterTable('huli',this)">Huli 200+</button>
+      <button class="filter-btn" onclick="filterTable('ig',this)">Con Instagram</button>
+      <button class="filter-btn" onclick="filterTable('noweb',this)">Sin Web</button>
+    </div>
+    <div class="ranking-table-wrap">
+      <table id="rankingTable">
+        <thead>
+          <tr><th>#</th><th>Especialista</th><th>Score Total</th><th>Huli ⭐</th><th>Google ⭐</th><th>AEO</th><th>Web</th><th>Instagram</th><th>Subespecialidad</th></tr>
+        </thead>
+        <tbody>
+          <tr class="top3" data-tags="top10 huli ig">
+            <td><span class="rank-num gold">1</span></td>
+            <td><div class="dr-name"><a href="https://www.drmurilloneurocirujano.com" target="_blank" class="table-link">Dr. Ricardo Murillo Álvarez</a></div><div class="dr-spec">Hospital La Católica</div></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:53%"></div></div><span class="score-val">53</span></div></td>
+            <td><span class="review-count">353</span><div class="review-plat">⭐ 5.0</div></td>
+            <td><span class="review-count">—</span></td>
+            <td><span class="score-badge high">9/15</span></td>
+            <td><span class="web-badge web-yes">drmurilloneurocirujano.com</span></td>
+            <td><span class="ig-count">@dr.murillo_neurocirujano 1K</span></td>
+            <td>Neurocirugía General · Blog/YouTube</td>
+          </tr>
+          <tr class="top3" data-tags="top10 huli ig">
+            <td><span class="rank-num silver">2</span></td>
+            <td><div class="dr-name"><a href="https://www.agneurocirugia.com" target="_blank" class="table-link">Dr. Andrés Gamboa Sanabria</a></div><div class="dr-spec">Clínica Bíblica · Hospital La Católica</div></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:51%"></div></div><span class="score-val">51</span></div></td>
+            <td><span class="review-count">543</span><div class="review-plat">⭐ 5.0 · RÉCORD</div></td>
+            <td><span class="review-count">—</span></td>
+            <td><span class="score-badge mid">7/15</span></td>
+            <td><span class="web-badge web-yes">agneurocirugia.com</span></td>
+            <td><span class="ig-count">@ag_neurocirugia 1.5K</span></td>
+            <td>Neurocirugía General</td>
+          </tr>
+          <tr class="top3" data-tags="top10 huli ig">
+            <td><span class="rank-num bronze">3</span></td>
+            <td><div class="dr-name"><a href="https://www.drlangserrano.com" target="_blank" class="table-link">Dr. Gerardo Lang Serrano</a></div><div class="dr-spec">Jefe Neurocirugía CIMA</div></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:51%"></div></div><span class="score-val">51</span></div></td>
+            <td><span class="review-count">496</span><div class="review-plat">⭐ 5.0</div></td>
+            <td><span class="review-count">—</span></td>
+            <td><span class="score-badge mid">7/15</span></td>
+            <td><span class="web-badge web-yes">drlangserrano.com</span></td>
+            <td><span class="ig-count">@drlangserrano</span></td>
+            <td>Cerebrovascular · Neurocirugía Funcional</td>
+          </tr>
+          <tr data-tags="top10 huli">
+            <td><span class="rank-num">4</span></td>
+            <td><div class="dr-name"><a href="https://www.neurocirujanocr.com" target="_blank" class="table-link">Dr. Alfonso Lozada Díaz</a></div><div class="dr-spec">Hospital La Católica · Clínica Bíblica</div></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:50%"></div></div><span class="score-val">50</span></div></td>
+            <td><span class="review-count">527</span><div class="review-plat">⭐ 5.0</div></td>
+            <td><span class="review-count">—</span></td>
+            <td><span class="score-badge mid">6/15</span></td>
+            <td><span class="web-badge web-yes">neurocirujanocr.com</span></td>
+            <td><span class="ig-count">—</span></td>
+            <td>Endoscópica Mínimamente Invasiva</td>
+          </tr>
+          <tr data-tags="top10 ig">
+            <td><span class="rank-num">5</span></td>
+            <td><div class="dr-name"><a href="https://www.neurovargas.com" target="_blank" class="table-link">Dr. Alejandro Vargas Román</a></div><div class="dr-spec">CIMA · La Católica</div></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:50%"></div></div><span class="score-val">50</span></div></td>
+            <td><span class="review-count">308</span><div class="review-plat">⭐ 5.0</div></td>
+            <td><span class="review-count">—</span></td>
+            <td><span class="score-badge mid">7/15</span></td>
+            <td><span class="web-badge web-yes">neurovargas.com</span></td>
+            <td><span class="ig-count">@dr.alejandrovargas</span></td>
+            <td>Neuroendovascular · Ex-Pres ACCN</td>
+          </tr>
+          <tr data-tags="top10">
+            <td><span class="rank-num">6</span></td>
+            <td><div class="dr-name"><a href="https://www.drfgcr.com" target="_blank" class="table-link">Dr. Francisco Gutiérrez Durán</a></div><div class="dr-spec">KUMA SPINE · CIMA</div></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:47%"></div></div><span class="score-val">47</span></div></td>
+            <td><span class="review-count">284</span><div class="review-plat">⭐ 5.0</div></td>
+            <td><span class="review-count">—</span></td>
+            <td><span class="score-badge mid">5/15</span></td>
+            <td><span class="web-badge web-yes">drfgcr.com</span></td>
+            <td><span class="ig-count">—</span></td>
+            <td>Columna · KUMA SPINE</td>
+          </tr>
+          <tr data-tags="top10 ig">
+            <td><span class="rank-num">7</span></td>
+            <td><div class="dr-name"><a href="https://www.drandresmorales.com" target="_blank" class="table-link">Dr. Andrés Morales Martínez</a></div><div class="dr-spec">La Católica · Clínica Bíblica</div></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:43%"></div></div><span class="score-val">43</span></div></td>
+            <td><span class="review-count">126</span><div class="review-plat">⭐ 5.0</div></td>
+            <td><span class="review-count">—</span></td>
+            <td><span class="score-badge mid">7/15</span></td>
+            <td><span class="web-badge web-yes">drandresmorales.com</span></td>
+            <td><span class="ig-count">@dr.andresmoralesm 792</span></td>
+            <td>Neurocirugía General · Blog bilingüe</td>
+          </tr>
+          <tr data-tags="top10 noweb">
+            <td><span class="rank-num">8</span></td>
+            <td><div class="dr-name">Dr. Esteban Sánchez Jiménez</div><div class="dr-spec">HSJD · La Católica</div></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:27%"></div></div><span class="score-val">27</span></div></td>
+            <td><span class="review-count">163</span><div class="review-plat">⭐ 5.0</div></td>
+            <td><span class="review-count">—</span></td>
+            <td><span class="score-badge low">2/15</span></td>
+            <td><span class="web-badge web-no">Sin web</span></td>
+            <td><span class="ig-count">—</span></td>
+            <td>Cirugía Paciente Despierto · Jefe HSJD</td>
+          </tr>
+          <tr data-tags="top10 noweb">
+            <td><span class="rank-num">9</span></td>
+            <td><div class="dr-name">Dr. Miguel Mejía Rojas</div><div class="dr-spec">La Católica · CIMA</div></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:27%"></div></div><span class="score-val">27</span></div></td>
+            <td><span class="review-count">149</span><div class="review-plat">⭐ 5.0</div></td>
+            <td><span class="review-count">—</span></td>
+            <td><span class="score-badge low">2/15</span></td>
+            <td><span class="web-badge web-no">Sin web</span></td>
+            <td><span class="ig-count">—</span></td>
+            <td>Columna · 24 años experiencia</td>
+          </tr>
+          <tr data-tags="top10 ig noweb">
+            <td><span class="rank-num">10</span></td>
+            <td><div class="dr-name"><a href="https://www.neurocirugia.cr" target="_blank" class="table-link">Dr. Edgar Jiménez Masís</a></div><div class="dr-spec">Hospital CIMA · La Católica</div></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:20%"></div></div><span class="score-val">20</span></div></td>
+            <td><span class="review-count">—</span><div class="review-plat">No Huli</div></td>
+            <td><span class="review-count">—</span></td>
+            <td><span class="score-badge low">4/15</span></td>
+            <td><span class="web-badge web-yes">neurocirugia.cr</span></td>
+            <td><span class="ig-count">@neurocxjimenez FB 68K</span></td>
+            <td>Neuro-Oncología</td>
+          </tr>
+          <tr data-tags="ig">
+            <td><span class="rank-num">11</span></td>
+            <td><div class="dr-name"><a href="https://www.neurocaceres.com" target="_blank" class="table-link">Dr. Adrián Cáceres Chacón</a></div><div class="dr-spec">La Católica · Clínica Bíblica</div></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:18%"></div></div><span class="score-val">18</span></div></td>
+            <td><span class="review-count">—</span><div class="review-plat">No Huli</div></td>
+            <td><span class="review-count">—</span></td>
+            <td><span class="score-badge low">3/15</span></td>
+            <td><span class="web-badge web-yes">neurocaceres.com</span></td>
+            <td><span class="ig-count">@dr.adriancaceres</span></td>
+            <td>Neuro Pediátrica · Harvard/Northwestern</td>
+          </tr>
+          <tr data-tags="">
+            <td><span class="rank-num">12</span></td>
+            <td><div class="dr-name"><a href="https://www.drpiva.com" target="_blank" class="table-link">Dr. Alfio Piva Rodríguez</a></div><div class="dr-spec">La Católica · CIMA</div></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:18%"></div></div><span class="score-val">18</span></div></td>
+            <td><span class="review-count">44</span><div class="review-plat">⭐ 5.0</div></td>
+            <td><span class="review-count">—</span></td>
+            <td><span class="score-badge low">3/15</span></td>
+            <td><span class="web-badge web-yes">drpiva.com</span></td>
+            <td><span class="ig-count">—</span></td>
+            <td>Mínimamente Invasiva · USC</td>
+          </tr>
+          <tr data-tags="noweb">
+            <td><span class="rank-num">13</span></td>
+            <td><div class="dr-name"><a href="https://www.neurocirugiacolumna.cr" target="_blank" class="table-link">Dr. Fabián Carballo Madrigal</a></div><div class="dr-spec">Clínica Bíblica · CIMA</div></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:18%"></div></div><span class="score-val">18</span></div></td>
+            <td><span class="review-count">—</span><div class="review-plat">No Huli</div></td>
+            <td><span class="review-count">—</span></td>
+            <td><span class="score-badge low">3/15</span></td>
+            <td><span class="web-badge web-yes">neurocirugiacolumna.cr</span></td>
+            <td><span class="ig-count">—</span></td>
+            <td>Columna · Harvard Brigham/MGH</td>
+          </tr>
+          <tr data-tags="ig noweb">
+            <td><span class="rank-num">14</span></td>
+            <td><div class="dr-name">Dr. Salvador Marín Marín</div><div class="dr-spec">La Católica · Clínica Bíblica</div></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:11%"></div></div><span class="score-val">11</span></div></td>
+            <td><span class="review-count">7</span><div class="review-plat">⭐ 5.0</div></td>
+            <td><span class="review-count">—</span></td>
+            <td><span class="score-badge low">1/15</span></td>
+            <td><span class="web-badge web-no">Sin web</span></td>
+            <td><span class="ig-count">@doctor_marin 9,333</span></td>
+            <td>Columna · Mayor IG Neuro CR</td>
+          </tr>
+          <tr data-tags="noweb">
+            <td><span class="rank-num">15</span></td>
+            <td><div class="dr-name">Dr. Niels Romero Barquero</div><div class="dr-spec">Clínica Bíblica</div></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:8%"></div></div><span class="score-val">8</span></div></td>
+            <td><span class="review-count">—</span><div class="review-plat">No Huli</div></td>
+            <td><span class="review-count">—</span></td>
+            <td><span class="score-badge low">2/15</span></td>
+            <td><span class="web-badge web-no">Sin web</span></td>
+            <td><span class="ig-count">—</span></td>
+            <td>AO-SPINE · MEDTRONIC Consultor</td>
+          </tr>
+          <tr data-tags="noweb">
+            <td><span class="rank-num">16</span></td>
+            <td><div class="dr-name">Dr. Eduardo Huertas Arias</div><div class="dr-spec">Fundador Neuro CIMA</div></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:7%"></div></div><span class="score-val">7</span></div></td>
+            <td><span class="review-count">—</span><div class="review-plat">No Huli</div></td>
+            <td><span class="review-count">—</span></td>
+            <td><span class="score-badge low">2/15</span></td>
+            <td><span class="web-badge web-no">Sin web</span></td>
+            <td><span class="ig-count">—</span></td>
+            <td>Neuro Pediátrica · Dallas</td>
+          </tr>
+          <tr data-tags="noweb">
+            <td><span class="rank-num">17</span></td>
+            <td><div class="dr-name">Dr. Javier Brenes Esquivel</div><div class="dr-spec">UCR Profesor · CIMA</div></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:6%"></div></div><span class="score-val">6</span></div></td>
+            <td><span class="review-count">—</span><div class="review-plat">No Huli</div></td>
+            <td><span class="review-count">—</span></td>
+            <td><span class="score-badge low">1/15</span></td>
+            <td><span class="web-badge web-no">Sin web</span></td>
+            <td><span class="ig-count">—</span></td>
+            <td>2,000 procedimientos · Profesor UCR</td>
+          </tr>
+          <tr data-tags="noweb">
+            <td><span class="rank-num">18</span></td>
+            <td><div class="dr-name">Dr. Jorge Fernández Alpízar</div><div class="dr-spec">Hospital La Católica</div></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:5%"></div></div><span class="score-val">5</span></div></td>
+            <td><span class="review-count">—</span><div class="review-plat">No Huli</div></td>
+            <td><span class="review-count">—</span></td>
+            <td><span class="score-badge low">1/15</span></td>
+            <td><span class="web-badge web-no">Sin web</span></td>
+            <td><span class="ig-count">—</span></td>
+            <td>Ex-Jefe Neuro Calderón Guardia</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">* Ningún neurocirujano privado de la muestra tiene Google Business Profile activo confirmado. · Dr. Salvador Marín tiene 9,333 seguidores en Instagram — el mayor de la especialidad — pero solo 7 reseñas Huli y sin web. Un caso de presencia social sin conversión.</p>
+  </div>
+</section>
+
+<section class="dark-bg">
+  <div class="section-inner">
+    <div class="section-label" style="color:var(--accent)">Líderes por Plataforma</div>
+    <h2 style="color:#fff">¿Quién domina <em>cada canal</em>?</h2>
+    <div class="platform-grid">
+      <div class="platform-card">
+        <div class="platform-header">
+          <div class="platform-icon google">G</div>
+          <div><div class="platform-name">Google Business Profile</div><div class="platform-sub">Sin perfil confirmado en la muestra</div></div>
+        </div>
+        <ul class="platform-list">
+          <li><span class="p-name">Todos los neurocirujanos</span><span class="p-val">GBP Sin confirmar</span></li>
+        </ul>
+        <p style="font-size:12px;color:var(--text-mid);margin-top:12px">La mayor brecha de la especialidad. Cuando un paciente busca "neurocirujano privado San José" en Google Maps, ningún neurocirujano privado aparece con perfil propio activo verificado.</p>
+      </div>
+      <div class="platform-card">
+        <div class="platform-header">
+          <div class="platform-icon huli">H</div>
+          <div><div class="platform-name">HuliHealth — Neurocirugía</div><div class="platform-sub">Récord: 543 reseñas Dr. Gamboa</div></div>
+        </div>
+        <ul class="platform-list">
+          <li><span class="p-rank">#1</span><span class="p-name">Dr. Andrés Gamboa</span><span class="p-val">543 ⭐ RÉCORD</span></li>
+          <li><span class="p-rank">#2</span><span class="p-name">Dr. Alfonso Lozada</span><span class="p-val">527 ⭐</span></li>
+          <li><span class="p-rank">#3</span><span class="p-name">Dr. Gerardo Lang</span><span class="p-val">496 ⭐</span></li>
+          <li><span class="p-rank">#4</span><span class="p-name">Dr. Ricardo Murillo</span><span class="p-val">353 ⭐</span></li>
+          <li><span class="p-rank">#5</span><span class="p-name">Dr. Alejandro Vargas</span><span class="p-val">308 ⭐</span></li>
+        </ul>
+      </div>
+      <div class="platform-card">
+        <div class="platform-header">
+          <div class="platform-icon ig">IG</div>
+          <div><div class="platform-name">Instagram</div><div class="platform-sub">Dr. Marín lidera con 9,333 — sin web</div></div>
+        </div>
+        <ul class="platform-list">
+          <li><span class="p-rank">#1</span><span class="p-name">Dr. Salvador Marín</span><span class="p-val">@doctor_marin 9,333</span></li>
+          <li><span class="p-rank">#2</span><span class="p-name">Dr. Andrés Gamboa</span><span class="p-val">@ag_neurocirugia 1.5K</span></li>
+          <li><span class="p-rank">#3</span><span class="p-name">Dr. Ricardo Murillo</span><span class="p-val">@dr.murillo_neuro 1K</span></li>
+          <li><span class="p-rank">#4</span><span class="p-name">Dr. Gerardo Lang</span><span class="p-val">@drlangserrano</span></li>
+          <li><span class="p-rank">#5</span><span class="p-name">Dr. Alejandro Vargas</span><span class="p-val">@dr.alejandrovargas</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="aeo">
+  <div class="section-inner">
+    <div class="section-label">AEO Audit</div>
+    <h2>Visibilidad en <em>Inteligencia Artificial</em></h2>
+    <div class="aeo-audit-section">
+      <div class="aeo-title">Neurocirugía CR en IA: la especialidad con más potencial AEO sin explotar</div>
+      <div class="aeo-sub">Los pacientes que buscan "neurocirujano columna Costa Rica" o "cirugía cerebrovascular privada CR" en ChatGPT o Perplexity reciben respuestas fragmentadas. Dr. Murillo es el único con blog activo en español que cubre temas de neurocirugía — por eso lidera el ranking. Nadie tiene AEO sistemático aún.</div>
+      <div class="aeo-grid">
+        <div class="aeo-card"><span class="aeo-icon">🤖</span><h4>ChatGPT</h4><p>Menciona drmurilloneurocirujano.com en consultas sobre neurocirugía general. neurocirujanocr.com aparece en búsquedas de columna.</p><span class="status-check">⚠️</span></div>
+        <div class="aeo-card"><span class="aeo-icon">🔍</span><h4>Perplexity AI</h4><p>Cita neurovargas.com para neuroendovascular. agneurocirugia.com en búsquedas generales de neurocirugía privada.</p><span class="status-check">⚠️</span></div>
+        <div class="aeo-card"><span class="aeo-icon">🌐</span><h4>Google AI Overview</h4><p>Favorece sitios con FAQ y schema médico. drmurilloneurocirujano.com y drfgcr.com aparecen para búsquedas de columna.</p><span class="status-check">⚠️</span></div>
+        <div class="aeo-card"><span class="aeo-icon">📋</span><h4>Schema / FAQ</h4><p>Solo 2 sitios tienen estructura schema parcial. Nadie tiene FAQ médica implementada correctamente para neurocirugía.</p><span class="status-check">❌</span></div>
+      </div>
+      <div class="aeo-finding">
+        <h4>Hallazgo #1: Dr. Marín — 9,333 seguidores IG sin activo digital</h4>
+        <p>El mayor seguidor de Instagram de la especialidad (9,333) tiene solo 7 reseñas Huli, sin web propia y sin AEO. Sus seguidores en Instagram no se traducen en visibilidad cuando el paciente busca en Google o pregunta a ChatGPT. Es el caso más extremo de desconexión entre presencia social y búsqueda médica.</p>
+      </div>
+      <div class="aeo-finding">
+        <h4>Hallazgo #2: Las credenciales Harvard/Northwestern no generan visibilidad digital</h4>
+        <p>Dr. Cáceres (Harvard/Northwestern, Pres. ASOLANPED) y Dr. Carballo (Harvard Brigham/MGH) tienen las credenciales más impresionantes de la especialidad, pero scores bajos porque no las comunican digitalmente. Sus pacientes referidos no los encuentran en Google. La academia y la visibilidad digital son mundos separados en neurocirugía CR.</p>
+      </div>
+      <div class="aeo-finding">
+        <h4>Hallazgo #3: Dr. Murillo demuestra el modelo correcto</h4>
+        <p>Blog activo en español, canal YouTube con casos educativos, Instagram con contenido clínico, y web con FAQ: Dr. Murillo tiene el score AEO más alto (9/15) a pesar de tener menos reseñas Huli que Gamboa, Lozada y Lang. El contenido web sistemático supera el volumen de reseñas cuando se trata de visibilidad en IA.</p>
+      </div>
+      <div class="aeo-top-scores">
+        <h4>Top AEO Scores — Neurocirujanos</h4>
+        <div class="aeo-score-row"><span class="dr">Dr. Ricardo Murillo</span><div class="aeo-score-bar"><div class="aeo-score-bar-fill" style="width:60%"></div></div><span class="aeo-score-num">9/15</span></div>
+        <div class="aeo-score-row"><span class="dr">Dr. Andrés Gamboa</span><div class="aeo-score-bar"><div class="aeo-score-bar-fill" style="width:47%"></div></div><span class="aeo-score-num">7/15</span></div>
+        <div class="aeo-score-row"><span class="dr">Dr. Gerardo Lang</span><div class="aeo-score-bar"><div class="aeo-score-bar-fill" style="width:47%"></div></div><span class="aeo-score-num">7/15</span></div>
+        <div class="aeo-score-row"><span class="dr">Dr. Alejandro Vargas</span><div class="aeo-score-bar"><div class="aeo-score-bar-fill" style="width:47%"></div></div><span class="aeo-score-num">7/15</span></div>
+        <div class="aeo-score-row"><span class="dr">Dr. Andrés Morales</span><div class="aeo-score-bar"><div class="aeo-score-bar-fill" style="width:47%"></div></div><span class="aeo-score-num">7/15</span></div>
+      </div>
+      <div class="dr-rank-cta">
+        <h3>¿Su perfil no aparece en ChatGPT ni Perplexity?</h3>
+        <p>Doctor Rank optimiza su presencia digital para IA: schema markup, FAQ médicas, contenido AEO y Google Business Profile activo. Resultados en 90 días.</p>
+        <a href="https://doctorrank.clinic" target="_blank" class="btn-accent">Ver Doctor Rank →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="brechas" class="alt-bg">
+  <div class="section-inner">
+    <div class="section-label">Análisis de Brechas</div>
+    <h2>Las <em>oportunidades críticas</em> de la especialidad</h2>
+    <div class="gap-grid">
+      <div class="gap-card gap-red"><h4>Google Business Profile: ausencia total en la especialidad</h4><p>Ningún neurocirujano privado tiene GBP confirmado. En búsquedas de alta urgencia como "neurocirujano urgente San José", la especialidad privada es invisible. El primer neurocirujano en activar su GBP con 100+ reseñas dominaría todas las búsquedas locales sin competencia.</p></div>
+      <div class="gap-card gap-red"><h4>La desconexión credenciales-digital es la más grave de todas las especialidades</h4><p>Neurocirugía CR tiene algunos de los médicos con formación más sólida (Harvard, Northwestern, Baylor, Dallas). Pero estos nombres no aparecen en Google cuando el paciente busca. El abismo entre credencial académica y visibilidad digital es el mayor de todas las especialidades analizadas.</p></div>
+      <div class="gap-card gap-amber"><h4>Dr. Marín: 9,333 seguidores IG sin rendimiento</h4><p>Con la mayor audiencia social de la especialidad y casi ninguna presencia en buscadores, el Dr. Marín representa la oportunidad más clara de conversión rápida: ya tiene audiencia. Necesita canalizarla con web, Huli activo y FAQ optimizadas para que su Instagram se traduzca en citas.</p></div>
+      <div class="gap-card gap-amber"><h4>Especialidades de alto costo = mayor urgencia AEO</h4><p>La neurocirugía privada es la especialidad de mayor ticket en medicina privada CR. Los pacientes que pueden pagarla investigan extensamente antes de elegir. Un artículo en blog sobre "cuándo operar una hernia de disco" o "qué es la cirugía mínimamente invasiva de columna" puede capturar a ese paciente que investiga por semanas.</p></div>
+      <div class="gap-card gap-green"><h4>Dr. Murillo prueba que el contenido gana</h4><p>Con menos reseñas Huli que los puestos 2, 3 y 4, Murillo lidera por contenido. Su blog, YouTube y FAQ son la plantilla que cualquier neurocirujano podría replicar. El retorno de publicar un artículo mensual en una especialidad de 18 médicos es enorme: hay poco contenido médico de calidad en español sobre neurocirugía CR.</p></div>
+      <div class="gap-card gap-green"><h4>Subespecialidades sin competencia digital</h4><p>Neuroendovascular (Vargas), neurocirugía pediátrica (Cáceres, Huertas), neuro-oncología (Jiménez): son subespecialidades sin competencia digital. Una página web especializada en "neuroendovascular Costa Rica" o "neurocirugía pediátrica CR" dominaría Google para esas búsquedas desde el día 1.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="cta" class="cta-section">
+  <div class="cta-inner">
+    <div class="section-label" style="color:var(--accent)">¿Es usted neurocirujano en Costa Rica?</div>
+    <h2>Harvard, Northwestern, Baylor — invisible en Google</h2>
+    <p>Sus credenciales son excepcionales. Pero el paciente que necesita neurocirugía urgente en Costa Rica no consulta su CV académico — busca en Google. El momento para actuar es antes de que alguien en su especialidad lo haga primero.</p>
+    <div class="cta-buttons">
+      <a href="https://calendly.com/recheverria-flow/30min" target="_blank" class="btn-accent">Solicitar auditoría gratuita</a>
+      <a href="https://doctorrank.clinic" target="_blank" class="btn-outline">Conocer Doctor Rank</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 FLOW Results · Ranking de Visibilidad Digital para Especialistas Médicos en Costa Rica · Datos recopilados en mayo 2026 · Metodología propia · <a href="https://flowresults.com" style="color:var(--accent)">flowresults.com</a></p>
+</footer>
+
+<script>
+function filterTable(tag, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('#rankingTable tbody tr').forEach(row => {
+    if (tag === 'all') { row.style.display = ''; return; }
+    row.style.display = (row.dataset.tags||'').includes(tag) ? '' : 'none';
+  });
+}
+new Chart(document.getElementById('chartTotal'), {
+  type: 'bar',
+  data: { labels: ['Murillo','A. Gamboa','Lang','Lozada','A. Vargas','Gutiérrez','A. Morales','E. Sánchez','M. Mejía','E. Jiménez','A. Cáceres','A. Piva'], datasets: [{ label: 'Score', data: [53,51,51,50,50,47,43,27,27,20,18,18], backgroundColor: ['#5EEBC2','#4ECBA8','#4ECBA8','#3CC49E','#3CC49E','#3DAD6C','#3DAD6C','#9AABBD','#9AABBD','#9AABBD','#9AABBD','#9AABBD'], borderRadius: 6 }] },
+  options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { max: 100, grid: { color: '#E2E8F0' } }, y: { grid: { display: false }, ticks: { font: { size: 11 } } } } }
+});
+new Chart(document.getElementById('chartHuli'), {
+  type: 'bar',
+  data: { labels: ['A. Gamboa','Lozada','Lang','Murillo','A. Vargas','Gutiérrez','A. Morales','E. Sánchez','M. Mejía','A. Piva'], datasets: [{ label: 'Reseñas Huli', data: [543,527,496,353,308,284,126,163,149,44], backgroundColor: '#3CC49E', borderRadius: 5 }] },
+  options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { color: '#E2E8F0' } }, y: { grid: { display: false }, ticks: { font: { size: 11 } } } } }
+});
+new Chart(document.getElementById('chartIG'), {
+  type: 'bar',
+  data: { labels: ['S. Marín 9.3K','A. Gamboa 1.5K','Murillo 1K','Lang','A. Vargas','A. Morales 792','A. Cáceres','E. Jiménez FB'], datasets: [{ label: 'Instagram', data: [9333,1500,1000,800,700,792,500,68000], backgroundColor: '#dc2743', borderRadius: 5 }] },
+  options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { color: '#E2E8F0' } }, y: { grid: { display: false }, ticks: { font: { size: 10 } } } } }
+});
+new Chart(document.getElementById('chartAEO'), {
+  type: 'bar',
+  data: { labels: ['Murillo','A. Gamboa','Lang','A. Vargas','A. Morales','Lozada','Gutiérrez','E. Jiménez'], datasets: [{ label: 'AEO Score', data: [9,7,7,7,7,6,5,4], backgroundColor: '#5EEBC2', borderRadius: 5 }] },
+  options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { max: 15, grid: { color: 'rgba(255,255,255,0.1)' }, ticks: { color: '#9AABBD' } }, y: { grid: { display: false }, ticks: { color: '#9AABBD', font: { size: 11 } } } } }
+});
+</script>
+</body>
+</html>
