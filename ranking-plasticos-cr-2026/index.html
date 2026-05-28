@@ -53,11 +53,13 @@ h2 em{font-family:'Newsreader',serif;font-style:italic;color:var(--accent)}
 .dark-bg{background:var(--navy)}
 
 /* METHODOLOGY */
-.method-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-top:24px}
-.method-card{background:var(--bg);border-radius:12px;padding:20px;border:1px solid #E2E8F0;border-left:3px solid var(--accent)}
-.method-card h3{font-size:14px;font-weight:700;margin-bottom:6px;color:var(--text-dark)}
-.method-card p{font-size:13px;color:#586D80;line-height:1.5}
-.method-card .weight{font-size:20px;font-weight:800;color:var(--accent);display:block;margin-bottom:4px}
+.method-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-top:24px}
+.method-card{background:var(--bg);border-radius:12px;padding:18px;border:1px solid #E2E8F0;border-left:3px solid var(--accent)}
+.method-card h3{font-size:13px;font-weight:700;margin-bottom:5px;color:var(--text-dark)}
+.method-card p{font-size:12px;color:#586D80;line-height:1.5}
+.method-card .weight{font-size:22px;font-weight:800;color:var(--accent);display:block;margin-bottom:4px}
+.method-card.featured{border-left-color:var(--green);background:#F0FBF4}
+.method-card.featured .weight{color:var(--green)}
 
 /* PODIUM */
 .podium{display:flex;justify-content:center;align-items:flex-end;gap:16px;margin:40px 0}
@@ -83,29 +85,28 @@ h2 em{font-family:'Newsreader',serif;font-style:italic;color:var(--accent)}
 .chart-title.light{color:#fff}
 .chart-frame{position:relative;width:100%;height:420px}
 .chart-frame.bar{height:520px}
-.chart-frame.bar-sm{height:340px}
+.chart-frame.bar-sm{height:300px}
 .chart-frame canvas{width:100%!important;height:100%!important;display:block}
 
 /* RANKING TABLE */
 .ranking-table-wrap{overflow-x:auto;margin-top:24px;border-radius:16px;border:1px solid #E2E8F0}
-table{width:100%;border-collapse:collapse;font-size:14px}
-thead th{background:var(--navy);color:var(--text-light);font-size:12px;font-weight:600;padding:13px 14px;text-align:left;white-space:nowrap;letter-spacing:.04em}
-thead th:first-child{border-radius:0}
+table{width:100%;border-collapse:collapse;font-size:13px}
+thead th{background:var(--navy);color:var(--text-light);font-size:11px;font-weight:600;padding:11px 12px;text-align:left;white-space:nowrap;letter-spacing:.04em}
 tbody tr{border-bottom:1px solid #F0F4F8;transition:background .15s}
 tbody tr:hover{background:#F6FAFF}
 tbody tr.top3{background:#F0FBF7}
-tbody td{padding:13px 14px;vertical-align:middle}
-.rank-num{font-size:16px;font-weight:800;color:var(--navy);width:36px;text-align:center}
+tbody td{padding:11px 12px;vertical-align:middle}
+.rank-num{font-size:15px;font-weight:800;color:var(--navy);width:32px;text-align:center}
 .rank-num.gold{color:#D4A017}
 .rank-num.silver{color:#7A8A99}
 .rank-num.bronze{color:#B5794A}
-.dr-name{font-weight:700;color:var(--text-dark);font-size:14px}
+.dr-name{font-weight:700;color:var(--text-dark);font-size:13px}
 .dr-spec{font-size:11px;color:#7A8A99;margin-top:1px}
 .score-bar-wrap{display:flex;align-items:center;gap:8px}
-.score-bar{height:7px;border-radius:4px;background:#E2E8F0;flex:1;min-width:60px}
+.score-bar{height:7px;border-radius:4px;background:#E2E8F0;flex:1;min-width:50px}
 .score-bar-fill{height:100%;border-radius:4px;background:var(--accent)}
 .score-val{font-size:13px;font-weight:700;white-space:nowrap}
-.score-badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:12px;font-weight:700}
+.score-badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:12px;font-weight:700}
 .score-badge.high{background:#D4EDDA;color:#155724}
 .score-badge.mid{background:#FFF3CD;color:#856404}
 .score-badge.low{background:#F8D7DA;color:#721C24}
@@ -113,7 +114,7 @@ tbody td{padding:13px 14px;vertical-align:middle}
 .review-count{font-size:13px;font-weight:600;color:var(--text-dark)}
 .review-plat{font-size:11px;color:var(--text-mid)}
 .ig-count{font-size:13px;font-weight:600}
-.web-badge{font-size:11px;font-weight:600;padding:2px 8px;border-radius:8px}
+.web-badge{font-size:11px;font-weight:600;padding:2px 7px;border-radius:8px}
 .web-yes{background:#D4EDDA;color:#155724}
 .web-no{background:#F8D7DA;color:#721C24}
 .web-basic{background:#FFF3CD;color:#856404}
@@ -147,7 +148,29 @@ tbody td{padding:13px 14px;vertical-align:middle}
 .gap-card h4{font-size:14px;font-weight:700;margin-bottom:8px}
 .gap-card p{font-size:13px;color:#586D80;line-height:1.5}
 
-/* AI SECTION */
+/* AEO AUDIT SECTION */
+.aeo-audit-section{background:var(--navy-mid);border-radius:20px;padding:40px;margin-top:0;border:1px solid rgba(94,235,194,.15)}
+.aeo-title{font-size:clamp(18px,2.5vw,26px);font-weight:700;color:#fff;margin-bottom:10px;line-height:1.3}
+.aeo-sub{color:var(--text-mid);font-size:15px;margin-bottom:28px;line-height:1.6}
+.aeo-finding{background:rgba(255,255,255,.04);border-radius:12px;padding:16px;margin-bottom:12px;border-left:3px solid var(--accent)}
+.aeo-finding h4{color:#fff;font-size:14px;font-weight:700;margin-bottom:4px}
+.aeo-finding p{color:var(--text-mid);font-size:13px;line-height:1.5}
+.aeo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:24px 0}
+.aeo-card{background:rgba(255,255,255,.05);border-radius:12px;padding:16px;text-align:center}
+.aeo-card .aeo-icon{font-size:24px;display:block;margin-bottom:8px}
+.aeo-card h4{color:#fff;font-size:13px;font-weight:700;margin-bottom:4px}
+.aeo-card p{color:var(--text-mid);font-size:12px;line-height:1.4}
+.aeo-card .status-check{font-size:18px;display:block;margin-top:8px}
+.aeo-top-scores{margin-top:20px}
+.aeo-top-scores h4{color:var(--accent);font-size:13px;font-weight:700;margin-bottom:10px;text-transform:uppercase;letter-spacing:.08em}
+.aeo-score-row{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:13px}
+.aeo-score-row:last-child{border-bottom:none}
+.aeo-score-row .dr{color:var(--text-light)}
+.aeo-score-bar{height:6px;border-radius:3px;background:rgba(255,255,255,.1);flex:1;margin:0 12px;min-width:60px}
+.aeo-score-bar-fill{height:100%;border-radius:3px;background:var(--accent)}
+.aeo-score-num{color:var(--accent);font-weight:700;white-space:nowrap}
+
+/* AI CTA */
 .ai-section{background:var(--navy-mid);border-radius:20px;padding:40px;margin-top:40px;border:1px solid rgba(94,235,194,.15)}
 .ai-hook{font-size:clamp(18px,2.5vw,26px);font-weight:700;color:#fff;margin-bottom:12px;line-height:1.3}
 .ai-sub{color:var(--text-mid);font-size:15px;margin-bottom:32px;line-height:1.6}
@@ -167,7 +190,7 @@ tbody td{padding:13px 14px;vertical-align:middle}
 .cta-section h2{color:#fff;font-size:clamp(22px,3vw,34px);margin-bottom:16px}
 .cta-section p{color:var(--text-mid);font-size:16px;margin-bottom:32px}
 .cta-buttons{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
-.btn-outline{display:inline-block;border:2px solid rgba(255,255,255,.3);color:#fff;font-weight:600;font-size:14px;padding:12px 26px;border-radius:30px;text-decoration:none;transition:all .2s}
+.btn-outline{display:inline-block;border:2px solid rgba(255,255,255,.3);color:#fff;font-weight:600;font-size:14px;padding:12px 26px;border-radius:30px;text-decoration:none;transition:all .2s;cursor:pointer;background:transparent;font-family:'Outfit',sans-serif}
 .btn-outline:hover{border-color:var(--accent);color:var(--accent)}
 
 /* FOOTER */
@@ -192,7 +215,7 @@ footer p{color:var(--text-mid);font-size:12px}
     <ul class="nav-links">
       <li><a href="#podio">Podio</a></li>
       <li><a href="#ranking">Ranking</a></li>
-      <li><a href="#plataformas">Plataformas</a></li>
+      <li><a href="#aeo">AEO Audit</a></li>
       <li><a href="#brechas">Brechas</a></li>
     </ul>
     <button class="btn-print" onclick="window.print()">Imprimir PDF</button>
@@ -202,33 +225,34 @@ footer p{color:var(--text-mid);font-size:12px}
 <!-- HERO -->
 <section class="hero">
   <div class="hero-inner">
-    <div class="hero-eyebrow">Estudio de Visibilidad Digital · Mayo 2026</div>
+    <div class="hero-eyebrow">Estudio de Visibilidad Digital · Mayo 2026 · Ponderación Revisada</div>
     <h1><strong>Ranking 2026</strong><br>Cirujanos Plásticos con Mayor<br><em>Visibilidad Digital</em> en Costa Rica</h1>
-    <p class="hero-tagline">Análisis integral de 48 cirujanos plásticos certificados por el Colegio de Médicos de Costa Rica. Evaluamos presencia en Google, Huli Health, Instagram, sitio web y directorios de turismo médico.</p>
+    <p class="hero-tagline">Análisis de 48 cirujanos plásticos certificados. Con mayor peso en reseñas (Google 30 + Huli 30) y AEO — la nueva frontera donde ninguno todavía compite.</p>
     <div class="hero-stats">
       <div class="stat-pill"><span class="num">48</span><span class="lbl">Cirujanos Analizados</span></div>
-      <div class="stat-pill"><span class="num">6</span><span class="lbl">Dimensiones Medidas</span></div>
-      <div class="stat-pill"><span class="num">118K</span><span class="lbl">Líder en Instagram</span></div>
+      <div class="stat-pill"><span class="num">61</span><span class="lbl">Score Máximo Alcanzado</span></div>
+      <div class="stat-pill"><span class="num">0/48</span><span class="lbl">Optimizados para IA</span></div>
       <div class="stat-pill"><span class="num">260</span><span class="lbl">Récord Reseñas Huli</span></div>
     </div>
-    <p class="hero-date">Datos recopilados en mayo 2026 · Fuentes: Google Business Profile, HuliHealth, Instagram, sitios web oficiales, RealSelf, Medical Departures · Elaborado por FLOW Results</p>
+    <p class="hero-date">Datos recopilados en mayo 2026 · Fuentes: Google Business Profile, HuliHealth, Instagram, sitios web oficiales, AMECPRE · Elaborado por FLOW Results</p>
   </div>
 </section>
 
 <!-- METODOLOGÍA -->
 <section class="alt-bg">
   <div class="section-inner">
-    <div class="section-label">Metodología</div>
-    <h2>Cómo se <em>califica</em> la visibilidad digital</h2>
-    <p style="color:#586D80;max-width:700px;margin-bottom:8px">Cada cirujano recibe un puntaje de 0 a 100 basado en seis dimensiones verificadas con fuentes públicas. El score refleja qué tan fácil es encontrar, confiar y contactar a ese cirujano en línea — que es exactamente como decide un paciente.</p>
+    <div class="section-label">Metodología Revisada</div>
+    <h2>Cómo se <em>califica</em> la visibilidad digital en 2026</h2>
+    <p style="color:#586D80;max-width:700px;margin-bottom:8px">Ponderación actualizada para reflejar el comportamiento real del paciente: las reseñas son el factor #1 de decisión, y la visibilidad en IA (AEO) es la nueva frontera donde nadie en CR ha llegado todavía. Score máximo: 100 puntos.</p>
     <div class="method-grid">
-      <div class="method-card"><span class="weight">25 pts</span><h3>Reseñas Google</h3><p>Volumen y calificación en Google Business Profile. Penalización por rating bajo (&lt;4.0).</p></div>
-      <div class="method-card"><span class="weight">25 pts</span><h3>Reseñas Huli</h3><p>Directorio dominante en CR. Volumen de reseñas verificadas en HuliHealth.</p></div>
-      <div class="method-card"><span class="weight">20 pts</span><h3>Instagram</h3><p>Seguidores actuales. Proxy de autoridad social y capacidad de generar demanda.</p></div>
-      <div class="method-card"><span class="weight">15 pts</span><h3>Sitio Web</h3><p>Calidad de conversión: booking, WhatsApp, galería de casos, bio médica, SSL.</p></div>
-      <div class="method-card"><span class="weight">10 pts</span><h3>Directorios</h3><p>Presencia en Google Maps, Huli, RealSelf, Medical Departures y otros.</p></div>
-      <div class="method-card"><span class="weight">5 pts</span><h3>SEO / Contenido</h3><p>Páginas de procedimientos, blog educativo, schema markup.</p></div>
+      <div class="method-card featured"><span class="weight">30 pts</span><h3>Reseñas Google</h3><p>Volumen y calificación en Google Business Profile. Penalización de 10 pts por rating &lt;4.0.</p></div>
+      <div class="method-card featured"><span class="weight">30 pts</span><h3>Reseñas Huli</h3><p>El directorio médico dominante en Costa Rica. Reseñas verificadas en HuliHealth.com.</p></div>
+      <div class="method-card"><span class="weight">15 pts</span><h3>AEO / IA</h3><p>¿Aparece en ChatGPT y Perplexity? FAQs estructuradas, schema markup, menciones en medios.</p></div>
+      <div class="method-card"><span class="weight">15 pts</span><h3>Sitio Web</h3><p>Conversión real: booking, WhatsApp, galería de casos, bio médica, velocidad, FAQ.</p></div>
+      <div class="method-card"><span class="weight">5 pts</span><h3>Instagram</h3><p>Seguidores como señal de presencia social. Proxy de demanda y reconocimiento.</p></div>
+      <div class="method-card"><span class="weight">5 pts</span><h3>SEO / Directorios</h3><p>Presencia en Google Maps, Huli, RealSelf, directorios de turismo médico, hospitales.</p></div>
     </div>
+    <p class="note" style="margin-top:16px">Escala de Google Reviews: 0 reseñas = 0 pts · 30–99 = 12 pts · 100–299 = 22 pts · 300+ = 28 pts · Bonus +2 si rating ≥4.8 · Penalización −10 si rating &lt;4.0 · Escala Huli: 0 = 0 · 1–9 = 2 · 10–49 = 5 · 50–99 = 10 · 100–199 = 20 · 200+ = 30 pts</p>
   </div>
 </section>
 
@@ -242,10 +266,10 @@ footer p{color:var(--text-mid);font-size:12px}
         <span class="medal">🥈</span>
         <div class="podium-name">Dr. Jorge Badilla Mora</div>
         <div class="podium-spec">Cirugía Plástica · Escazú</div>
-        <span class="podium-score">66<span>/100</span></span>
+        <span class="podium-score">56<span>/100</span></span>
         <div class="podium-pills">
           <span class="pill">Huli 177 ⭐5.0</span>
-          <span class="pill">Google 52</span>
+          <span class="pill">Google 52 ⭐4.8</span>
           <span class="pill">IG 12K</span>
         </div>
       </div>
@@ -254,25 +278,26 @@ footer p{color:var(--text-mid);font-size:12px}
         <span class="medal">🥇</span>
         <div class="podium-name">Dr. Christian Rivera Paniagua</div>
         <div class="podium-spec">Cirugía Plástica · Curridabat, San José</div>
-        <span class="podium-score">70<span>/100</span></span>
+        <span class="podium-score">61<span>/100</span></span>
         <div class="podium-pills">
           <span class="pill">Google 360 ⭐4.9</span>
           <span class="pill">IG 118K</span>
-          <span class="pill">Web Completa</span>
+          <span class="pill">AEO 9/15</span>
         </div>
       </div>
       <div class="podium-card p3">
         <span class="medal">🥉</span>
         <div class="podium-name">Dr. Andrés Tapia Herrera</div>
         <div class="podium-spec">Cirugía Plástica · Escazú</div>
-        <span class="podium-score">60<span>/100</span></span>
+        <span class="podium-score">54<span>/100</span></span>
         <div class="podium-pills">
           <span class="pill">Huli 218 ⭐5.0</span>
-          <span class="pill">IG 10K</span>
+          <span class="pill">IG ~10K</span>
           <span class="pill">Web Completa</span>
         </div>
       </div>
     </div>
+    <p class="note" style="text-align:center">El score máximo alcanzado es 61/100. Ningún cirujano supera el 65% de la escala — lo que indica una <strong>enorme brecha de oportunidad</strong> para quien tome acción primero.</p>
   </div>
 </section>
 
@@ -315,7 +340,7 @@ footer p{color:var(--text-mid);font-size:12px}
   <div class="section-inner">
     <div class="section-label">Ranking Completo</div>
     <h2>Los 48 cirujanos plásticos <em>certificados</em> de Costa Rica</h2>
-    <p style="color:#586D80;margin-bottom:20px">Todos los miembros activos de la AMECPRE (Asociación de Médicos Especialistas en Cirugía Plástica Reconstructiva y Estética) y del Colegio de Médicos de Costa Rica incluidos.</p>
+    <p style="color:#586D80;margin-bottom:20px">Todos los miembros activos de la AMECPRE y del Colegio de Médicos de Costa Rica. Ordenados por visibilidad digital total (nueva ponderación mayo 2026).</p>
     <div class="filter-bar">
       <button class="filter-btn active" onclick="filterTable('all',this)">Todos (48)</button>
       <button class="filter-btn" onclick="filterTable('top10',this)">Top 10</button>
@@ -329,22 +354,24 @@ footer p{color:var(--text-mid);font-size:12px}
           <tr>
             <th>#</th>
             <th>Cirujano</th>
-            <th>Score</th>
+            <th>Score /100</th>
             <th>Google Reseñas</th>
             <th>Huli Reseñas</th>
+            <th>AEO /15</th>
             <th>Instagram</th>
             <th>Sitio Web</th>
-            <th>Hospital Principal</th>
+            <th>Hospital / Clínica</th>
           </tr>
         </thead>
         <tbody>
           <!-- Rank 1 -->
           <tr class="top3" data-rank="1" data-huli="0" data-ig="118000" data-noweb="false">
             <td><span class="rank-num gold">1</span></td>
-            <td><div class="dr-name">Dr. Christian Rivera Paniagua</div><div class="dr-spec">Cirugía Plástica Estética</div></td>
-            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:70%"></div></div><span class="score-val">70</span></div></td>
+            <td><div class="dr-name">Dr. Christian Rivera Paniagua</div><div class="dr-spec">Cirugía Plástica Estética · Turismo Médico</div></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:61%"></div></div><span class="score-val">61</span></div></td>
             <td><span class="review-count">360</span><div class="review-plat">⭐ 4.9 · Google Maps</div></td>
             <td><span class="review-count">—</span><div class="review-plat">Sin perfil activo</div></td>
+            <td><span class="score-badge high">9/15</span></td>
             <td><span class="ig-count" style="color:#E4405F">118K</span></td>
             <td><span class="web-badge web-yes">Completa</span></td>
             <td>Clínica Rivera, Curridabat</td>
@@ -353,9 +380,10 @@ footer p{color:var(--text-mid);font-size:12px}
           <tr class="top3" data-rank="2" data-huli="177" data-ig="12000" data-noweb="false">
             <td><span class="rank-num silver">2</span></td>
             <td><div class="dr-name">Dr. Jorge Badilla Mora</div><div class="dr-spec">Cirugía Plástica Estética y Reconstructiva</div></td>
-            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:66%"></div></div><span class="score-val">66</span></div></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:56%"></div></div><span class="score-val">56</span></div></td>
             <td><span class="review-count">52</span><div class="review-plat">⭐ 4.8 · Google Maps</div></td>
             <td><span class="review-count">177</span><div class="review-plat">⭐ 5.0 · HuliHealth</div></td>
+            <td><span class="score-badge mid">5/15</span></td>
             <td><span class="ig-count" style="color:#E4405F">12K</span></td>
             <td><span class="web-badge web-yes">Completa</span></td>
             <td>JBM Plastic Surgery, Escazú</td>
@@ -364,9 +392,10 @@ footer p{color:var(--text-mid);font-size:12px}
           <tr class="top3" data-rank="3" data-huli="218" data-ig="10000" data-noweb="false">
             <td><span class="rank-num bronze">3</span></td>
             <td><div class="dr-name">Dr. Andrés Tapia Herrera</div><div class="dr-spec">Cirugía Plástica · Especialista Rinoplastia</div></td>
-            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:60%"></div></div><span class="score-val">60</span></div></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:54%"></div></div><span class="score-val">54</span></div></td>
             <td><span class="review-count">N/C</span><div class="review-plat">Sin datos confirmados</div></td>
             <td><span class="review-count">218</span><div class="review-plat">⭐ 5.0 · HuliHealth</div></td>
+            <td><span class="score-badge mid">6/15</span></td>
             <td><span class="ig-count" style="color:#E4405F">~10K</span></td>
             <td><span class="web-badge web-yes">Completa</span></td>
             <td>Avenida Escazú / ICPD</td>
@@ -375,279 +404,307 @@ footer p{color:var(--text-mid);font-size:12px}
           <tr data-rank="4" data-huli="160" data-ig="28000" data-noweb="false">
             <td><span class="rank-num">4</span></td>
             <td><div class="dr-name">Dr. Eduardo Brenes Leñero</div><div class="dr-spec">Cirugía Plástica Estética</div></td>
-            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:56%"></div></div><span class="score-val">56</span></div></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:47%"></div></div><span class="score-val">47</span></div></td>
             <td><span class="review-count">N/C</span><div class="review-plat">Sin datos confirmados</div></td>
             <td><span class="review-count">160</span><div class="review-plat">⭐ 5.0 · HuliHealth</div></td>
+            <td><span class="score-badge high">8/15</span></td>
             <td><span class="ig-count" style="color:#E4405F">28K</span></td>
             <td><span class="web-badge web-yes">Completa</span></td>
             <td>State of the Art, Sabana Norte</td>
           </tr>
           <!-- Rank 5 -->
-          <tr data-rank="5" data-huli="0" data-ig="36900" data-noweb="false">
+          <tr data-rank="5" data-huli="240" data-ig="4100" data-noweb="false">
             <td><span class="rank-num">5</span></td>
+            <td><div class="dr-name">Dr. Alfredo Vargas Villalobos</div><div class="dr-spec">Cirugía Plástica Estética</div></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:45%"></div></div><span class="score-val">45</span></div></td>
+            <td><span class="review-count">N/C</span><div class="review-plat">Sin datos confirmados</div></td>
+            <td><span class="review-count">240</span><div class="review-plat">⭐ 5.0 · HuliHealth</div></td>
+            <td><span class="score-badge low">3/15</span></td>
+            <td><span class="ig-count" style="color:#E4405F">4.1K</span></td>
+            <td><span class="web-badge web-yes">Buena</span></td>
+            <td>Sabana Medical Center, La Sabana</td>
+          </tr>
+          <!-- Rank 6 -->
+          <tr data-rank="6" data-huli="0" data-ig="36900" data-noweb="false">
+            <td><span class="rank-num">6</span></td>
             <td>
               <div class="dr-name">Dr. Rodrigo Araya Alegría</div>
-              <div class="dr-spec">Cirugía Plástica Estética · Turismo Médico</div>
+              <div class="dr-spec">Cirugía Plástica · Turismo Médico <span class="warning-badge">⚠ Rating 3.6</span></div>
             </td>
-            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:55%"></div></div><span class="score-val">55</span></div></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:42%"></div></div><span class="score-val">42</span></div></td>
             <td>
               <span class="review-count">299</span>
-              <div class="review-plat"><span class="warning-badge">⚠ 3.6</span> Rating bajo</div>
+              <div class="review-plat"><span class="warning-badge">⚠ 3.6/5.0</span> Penalización</div>
             </td>
             <td><span class="review-count">—</span><div class="review-plat">Sin perfil activo</div></td>
+            <td><span class="score-badge high">8/15</span></td>
             <td><span class="ig-count" style="color:#E4405F">36.9K</span></td>
             <td><span class="web-badge web-yes">Completa</span></td>
             <td>Avenida Médica / Hospital CIMA</td>
-          </tr>
-          <!-- Rank 6 -->
-          <tr data-rank="6" data-huli="240" data-ig="4100" data-noweb="false">
-            <td><span class="rank-num">6</span></td>
-            <td><div class="dr-name">Dr. Alfredo Vargas Villalobos</div><div class="dr-spec">Cirugía Plástica Estética</div></td>
-            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:47%"></div></div><span class="score-val">47</span></div></td>
-            <td><span class="review-count">N/C</span><div class="review-plat">Sin datos confirmados</div></td>
-            <td><span class="review-count">240</span><div class="review-plat">⭐ 5.0 · HuliHealth</div></td>
-            <td><span class="ig-count" style="color:#E4405F">4.1K</span></td>
-            <td><span class="web-badge web-yes">Completa</span></td>
-            <td>Sabana Medical Center, La Sabana</td>
           </tr>
           <!-- Rank 7 -->
           <tr data-rank="7" data-huli="110" data-ig="4000" data-noweb="false">
             <td><span class="rank-num">7</span></td>
             <td><div class="dr-name">Dr. Giovanni Montoya Mora</div><div class="dr-spec">Cirugía Plástica Estética y Pediátrica</div></td>
-            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:41%"></div></div><span class="score-val">41</span></div></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:38%"></div></div><span class="score-val">38</span></div></td>
             <td><span class="review-count">N/C</span><div class="review-plat">Sin datos confirmados</div></td>
             <td><span class="review-count">110</span><div class="review-plat">⭐ 5.0 · HuliHealth</div></td>
+            <td><span class="score-badge low">4/15</span></td>
             <td><span class="ig-count" style="color:#E4405F">~4K</span></td>
-            <td><span class="web-badge web-yes">Completa</span></td>
+            <td><span class="web-badge web-yes">Buena</span></td>
             <td>Hospital CIMA, Escazú</td>
           </tr>
           <!-- Rank 8 -->
-          <tr data-rank="8" data-huli="0" data-ig="20000" data-noweb="false">
+          <tr data-rank="8" data-huli="260" data-ig="2000" data-noweb="false">
             <td><span class="rank-num">8</span></td>
-            <td><div class="dr-name">Dra. Daniela Vargas Salas</div><div class="dr-spec">Cirugía Plástica Estética (The Clinic CR)</div></td>
-            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:39%"></div></div><span class="score-val">39</span></div></td>
-            <td><span class="review-count">N/C</span><div class="review-plat">Sin datos confirmados</div></td>
-            <td><span class="review-count">332</span><div class="review-plat">⭐ 5.0 · Crisalix</div></td>
-            <td><span class="ig-count" style="color:#E4405F">~20K</span></td>
-            <td><span class="web-badge web-yes">Completa</span></td>
-            <td>The Clinic CR / CMI</td>
-          </tr>
-          <!-- Rank 9 -->
-          <tr data-rank="9" data-huli="0" data-ig="47000" data-noweb="false">
-            <td><span class="rank-num">9</span></td>
-            <td><div class="dr-name">Dr. Allan Pérez Baltodano</div><div class="dr-spec">Cirugía Plástica Estética (Dolce Medical)</div></td>
-            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:37%"></div></div><span class="score-val">37</span></div></td>
-            <td><span class="review-count">N/C</span><div class="review-plat">Sin datos confirmados</div></td>
-            <td><span class="review-count">—</span><div class="review-plat">Sin perfil activo</div></td>
-            <td><span class="ig-count" style="color:#E4405F">47K</span></td>
-            <td><span class="web-badge web-yes">Completa</span></td>
-            <td>Dolce Medical Center, Curridabat</td>
-          </tr>
-          <!-- Rank 10 -->
-          <tr data-rank="10" data-huli="260" data-ig="2000" data-noweb="false">
-            <td><span class="rank-num">10</span></td>
-            <td><div class="dr-name">Dr. Francisco Vargas Villalobos</div><div class="dr-spec">Cirugía Plástica Estética</div></td>
+            <td>
+              <div class="dr-name">Dr. Francisco Vargas Villalobos</div>
+              <div class="dr-spec">Cirugía Plástica Estética · #1 en Huli</div>
+            </td>
             <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:37%"></div></div><span class="score-val">37</span></div></td>
             <td><span class="review-count">N/C</span><div class="review-plat">Sin datos confirmados</div></td>
             <td><span class="review-count">260</span><div class="review-plat">⭐ 5.0 · HuliHealth (1°)</div></td>
+            <td><span class="score-badge vlow">2/15</span></td>
             <td><span class="ig-count" style="color:#E4405F">~2K</span></td>
             <td><span class="web-badge web-basic">Básica</span></td>
             <td>Sabana Medical Center, La Sabana</td>
           </tr>
-          <!-- Rank 11 -->
-          <tr data-rank="11" data-huli="0" data-ig="29000" data-noweb="false">
-            <td><span class="rank-num">11</span></td>
-            <td><div class="dr-name">Dr. Víctor Urzola Herrera</div><div class="dr-spec">Cirugía Plástica Estética</div></td>
-            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:34%"></div></div><span class="score-val">34</span></div></td>
-            <td><span class="review-count">N/C</span><div class="review-plat">Sin datos confirmados</div></td>
+          <!-- Rank 9 -->
+          <tr data-rank="9" data-huli="0" data-ig="29000" data-noweb="false">
+            <td><span class="rank-num">9</span></td>
+            <td><div class="dr-name">Dr. Víctor Urzola Herrera</div><div class="dr-spec">Cirugía Plástica · Ex-presidente AMECPRE</div></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:30%"></div></div><span class="score-val">30</span></div></td>
+            <td><span class="review-count">~5</span><div class="review-plat">⭐ 4.7 · Parcial/Bookimed</div></td>
             <td><span class="review-count">—</span><div class="review-plat">Sin perfil activo</div></td>
-            <td><span class="ig-count" style="color:#E4405F">29K</span></td>
-            <td><span class="web-badge web-yes">Completa</span></td>
+            <td><span class="score-badge high">8/15</span></td>
+            <td><span class="ig-count" style="color:#E4405F">~29K</span></td>
+            <td><span class="web-badge web-yes">Funcional</span></td>
             <td>Torre Lexus, Avenida Escazú</td>
           </tr>
-          <!-- Rank 12 -->
-          <tr data-rank="12" data-huli="0" data-ig="29000" data-noweb="false">
-            <td><span class="rank-num">12</span></td>
-            <td><div class="dr-name">Dr. Alberto Argüello Choiseul</div><div class="dr-spec">Cirugía Plástica Estética · 22+ años</div></td>
-            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:34%"></div></div><span class="score-val">34</span></div></td>
-            <td><span class="review-count">N/C</span><div class="review-plat">Sin datos confirmados</div></td>
-            <td><span class="review-count">—</span><div class="review-plat">Sin perfil activo</div></td>
-            <td><span class="ig-count" style="color:#E4405F">29K</span></td>
-            <td><span class="web-badge web-yes">Completa</span></td>
-            <td>Clínica Bíblica, San José</td>
-          </tr>
-          <!-- Rank 13 -->
-          <tr data-rank="13" data-huli="0" data-ig="20000" data-noweb="false">
-            <td><span class="rank-num">13</span></td>
-            <td><div class="dr-name">Dr. Henry Sequeira Ulate</div><div class="dr-spec">Cirugía Plástica Estética</div></td>
-            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:28%"></div></div><span class="score-val">28</span></div></td>
-            <td><span class="review-count">N/C</span><div class="review-plat">Sin datos confirmados</div></td>
-            <td><span class="review-count">—</span><div class="review-plat">Sin perfil activo</div></td>
-            <td><span class="ig-count" style="color:#E4405F">20K</span></td>
-            <td><span class="web-badge web-yes">Completa</span></td>
-            <td>FERALE SPA, Sabana Norte</td>
-          </tr>
-          <!-- Rank 14 -->
-          <tr data-rank="14" data-huli="0" data-ig="0" data-noweb="false">
-            <td><span class="rank-num">14</span></td>
+          <!-- Rank 10 -->
+          <tr data-rank="10" data-huli="0" data-ig="1400" data-noweb="false">
+            <td><span class="rank-num">10</span></td>
             <td><div class="dr-name">Dr. Carlos Centeno Ramírez</div><div class="dr-spec">Cirugía Plástica · Universal Plastic Surgery</div></td>
-            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:26%"></div></div><span class="score-val">26</span></div></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:28%"></div></div><span class="score-val">28</span></div></td>
             <td><span class="review-count">86</span><div class="review-plat">⭐ 4.7 · Google Maps</div></td>
             <td><span class="review-count">—</span><div class="review-plat">Sin perfil activo</div></td>
+            <td><span class="score-badge low">3/15</span></td>
             <td><span class="ig-count" style="color:#E4405F">1.4K</span></td>
             <td><span class="web-badge web-yes">Completa</span></td>
             <td>Universal Plastic Surgery, La Sabana</td>
           </tr>
-          <!-- Rank 15 -->
-          <tr data-rank="15" data-huli="0" data-ig="8600" data-noweb="false">
-            <td><span class="rank-num">15</span></td>
-            <td><div class="dr-name">Dr. Manuel Chacón Quirós</div><div class="dr-spec">Cirugía Plástica · Fundador CEC</div></td>
-            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:25%"></div></div><span class="score-val">25</span></div></td>
+          <!-- Rank 11 -->
+          <tr data-rank="11" data-huli="0" data-ig="20000" data-noweb="false">
+            <td><span class="rank-num">11</span></td>
+            <td><div class="dr-name">Dra. Daniela Vargas Salas</div><div class="dr-spec">Cirugía Plástica Estética (The Clinic CR)</div></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:24%"></div></div><span class="score-val">24</span></div></td>
+            <td><span class="review-count">N/C</span><div class="review-plat">Sin datos confirmados</div></td>
+            <td><span class="review-count">—</span><div class="review-plat">Sin perfil Huli activo</div></td>
+            <td><span class="score-badge mid">5/15</span></td>
+            <td><span class="ig-count" style="color:#E4405F">~20K</span></td>
+            <td><span class="web-badge web-yes">Completa</span></td>
+            <td>The Clinic CR / CMI</td>
+          </tr>
+          <!-- Rank 12 -->
+          <tr data-rank="12" data-huli="16" data-ig="0" data-noweb="false">
+            <td><span class="rank-num">12</span></td>
+            <td><div class="dr-name">Dr. Alejandro Lev Schtirbu</div><div class="dr-spec">Cirugía Plástica · Turismo Médico</div></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:24%"></div></div><span class="score-val">24</span></div></td>
+            <td><span class="review-count">N/C</span><div class="review-plat">Sin datos confirmados</div></td>
+            <td><span class="review-count">16</span><div class="review-plat">⭐ 5.0 · HuliHealth</div></td>
+            <td><span class="score-badge low">4/15</span></td>
+            <td><span class="ig-count">—</span></td>
+            <td><span class="web-badge web-yes">Completa</span></td>
+            <td>Plaza Mayor, Rohrmoser</td>
+          </tr>
+          <!-- Rank 13 -->
+          <tr data-rank="13" data-huli="0" data-ig="47000" data-noweb="false">
+            <td><span class="rank-num">13</span></td>
+            <td><div class="dr-name">Dr. Allan Pérez Baltodano</div><div class="dr-spec">Cirugía Plástica Estética (Dolce Medical)</div></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:23%"></div></div><span class="score-val">23</span></div></td>
             <td><span class="review-count">N/C</span><div class="review-plat">Sin datos confirmados</div></td>
             <td><span class="review-count">—</span><div class="review-plat">Sin perfil activo</div></td>
-            <td><span class="ig-count" style="color:#E4405F">8.6K</span></td>
+            <td><span class="score-badge low">4/15</span></td>
+            <td><span class="ig-count" style="color:#E4405F">47K</span></td>
             <td><span class="web-badge web-yes">Completa</span></td>
-            <td>Centro Europeo de Cirugía (CEC)</td>
+            <td>Dolce Medical Center, Curridabat</td>
+          </tr>
+          <!-- Rank 14 -->
+          <tr data-rank="14" data-huli="168" data-ig="0" data-noweb="true">
+            <td><span class="rank-num">14</span></td>
+            <td><div class="dr-name">Dr. Luis Carlos Pastor Pacheco</div><div class="dr-spec">Cirugía Plástica · Alta reputación offline</div></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:22%"></div></div><span class="score-val">22</span></div></td>
+            <td><span class="review-count">N/C</span><div class="review-plat">Sin datos confirmados</div></td>
+            <td><span class="review-count">168</span><div class="review-plat">⭐ 5.0 · HuliHealth</div></td>
+            <td><span class="score-badge vlow">1/15</span></td>
+            <td><span class="ig-count">—</span></td>
+            <td><span class="web-badge web-no">Sin web</span></td>
+            <td>Clínica Tepeyac, Guadalupe</td>
+          </tr>
+          <!-- Rank 15 -->
+          <tr data-rank="15" data-huli="0" data-ig="20000" data-noweb="false">
+            <td><span class="rank-num">15</span></td>
+            <td><div class="dr-name">Dr. Henry Sequeira Ulate</div><div class="dr-spec">Cirugía Plástica Estética</div></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:21%"></div></div><span class="score-val">21</span></div></td>
+            <td><span class="review-count">N/C</span><div class="review-plat">Sin datos confirmados</div></td>
+            <td><span class="review-count">—</span><div class="review-plat">Sin perfil activo</div></td>
+            <td><span class="score-badge low">4/15</span></td>
+            <td><span class="ig-count" style="color:#E4405F">20K</span></td>
+            <td><span class="web-badge web-yes">Completa</span></td>
+            <td>FERALE SPA, Sabana Norte</td>
           </tr>
           <!-- Rank 16 -->
           <tr data-rank="16" data-huli="0" data-ig="9500" data-noweb="false">
             <td><span class="rank-num">16</span></td>
             <td><div class="dr-name">Dr. Gabriel Peralta Mantilla</div><div class="dr-spec">Cirugía Plástica Estética</div></td>
-            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:23%"></div></div><span class="score-val">23</span></div></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:19%"></div></div><span class="score-val">19</span></div></td>
             <td><span class="review-count">N/C</span><div class="review-plat">Sin datos confirmados</div></td>
             <td><span class="review-count">—</span><div class="review-plat">Sin perfil activo</div></td>
+            <td><span class="score-badge vlow">2/15</span></td>
             <td><span class="ig-count" style="color:#E4405F">~9.5K</span></td>
             <td><span class="web-badge web-yes">Completa</span></td>
             <td>Torre Universal, La Sabana</td>
           </tr>
           <!-- Rank 17 -->
-          <tr data-rank="17" data-huli="0" data-ig="7300" data-noweb="false">
+          <tr data-rank="17" data-huli="0" data-ig="8600" data-noweb="false">
             <td><span class="rank-num">17</span></td>
-            <td><div class="dr-name">Dr. Pablo Solís Chaves</div><div class="dr-spec">Cirugía Plástica Estética · CEC</div></td>
-            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:23%"></div></div><span class="score-val">23</span></div></td>
+            <td><div class="dr-name">Dr. Manuel Chacón Quirós</div><div class="dr-spec">Cirugía Plástica · Fundador CEC</div></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:19%"></div></div><span class="score-val">19</span></div></td>
             <td><span class="review-count">N/C</span><div class="review-plat">Sin datos confirmados</div></td>
             <td><span class="review-count">—</span><div class="review-plat">Sin perfil activo</div></td>
-            <td><span class="ig-count" style="color:#E4405F">7.3K</span></td>
+            <td><span class="score-badge vlow">2/15</span></td>
+            <td><span class="ig-count" style="color:#E4405F">8.6K</span></td>
             <td><span class="web-badge web-yes">Completa</span></td>
             <td>Centro Europeo de Cirugía (CEC)</td>
           </tr>
           <!-- Rank 18 -->
-          <tr data-rank="18" data-huli="0" data-ig="0" data-noweb="false">
+          <tr data-rank="18" data-huli="0" data-ig="29000" data-noweb="false">
             <td><span class="rank-num">18</span></td>
-            <td><div class="dr-name">Dr. Alejandro Lev Schtirbu</div><div class="dr-spec">Cirugía Plástica · Turismo Médico</div></td>
-            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:22%"></div></div><span class="score-val">22</span></div></td>
+            <td><div class="dr-name">Dr. Alberto Argüello Choiseul</div><div class="dr-spec">Cirugía Plástica Estética · 22+ años</div></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:19%"></div></div><span class="score-val">19</span></div></td>
             <td><span class="review-count">N/C</span><div class="review-plat">Sin datos confirmados</div></td>
-            <td><span class="review-count">16</span><div class="review-plat">⭐ 5.0 · HuliHealth</div></td>
-            <td><span class="ig-count">—</span></td>
+            <td><span class="review-count">—</span><div class="review-plat">Sin perfil activo</div></td>
+            <td><span class="score-badge vlow">2/15</span></td>
+            <td><span class="ig-count" style="color:#E4405F">29K</span></td>
             <td><span class="web-badge web-yes">Completa</span></td>
-            <td>Plaza Mayor, Rohrmoser</td>
+            <td>Clínica Bíblica, San José</td>
           </tr>
           <!-- Rank 19 -->
-          <tr data-rank="19" data-huli="0" data-ig="4700" data-noweb="false">
+          <tr data-rank="19" data-huli="0" data-ig="2800" data-noweb="false">
             <td><span class="rank-num">19</span></td>
-            <td><div class="dr-name">Dra. Yaneth Prada Castellanos</div><div class="dr-spec">Cirugía Plástica Estética</div></td>
-            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:20%"></div></div><span class="score-val">20</span></div></td>
-            <td><span class="review-count">N/C</span><div class="review-plat">Sin datos confirmados</div></td>
-            <td><span class="review-count">—</span><div class="review-plat">Sin perfil activo</div></td>
-            <td><span class="ig-count" style="color:#E4405F">~4.7K</span></td>
-            <td><span class="web-badge web-yes">Completa</span></td>
-            <td>Clínica Americana, San José</td>
-          </tr>
-          <!-- Rank 20 -->
-          <tr data-rank="20" data-huli="168" data-ig="0" data-noweb="true">
-            <td><span class="rank-num">20</span></td>
-            <td><div class="dr-name">Dr. Luis Carlos Pastor Pacheco</div><div class="dr-spec">Cirugía Plástica · Alta reputación offline</div></td>
-            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:20%"></div></div><span class="score-val">20</span></div></td>
-            <td><span class="review-count">N/C</span><div class="review-plat">Sin datos confirmados</div></td>
-            <td><span class="review-count">168</span><div class="review-plat">⭐ 5.0 · HuliHealth</div></td>
-            <td><span class="ig-count">—</span></td>
-            <td><span class="web-badge web-no">Sin web</span></td>
-            <td>Clínica Tepeyac, Guadalupe</td>
-          </tr>
-          <!-- Rank 21 -->
-          <tr data-rank="21" data-huli="0" data-ig="2800" data-noweb="false">
-            <td><span class="rank-num">21</span></td>
             <td><div class="dr-name">Dr. Oscar Suárez Ramos</div><div class="dr-spec">Cirugía Plástica · OAS Plastic Surgery</div></td>
-            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:20%"></div></div><span class="score-val">20</span></div></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:19%"></div></div><span class="score-val">19</span></div></td>
             <td><span class="review-count">N/C</span><div class="review-plat">Sin datos confirmados</div></td>
             <td><span class="review-count">—</span><div class="review-plat">Sin perfil activo</div></td>
+            <td><span class="score-badge vlow">2/15</span></td>
             <td><span class="ig-count" style="color:#E4405F">2.8K</span></td>
             <td><span class="web-badge web-yes">Completa</span></td>
             <td>Hospital CIMA / OAS, Escazú</td>
           </tr>
-          <!-- Rank 22 -->
-          <tr data-rank="22" data-huli="0" data-ig="4600" data-noweb="false">
-            <td><span class="rank-num">22</span></td>
-            <td><div class="dr-name">Dr. Giovanni Herrera Mora</div><div class="dr-spec">Cirugía Plástica Estética · CEC</div></td>
-            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:19%"></div></div><span class="score-val">19</span></div></td>
+          <!-- Rank 20 -->
+          <tr data-rank="20" data-huli="0" data-ig="7300" data-noweb="false">
+            <td><span class="rank-num">20</span></td>
+            <td><div class="dr-name">Dr. Pablo Solís Chaves</div><div class="dr-spec">Cirugía Plástica Estética · CEC</div></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:15%"></div></div><span class="score-val">15</span></div></td>
             <td><span class="review-count">N/C</span><div class="review-plat">Sin datos confirmados</div></td>
             <td><span class="review-count">—</span><div class="review-plat">Sin perfil activo</div></td>
-            <td><span class="ig-count" style="color:#E4405F">4.6K</span></td>
-            <td><span class="web-badge web-basic">Compartida (CEC)</span></td>
+            <td><span class="score-badge vlow">1/15</span></td>
+            <td><span class="ig-count" style="color:#E4405F">7.3K</span></td>
+            <td><span class="web-badge web-yes">Completa</span></td>
             <td>Centro Europeo de Cirugía (CEC)</td>
+          </tr>
+          <!-- Rank 21 -->
+          <tr data-rank="21" data-huli="0" data-ig="0" data-noweb="false">
+            <td><span class="rank-num">21</span></td>
+            <td><div class="dr-name">Dr. Bernardo Peralta Mantilla</div><div class="dr-spec">Cirugía Plástica Estética</div></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:15%"></div></div><span class="score-val">15</span></div></td>
+            <td><span class="review-count">N/C</span><div class="review-plat">Sin datos confirmados</div></td>
+            <td><span class="review-count">—</span><div class="review-plat">Sin perfil activo</div></td>
+            <td><span class="score-badge vlow">1/15</span></td>
+            <td><span class="ig-count">—</span></td>
+            <td><span class="web-badge web-yes">Completa</span></td>
+            <td>Clínica Peralta, Rohrmoser</td>
+          </tr>
+          <!-- Rank 22 -->
+          <tr data-rank="22" data-huli="0" data-ig="4700" data-noweb="false">
+            <td><span class="rank-num">22</span></td>
+            <td><div class="dr-name">Dra. Yaneth Prada Castellanos</div><div class="dr-spec">Cirugía Plástica Estética</div></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:15%"></div></div><span class="score-val">15</span></div></td>
+            <td><span class="review-count">N/C</span><div class="review-plat">Sin datos confirmados</div></td>
+            <td><span class="review-count">—</span><div class="review-plat">Sin perfil activo</div></td>
+            <td><span class="score-badge vlow">2/15</span></td>
+            <td><span class="ig-count" style="color:#E4405F">~4.7K</span></td>
+            <td><span class="web-badge web-yes">Completa</span></td>
+            <td>Clínica Americana, San José</td>
           </tr>
           <!-- Rank 23 -->
           <tr data-rank="23" data-huli="0" data-ig="0" data-noweb="false">
             <td><span class="rank-num">23</span></td>
-            <td><div class="dr-name">Dr. Ronald Pino King</div><div class="dr-spec">Cirugía Plástica · Turismo Médico</div></td>
-            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:18%"></div></div><span class="score-val">18</span></div></td>
-            <td><span class="review-count">N/C</span><div class="review-plat">Sin datos confirmados</div></td>
-            <td><span class="review-count">—</span><div class="review-plat">Sin perfil activo</div></td>
-            <td><span class="ig-count">—</span></td>
-            <td><span class="web-badge web-yes">Completa</span></td>
-            <td>Clínica Pino, Pavas</td>
-          </tr>
-          <!-- Rank 24 -->
-          <tr data-rank="24" data-huli="0" data-ig="8500" data-noweb="false">
-            <td><span class="rank-num">24</span></td>
-            <td><div class="dr-name">Dr. Andrés Castrillón Gómez</div><div class="dr-spec">Cirugía Plástica Estética</div></td>
-            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:14%"></div></div><span class="score-val">14</span></div></td>
-            <td><span class="review-count">N/C</span><div class="review-plat">Sin datos confirmados</div></td>
-            <td><span class="review-count">—</span><div class="review-plat">Sin perfil activo</div></td>
-            <td><span class="ig-count" style="color:#E4405F">8.5K</span></td>
-            <td><span class="web-badge web-no">Sin web real</span></td>
-            <td>AVA Surgical Center, Escazú</td>
-          </tr>
-          <!-- Rank 25 -->
-          <tr data-rank="25" data-huli="0" data-ig="0" data-noweb="false">
-            <td><span class="rank-num">25</span></td>
             <td><div class="dr-name">Dr. Rashi Rosenstock Lieberman</div><div class="dr-spec">Cirugía Plástica · RealSelf 77 reseñas</div></td>
             <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:13%"></div></div><span class="score-val">13</span></div></td>
             <td><span class="review-count">N/C</span><div class="review-plat">Sin datos confirmados</div></td>
             <td><span class="review-count">—</span><div class="review-plat">77 en RealSelf ⭐4.3</div></td>
+            <td><span class="score-badge vlow">2/15</span></td>
             <td><span class="ig-count">—</span></td>
             <td><span class="web-badge web-basic">Compartida</span></td>
             <td>La Sabana, San José</td>
           </tr>
-          <!-- Rank 26 -->
-          <tr data-rank="26" data-huli="56" data-ig="0" data-noweb="true">
-            <td><span class="rank-num">26</span></td>
+          <!-- Rank 24 -->
+          <tr data-rank="24" data-huli="0" data-ig="0" data-noweb="false">
+            <td><span class="rank-num">24</span></td>
+            <td><div class="dr-name">Dr. Ronald Pino King</div><div class="dr-spec">Cirugía Plástica · Turismo Médico</div></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:13%"></div></div><span class="score-val">13</span></div></td>
+            <td><span class="review-count">N/C</span><div class="review-plat">Sin datos confirmados</div></td>
+            <td><span class="review-count">—</span><div class="review-plat">Sin perfil activo</div></td>
+            <td><span class="score-badge vlow">2/15</span></td>
+            <td><span class="ig-count">—</span></td>
+            <td><span class="web-badge web-yes">Completa</span></td>
+            <td>Clínica Pino, Pavas</td>
+          </tr>
+          <!-- Rank 25 -->
+          <tr data-rank="25" data-huli="56" data-ig="0" data-noweb="true">
+            <td><span class="rank-num">25</span></td>
             <td><div class="dr-name">Dr. Héctor Rivera González</div><div class="dr-spec">Cirugía Plástica · Director MediSync</div></td>
             <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:12%"></div></div><span class="score-val">12</span></div></td>
             <td><span class="review-count">N/C</span><div class="review-plat">Sin datos confirmados</div></td>
             <td><span class="review-count">56</span><div class="review-plat">⭐ 5.0 · HuliHealth</div></td>
+            <td><span class="score-badge vlow">1/15</span></td>
             <td><span class="ig-count">—</span></td>
             <td><span class="web-badge web-no">Sin web propia</span></td>
             <td>Hospital La Católica, Guadalupe</td>
           </tr>
-          <!-- Rank 27 -->
-          <tr data-rank="27" data-huli="0" data-ig="0" data-noweb="false">
-            <td><span class="rank-num">27</span></td>
-            <td><div class="dr-name">Dr. Bernardo Peralta Mantilla</div><div class="dr-spec">Cirugía Plástica Estética</div></td>
+          <!-- Rank 26 -->
+          <tr data-rank="26" data-huli="0" data-ig="4600" data-noweb="false">
+            <td><span class="rank-num">26</span></td>
+            <td><div class="dr-name">Dr. Giovanni Herrera Mora</div><div class="dr-spec">Cirugía Plástica Estética · CEC</div></td>
             <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:12%"></div></div><span class="score-val">12</span></div></td>
             <td><span class="review-count">N/C</span><div class="review-plat">Sin datos confirmados</div></td>
             <td><span class="review-count">—</span><div class="review-plat">Sin perfil activo</div></td>
-            <td><span class="ig-count">—</span></td>
+            <td><span class="score-badge vlow">2/15</span></td>
+            <td><span class="ig-count" style="color:#E4405F">4.6K</span></td>
+            <td><span class="web-badge web-basic">Compartida (CEC)</span></td>
+            <td>Centro Europeo de Cirugía (CEC)</td>
+          </tr>
+          <!-- Rank 27 -->
+          <tr data-rank="27" data-huli="0" data-ig="738" data-noweb="false">
+            <td><span class="rank-num">27</span></td>
+            <td><div class="dr-name">Dr. Arnoldo Fournier Solano</div><div class="dr-spec">Cirugía Plástica · 25+ años</div></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:12%"></div></div><span class="score-val">12</span></div></td>
+            <td><span class="review-count">N/C</span><div class="review-plat">Sin datos confirmados</div></td>
+            <td><span class="review-count">—</span><div class="review-plat">Sin perfil activo</div></td>
+            <td><span class="score-badge vlow">2/15</span></td>
+            <td><span class="ig-count">738</span></td>
             <td><span class="web-badge web-yes">Completa</span></td>
-            <td>Clínica Peralta, Rohrmoser</td>
+            <td>Clínica Americana, San José</td>
           </tr>
           <!-- Rank 28 -->
           <tr data-rank="28" data-huli="0" data-ig="2100" data-noweb="false">
             <td><span class="rank-num">28</span></td>
             <td><div class="dr-name">Dr. Leonardo Canossa Montes de Oca</div><div class="dr-spec">Cirugía Plástica · Alajuela y GAM</div></td>
-            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:12%"></div></div><span class="score-val">12</span></div></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:11%"></div></div><span class="score-val">11</span></div></td>
             <td><span class="review-count">N/C</span><div class="review-plat">Sin datos confirmados</div></td>
             <td><span class="review-count">—</span><div class="review-plat">Sin perfil activo</div></td>
+            <td><span class="score-badge vlow">1/15</span></td>
             <td><span class="ig-count" style="color:#E4405F">~2.1K</span></td>
             <td><span class="web-badge web-yes">Completa</span></td>
             <td>Momentum Pinares / Alajuela</td>
@@ -656,9 +713,10 @@ footer p{color:var(--text-mid);font-size:12px}
           <tr data-rank="29" data-huli="0" data-ig="0" data-noweb="false">
             <td><span class="rank-num">29</span></td>
             <td><div class="dr-name">Dr. Gustavo Chavarría León</div><div class="dr-spec">Cirugía Plástica · Paseo Colón</div></td>
-            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:11%"></div></div><span class="score-val">11</span></div></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:10%"></div></div><span class="score-val">10</span></div></td>
             <td><span class="review-count">N/C</span><div class="review-plat">Sin datos confirmados</div></td>
             <td><span class="review-count">—</span><div class="review-plat">Sin perfil activo</div></td>
+            <td><span class="score-badge vlow">1/15</span></td>
             <td><span class="ig-count">—</span></td>
             <td><span class="web-badge web-yes">Completa</span></td>
             <td>Torres Mercedes, Paseo Colón</td>
@@ -666,198 +724,235 @@ footer p{color:var(--text-mid);font-size:12px}
           <!-- Rank 30 -->
           <tr data-rank="30" data-huli="0" data-ig="0" data-noweb="false">
             <td><span class="rank-num">30</span></td>
-            <td><div class="dr-name">Dr. Jorge Hernando Mora Sinning</div><div class="dr-spec">Cirugía Plástica · Hospital CIMA</div></td>
-            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:10%"></div></div><span class="score-val">10</span></div></td>
-            <td><span class="review-count">N/C</span><div class="review-plat">Sin datos confirmados</div></td>
-            <td><span class="review-count">—</span><div class="review-plat">Sin perfil activo</div></td>
-            <td><span class="ig-count">—</span></td>
-            <td><span class="web-badge web-basic">Básica (HTTP)</span></td>
-            <td>Hospital CIMA, Escazú</td>
-          </tr>
-          <!-- Rank 31 -->
-          <tr data-rank="31" data-huli="0" data-ig="0" data-noweb="false">
-            <td><span class="rank-num">31</span></td>
-            <td><div class="dr-name">Dr. Miguel Alfaro Dávila</div><div class="dr-spec">Cirugía Plástica · CIMA · Código CP101</div></td>
-            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:9%"></div></div><span class="score-val">9</span></div></td>
-            <td><span class="review-count">N/C</span></td>
-            <td><span class="review-count">—</span></td>
-            <td><span class="ig-count">—</span></td>
-            <td><span class="web-badge web-basic">Básica</span></td>
-            <td>Hospital CIMA, Escazú</td>
-          </tr>
-          <!-- Rank 32 -->
-          <tr data-rank="32" data-huli="0" data-ig="0" data-noweb="false">
-            <td><span class="rank-num">32</span></td>
             <td><div class="dr-name">Dra. Silvia Araya Matamoros</div><div class="dr-spec">Cirugía Plástica Estética · Heredia</div></td>
             <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:9%"></div></div><span class="score-val">9</span></div></td>
             <td><span class="review-count">N/C</span></td>
             <td><span class="review-count">—</span></td>
+            <td><span class="score-badge vlow">1/15</span></td>
             <td><span class="ig-count">—</span></td>
             <td><span class="web-badge web-yes">Completa</span></td>
             <td>Plaza Cariari, Heredia</td>
           </tr>
-          <!-- Rank 33 -->
-          <tr data-rank="33" data-huli="0" data-ig="738" data-noweb="false">
-            <td><span class="rank-num">33</span></td>
-            <td><div class="dr-name">Dr. Arnoldo Fournier Solano</div><div class="dr-spec">Cirugía Plástica · 25+ años</div></td>
-            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:8%"></div></div><span class="score-val">8</span></div></td>
-            <td><span class="review-count">N/C</span></td>
-            <td><span class="review-count">—</span></td>
-            <td><span class="ig-count">738</span></td>
-            <td><span class="web-badge web-yes">Completa</span></td>
-            <td>Clínica Americana, San José</td>
-          </tr>
-          <!-- Rank 34 -->
-          <tr data-rank="34" data-huli="0" data-ig="0" data-noweb="false">
-            <td><span class="rank-num">34</span></td>
-            <td><div class="dr-name">Dr. Rodrigo Araya Alegría — Nota</div><div class="dr-spec"><span class="warning-badge">⚠ Rating 3.6/5 en Google</span> — riesgo reputacional</div></td>
-            <td></td><td></td><td></td><td></td><td></td><td></td>
-          </tr>
-          <!-- Continue with remaining surgeons -->
-          <tr data-rank="35" data-huli="31" data-ig="0" data-noweb="true">
-            <td><span class="rank-num">35</span></td>
-            <td><div class="dr-name">Dra. Arianne Vargas Simipuy</div><div class="dr-spec">Cirugía Plástica · Aria Cirugía, Escazú</div></td>
-            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:7%"></div></div><span class="score-val">7</span></div></td>
-            <td><span class="review-count">N/C</span></td>
-            <td><span class="review-count">31</span><div class="review-plat">⭐ 5.0 · HuliHealth</div></td>
-            <td><span class="ig-count">—</span></td>
-            <td><span class="web-badge web-no">Sin web propia</span></td>
-            <td>Mediplaza, San Rafael Escazú</td>
-          </tr>
-          <tr data-rank="36" data-huli="0" data-ig="1000" data-noweb="false">
-            <td><span class="rank-num">36</span></td>
+          <!-- Rank 31 -->
+          <tr data-rank="31" data-huli="0" data-ig="1000" data-noweb="false">
+            <td><span class="rank-num">31</span></td>
             <td><div class="dr-name">Dra. Silvia Villegas Méndez</div><div class="dr-spec">Cirugía Plástica · Clínica Bíblica</div></td>
-            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:7%"></div></div><span class="score-val">7</span></div></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:9%"></div></div><span class="score-val">9</span></div></td>
             <td><span class="review-count">N/C</span></td>
             <td><span class="review-count">—</span></td>
+            <td><span class="score-badge vlow">1/15</span></td>
             <td><span class="ig-count">~1K</span></td>
             <td><span class="web-badge web-yes">Completa</span></td>
             <td>Clínica Bíblica, San José</td>
           </tr>
-          <tr data-rank="37" data-huli="0" data-ig="0" data-noweb="false">
-            <td><span class="rank-num">37</span></td>
-            <td><div class="dr-name">Dr. Juan Ramón Poveda Xatruch</div><div class="dr-spec">Cirugía Plástica Reconstructiva</div></td>
-            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:6%"></div></div><span class="score-val">6</span></div></td>
-            <td><span class="review-count">N/C</span></td>
-            <td><span class="review-count">—</span></td>
-            <td><span class="ig-count">—</span></td>
-            <td><span class="web-badge web-no">Web caída (404)</span></td>
-            <td>Hospital La Católica, Guadalupe</td>
-          </tr>
-          <tr data-rank="38" data-huli="0" data-ig="0" data-noweb="false">
-            <td><span class="rank-num">38</span></td>
+          <!-- Rank 32 -->
+          <tr data-rank="32" data-huli="0" data-ig="0" data-noweb="false">
+            <td><span class="rank-num">32</span></td>
             <td><div class="dr-name">Dr. Joseph Alex Cohen Retelny</div><div class="dr-spec">Cirugía Plástica · RealSelf 3 reseñas</div></td>
-            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:6%"></div></div><span class="score-val">6</span></div></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:8%"></div></div><span class="score-val">8</span></div></td>
             <td><span class="review-count">N/C</span></td>
             <td><span class="review-count">—</span></td>
+            <td><span class="score-badge vlow">1/15</span></td>
             <td><span class="ig-count">—</span></td>
             <td><span class="web-badge web-basic">Compartida</span></td>
             <td>La Sabana, San José</td>
           </tr>
-          <tr data-rank="39" data-huli="4" data-ig="0" data-noweb="true">
-            <td><span class="rank-num">39</span></td>
-            <td><div class="dr-name">Dra. Sylvia Rubinstein Teitelbaum</div><div class="dr-spec">Cirugía Plástica · La Sabana</div></td>
-            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:5%"></div></div><span class="score-val">5</span></div></td>
+          <!-- Rank 33 -->
+          <tr data-rank="33" data-huli="31" data-ig="0" data-noweb="true">
+            <td><span class="rank-num">33</span></td>
+            <td><div class="dr-name">Dra. Arianne Vargas Simipuy</div><div class="dr-spec">Cirugía Plástica · Aria Cirugía, Escazú</div></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:7%"></div></div><span class="score-val">7</span></div></td>
             <td><span class="review-count">N/C</span></td>
-            <td><span class="review-count">4</span><div class="review-plat">⭐ 5.0 · HuliHealth</div></td>
+            <td><span class="review-count">31</span><div class="review-plat">⭐ 5.0 · HuliHealth</div></td>
+            <td><span class="score-badge vlow">1/15</span></td>
             <td><span class="ig-count">—</span></td>
             <td><span class="web-badge web-no">Sin web propia</span></td>
-            <td>La Sabana, San José</td>
+            <td>Mediplaza, San Rafael Escazú</td>
           </tr>
-          <tr data-rank="40" data-huli="0" data-ig="0" data-noweb="false">
-            <td><span class="rank-num">40</span></td>
-            <td><div class="dr-name">Dr. Luis Alberto Berrocal Córdoba</div><div class="dr-spec">Cirugía Plástica · Clínica Siloé</div></td>
-            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:5%"></div></div><span class="score-val">5</span></div></td>
+          <!-- Rank 34 -->
+          <tr data-rank="34" data-huli="0" data-ig="0" data-noweb="false">
+            <td><span class="rank-num">34</span></td>
+            <td><div class="dr-name">Dr. Miguel Alfaro Dávila</div><div class="dr-spec">Cirugía Plástica · Hospital CIMA</div></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:7%"></div></div><span class="score-val">7</span></div></td>
             <td><span class="review-count">N/C</span></td>
             <td><span class="review-count">—</span></td>
+            <td><span class="score-badge vlow">1/15</span></td>
+            <td><span class="ig-count">—</span></td>
+            <td><span class="web-badge web-basic">Básica</span></td>
+            <td>Hospital CIMA, Escazú</td>
+          </tr>
+          <!-- Rank 35 -->
+          <tr data-rank="35" data-huli="0" data-ig="0" data-noweb="false">
+            <td><span class="rank-num">35</span></td>
+            <td><div class="dr-name">Dr. Jorge Hernando Mora Sinning</div><div class="dr-spec">Cirugía Plástica · Hospital CIMA</div></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:6%"></div></div><span class="score-val">6</span></div></td>
+            <td><span class="review-count">N/C</span></td>
+            <td><span class="review-count">—</span></td>
+            <td><span class="score-badge vlow">1/15</span></td>
+            <td><span class="ig-count">—</span></td>
+            <td><span class="web-badge web-basic">Básica (HTTP)</span></td>
+            <td>Hospital CIMA, Escazú</td>
+          </tr>
+          <!-- Rank 36 -->
+          <tr data-rank="36" data-huli="0" data-ig="0" data-noweb="false">
+            <td><span class="rank-num">36</span></td>
+            <td><div class="dr-name">Dr. Luis Alberto Berrocal Córdoba</div><div class="dr-spec">Cirugía Plástica · Clínica Siloé</div></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:6%"></div></div><span class="score-val">6</span></div></td>
+            <td><span class="review-count">N/C</span></td>
+            <td><span class="review-count">—</span></td>
+            <td><span class="score-badge vlow">1/15</span></td>
             <td><span class="ig-count">—</span></td>
             <td><span class="web-badge web-basic">Básica</span></td>
             <td>Clínica Siloé, San José</td>
           </tr>
-          <tr data-rank="41" data-huli="0" data-ig="1000" data-noweb="true">
-            <td><span class="rank-num">41</span></td>
-            <td><div class="dr-name">Dra. María Rosa Aguilera Reyes</div><div class="dr-spec">Cirugía Plástica · Heredia</div></td>
+          <!-- Rank 37 -->
+          <tr data-rank="37" data-huli="0" data-ig="8500" data-noweb="true">
+            <td><span class="rank-num">37</span></td>
+            <td><div class="dr-name">Dr. Andrés Castrillón Gómez</div><div class="dr-spec">Cirugía Plástica Estética</div></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:5%"></div></div><span class="score-val">5</span></div></td>
+            <td><span class="review-count">N/C</span></td>
+            <td><span class="review-count">—</span></td>
+            <td><span class="score-badge vlow">1/15</span></td>
+            <td><span class="ig-count" style="color:#E4405F">8.5K</span></td>
+            <td><span class="web-badge web-no">Sin web real</span></td>
+            <td>AVA Surgical Center, Escazú</td>
+          </tr>
+          <!-- Rank 38 -->
+          <tr data-rank="38" data-huli="0" data-ig="0" data-noweb="true">
+            <td><span class="rank-num">38</span></td>
+            <td><div class="dr-name">Dr. Joaquín Sánchez</div><div class="dr-spec">Cirugía Plástica · San José</div></td>
             <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:4%"></div></div><span class="score-val">4</span></div></td>
             <td><span class="review-count">N/C</span></td>
             <td><span class="review-count">—</span></td>
-            <td><span class="ig-count">~1K</span></td>
-            <td><span class="web-badge web-no">Sin web propia</span></td>
-            <td>Heredia / CCSS</td>
-          </tr>
-          <tr data-rank="42" data-huli="1" data-ig="0" data-noweb="true">
-            <td><span class="rank-num">42</span></td>
-            <td><div class="dr-name">Dr. Jovel Bogantes Ledezma</div><div class="dr-spec">Cirugía Plástica · La Católica</div></td>
-            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:4%"></div></div><span class="score-val">4</span></div></td>
-            <td><span class="review-count">N/C</span></td>
-            <td><span class="review-count">1</span></td>
+            <td><span class="score-badge vlow">1/15</span></td>
             <td><span class="ig-count">—</span></td>
-            <td><span class="web-badge web-no">Sin web propia</span></td>
-            <td>Hospital La Católica, Goicoechea</td>
+            <td><span class="web-badge web-no">Sin web</span></td>
+            <td>San José</td>
           </tr>
-          <tr data-rank="43" data-huli="1" data-ig="0" data-noweb="true">
-            <td><span class="rank-num">43</span></td>
-            <td><div class="dr-name">Dra. Laura Víquez Prendas</div><div class="dr-spec">Cirugía Plástica · Hospital UNIBE</div></td>
-            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:4%"></div></div><span class="score-val">4</span></div></td>
-            <td><span class="review-count">N/C</span></td>
-            <td><span class="review-count">1</span></td>
-            <td><span class="ig-count">—</span></td>
-            <td><span class="web-badge web-no">Sin web propia</span></td>
-            <td>Hospital UNIBE, Tibás</td>
-          </tr>
-          <tr data-rank="44" data-huli="0" data-ig="0" data-noweb="true">
-            <td><span class="rank-num">44</span></td>
-            <td><div class="dr-name">Dra. Anabelle Salas Pereira</div><div class="dr-spec">Cirugía Plástica · Hospital CIMA</div></td>
+          <!-- Rank 39 -->
+          <tr data-rank="39" data-huli="4" data-ig="0" data-noweb="true">
+            <td><span class="rank-num">39</span></td>
+            <td><div class="dr-name">Dra. Sylvia Rubinstein Teitelbaum</div><div class="dr-spec">Cirugía Plástica · La Sabana</div></td>
             <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:3%"></div></div><span class="score-val">3</span></div></td>
             <td><span class="review-count">N/C</span></td>
-            <td><span class="review-count">—</span></td>
+            <td><span class="review-count">4</span><div class="review-plat">⭐ 5.0 · HuliHealth</div></td>
+            <td><span class="score-badge vlow">0/15</span></td>
             <td><span class="ig-count">—</span></td>
             <td><span class="web-badge web-no">Sin web propia</span></td>
-            <td>Hospital CIMA, Escazú</td>
+            <td>La Sabana, San José</td>
           </tr>
-          <tr data-rank="45" data-huli="0" data-ig="0" data-noweb="true">
-            <td><span class="rank-num">45</span></td>
-            <td><div class="dr-name">Dra. May Ling Achio Fuentes</div><div class="dr-spec">Cirugía Plástica · La Católica</div></td>
-            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:3%"></div></div><span class="score-val">3</span></div></td>
-            <td><span class="review-count">N/C</span></td>
-            <td><span class="review-count">—</span></td>
-            <td><span class="ig-count">—</span></td>
-            <td><span class="web-badge web-no">Sin web propia</span></td>
-            <td>Hospital La Católica, Guadalupe</td>
-          </tr>
-          <tr data-rank="46" data-huli="0" data-ig="0" data-noweb="true">
-            <td><span class="rank-num">46</span></td>
-            <td><div class="dr-name">Dr. Gilberto Reyna Waldron</div><div class="dr-spec">Cirugía Plástica · San Juan de Dios</div></td>
-            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:3%"></div></div><span class="score-val">3</span></div></td>
-            <td><span class="review-count">N/C</span></td>
-            <td><span class="review-count">—</span></td>
-            <td><span class="ig-count">—</span></td>
-            <td><span class="web-badge web-no">Sin web propia</span></td>
-            <td>Clínica San Agustín / SJDD</td>
-          </tr>
-          <tr data-rank="47" data-huli="0" data-ig="0" data-noweb="true">
-            <td><span class="rank-num">47</span></td>
-            <td><div class="dr-name">Dr. Carlos Villalobos Mora</div><div class="dr-spec">Cirugía Plástica · Heredia</div></td>
-            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:3%"></div></div><span class="score-val">3</span></div></td>
-            <td><span class="review-count">N/C</span></td>
-            <td><span class="review-count">—</span></td>
-            <td><span class="ig-count">—</span></td>
-            <td><span class="web-badge web-no">Sin web propia</span></td>
-            <td>MediClinic, Heredia</td>
-          </tr>
-          <tr data-rank="48" data-huli="0" data-ig="0" data-noweb="true">
-            <td><span class="rank-num">48</span></td>
+          <!-- Rank 40 -->
+          <tr data-rank="40" data-huli="0" data-ig="0" data-noweb="true">
+            <td><span class="rank-num">40</span></td>
             <td><div class="dr-name">Dra. Madeleine Centeno Rodríguez</div><div class="dr-spec">Cirugía Plástica · Universal PS</div></td>
             <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:3%"></div></div><span class="score-val">3</span></div></td>
             <td><span class="review-count">N/C</span></td>
             <td><span class="review-count">—</span></td>
+            <td><span class="score-badge vlow">0/15</span></td>
             <td><span class="ig-count">—</span></td>
             <td><span class="web-badge web-no">Sin web propia</span></td>
             <td>Universal Plastic Surgery, La Sabana</td>
           </tr>
+          <!-- Rank 41 -->
+          <tr data-rank="41" data-huli="0" data-ig="0" data-noweb="true">
+            <td><span class="rank-num">41</span></td>
+            <td><div class="dr-name">Dra. Cinthya Mora</div><div class="dr-spec">Cirugía Plástica · San José</div></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:2%"></div></div><span class="score-val">2</span></div></td>
+            <td><span class="review-count">N/C</span></td>
+            <td><span class="review-count">—</span></td>
+            <td><span class="score-badge vlow">0/15</span></td>
+            <td><span class="ig-count">—</span></td>
+            <td><span class="web-badge web-no">Sin web</span></td>
+            <td>San José</td>
+          </tr>
+          <!-- Rank 42 -->
+          <tr data-rank="42" data-huli="1" data-ig="0" data-noweb="true">
+            <td><span class="rank-num">42</span></td>
+            <td><div class="dr-name">Dr. Jovel Bogantes Ledezma</div><div class="dr-spec">Cirugía Plástica · La Católica</div></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:2%"></div></div><span class="score-val">2</span></div></td>
+            <td><span class="review-count">N/C</span></td>
+            <td><span class="review-count">1</span></td>
+            <td><span class="score-badge vlow">0/15</span></td>
+            <td><span class="ig-count">—</span></td>
+            <td><span class="web-badge web-no">Sin web propia</span></td>
+            <td>Hospital La Católica, Goicoechea</td>
+          </tr>
+          <!-- Rank 43 -->
+          <tr data-rank="43" data-huli="1" data-ig="0" data-noweb="true">
+            <td><span class="rank-num">43</span></td>
+            <td><div class="dr-name">Dra. Laura Víquez Prendas</div><div class="dr-spec">Cirugía Plástica · Hospital UNIBE</div></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:2%"></div></div><span class="score-val">2</span></div></td>
+            <td><span class="review-count">N/C</span></td>
+            <td><span class="review-count">1</span></td>
+            <td><span class="score-badge vlow">0/15</span></td>
+            <td><span class="ig-count">—</span></td>
+            <td><span class="web-badge web-no">Sin web propia</span></td>
+            <td>Hospital UNIBE, Tibás</td>
+          </tr>
+          <!-- Rank 44 -->
+          <tr data-rank="44" data-huli="0" data-ig="0" data-noweb="true">
+            <td><span class="rank-num">44</span></td>
+            <td><div class="dr-name">Dra. Anabelle Salas Pereira</div><div class="dr-spec">Cirugía Plástica · Hospital CIMA</div></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:1%"></div></div><span class="score-val">1</span></div></td>
+            <td><span class="review-count">N/C</span></td>
+            <td><span class="review-count">—</span></td>
+            <td><span class="score-badge vlow">0/15</span></td>
+            <td><span class="ig-count">—</span></td>
+            <td><span class="web-badge web-no">Sin web propia</span></td>
+            <td>Hospital CIMA, Escazú</td>
+          </tr>
+          <!-- Rank 45 -->
+          <tr data-rank="45" data-huli="0" data-ig="1000" data-noweb="true">
+            <td><span class="rank-num">45</span></td>
+            <td><div class="dr-name">Dra. María Rosa Aguilera Reyes</div><div class="dr-spec">Cirugía Plástica · Heredia</div></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:1%"></div></div><span class="score-val">0</span></div></td>
+            <td><span class="review-count">N/C</span></td>
+            <td><span class="review-count">—</span></td>
+            <td><span class="score-badge vlow">0/15</span></td>
+            <td><span class="ig-count">~1K</span></td>
+            <td><span class="web-badge web-no">Sin web propia</span></td>
+            <td>Heredia / CCSS</td>
+          </tr>
+          <!-- Rank 46 -->
+          <tr data-rank="46" data-huli="0" data-ig="0" data-noweb="true">
+            <td><span class="rank-num">46</span></td>
+            <td><div class="dr-name">Dra. May Ling Achio Fuentes</div><div class="dr-spec">Cirugía Plástica · La Católica</div></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:1%"></div></div><span class="score-val">0</span></div></td>
+            <td><span class="review-count">N/C</span></td>
+            <td><span class="review-count">—</span></td>
+            <td><span class="score-badge vlow">0/15</span></td>
+            <td><span class="ig-count">—</span></td>
+            <td><span class="web-badge web-no">Sin web propia</span></td>
+            <td>Hospital La Católica, Guadalupe</td>
+          </tr>
+          <!-- Rank 47 -->
+          <tr data-rank="47" data-huli="0" data-ig="0" data-noweb="true">
+            <td><span class="rank-num">47</span></td>
+            <td><div class="dr-name">Dr. Gilberto Reyna Waldron</div><div class="dr-spec">Cirugía Plástica · San Juan de Dios</div></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:1%"></div></div><span class="score-val">0</span></div></td>
+            <td><span class="review-count">N/C</span></td>
+            <td><span class="review-count">—</span></td>
+            <td><span class="score-badge vlow">0/15</span></td>
+            <td><span class="ig-count">—</span></td>
+            <td><span class="web-badge web-no">Sin web propia</span></td>
+            <td>Clínica San Agustín / SJDD</td>
+          </tr>
+          <!-- Rank 48 -->
+          <tr data-rank="48" data-huli="0" data-ig="0" data-noweb="true">
+            <td><span class="rank-num">48</span></td>
+            <td><div class="dr-name">Dr. Carlos Villalobos Mora</div><div class="dr-spec">Cirugía Plástica · Heredia</div></td>
+            <td><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:1%"></div></div><span class="score-val">0</span></div></td>
+            <td><span class="review-count">N/C</span></td>
+            <td><span class="review-count">—</span></td>
+            <td><span class="score-badge vlow">0/15</span></td>
+            <td><span class="ig-count">—</span></td>
+            <td><span class="web-badge web-no">Sin web propia</span></td>
+            <td>MediClinic, Heredia</td>
+          </tr>
         </tbody>
       </table>
     </div>
-    <p class="note">N/C = No confirmado en fuentes públicas. Esto no significa que no tengan Google Business Profile — significa que el número exacto no fue indexado por buscadores en el momento del análisis. · Datos de mayo 2026.</p>
+    <p class="note">N/C = No confirmado en fuentes públicas. No significa que no tengan Google Business Profile — significa que el número exacto no fue indexado públicamente al momento del análisis. · Datos de mayo 2026. · AEO = Answer Engine Optimization (visibilidad en ChatGPT, Perplexity, Google AI Overview).</p>
   </div>
 </section>
 
@@ -870,100 +965,190 @@ footer p{color:var(--text-mid);font-size:12px}
       <div class="platform-card">
         <div class="platform-header">
           <div class="platform-icon google">G</div>
-          <div><div class="platform-name">Google Business Profile</div><div class="platform-sub">Reseñas confirmadas en fuentes públicas</div></div>
+          <div><div class="platform-name">Google Business Profile</div><div class="platform-sub">Reseñas confirmadas en fuentes públicas (30 pts)</div></div>
         </div>
         <ul class="platform-list">
-          <li><span class="p-name"><span class="p-rank">#1</span>Dr. Christian Rivera</span><span class="p-val">360 ⭐4.9</span></li>
-          <li><span class="p-name"><span class="p-rank">#2</span>Dr. Rodrigo Araya</span><span class="p-val">299 <span style="color:var(--amber)">⚠3.6</span></span></li>
-          <li><span class="p-name"><span class="p-rank">#3</span>Dr. Carlos Centeno</span><span class="p-val">86 ⭐4.7</span></li>
-          <li><span class="p-name"><span class="p-rank">#4</span>Dr. Jorge Badilla</span><span class="p-val">52 ⭐4.8</span></li>
+          <li><span class="p-name"><span class="p-rank">#1</span>Dr. Christian Rivera</span><span class="p-val">360 ⭐4.9 → 30 pts</span></li>
+          <li><span class="p-name"><span class="p-rank">#2</span>Dr. Rodrigo Araya</span><span class="p-val">299 <span style="color:var(--amber)">⚠3.6</span> → 12 pts</span></li>
+          <li><span class="p-name"><span class="p-rank">#3</span>Dr. Carlos Centeno</span><span class="p-val">86 ⭐4.7 → 12 pts</span></li>
+          <li><span class="p-name"><span class="p-rank">#4</span>Dr. Jorge Badilla</span><span class="p-val">52 ⭐4.8 → 12 pts</span></li>
           <li><span class="p-name" style="color:var(--text-mid);font-style:italic">44 cirujanos sin datos confirmados</span><span></span></li>
         </ul>
       </div>
       <div class="platform-card">
         <div class="platform-header">
           <div class="platform-icon huli">H</div>
-          <div><div class="platform-name">HuliHealth</div><div class="platform-sub">Directorio dominante en Costa Rica</div></div>
+          <div><div class="platform-name">HuliHealth</div><div class="platform-sub">Directorio dominante en Costa Rica (30 pts)</div></div>
         </div>
         <ul class="platform-list">
-          <li><span class="p-name"><span class="p-rank">#1</span>Dr. Francisco Vargas V.</span><span class="p-val">260 ⭐5.0</span></li>
-          <li><span class="p-name"><span class="p-rank">#2</span>Dr. Alfredo Vargas V.</span><span class="p-val">240 ⭐5.0</span></li>
-          <li><span class="p-name"><span class="p-rank">#3</span>Dr. Andrés Tapia H.</span><span class="p-val">218 ⭐5.0</span></li>
-          <li><span class="p-name"><span class="p-rank">#4</span>Dr. Jorge Badilla M.</span><span class="p-val">177 ⭐5.0</span></li>
-          <li><span class="p-name"><span class="p-rank">#5</span>Dr. Luis Pastor P.</span><span class="p-val">168 ⭐5.0</span></li>
-          <li><span class="p-name"><span class="p-rank">#6</span>Dr. Eduardo Brenes L.</span><span class="p-val">160 ⭐5.0</span></li>
-          <li><span class="p-name"><span class="p-rank">#7</span>Dr. Giovanni Montoya</span><span class="p-val">110 ⭐5.0</span></li>
-          <li><span class="p-name"><span class="p-rank">#8</span>Dr. Héctor Rivera G.</span><span class="p-val">56 ⭐5.0</span></li>
+          <li><span class="p-name"><span class="p-rank">#1</span>Dr. Francisco Vargas V.</span><span class="p-val">260 ⭐5.0 → 30 pts</span></li>
+          <li><span class="p-name"><span class="p-rank">#2</span>Dr. Alfredo Vargas V.</span><span class="p-val">240 ⭐5.0 → 30 pts</span></li>
+          <li><span class="p-name"><span class="p-rank">#3</span>Dr. Andrés Tapia H.</span><span class="p-val">218 ⭐5.0 → 30 pts</span></li>
+          <li><span class="p-name"><span class="p-rank">#4</span>Dr. Jorge Badilla M.</span><span class="p-val">177 ⭐5.0 → 20 pts</span></li>
+          <li><span class="p-name"><span class="p-rank">#5</span>Dr. Luis Pastor P.</span><span class="p-val">168 ⭐5.0 → 20 pts</span></li>
+          <li><span class="p-name"><span class="p-rank">#6</span>Dr. Eduardo Brenes L.</span><span class="p-val">160 ⭐5.0 → 20 pts</span></li>
+          <li><span class="p-name"><span class="p-rank">#7</span>Dr. Giovanni Montoya</span><span class="p-val">110 ⭐5.0 → 20 pts</span></li>
+          <li><span class="p-name"><span class="p-rank">#8</span>Dr. Héctor Rivera G.</span><span class="p-val">56 ⭐5.0 → 10 pts</span></li>
         </ul>
       </div>
       <div class="platform-card">
         <div class="platform-header">
           <div class="platform-icon ig">IG</div>
-          <div><div class="platform-name">Instagram</div><div class="platform-sub">Seguidores · proxy de influencia digital</div></div>
+          <div><div class="platform-name">Instagram</div><div class="platform-sub">Seguidores · proxy de presencia social (5 pts)</div></div>
         </div>
         <ul class="platform-list">
-          <li><span class="p-name"><span class="p-rank">#1</span>Dr. Christian Rivera</span><span class="p-val">118K</span></li>
-          <li><span class="p-name"><span class="p-rank">#2</span>Dr. Allan Pérez (Dolce)</span><span class="p-val">47K</span></li>
-          <li><span class="p-name"><span class="p-rank">#3</span>Dr. Rodrigo Araya</span><span class="p-val">36.9K</span></li>
-          <li><span class="p-name"><span class="p-rank">#4</span>Dr. Víctor Urzola</span><span class="p-val">29K</span></li>
-          <li><span class="p-name"><span class="p-rank">#5</span>Dr. Alberto Argüello</span><span class="p-val">29K</span></li>
-          <li><span class="p-name"><span class="p-rank">#6</span>Dr. Eduardo Brenes</span><span class="p-val">28K</span></li>
-          <li><span class="p-name"><span class="p-rank">#7</span>Dra. Daniela Vargas</span><span class="p-val">~20K</span></li>
-          <li><span class="p-name"><span class="p-rank">#8</span>Dr. Henry Sequeira</span><span class="p-val">20K</span></li>
+          <li><span class="p-name"><span class="p-rank">#1</span>Dr. Christian Rivera</span><span class="p-val">118K → 5 pts</span></li>
+          <li><span class="p-name"><span class="p-rank">#2</span>Dr. Allan Pérez (Dolce)</span><span class="p-val">47K → 4 pts</span></li>
+          <li><span class="p-name"><span class="p-rank">#3</span>Dr. Rodrigo Araya</span><span class="p-val">36.9K → 4 pts</span></li>
+          <li><span class="p-name"><span class="p-rank">#4</span>Dr. Víctor Urzola</span><span class="p-val">~29K → 4 pts</span></li>
+          <li><span class="p-name"><span class="p-rank">#5</span>Dr. Alberto Argüello</span><span class="p-val">29K → 3 pts</span></li>
+          <li><span class="p-name"><span class="p-rank">#6</span>Dr. Eduardo Brenes</span><span class="p-val">28K → 3 pts</span></li>
+          <li><span class="p-name"><span class="p-rank">#7</span>Dra. Daniela Vargas</span><span class="p-val">~20K → 3 pts</span></li>
+          <li><span class="p-name"><span class="p-rank">#8</span>Dr. Henry Sequeira</span><span class="p-val">20K → 3 pts</span></li>
         </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AEO AUDIT -->
+<section id="aeo">
+  <div class="section-inner">
+    <div class="section-label">Auditoría AEO — Hallazgo Crítico</div>
+    <h2><em>Ningún</em> cirujano plástico de CR está optimizado para IA</h2>
+    <p style="color:#586D80;max-width:700px;margin-bottom:8px">El AEO (Answer Engine Optimization) mide si ChatGPT, Perplexity y Google AI Overview recomendarán a ese médico cuando un paciente pregunte. Auditamos los 48 sitios. El resultado es contundente.</p>
+    <div class="aeo-audit-section">
+      <div class="aeo-title">Cuando alguien le pregunta a ChatGPT cuál es el mejor cirujano plástico en Costa Rica — nadie aparece</div>
+      <p class="aeo-sub">Verificado en mayo 2026: ninguno de los 48 cirujanos certificados tiene la combinación de señales que necesita la IA para recomendar con confianza. El primero que construya esa autoridad, la mantiene por años.</p>
+
+      <div class="aeo-grid">
+        <div class="aeo-card">
+          <span class="aeo-icon">📋</span>
+          <h4>Schema Markup</h4>
+          <p>Código estructurado que le dice a la IA quién eres, qué haces y dónde operas</p>
+          <span class="status-check">❌ 0 de 48 lo tienen completo</span>
+        </div>
+        <div class="aeo-card">
+          <span class="aeo-icon">❓</span>
+          <h4>FAQs Estructuradas</h4>
+          <p>Preguntas y respuestas que la IA cita directamente al responder consultas</p>
+          <span class="status-check">⚠️ Solo 6 sitios tienen FAQ real</span>
+        </div>
+        <div class="aeo-card">
+          <span class="aeo-icon">📰</span>
+          <h4>Menciones en Medios</h4>
+          <p>Citas en La Nación, Teletica, La República — señales de autoridad para la IA</p>
+          <span class="status-check">⚠️ Solo 3 tienen cobertura mediática</span>
+        </div>
+        <div class="aeo-card">
+          <span class="aeo-icon">🤖</span>
+          <h4>Citado por IA</h4>
+          <p>Aparece cuando ChatGPT o Perplexity responden consultas de pacientes</p>
+          <span class="status-check">❌ 0 de 48 aparecen consistentemente</span>
+        </div>
+      </div>
+
+      <div class="aeo-top-scores">
+        <h4>Top AEO actual — el más alto solo alcanza 9/15</h4>
+        <div class="aeo-score-row">
+          <span class="dr">Dr. Christian Rivera Paniagua</span>
+          <div class="aeo-score-bar"><div class="aeo-score-bar-fill" style="width:60%"></div></div>
+          <span class="aeo-score-num">9/15</span>
+        </div>
+        <div class="aeo-score-row">
+          <span class="dr">Dr. Eduardo Brenes Leñero</span>
+          <div class="aeo-score-bar"><div class="aeo-score-bar-fill" style="width:53%"></div></div>
+          <span class="aeo-score-num">8/15</span>
+        </div>
+        <div class="aeo-score-row">
+          <span class="dr">Dr. Rodrigo Araya Alegría</span>
+          <div class="aeo-score-bar"><div class="aeo-score-bar-fill" style="width:53%"></div></div>
+          <span class="aeo-score-num">8/15</span>
+        </div>
+        <div class="aeo-score-row">
+          <span class="dr">Dr. Víctor Urzola Herrera</span>
+          <div class="aeo-score-bar"><div class="aeo-score-bar-fill" style="width:53%"></div></div>
+          <span class="aeo-score-num">8/15</span>
+        </div>
+        <div class="aeo-score-row">
+          <span class="dr">Dr. Andrés Tapia Herrera</span>
+          <div class="aeo-score-bar"><div class="aeo-score-bar-fill" style="width:40%"></div></div>
+          <span class="aeo-score-num">6/15</span>
+        </div>
+      </div>
+
+      <div style="margin-top:28px">
+        <div class="aeo-finding">
+          <h4>Solo 6 sitios tienen página de FAQ real</h4>
+          <p>Dolce Medical (8 FAQs), Dr. Araya (página FAQ dedicada), The Clinic CR (6 FAQs), Dr. Sequeira (6 FAQs), Dr. Rivera (FAQ en blog), plasticsurgerycr.com. El resto no tiene ni una pregunta estructurada.</p>
+        </div>
+        <div class="aeo-finding">
+          <h4>Solo 3 cirujanos tienen menciones en medios costarricenses</h4>
+          <p>Dr. Rivera (La República 2024, La Nación 2021), Dr. Brenes (Teletica 2024), Dr. Urzola (Bookimed Top 2, ex-presidente AMECPRE). 45 cirujanos no existen para la prensa digital.</p>
+        </div>
+        <div class="aeo-finding">
+          <h4>Ninguno tiene Schema + FAQ + medios al mismo tiempo</h4>
+          <p>La IA necesita las tres señales combinadas para recomendar con confianza. Incluso Rivera (líder con 9/15) tiene blog y medios pero carece de schema markup completo. La ventana de primero en llegar sigue completamente abierta.</p>
+        </div>
+      </div>
+
+      <div class="dr-rank-cta" style="margin-top:32px">
+        <h3>Doctor Rank — El primer cirujano que aparezca en ChatGPT gana</h3>
+        <p>El servicio de Flow Results que posiciona médicos especialistas como la autoridad #1 en Google, redes e IA. Primer servicio de AEO para cirujanos en Costa Rica.</p>
+        <a href="https://doctorrank.clinic" class="btn-accent" target="_blank">Conocer Doctor Rank →</a>
       </div>
     </div>
   </div>
 </section>
 
 <!-- BRECHAS -->
-<section id="brechas">
+<section id="brechas" class="alt-bg">
   <div class="section-inner">
     <div class="section-label">Análisis de Brechas</div>
     <h2>Las mayores <em>oportunidades</em> del mercado</h2>
     <div class="gap-grid">
       <div class="gap-card gap-red">
         <h4>🚨 44 de 48 sin Google Business confirmado</h4>
-        <p>La plataforma #1 de decisión del paciente está subutilizada. Solo 4 cirujanos tienen datos de Google Maps confirmados públicamente. El líder tiene 360 reseñas — la mayoría tiene 0 confirmadas.</p>
+        <p>La plataforma #1 de decisión del paciente está subutilizada. Solo 4 cirujanos tienen datos de Google Maps confirmados. El líder tiene 360 reseñas — la mayoría tiene 0 confirmadas.</p>
       </div>
       <div class="gap-card gap-red">
-        <h4>🚨 35 de 48 sin perfil activo en Huli</h4>
-        <p>Huli es el directorio médico dominante en Costa Rica. Más del 70% de los cirujanos no tienen reseñas activas. Francisco Vargas lidera con 260 reseñas — el estándar que define quién aparece primero.</p>
+        <h4>🚨 Ninguno está en ChatGPT o Perplexity</h4>
+        <p>AEO es la frontera donde nadie ha llegado. Cuando un paciente pregunta a la IA por un cirujano plástico en Costa Rica, el resultado es genérico o incompleto. El primero en construir esto gana.</p>
       </div>
       <div class="gap-card gap-amber">
         <h4>⚠ Rating de 3.6 en Dr. Rodrigo Araya</h4>
-        <p>Con 299 reseñas en Google pero un rating de 3.6/5, el volumen suma pero el rating penaliza. Un paciente que lee ese número puede elegir al competidor. Este es el gap más urgente de resolver en el Top 10.</p>
+        <p>Con 299 reseñas en Google y -10 pts de penalización por rating bajo, pasa del #2 en volumen al #6 en visibilidad. El gap entre reputación real y percepción digital es urgente de cerrar.</p>
       </div>
       <div class="gap-card gap-amber">
-        <h4>⚠ 15 cirujanos sin sitio web funcional</h4>
-        <p>Sin sitio web, no hay conversión. El paciente llega por Google o Instagram, busca el sitio, no lo encuentra y se va con quien sí tiene galería de casos y WhatsApp visible.</p>
+        <h4>⚠ Dr. Francisco Vargas: 260 reseñas Huli, web casi inexistente</h4>
+        <p>El líder absoluto en Huli (260 reseñas ⭐5.0) tiene un dominio expirado. Sin sitio web funcional pierde toda la conversión. Con un sitio completo, podría estar en el Top 3 del ranking.</p>
       </div>
       <div class="gap-card gap-green">
-        <h4>✅ Brecha de Instagram enorme = oportunidad</h4>
-        <p>Solo Dr. Christian Rivera supera los 100K. El segundo tiene 47K. Hay espacio real para que un cirujano con contenido educativo constante y casos bien documentados llegue al top 3 en 12 meses.</p>
+        <h4>✅ 35 cirujanos sin Huli activo = oportunidad enorme</h4>
+        <p>El directorio médico más usado en CR está aprovechado por menos del 30% del mercado. Quien construya un perfil sólido con reseñas puede capturar posiciones de liderazgo en 6-12 meses.</p>
       </div>
       <div class="gap-card gap-green">
-        <h4>✅ Ninguno optimizado para IA todavía</h4>
-        <p>Ningún cirujano plástico de CR aparece citado cuando ChatGPT o Perplexity responden "¿Cuál es el mejor cirujano plástico de Costa Rica?". El que llegue primero se posiciona como referente nacional durante años.</p>
+        <h4>✅ Score máximo alcanzado: 61/100</h4>
+        <p>En una escala de 100 puntos, el mejor cirujano en CR solo llega a 61. Hay 39 puntos de ventaja disponibles para quien optimice Google + Huli + AEO simultáneamente. Una agenda muy ocupada no es excusa — es el punto de partida.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- AI SECTION -->
-<section class="alt-bg">
+<!-- AI / DOCTOR RANK CTA -->
+<section>
   <div class="section-inner">
     <div class="ai-section">
-      <div class="ai-hook">¿Qué pasa cuando un paciente le pregunta a ChatGPT cuál es el mejor cirujano plástico de Costa Rica?</div>
-      <p class="ai-sub">Hoy ninguno de los 48 cirujanos certificados aparece consistentemente en las respuestas de herramientas de IA. El que construya esa autoridad primero, la mantiene por años. Así funciona:</p>
+      <div class="ai-hook">¿Qué pasa cuando alguien le pregunta a ChatGPT cuál es el mejor cirujano plástico de Costa Rica?</div>
+      <p class="ai-sub">Hoy ninguno de los 48 cirujanos certificados aparece. El que construya esa autoridad primero, la mantiene por años. Así funciona la IA cuando elige a quién recomendar:</p>
       <div class="ai-steps">
-        <div class="ai-step"><span class="step-icon">🔍</span><p>La paciente abre ChatGPT a las 11pm y pregunta por el mejor cirujano plástico en Escazú</p></div>
-        <div class="ai-step"><span class="step-icon">🧠</span><p>La IA busca señales: reseñas, contenido estructurado, menciones en medios, autoridad temática</p></div>
-        <div class="ai-step"><span class="step-icon">✅</span><p>Recomienda al que tiene más señales — no al mejor cirujano, sino al más visible digitalmente</p></div>
+        <div class="ai-step"><span class="step-icon">🔍</span><p>La paciente abre ChatGPT a las 11pm y pregunta por el mejor cirujano plástico en San José o Escazú</p></div>
+        <div class="ai-step"><span class="step-icon">🧠</span><p>La IA busca señales de autoridad: reseñas, contenido estructurado, menciones en medios, FAQs, schema markup</p></div>
+        <div class="ai-step"><span class="step-icon">✅</span><p>Recomienda al que tiene más señales — no al mejor cirujano del mundo, sino al más visible digitalmente</p></div>
       </div>
       <div class="dr-rank-cta">
         <h3>Doctor Rank — Visibilidad en Google, Redes e IA</h3>
-        <p>El servicio de Flow Results para posicionar médicos especialistas como la autoridad #1 de su especialidad en Costa Rica.</p>
+        <p>El servicio de Flow Results para posicionar médicos especialistas como la autoridad #1 de su especialidad en Costa Rica. Primer servicio de AEO para cirujanos en el país.</p>
         <a href="https://doctorrank.clinic" class="btn-accent" target="_blank">Ver Doctor Rank →</a>
       </div>
     </div>
@@ -973,8 +1158,8 @@ footer p{color:var(--text-mid);font-size:12px}
 <!-- CTA FINAL -->
 <section class="cta-section" id="cta">
   <div class="cta-inner">
-    <h2>¿Aparece usted en este ranking?</h2>
-    <p>Si su score está por debajo de 40/100, hay una brecha real de pacientes que no lo encuentran. Una sesión de estrategia de 30 minutos le muestra exactamente qué cerrar primero.</p>
+    <h2>¿Su score está por debajo de 40/100?</h2>
+    <p>Hay pacientes buscándolo en Google, Huli y ahora en la IA — y no lo encuentran. Una sesión de estrategia de 30 minutos le muestra exactamente qué cerrar primero para subir al Top 10.</p>
     <div class="cta-buttons">
       <a href="https://calendly.com/recheverria-flow/sesion-de-estrategia-con-flow-results-clone" class="btn-accent" target="_blank">Agendar sesión gratuita</a>
       <button class="btn-outline" onclick="window.print()">Imprimir reporte</button>
@@ -983,7 +1168,7 @@ footer p{color:var(--text-mid);font-size:12px}
 </section>
 
 <footer>
-  <p>Ranking de Visibilidad Digital — Cirujanos Plásticos Costa Rica 2026 · Elaborado por <strong>FLOW Results</strong> · Datos de mayo 2026 · Fuentes: HuliHealth, Google Business Profile, Instagram, RealSelf, AMECPRE, Colegio de Médicos CR</p>
+  <p>Ranking de Visibilidad Digital — Cirujanos Plásticos Costa Rica 2026 · Elaborado por <strong>FLOW Results</strong> · Datos de mayo 2026 · Fuentes: HuliHealth, Google Business Profile, Instagram, AMECPRE, Colegio de Médicos CR · Ponderación: Google 30 + Huli 30 + AEO 15 + Web 15 + IG 5 + Dirs 5 = 100 pts</p>
 </footer>
 
 <script>
@@ -1011,15 +1196,15 @@ const ACCENT='#5EEBC2';
 const GRAY='#3A4D62';
 const AMBER='#E8A820';
 
-// Chart 1: Total Score Top 15
+// Chart 1: Total Score Top 15 — NEW SCORING
 new Chart(document.getElementById('chartTotal'),{
   type:'bar',
   data:{
-    labels:['Dr. Rivera','Dr. Badilla','Dr. Tapia','Dr. Brenes L.','Dr. Araya (⚠3.6)','Dr. Vargas A.','Dr. Montoya','Dra. Vargas D.','Dr. Pérez (Dolce)','Dr. Vargas F.','Dr. Urzola','Dr. Argüello','Dr. Sequeira','Dr. Centeno','Dr. Chacón'],
+    labels:['Dr. Rivera','Dr. Badilla','Dr. Tapia','Dr. Brenes L.','Dr. Vargas A.','Dr. Araya (⚠3.6)','Dr. Montoya','Dr. Vargas F.','Dr. Urzola','Dr. Centeno','Dra. Vargas D.','Dr. Lev','Dr. Pérez/Dolce','Dr. Pastor','Dr. Sequeira'],
     datasets:[{
       label:'Score (0–100)',
-      data:[70,66,60,56,55,47,41,39,37,37,34,34,28,26,25],
-      backgroundColor:[ACCENT,GRAY,GRAY,GRAY,AMBER,GRAY,GRAY,GRAY,GRAY,GRAY,GRAY,GRAY,GRAY,GRAY,GRAY],
+      data:[61,56,54,47,45,42,38,37,30,28,24,24,23,22,21],
+      backgroundColor:[ACCENT,GRAY,GRAY,GRAY,GRAY,AMBER,GRAY,GRAY,GRAY,GRAY,GRAY,GRAY,GRAY,GRAY,GRAY],
       borderRadius:4,
       barThickness:18
     }]
@@ -1035,17 +1220,17 @@ new Chart(document.getElementById('chartTotal'),{
 new Chart(document.getElementById('chartHuli'),{
   type:'bar',
   data:{
-    labels:['Vargas F.','Vargas A.','Tapia H.','Badilla M.','Pastor P.','Brenes L.','Montoya','Rivera H.','Vargas S.','Lev S.'],
+    labels:['Vargas F.','Vargas A.','Tapia H.','Badilla M.','Pastor P.','Brenes L.','Montoya','Rivera H.','Arianne V.','Lev S.'],
     datasets:[{
       label:'Reseñas Huli',
       data:[260,240,218,177,168,160,110,56,31,16],
       backgroundColor:[ACCENT,GRAY,GRAY,GRAY,GRAY,GRAY,GRAY,GRAY,GRAY,GRAY],
-      borderRadius:4,barThickness:20
+      borderRadius:4,barThickness:22
     }]
   },
   options:{
     indexAxis:'y',responsive:true,maintainAspectRatio:false,
-    plugins:{legend:{display:false}},
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${c.raw} reseñas en Huli`}}},
     scales:{x:{grid:{color:'rgba(0,0,0,0.05)'}},y:{ticks:{font:{size:12,weight:'600'}}}}
   }
 });
@@ -1054,10 +1239,10 @@ new Chart(document.getElementById('chartHuli'),{
 new Chart(document.getElementById('chartIG'),{
   type:'bar',
   data:{
-    labels:['Rivera (118K)','Pérez/Dolce (47K)','Araya (36.9K)','Urzola (29K)','Argüello (29K)','Brenes L.(28K)','Vargas D.(20K)','Sequeira (20K)','Badilla (12K)','Tapia (10K)','Castrillón (8.5K)','Chacón (8.6K)'],
+    labels:['Rivera (118K)','Pérez/Dolce (47K)','Araya (36.9K)','Urzola (~29K)','Argüello (29K)','Brenes (28K)','Vargas D.(~20K)','Sequeira (20K)','Badilla (12K)','Tapia (~10K)','Peralta G.(9.5K)','Chacón (8.6K)'],
     datasets:[{
       label:'Seguidores IG',
-      data:[118000,47000,36900,29000,29000,28000,20000,20000,12000,10000,8600,8500],
+      data:[118000,47000,36900,29000,29000,28000,20000,20000,12000,10000,9500,8600],
       backgroundColor:[ACCENT,GRAY,GRAY,GRAY,GRAY,GRAY,GRAY,GRAY,GRAY,GRAY,GRAY,GRAY],
       borderRadius:4,barThickness:18
     }]
@@ -1073,7 +1258,7 @@ new Chart(document.getElementById('chartIG'),{
 new Chart(document.getElementById('chartGoogle'),{
   type:'bar',
   data:{
-    labels:['Dr. Christian Rivera\n⭐4.9','Dr. Rodrigo Araya\n⚠3.6','Dr. Carlos Centeno\n⭐4.7','Dr. Jorge Badilla\n⭐4.8'],
+    labels:['Dr. Christian Rivera\n⭐4.9 → 30 pts','Dr. Rodrigo Araya\n⚠3.6 → 12 pts (penaliz.)','Dr. Carlos Centeno\n⭐4.7 → 12 pts','Dr. Jorge Badilla\n⭐4.8 → 12 pts'],
     datasets:[{
       label:'Reseñas Google',
       data:[360,299,86,52],
